@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Noah Too
+ * Copyright (c) 2021 Noah Too
  * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,16 +23,13 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "stock_manager.h"
+#include "add_new.h"
 
-#include <QApplication>
-
-int main(int argc, char *argv[])
+dlgAdd::dlgAdd(QMainWindow *parent):
+    QDialog(parent),
+    ui(new Ui::dlgAdd)
 {
-    QApplication app(argc, argv);
-    stock_manager w;
-    w.show();
-
-    return app.exec();
+    ui->setupUi(this);
 }
 
+dlgAdd::~dlgAdd() = default;

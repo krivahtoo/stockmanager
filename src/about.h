@@ -23,16 +23,24 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "stock_manager.h"
+#ifndef ABOUT_H
+#define ABOUT_H
 
-#include <QApplication>
+#include "ui_about.h"
 
-int main(int argc, char *argv[])
+#include <QMainWindow>
+#include <QDialog>
+
+class dlgAbout: public QDialog
 {
-    QApplication app(argc, argv);
-    stock_manager w;
-    w.show();
+    Q_OBJECT
 
-    return app.exec();
-}
+public:
+    explicit dlgAbout(QMainWindow *parent);
+    ~dlgAbout() override;
 
+private:
+    QScopedPointer<Ui::dlgAbout> ui;
+};
+
+#endif // ABOUT_ITEMS_H

@@ -23,16 +23,24 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "stock_manager.h"
+#ifndef ADD_NEW_SELL_H
+#define ADD_NEW_SELL_H
 
-#include <QApplication>
+#include "ui_add_new_sell.h"
 
-int main(int argc, char *argv[])
+#include <QMainWindow>
+#include <QDialog>
+
+class dlgAddNew: public QDialog
 {
-    QApplication app(argc, argv);
-    stock_manager w;
-    w.show();
+    Q_OBJECT
 
-    return app.exec();
-}
+public:
+    explicit dlgAddNew(QWidget *parent);
+    ~dlgAddNew() override;
 
+private:
+    QScopedPointer<Ui::dlgAddNew> ui;
+};
+
+#endif // ABOUT_ITEMS_H

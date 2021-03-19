@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_newQbIbtA.ui'
+** Form generated from reading UI file 'add_newgKFsXF.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEWQBIBTA_H
-#define ADD_NEWQBIBTA_H
+#ifndef ADD_NEWGKFSXF_H
+#define ADD_NEWGKFSXF_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -37,6 +37,7 @@ public:
     {
         if (dlgAdd->objectName().isEmpty())
             dlgAdd->setObjectName(QString::fromUtf8("dlgAdd"));
+        dlgAdd->setWindowModality(Qt::WindowModal);
         dlgAdd->resize(400, 254);
         dlgAdd->setMinimumSize(QSize(400, 254));
         dlgAdd->setMaximumSize(QSize(400, 254));
@@ -70,7 +71,7 @@ public:
         btnCancel->setGeometry(QRect(20, 220, 88, 26));
         spbPrice = new QSpinBox(dlgAdd);
         spbPrice->setObjectName(QString::fromUtf8("spbPrice"));
-        spbPrice->setGeometry(QRect(100, 160, 131, 26));
+        spbPrice->setGeometry(QRect(100, 160, 141, 26));
         spbPrice->setMaximum(999999);
         spbPrice->setValue(0);
 
@@ -104,4 +105,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEWQBIBTA_H
+#endif // ADD_NEWGKFSXF_H

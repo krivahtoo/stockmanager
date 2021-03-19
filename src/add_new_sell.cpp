@@ -23,16 +23,13 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "stock_manager.h"
+#include "add_new_sell.h"
 
-#include <QApplication>
-
-int main(int argc, char *argv[])
+dlgAddNew::dlgAddNew(QWidget *parent):
+    QDialog(parent),
+    ui(new Ui::dlgAddNew)
 {
-    QApplication app(argc, argv);
-    stock_manager w;
-    w.show();
-
-    return app.exec();
+    ui->setupUi(this);
 }
 
+dlgAddNew::~dlgAddNew() = default;

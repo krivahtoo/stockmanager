@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>dlgAdd</class>
  <widget class="QDialog" name="dlgAdd">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -144,7 +147,7 @@
     <rect>
      <x>100</x>
      <y>160</y>
-     <width>131</width>
+     <width>141</width>
      <height>26</height>
     </rect>
    </property>
@@ -171,12 +174,12 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>107</x>
-     <y>227</y>
+     <x>93</x>
+     <y>235</y>
     </hint>
     <hint type="destinationlabel">
-     <x>202</x>
-     <y>231</y>
+     <x>178</x>
+     <y>234</y>
     </hint>
    </hints>
   </connection>

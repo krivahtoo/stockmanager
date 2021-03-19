@@ -23,16 +23,13 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "stock_manager.h"
+#include "about.h"
 
-#include <QApplication>
-
-int main(int argc, char *argv[])
+dlgAbout::dlgAbout(QMainWindow *parent):
+    QDialog(parent),
+    ui(new Ui::dlgAbout)
 {
-    QApplication app(argc, argv);
-    stock_manager w;
-    w.show();
-
-    return app.exec();
+    ui->setupUi(this);
 }
 
+dlgAbout::~dlgAbout() = default;

@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.ui": "xml",
+        "qvariant": "cpp",
+        "qapplication": "cpp"
+    }
+}

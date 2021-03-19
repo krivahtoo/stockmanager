@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'stock_managerKSVDzX.ui'
+** Form generated from reading UI file 'stock_managerLdtYHj.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef STOCK_MANAGERKSVDZX_H
-#define STOCK_MANAGERKSVDZX_H
+#ifndef STOCK_MANAGERLDTYHJ_H
+#define STOCK_MANAGERLDTYHJ_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -168,7 +168,7 @@ public:
 
     void retranslateUi(QMainWindow *stock_manager)
     {
-        stock_manager->setWindowTitle(QCoreApplication::translate("stock_manager", "stock_manager", nullptr));
+        stock_manager->setWindowTitle(QCoreApplication::translate("stock_manager", "Stock Manager", nullptr));
         actQuit->setText(QCoreApplication::translate("stock_manager", "Quit", nullptr));
 #if QT_CONFIG(shortcut)
         actQuit->setShortcut(QCoreApplication::translate("stock_manager", "Ctrl+Q", nullptr));
@@ -215,4 +215,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // STOCK_MANAGERKSVDZX_H
+#endif // STOCK_MANAGERLDTYHJ_H

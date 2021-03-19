@@ -43,7 +43,7 @@
      <item>
       <widget class="QLabel" name="lblTotal">
        <property name="text">
-        <string>Total: Ksh. 28904</string>
+        <string notr="true">Total: Ksh. 28904</string>
        </property>
       </widget>
      </item>

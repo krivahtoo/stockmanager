@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Noah Too
+ * Copyright (c) 2021 Noah Too
  * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,16 +23,24 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "stock_manager.h"
+#ifndef SELL_ITEMS_H
+#define SELL_ITEMS_H
 
-#include <QApplication>
+#include "ui_sell_items.h"
 
-int main(int argc, char *argv[])
+#include <QMainWindow>
+#include <QDialog>
+
+class dlgSell: public QDialog
 {
-    QApplication app(argc, argv);
-    stock_manager w;
-    w.show();
+    Q_OBJECT
 
-    return app.exec();
-}
+public:
+    explicit dlgSell(QMainWindow *parent);
+    ~dlgSell() override;
 
+private:
+    QScopedPointer<Ui::dlgSell> ui;
+};
+
+#endif // SELL_ITEMS_H

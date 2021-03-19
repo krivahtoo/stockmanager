@@ -26,12 +26,13 @@
 #ifndef STOCK_MANAGER_H
 #define STOCK_MANAGER_H
 
-#include "ui_add_new.h"
-#include "ui_sell_items.h"
+#include "about.h"
+#include "add_new.h"
+#include "sell_items.h"
 #include "ui_stock_manager.h"
 
 #include <QMainWindow>
-
+#include <QAction>
 
 class stock_manager : public QMainWindow
 {
@@ -41,8 +42,15 @@ public:
     explicit stock_manager(QWidget *parent = nullptr);
     ~stock_manager() override;
 
+    void show_AddItem();
+    void show_SellItems();
+    void show_About();
+
 private:
     QScopedPointer<Ui::stock_manager> m_ui;
+    dlgAdd *dlg_add;
+    dlgSell *dlg_sell;
+    dlgAbout *dlg_about;
 };
 
 #endif // STOCK_MANAGER_H

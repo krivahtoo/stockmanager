@@ -24,13 +24,38 @@
  */
 
 #include "stock_manager.h"
-#include "ui_stock_manager.h"
+
+#include <QtWidgets/QPushButton>
 
 stock_manager::stock_manager(QWidget *parent) :
     QMainWindow(parent),
     m_ui(new Ui::stock_manager)
 {
+    dlg_add = new dlgAdd(this);
+    dlg_sell = new dlgSell(this);
+    dlg_about = new dlgAbout(this);
     m_ui->setupUi(this);
+
+    connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
+    connect(m_ui->actQuit, &QAction::triggered, this, &QCoreApplication::quit);
+    connect(m_ui->btnAddItem, &QPushButton::pressed, this, &stock_manager::show_AddItem);
+    connect(m_ui->btnSellItem, &QPushButton::pressed, this, &stock_manager::show_SellItems);
+    connect(m_ui->actAbout, &QAction::triggered, this, &stock_manager::show_About);
+}
+
+void stock_manager::show_AddItem()
+{
+    dlg_add->show();
+}
+
+void stock_manager::show_SellItems()
+{
+    dlg_sell->show();
+}
+
+void stock_manager::show_About()
+{
+    dlg_about->show();
 }
 
 stock_manager::~stock_manager() = default;

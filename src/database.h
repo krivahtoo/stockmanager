@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Noah Too
+ * Copyright (c) 2021 Noah Too
  * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,16 +23,21 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "stock_manager.h"
+#ifndef DATABASE_H
+#define DATABASE_H
 
-#include <QApplication>
+#include <iostream>
 
-int main(int argc, char *argv[])
+#define DB_FILE "items.db"
+
+struct Item
 {
-    QApplication app(argc, argv);
-    stock_manager w;
-    w.show();
+    int id;
+    std::string itemNo; // This can be WR2536 ;-
+    std::string name;
+    int quantity;
+    long price;
+    int birthDate;
+};
 
-    return app.exec();
-}
-
+#endif // DATABASE_H
