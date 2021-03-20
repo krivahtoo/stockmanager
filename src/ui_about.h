@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'aboutqFMpQC.ui'
+** Form generated from reading UI file 'aboutRhCHrp.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ABOUTQFMPQC_H
-#define ABOUTQFMPQC_H
+#ifndef ABOUTRHCHRP_H
+#define ABOUTRHCHRP_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -28,15 +28,18 @@ public:
         if (dlgAbout->objectName().isEmpty())
             dlgAbout->setObjectName(QString::fromUtf8("dlgAbout"));
         dlgAbout->setWindowModality(Qt::WindowModal);
-        dlgAbout->resize(336, 141);
+        dlgAbout->resize(350, 185);
+        dlgAbout->setModal(true);
         label = new QLabel(dlgAbout);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(30, 10, 201, 91));
+        label->setGeometry(QRect(30, 30, 201, 91));
         label->setTextFormat(Qt::RichText);
         label->setWordWrap(true);
         pushButton = new QPushButton(dlgAbout);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(240, 100, 71, 26));
+        pushButton->setGeometry(QRect(250, 140, 71, 26));
+        pushButton->setMinimumSize(QSize(71, 26));
+        pushButton->setMaximumSize(QSize(71, 26));
 
         retranslateUi(dlgAbout);
         QObject::connect(pushButton, SIGNAL(clicked()), dlgAbout, SLOT(accept()));
@@ -59,4 +62,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ABOUTQFMPQC_H
+#endif // ABOUTRHCHRP_H

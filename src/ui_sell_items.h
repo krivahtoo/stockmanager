@@ -1,17 +1,18 @@
 /********************************************************************************
-** Form generated from reading UI file 'sell_itemspDAiKr.ui'
+** Form generated from reading UI file 'sell_itemstmunLE.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SELL_ITEMSPDAIKR_H
-#define SELL_ITEMSPDAIKR_H
+#ifndef SELL_ITEMSTMUNLE_H
+#define SELL_ITEMSTMUNLE_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -25,6 +26,8 @@ QT_BEGIN_NAMESPACE
 class Ui_dlgSell
 {
 public:
+    QVBoxLayout *verticalLayout_2;
+    QGroupBox *groupBox;
     QVBoxLayout *verticalLayout;
     QTableWidget *tblItems;
     QHBoxLayout *horizontalLayout_2;
@@ -41,11 +44,15 @@ public:
         if (dlgSell->objectName().isEmpty())
             dlgSell->setObjectName(QString::fromUtf8("dlgSell"));
         dlgSell->setWindowModality(Qt::WindowModal);
-        dlgSell->resize(618, 320);
+        dlgSell->resize(607, 398);
         dlgSell->setModal(true);
-        verticalLayout = new QVBoxLayout(dlgSell);
+        verticalLayout_2 = new QVBoxLayout(dlgSell);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        groupBox = new QGroupBox(dlgSell);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        verticalLayout = new QVBoxLayout(groupBox);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        tblItems = new QTableWidget(dlgSell);
+        tblItems = new QTableWidget(groupBox);
         if (tblItems->columnCount() < 4)
             tblItems->setColumnCount(4);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
@@ -63,7 +70,7 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        lblTotal = new QLabel(dlgSell);
+        lblTotal = new QLabel(groupBox);
         lblTotal->setObjectName(QString::fromUtf8("lblTotal"));
         lblTotal->setText(QString::fromUtf8("Total: Ksh. 28904"));
 
@@ -73,7 +80,7 @@ public:
 
         horizontalLayout_2->addItem(horizontalSpacer_2);
 
-        btnNew = new QPushButton(dlgSell);
+        btnNew = new QPushButton(groupBox);
         btnNew->setObjectName(QString::fromUtf8("btnNew"));
         btnNew->setMinimumSize(QSize(88, 26));
         btnNew->setMaximumSize(QSize(88, 26));
@@ -82,6 +89,9 @@ public:
 
 
         verticalLayout->addLayout(horizontalLayout_2);
+
+
+        verticalLayout_2->addWidget(groupBox);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -104,7 +114,7 @@ public:
         horizontalLayout->addWidget(btnDone);
 
 
-        verticalLayout->addLayout(horizontalLayout);
+        verticalLayout_2->addLayout(horizontalLayout);
 
 
         retranslateUi(dlgSell);
@@ -116,6 +126,7 @@ public:
     void retranslateUi(QDialog *dlgSell)
     {
         dlgSell->setWindowTitle(QCoreApplication::translate("dlgSell", "Sell Items", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("dlgSell", "Items", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tblItems->horizontalHeaderItem(1);
         ___qtablewidgetitem->setText(QCoreApplication::translate("dlgSell", "Name", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tblItems->horizontalHeaderItem(2);
@@ -135,4 +146,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SELL_ITEMSPDAIKR_H
+#endif // SELL_ITEMSTMUNLE_H

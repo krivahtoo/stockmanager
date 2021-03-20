@@ -41,6 +41,8 @@ stock_manager::stock_manager(QWidget *parent) :
     connect(m_ui->btnAddItem, &QPushButton::pressed, this, &stock_manager::show_AddItem);
     connect(m_ui->btnSellItem, &QPushButton::pressed, this, &stock_manager::show_SellItems);
     connect(m_ui->actAbout, &QAction::triggered, this, &stock_manager::show_About);
+
+    // m_ui->tblStock
 }
 
 void stock_manager::show_AddItem()
