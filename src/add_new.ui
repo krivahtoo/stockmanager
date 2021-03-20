@@ -28,6 +28,9 @@
   <property name="windowTitle">
    <string>Add New Item</string>
   </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
   <widget class="QLineEdit" name="txtId">
    <property name="geometry">
     <rect>

@@ -16,6 +16,9 @@
   <property name="windowTitle">
    <string>Add Item</string>
   </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
   <widget class="QPushButton" name="btnCancel">
    <property name="geometry">
     <rect>

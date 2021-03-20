@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_newgKFsXF.ui'
+** Form generated from reading UI file 'add_newfiqWNI.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEWGKFSXF_H
-#define ADD_NEWGKFSXF_H
+#ifndef ADD_NEWFIQWNI_H
+#define ADD_NEWFIQWNI_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -41,6 +41,7 @@ public:
         dlgAdd->resize(400, 254);
         dlgAdd->setMinimumSize(QSize(400, 254));
         dlgAdd->setMaximumSize(QSize(400, 254));
+        dlgAdd->setModal(true);
         txtId = new QLineEdit(dlgAdd);
         txtId->setObjectName(QString::fromUtf8("txtId"));
         txtId->setGeometry(QRect(160, 30, 181, 26));
@@ -105,4 +106,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEWGKFSXF_H
+#endif // ADD_NEWFIQWNI_H

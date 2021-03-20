@@ -29,7 +29,16 @@ dlgSell::dlgSell(QMainWindow *parent):
     QDialog(parent),
     ui(new Ui::dlgSell)
 {
+
+    dlg_add_new = new dlgAddNew(this);
+
     ui->setupUi(this);
+
+    connect(ui->btnNew, &QPushButton::pressed, this, &dlgSell::addNew);
+}
+
+void dlgSell::addNew() {
+    dlg_add_new->show();
 }
 
 dlgSell::~dlgSell() = default;

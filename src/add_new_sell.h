@@ -28,7 +28,7 @@
 
 #include "ui_add_new_sell.h"
 
-#include <QMainWindow>
+#include <QWidget>
 #include <QDialog>
 
 class dlgAddNew: public QDialog

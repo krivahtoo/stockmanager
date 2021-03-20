@@ -27,6 +27,7 @@
 #define SELL_ITEMS_H
 
 #include "ui_sell_items.h"
+#include "add_new_sell.h"
 
 #include <QMainWindow>
 #include <QDialog>
@@ -41,6 +42,9 @@ public:
 
 private:
     QScopedPointer<Ui::dlgSell> ui;
+    dlgAddNew *dlg_add_new;
+
+    void addNew();
 };
 
 #endif // SELL_ITEMS_H

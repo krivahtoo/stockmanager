@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_new_sellyozNYp.ui'
+** Form generated from reading UI file 'add_new_sellZMdlkO.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEW_SELLYOZNYP_H
-#define ADD_NEW_SELLYOZNYP_H
+#ifndef ADD_NEW_SELLZMDLKO_H
+#define ADD_NEW_SELLZMDLKO_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -35,6 +35,7 @@ public:
             dlgAddNew->setObjectName(QString::fromUtf8("dlgAddNew"));
         dlgAddNew->setWindowModality(Qt::WindowModal);
         dlgAddNew->resize(318, 180);
+        dlgAddNew->setModal(true);
         btnCancel = new QPushButton(dlgAddNew);
         btnCancel->setObjectName(QString::fromUtf8("btnCancel"));
         btnCancel->setGeometry(QRect(20, 140, 88, 26));
@@ -77,4 +78,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEW_SELLYOZNYP_H
+#endif // ADD_NEW_SELLZMDLKO_H

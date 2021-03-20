@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'sell_itemsEShnTu.ui'
+** Form generated from reading UI file 'sell_itemspDAiKr.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SELL_ITEMSESHNTU_H
-#define SELL_ITEMSESHNTU_H
+#ifndef SELL_ITEMSPDAIKR_H
+#define SELL_ITEMSPDAIKR_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -40,7 +40,9 @@ public:
     {
         if (dlgSell->objectName().isEmpty())
             dlgSell->setObjectName(QString::fromUtf8("dlgSell"));
+        dlgSell->setWindowModality(Qt::WindowModal);
         dlgSell->resize(618, 320);
+        dlgSell->setModal(true);
         verticalLayout = new QVBoxLayout(dlgSell);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         tblItems = new QTableWidget(dlgSell);
@@ -63,6 +65,7 @@ public:
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         lblTotal = new QLabel(dlgSell);
         lblTotal->setObjectName(QString::fromUtf8("lblTotal"));
+        lblTotal->setText(QString::fromUtf8("Total: Ksh. 28904"));
 
         horizontalLayout_2->addWidget(lblTotal);
 
@@ -119,7 +122,6 @@ public:
         ___qtablewidgetitem1->setText(QCoreApplication::translate("dlgSell", "Quantity", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = tblItems->horizontalHeaderItem(3);
         ___qtablewidgetitem2->setText(QCoreApplication::translate("dlgSell", "Price", nullptr));
-        lblTotal->setText(QCoreApplication::translate("dlgSell", "Total: Ksh. 28904", nullptr));
         btnNew->setText(QCoreApplication::translate("dlgSell", "Add Item", nullptr));
         btnCancel->setText(QCoreApplication::translate("dlgSell", "Cancel", nullptr));
         btnDone->setText(QCoreApplication::translate("dlgSell", "Done", nullptr));
@@ -133,4 +135,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SELL_ITEMSESHNTU_H
+#endif // SELL_ITEMSPDAIKR_H

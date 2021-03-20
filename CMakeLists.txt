@@ -16,6 +16,8 @@ set(stock_manager_SRC
   src/stock_manager.cpp
   src/add_new.cpp
   src/sell_items.cpp
+  src/add_new_sell.cpp
+  src/about.cpp
 )
 
 # Tell CMake to create the helloworld executable
