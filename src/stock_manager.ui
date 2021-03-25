@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Stock Manager</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../stock_manager.qrc">
+    <normaloff>:/images/logo-small.svg</normaloff>:/images/logo-small.svg</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="1">
@@ -81,7 +85,7 @@
              <x>0</x>
              <y>0</y>
              <width>240</width>
-             <height>297</height>
+             <height>269</height>
             </rect>
            </property>
            <attribute name="label">
@@ -93,14 +97,14 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>40</height>
+                <height>50</height>
                </size>
               </property>
               <property name="statusTip">
                <string>Record sold items</string>
               </property>
               <property name="text">
-               <string>Sell Item</string>
+               <string>Sell Items</string>
               </property>
              </widget>
             </item>
@@ -121,7 +125,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="btnStats">
+             <widget class="QPushButton" name="btnRefresh">
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
@@ -132,12 +136,65 @@
                <string>Display sales statistics</string>
               </property>
               <property name="text">
-               <string>Stats</string>
+               <string>Refresh</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stock: 244&lt;/p&gt;&lt;p&gt;Sales Today: 23 for Ksh. 2,244&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Items Out of Stock:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;1. Milk&lt;br/&gt;2. TipTop&lt;br/&gt;3. Oreo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="page_2">
+           <attribute name="label">
+            <string>Stats</string>
+           </attribute>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabSales">
+       <attribute name="title">
+        <string>Sales</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QTableWidget" name="tableWidget">
+          <column>
+           <property name="text">
+            <string>Item Number / Id</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Quantity</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Price</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Total Price</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Sale Date</string>
+           </property>
+          </column>
          </widget>
         </item>
        </layout>
@@ -193,7 +250,8 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actQuit">
    <property name="icon">
-    <iconset theme="application-exit"/>
+    <iconset theme="application-exit">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Quit</string>
@@ -204,7 +262,8 @@
   </action>
   <action name="actQt_About">
    <property name="icon">
-    <iconset theme="help-about"/>
+    <iconset theme="help-about">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Qt About</string>
@@ -212,7 +271,8 @@
   </action>
   <action name="actAbout">
    <property name="icon">
-    <iconset theme="help-about"/>
+    <iconset theme="help-about">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>About</string>
@@ -220,7 +280,8 @@
   </action>
   <action name="actCheck_For_Updates">
    <property name="icon">
-    <iconset theme="view-refresh"/>
+    <iconset theme="view-refresh">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Check For Updates</string>
@@ -228,15 +289,20 @@
   </action>
   <action name="actAdd_Item">
    <property name="icon">
-    <iconset theme="document-new"/>
+    <iconset theme="document-new">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Add Item</string>
+    <string>Add New Item</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
   <action name="actionSell_Items">
    <property name="icon">
-    <iconset theme="document-send"/>
+    <iconset theme="document-send">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Sell Items</string>
@@ -244,29 +310,43 @@
   </action>
   <action name="actionCopy">
    <property name="icon">
-    <iconset theme="edit-copy"/>
+    <iconset theme="edit-copy">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Copy</string>
+    <string>&amp;Copy</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
    </property>
   </action>
   <action name="actionPaste">
    <property name="icon">
-    <iconset theme="edit-paste"/>
+    <iconset theme="edit-paste">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Paste</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
   </action>
   <action name="actionCut">
    <property name="icon">
-    <iconset theme="edit-cut"/>
+    <iconset theme="edit-cut">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Cut</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../stock_manager.qrc"/>
+ </resources>
  <connections/>
 </ui>

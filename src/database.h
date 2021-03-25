@@ -26,11 +26,12 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
+#include <iostream>
 #include <string>
 
 #include "../sqlite_orm/sqlite_orm.h"
 
-#define DB_FILE "items.db"
+#define DB_FILE "/items.db"
 
 struct Item
 {
@@ -79,6 +80,8 @@ inline auto initStorage(const std::string &path) {
 using Storage = decltype(initStorage(""));
 
 static std::unique_ptr<Storage> storage;
+
+std::string getDBPath();
 
 void updateDb();
 

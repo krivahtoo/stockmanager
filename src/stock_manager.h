@@ -29,10 +29,20 @@
 #include "about.h"
 #include "add_new.h"
 #include "sell_items.h"
+#include "database.h"
 #include "ui_stock_manager.h"
 
 #include <QMainWindow>
 #include <QAction>
+
+struct Items
+{
+    int id;
+    std::string itemNo; // This can be WR2536 ;-
+    std::string name;
+    long price;
+    int quantity;
+};
 
 class stock_manager : public QMainWindow
 {
@@ -45,12 +55,15 @@ public:
     void show_AddItem();
     void show_SellItems();
     void show_About();
+    void refreshDb();
+    void updateTable();
 
 private:
     QScopedPointer<Ui::stock_manager> m_ui;
     dlgAdd *dlg_add;
     dlgSell *dlg_sell;
     dlgAbout *dlg_about;
+    std::vector<Items> items;
 };
 
 #endif // STOCK_MANAGER_H

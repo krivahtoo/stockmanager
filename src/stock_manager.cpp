@@ -24,6 +24,7 @@
  */
 
 #include "stock_manager.h"
+#include "database.h"
 
 #include <QtWidgets/QPushButton>
 
@@ -43,6 +44,8 @@ stock_manager::stock_manager(QWidget *parent) :
     connect(m_ui->actAbout, &QAction::triggered, this, &stock_manager::show_About);
 
     // m_ui->tblStock
+    refreshDb();
+    updateTable();
 }
 
 void stock_manager::show_AddItem()
@@ -58,6 +61,56 @@ void stock_manager::show_SellItems()
 void stock_manager::show_About()
 {
     dlg_about->show();
+}
+
+void stock_manager::refreshDb() {
+    using namespace sqlite_orm;
+    storage = std::make_unique<Storage>(initStorage(getDBPath()));
+    auto allItems = storage->select(
+        columns(&Item::id, &Item::itemNo, &Item::name, &Item::price, &Stock::quantity),
+        where(c(&Item::itemNo) == &Stock::itemNo),
+        order_by(&Item::id), limit(20, offset(0))
+    );
+
+    for (auto &itm: allItems) {
+        items.push_back(
+            Items{
+                std::get<0>(itm), // id
+                std::get<1>(itm), // itemNo
+                std::get<2>(itm), // Name
+                std::get<3>(itm), // Price
+                std::get<4>(itm) // quantity
+            }
+        );
+    }
+}
+
+void stock_manager::updateTable() {
+    int count = 0;
+    m_ui->tblStock->setRowCount(items.size());
+    for (const auto& itm: items) {
+        QTableWidgetItem *tblItem1 = new QTableWidgetItem();
+        tblItem1->setText(QString::fromStdString(itm.itemNo));
+        m_ui->tblStock->setItem(count, 0, tblItem1);
+
+        QTableWidgetItem *tblItem2 = new QTableWidgetItem();
+        tblItem2->setText(QString::fromStdString(itm.name));
+        m_ui->tblStock->setItem(count, 1, tblItem2);
+
+        QTableWidgetItem *tblItem3 = new QTableWidgetItem();
+        tblItem3->setText(QString::number(itm.price));
+        m_ui->tblStock->setItem(count, 2, tblItem3);
+
+        QTableWidgetItem *tblItem4 = new QTableWidgetItem();
+        tblItem4->setText(QString::number(itm.quantity));
+        m_ui->tblStock->setItem(count, 3, tblItem4);
+
+        // QTableWidgetItem *tblItem5 = new QTableWidgetItem();
+        // tblItem5->setText();
+        // m_ui->tblStock->setItem(count, 4, tblItem5);
+
+        count++;
+    }
 }
 
 stock_manager::~stock_manager() = default;

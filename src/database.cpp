@@ -25,7 +25,16 @@
 
 #include "database.h"
 
+#include <QDir>
+
+std::string getDBPath() {
+    QDir path = QDir::home();
+    path.mkdir(".store");
+    path.cd(".store");
+    return path.absolutePath().append(DB_FILE).toStdString();
+}
+
 void updateDb() {
-    storage = std::make_unique<Storage>(initStorage(DB_FILE));
-    storage->sync_schema();
+    storage = std::make_unique<Storage>(initStorage(getDBPath()));
+    // storage->sync_schema();
 }

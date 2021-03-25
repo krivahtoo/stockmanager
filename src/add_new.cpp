@@ -38,7 +38,7 @@ dlgAdd::dlgAdd(QMainWindow *parent):
 }
 
 void dlgAdd::add() {
-    storage = std::make_unique<Storage>(initStorage(DB_FILE));
+    storage = std::make_unique<Storage>(initStorage(getDBPath()));
     name = ui->txtName->text().toStdString();
     itemNo = ui->txtId->text().toStdString();
     price = ui->spbPrice->cleanText().toLong();
@@ -70,8 +70,8 @@ void dlgAdd::add() {
 void dlgAdd::clearData() {
     ui->txtId->clear();
     ui->txtName->clear();
-    ui->spbPrice->clear();
-    ui->spbQuantity->clear();
+    ui->spbPrice->setValue(0);
+    ui->spbQuantity->setValue(1);
 }
 
 dlgAdd::~dlgAdd() = default;
