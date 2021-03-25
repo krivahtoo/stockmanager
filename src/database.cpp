@@ -23,32 +23,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef ADD_NEW_H
-#define ADD_NEW_H
+#include "database.h"
 
-#include "ui_add_new.h"
-
-#include <string>
-
-#include <QMainWindow>
-#include <QDialog>
-
-class dlgAdd: public QDialog
-{
-    Q_OBJECT
-
-public:
-    explicit dlgAdd(QMainWindow *parent);
-    ~dlgAdd() override;
-
-private:
-    QScopedPointer<Ui::dlgAdd> ui;
-    std::string name;
-    std::string itemNo;
-    long price;
-    int quantity;
-    void add();
-    void clearData();
-};
-
-#endif // ADD_NEW
+void updateDb() {
+    storage = std::make_unique<Storage>(initStorage(DB_FILE));
+    storage->sync_schema();
+}

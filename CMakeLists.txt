@@ -18,13 +18,17 @@ set(stock_manager_SRC
   src/sell_items.cpp
   src/add_new_sell.cpp
   src/about.cpp
+  src/database.cpp
 )
 
-# Tell CMake to create the helloworld executable
+# Tell CMake to create the stock_manager executable
 add_executable(stock_manager ${stock_manager_SRC})
 
+include_directories(/usr/include)
+link_directories(/usr/lib)
+
 # Use the Widgets module from Qt 5.
-target_link_libraries(stock_manager Qt5::Widgets Qt5::Core)
+target_link_libraries(stock_manager Qt5::Widgets Qt5::Core sqlite3)
 
 # Install the executable
 install(TARGETS stock_manager DESTINATION bin)

@@ -24,15 +24,19 @@
  */
 
 #include "stock_manager.h"
+#include "database.h"
 
 #include <QApplication>
+#include <QIcon>
 
 int main(int argc, char *argv[])
 {
+    updateDb();
     QApplication app(argc, argv);
+    // app.setWindowIcon(QIcon());
+    app.setApplicationDisplayName("Shop Manager");
     stock_manager w;
     w.show();
 
     return app.exec();
 }
-

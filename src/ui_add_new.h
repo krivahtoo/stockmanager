@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_newDFHEml.ui'
+** Form generated from reading UI file 'add_newpTObST.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEWDFHEML_H
-#define ADD_NEWDFHEML_H
+#ifndef ADD_NEWPTOBST_H
+#define ADD_NEWPTOBST_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -38,6 +38,7 @@ public:
     QSpinBox *spbQuantity;
     QLabel *lblPrice;
     QSpinBox *spbPrice;
+    QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnCancel;
     QSpacerItem *horizontalSpacer;
@@ -48,8 +49,8 @@ public:
         if (dlgAdd->objectName().isEmpty())
             dlgAdd->setObjectName(QString::fromUtf8("dlgAdd"));
         dlgAdd->setWindowModality(Qt::WindowModal);
-        dlgAdd->resize(400, 254);
-        dlgAdd->setMinimumSize(QSize(400, 254));
+        dlgAdd->resize(414, 190);
+        dlgAdd->setMinimumSize(QSize(0, 0));
         dlgAdd->setMaximumSize(QSize(41055, 25455));
         dlgAdd->setModal(true);
         verticalLayout = new QVBoxLayout(dlgAdd);
@@ -107,6 +108,10 @@ public:
 
         verticalLayout->addWidget(groupBox);
 
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         btnCancel = new QPushButton(dlgAdd);
@@ -160,4 +165,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEWDFHEML_H
+#endif // ADD_NEWPTOBST_H

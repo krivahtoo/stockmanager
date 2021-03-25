@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'stock_managerLdtYHj.ui'
+** Form generated from reading UI file 'stock_managerPNaKFv.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef STOCK_MANAGERLDTYHJ_H
-#define STOCK_MANAGERLDTYHJ_H
+#ifndef STOCK_MANAGERPNAKFV_H
+#define STOCK_MANAGERPNAKFV_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -36,6 +36,10 @@ public:
     QAction *actAbout;
     QAction *actCheck_For_Updates;
     QAction *actAdd_Item;
+    QAction *actionSell_Items;
+    QAction *actionCopy;
+    QAction *actionPaste;
+    QAction *actionCut;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QTabWidget *tabMain;
@@ -52,23 +56,49 @@ public:
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuHelp;
+    QMenu *menuEdit;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *stock_manager)
     {
         if (stock_manager->objectName().isEmpty())
             stock_manager->setObjectName(QString::fromUtf8("stock_manager"));
-        stock_manager->resize(716, 438);
+        stock_manager->resize(716, 429);
         actQuit = new QAction(stock_manager);
         actQuit->setObjectName(QString::fromUtf8("actQuit"));
+        QIcon icon(QIcon::fromTheme(QString::fromUtf8("application-exit")));
+        actQuit->setIcon(icon);
         actQt_About = new QAction(stock_manager);
         actQt_About->setObjectName(QString::fromUtf8("actQt_About"));
+        QIcon icon1(QIcon::fromTheme(QString::fromUtf8("help-about")));
+        actQt_About->setIcon(icon1);
         actAbout = new QAction(stock_manager);
         actAbout->setObjectName(QString::fromUtf8("actAbout"));
+        actAbout->setIcon(icon1);
         actCheck_For_Updates = new QAction(stock_manager);
         actCheck_For_Updates->setObjectName(QString::fromUtf8("actCheck_For_Updates"));
+        QIcon icon2(QIcon::fromTheme(QString::fromUtf8("view-refresh")));
+        actCheck_For_Updates->setIcon(icon2);
         actAdd_Item = new QAction(stock_manager);
         actAdd_Item->setObjectName(QString::fromUtf8("actAdd_Item"));
+        QIcon icon3(QIcon::fromTheme(QString::fromUtf8("document-new")));
+        actAdd_Item->setIcon(icon3);
+        actionSell_Items = new QAction(stock_manager);
+        actionSell_Items->setObjectName(QString::fromUtf8("actionSell_Items"));
+        QIcon icon4(QIcon::fromTheme(QString::fromUtf8("document-send")));
+        actionSell_Items->setIcon(icon4);
+        actionCopy = new QAction(stock_manager);
+        actionCopy->setObjectName(QString::fromUtf8("actionCopy"));
+        QIcon icon5(QIcon::fromTheme(QString::fromUtf8("edit-copy")));
+        actionCopy->setIcon(icon5);
+        actionPaste = new QAction(stock_manager);
+        actionPaste->setObjectName(QString::fromUtf8("actionPaste"));
+        QIcon icon6(QIcon::fromTheme(QString::fromUtf8("edit-paste")));
+        actionPaste->setIcon(icon6);
+        actionCut = new QAction(stock_manager);
+        actionCut->setObjectName(QString::fromUtf8("actionCut"));
+        QIcon icon7(QIcon::fromTheme(QString::fromUtf8("edit-cut")));
+        actionCut->setIcon(icon7);
         centralWidget = new QWidget(stock_manager);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -102,7 +132,7 @@ public:
         toolBox->setMaximumSize(QSize(240, 16777215));
         page = new QWidget();
         page->setObjectName(QString::fromUtf8("page"));
-        page->setGeometry(QRect(0, 0, 240, 306));
+        page->setGeometry(QRect(0, 0, 240, 297));
         verticalLayout = new QVBoxLayout(page);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         btnSellItem = new QPushButton(page);
@@ -142,20 +172,27 @@ public:
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QString::fromUtf8("menuHelp"));
+        menuEdit = new QMenu(menuBar);
+        menuEdit->setObjectName(QString::fromUtf8("menuEdit"));
         stock_manager->setMenuBar(menuBar);
         statusBar = new QStatusBar(stock_manager);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         stock_manager->setStatusBar(statusBar);
 
         menuBar->addAction(menuFile->menuAction());
+        menuBar->addAction(menuEdit->menuAction());
         menuBar->addAction(menuHelp->menuAction());
         menuFile->addAction(actAdd_Item);
+        menuFile->addAction(actionSell_Items);
         menuFile->addSeparator();
         menuFile->addAction(actQuit);
         menuHelp->addAction(actQt_About);
         menuHelp->addAction(actAbout);
         menuHelp->addSeparator();
         menuHelp->addAction(actCheck_For_Updates);
+        menuEdit->addAction(actionCopy);
+        menuEdit->addAction(actionPaste);
+        menuEdit->addAction(actionCut);
 
         retranslateUi(stock_manager);
 
@@ -177,6 +214,10 @@ public:
         actAbout->setText(QCoreApplication::translate("stock_manager", "About", nullptr));
         actCheck_For_Updates->setText(QCoreApplication::translate("stock_manager", "Check For Updates", nullptr));
         actAdd_Item->setText(QCoreApplication::translate("stock_manager", "Add Item", nullptr));
+        actionSell_Items->setText(QCoreApplication::translate("stock_manager", "Sell Items", nullptr));
+        actionCopy->setText(QCoreApplication::translate("stock_manager", "Copy", nullptr));
+        actionPaste->setText(QCoreApplication::translate("stock_manager", "Paste", nullptr));
+        actionCut->setText(QCoreApplication::translate("stock_manager", "Cut", nullptr));
 #if QT_CONFIG(statustip)
         tabMain->setStatusTip(QCoreApplication::translate("stock_manager", "View items on stock", nullptr));
 #endif // QT_CONFIG(statustip)
@@ -205,6 +246,7 @@ public:
         tabMain->setTabText(tabMain->indexOf(tabSettings), QCoreApplication::translate("stock_manager", "Settings", nullptr));
         menuFile->setTitle(QCoreApplication::translate("stock_manager", "File", nullptr));
         menuHelp->setTitle(QCoreApplication::translate("stock_manager", "Help", nullptr));
+        menuEdit->setTitle(QCoreApplication::translate("stock_manager", "Edit", nullptr));
     } // retranslateUi
 
 };
@@ -215,4 +257,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // STOCK_MANAGERLDTYHJ_H
+#endif // STOCK_MANAGERPNAKFV_H

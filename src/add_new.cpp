@@ -24,12 +24,54 @@
  */
 
 #include "add_new.h"
+#include "database.h"
+
+#include <QMessageBox>
 
 dlgAdd::dlgAdd(QMainWindow *parent):
     QDialog(parent),
     ui(new Ui::dlgAdd)
 {
     ui->setupUi(this);
+
+    connect(ui->btnSave, &QPushButton::pressed, this, &dlgAdd::add);
+}
+
+void dlgAdd::add() {
+    storage = std::make_unique<Storage>(initStorage(DB_FILE));
+    name = ui->txtName->text().toStdString();
+    itemNo = ui->txtId->text().toStdString();
+    price = ui->spbPrice->cleanText().toLong();
+    quantity = ui->spbQuantity->cleanText().toInt();
+    Item item{-1, itemNo, name, price};
+    auto insertId = storage->insert(item);
+    storage->insert(Stock{itemNo, quantity});
+
+    QMessageBox msgBox;
+    msgBox.setText("Item added to stock.");
+    msgBox.setInformativeText("Do you want to add more items?");
+    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    int result = msgBox.exec();
+
+    switch (result) {
+        case QMessageBox::Ok:
+            clearData();
+            return;
+            break;
+        case QMessageBox::Cancel:
+            accept();
+            break;
+        default:
+            break;
+    }
+}
+
+void dlgAdd::clearData() {
+    ui->txtId->clear();
+    ui->txtName->clear();
+    ui->spbPrice->clear();
+    ui->spbQuantity->clear();
 }
 
 dlgAdd::~dlgAdd() = default;
