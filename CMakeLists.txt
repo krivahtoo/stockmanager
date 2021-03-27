@@ -8,8 +8,14 @@ set(CMAKE_AUTOMOC ON)
 # Instruct CMake to create code from Qt designer ui files
 set(CMAKE_AUTOUIC ON)
 
+#set(CMAKE_CXX_COMPILER "clang++")
+
+set(CMAKE_CXX_FLAGS "-Wall -fPIC -std=c++14")
+
+include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+
 # Find the QtWidgets library
-find_package(Qt5Widgets CONFIG REQUIRED)
+find_package(qt COMPONENTS Widgets Core Gui)
 
 set(stock_manager_SRC
   src/main.cpp
@@ -19,16 +25,16 @@ set(stock_manager_SRC
   src/add_new_sell.cpp
   src/about.cpp
   src/database.cpp
+  rc_stock_manager.cpp
 )
+
+include_directories(${qt_INCLUDE_DIRS})
 
 # Tell CMake to create the stock_manager executable
 add_executable(stock_manager ${stock_manager_SRC})
 
-include_directories(/usr/include)
-link_directories(/usr/lib)
-
 # Use the Widgets module from Qt 5.
-target_link_libraries(stock_manager Qt5::Widgets Qt5::Core sqlite3)
+target_link_libraries(stock_manager Qt5Widgets Qt5Core Qt5Gui sqlcipher)
 
 # Install the executable
-install(TARGETS stock_manager DESTINATION bin)
+#install(TARGETS stock_manager DESTINATION bin)

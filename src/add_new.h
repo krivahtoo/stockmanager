@@ -30,8 +30,8 @@
 
 #include <string>
 
-#include <QMainWindow>
-#include <QDialog>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QDialog>
 
 class dlgAdd: public QDialog
 {

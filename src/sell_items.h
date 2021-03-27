@@ -29,8 +29,8 @@
 #include "ui_sell_items.h"
 #include "add_new_sell.h"
 
-#include <QMainWindow>
-#include <QDialog>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QDialog>
 
 class dlgSell: public QDialog
 {

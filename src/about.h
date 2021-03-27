@@ -28,8 +28,8 @@
 
 #include "ui_about.h"
 
-#include <QMainWindow>
-#include <QDialog>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QDialog>
 
 class dlgAbout: public QDialog
 {

@@ -28,8 +28,8 @@
 
 #include "ui_add_new_sell.h"
 
-#include <QWidget>
-#include <QDialog>
+#include <QtWidgets/QWidget>
+#include <QtWidgets/QDialog>
 
 class dlgAddNew: public QDialog
 {

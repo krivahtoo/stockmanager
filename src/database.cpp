@@ -25,7 +25,7 @@
 
 #include "database.h"
 
-#include <QDir>
+#include <QtCore/QDir>
 
 std::string getDBPath() {
     QDir path = QDir::home();

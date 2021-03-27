@@ -32,8 +32,8 @@
 #include "database.h"
 #include "ui_stock_manager.h"
 
-#include <QMainWindow>
-#include <QAction>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QAction>
 
 struct Items
 {

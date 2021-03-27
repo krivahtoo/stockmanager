@@ -26,7 +26,7 @@
 #include "add_new.h"
 #include "database.h"
 
-#include <QMessageBox>
+#include <QtWidgets/QMessageBox>
 
 dlgAdd::dlgAdd(QMainWindow *parent):
     QDialog(parent),

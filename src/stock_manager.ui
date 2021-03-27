@@ -11,11 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Stock Manager</string>
+   <string>Dashboard</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../stock_manager.qrc">
-    <normaloff>:/images/logo-small.svg</normaloff>:/images/logo-small.svg</iconset>
+    <normaloff>:/images/logo.svg</normaloff>:/images/logo.svg</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -406,8 +406,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>240</width>
-             <height>269</height>
+             <width>94</width>
+             <height>24</height>
             </rect>
            </property>
            <attribute name="label">

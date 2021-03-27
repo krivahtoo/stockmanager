@@ -26,8 +26,8 @@
 #include "stock_manager.h"
 #include "database.h"
 
-#include <QApplication>
-#include <QIcon>
+#include <QtWidgets/QApplication>
+#include <QtGui/QIcon>
 
 int main(int argc, char *argv[])
 {
