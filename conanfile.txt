@@ -1,6 +1,6 @@
 [requires]
 qt/5.15.2
-jsoncpp/1.9.4
+nlohmann_json/3.9.1
 openssl/1.1.1j
 sqlcipher/4.4.2
 inja/3.1.0
