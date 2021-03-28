@@ -26,15 +26,49 @@
 #include "database.h"
 
 #include <QtCore/QDir>
+#include <QtCore/QFile>
+#include <QtCore/QStandardPaths>
 
-std::string getDBPath() {
-    QDir path = QDir::home();
-    path.mkdir(".store");
-    path.cd(".store");
-    return path.absolutePath().append(DB_FILE).toStdString();
+std::string getDBPath()
+{
+    QDir dir;
+    QString path = QStandardPaths::locate(
+        QStandardPaths::AppDataLocation,
+        QString("data"), QStandardPaths::LocateDirectory
+    );
+    if (path.isEmpty()) {
+        dir = QDir(
+            QStandardPaths::standardLocations(
+                QStandardPaths::AppDataLocation
+            ).first()
+        );
+        if (!dir.exists())
+            qWarning("Cannot find the data directory");
+        QDir hdir = QDir::home();
+        if (
+            !hdir.mkpath(
+                QStandardPaths::standardLocations(
+                    QStandardPaths::AppDataLocation
+                ).first()
+            )
+        ) qWarning("Could not create data directory");
+            
+        dir.mkdir("data");
+        dir.cd("data");
+    } else {
+        dir = QDir(path);
+    }
+    path = dir.filePath(DB_FILE);
+    return path.toStdString();
 }
 
-void updateDb() {
+void updateDb()
+{
     storage = std::make_unique<Storage>(initStorage(getDBPath()));
-    // storage->sync_schema();
+    storage->sync_schema();
+}
+
+bool isDbFileExist()
+{
+    return QFile::exists(QString::fromStdString(getDBPath()));
 }

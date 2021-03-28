@@ -17,6 +17,8 @@ include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
 # Find the QtWidgets library
 find_package(qt COMPONENTS Widgets Core Gui)
 
+find_package(nlohmann_json)
+
 set(stock_manager_SRC
   src/main.cpp
   src/stock_manager.cpp
@@ -25,10 +27,13 @@ set(stock_manager_SRC
   src/add_new_sell.cpp
   src/about.cpp
   src/database.cpp
+  src/settings.cpp
   rc_stock_manager.cpp
 )
 
 include_directories(${qt_INCLUDE_DIRS})
+
+include_directories(${nlohmann_json_INCLUDE_DIRS})
 
 # Tell CMake to create the stock_manager executable
 add_executable(stock_manager ${stock_manager_SRC})

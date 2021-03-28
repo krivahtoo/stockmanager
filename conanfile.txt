@@ -11,5 +11,4 @@ cmake_find_package
 cmake_paths
 
 [options]
-sqlcipher:shared=False
 *:shared=False

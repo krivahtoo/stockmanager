@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Noah Too
+ * Copyright (c) 2021 Noah Too
  * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,35 +23,21 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "stock_manager.h"
-#include "database.h"
+#ifndef SETTINGS_H
+#define SETTINGS_H
 
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QInputDialog>
-#include <QtGui/QIcon>
+#include <nlohmann/json.hpp>
 
-int main(int argc, char *argv[])
+#include <string>
+
+class Settings
 {
-    QApplication app(argc, argv);
-    // app.setWindowIcon(QIcon());
-    app.setApplicationDisplayName("Shop Manager");
-    app.setApplicationName("Stock Manager");
-    app.setApplicationVersion("0.1.0");
-    app.setOrganizationName("KrivArt Software");
-    if (!isDbFileExist()) {
-        bool ok = false;
-        QString pass = "";
-        while (!ok && pass.isEmpty()) {
-            pass = QInputDialog::getText(nullptr,
-                "Set Master password", "Password",
-                QLineEdit::Password,
-                "", &ok
-            );
-        }
-    }
-    updateDb();
-    stock_manager w;
-    w.show();
+private:
+    std::string data;
+public:
+    Settings(std::string configFile = "config.json");
+    ~Settings();
 
-    return app.exec();
-}
+};
+
+#endif // SETTINGS_H

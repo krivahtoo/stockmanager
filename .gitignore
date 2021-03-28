@@ -1,2 +1,3 @@
 build
 conan.lock
+.vscode/c_cpp_properties.json

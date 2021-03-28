@@ -31,7 +31,7 @@
 
 #include "../sqlite_orm/sqlite_orm.h"
 
-#define DB_FILE "/items.db"
+#define DB_FILE "items.db"
 
 struct Item
 {
@@ -84,5 +84,7 @@ static std::unique_ptr<Storage> storage;
 std::string getDBPath();
 
 void updateDb();
+
+bool isDbFileExist();
 
 #endif // DATABASE_H
