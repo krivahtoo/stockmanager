@@ -43,8 +43,8 @@ struct Items
     std::string itemNo; // This can be WR2536 ;-
     std::string name;
     long price;
-    int quantity;
     std::string capacity;
+    int quantity;
 };
 
 class stock_manager : public QMainWindow

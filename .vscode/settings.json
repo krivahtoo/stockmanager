@@ -71,6 +71,15 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "variant": "cpp",
-        "qpushbutton": "cpp"
-    }
+        "qpushbutton": "cpp",
+        "csignal": "cpp",
+        "any": "cpp",
+        "strstream": "cpp",
+        "forward_list": "cpp",
+        "iomanip": "cpp",
+        "shared_mutex": "cpp",
+        "cfenv": "cpp",
+        "qdir": "cpp"
+    },
+    "C_Cpp.vcpkg.enabled": false
 }

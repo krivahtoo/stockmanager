@@ -26,17 +26,49 @@
 #include "settings.h"
 #include "sha256.h"
 
+#include <QtCore/QDir>
+#include <QtCore/QFile>
+#include <QtCore/QString>
+#include <QtCore/QStandardPaths>
+
 Settings::Settings (std::string configFile):
     file(configFile)
-{}
+{
+    loadSettings();
+}
 
 std::string Settings::getConfigPath()
 {
-    return "";
+    QString path = QStandardPaths::locate(
+        QStandardPaths::AppConfigLocation,
+        QString::fromStdString(file), QStandardPaths::LocateFile
+    );
+    if (path.isEmpty()) {
+        QDir dir = QDir(
+            QStandardPaths::standardLocations(
+                QStandardPaths::AppConfigLocation
+            ).first()
+        );
+        if (!dir.exists())
+            qWarning("Cannot find the config directory");
+        QDir hdir = QDir::home();
+        if (
+            !hdir.mkpath(
+                QStandardPaths::standardLocations(
+                    QStandardPaths::AppConfigLocation
+                ).first()
+            )
+        ) qWarning("Could not create config directory");
+
+        path = dir.filePath(QString::fromStdString(file));
+    }
+    return path.toStdString();
 }
 
 void Settings::loadSettings()
-{}
+{
+    std::string path = getConfigPath();
+}
 
 json Settings::getKey(std::string key)
 {

@@ -47,19 +47,14 @@ std::vector<unsigned long> resize_block(std::vector<unsigned long>);
 // The actual hash computing.
 std::string compute_hash(const std::vector<unsigned long>);
 
-// Used for debugging. Decided to leave this in for if I ever will expand on this.
 std::string get_hex(unsigned long);
 
-// Taken from NIST spec. I find it amazing how this can all be done by just
-// bit rotations.
 #define ROTRIGHT(word, bits) (((word) >> (bits)) | ((word) << (32 - (bits))))
 #define SSIG0(x) (ROTRIGHT(x, 7) ^ ROTRIGHT(x, 18) ^ ((x) >> 3))
 #define SSIG1(x) (ROTRIGHT(x, 17) ^ ROTRIGHT(x, 19) ^ ((x) >> 10))
 #define CH(x, y, z) (((x) & (y)) ^ (~(x) & (z)))
 #define MAJ(x, y, z) (((x) & (y)) ^ ((x) & (z)) ^ ((y) & (z)))
 
-// Supposed incorrect implimentation from NIST.
-// BSIG0 is replaced with EP0 and BSIG1 is replaced with EP0 in the implimentation.
 #define BSIG0(x) (ROTRIGHT(x, 7) ^ ROTRIGHT(x, 18) ^ ((x) >> 3))
 #define BSIG1(x) (ROTRIGHT(x, 17) ^ ROTRIGHT(x, 19) ^ ((x) >> 10))
 

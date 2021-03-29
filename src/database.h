@@ -39,6 +39,8 @@ struct Item
     std::string itemNo; // This can be WR2536 ;-
     std::string name;
     long price;
+    std::string capacity;
+    std::string entryDate;
 };
 
 struct Stock
@@ -51,7 +53,8 @@ struct SoldItem
 {
     std::string itemNo;
     int quantity;
-    std::string date;
+    std::string paymentMethod;
+    std::string saleDate;
 };
 
 inline auto initStorage(const std::string &path) {
@@ -63,7 +66,9 @@ inline auto initStorage(const std::string &path) {
             make_column("id", &Item::id, autoincrement(), primary_key()),
             make_column("item_no", &Item::itemNo),
             make_column("name", &Item::name),
-            make_column("price", &Item::price)
+            make_column("price", &Item::price),
+            make_column("capacity", &Item::capacity),
+            make_column("entry_date", &Item::entryDate)
         ),
         make_table("stock",
             make_column("item_no", &Stock::itemNo),
@@ -72,7 +77,8 @@ inline auto initStorage(const std::string &path) {
         make_table("sold_item",
             make_column("item_no", &SoldItem::itemNo),
             make_column("quantity", &SoldItem::quantity),
-            make_column("date", &SoldItem::date)
+            make_column("payment_method", &SoldItem::paymentMethod),
+            make_column("sale_date", &SoldItem::saleDate)
         )
     );
 }

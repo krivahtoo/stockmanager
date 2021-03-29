@@ -28,6 +28,7 @@ set(stock_manager_SRC
   src/about.cpp
   src/database.cpp
   src/settings.cpp
+  src/sha256.cpp
   rc_stock_manager.cpp
 )
 

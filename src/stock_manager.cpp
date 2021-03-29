@@ -35,7 +35,7 @@ stock_manager::stock_manager(QWidget *parent) :
     dlg_add = new dlgAdd(this);
     dlg_sell = new dlgSell(this);
     dlg_about = new dlgAbout(this);
-    ui_dlg_settings->setupUi(&dlg_settings);
+    ui_dlg_settings.setupUi(&dlg_settings);
     m_ui->setupUi(this);
 
     connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
@@ -67,7 +67,7 @@ void stock_manager::refreshDb() {
     using namespace sqlite_orm;
     storage = std::make_unique<Storage>(initStorage(getDBPath()));
     auto allItems = storage->select(
-        columns(&Item::id, &Item::itemNo, &Item::name, &Item::price, &Stock::quantity),
+        columns(&Item::id, &Item::itemNo, &Item::name, &Item::price, &Item::capacity, &Stock::quantity),
         where(c(&Item::itemNo) == &Stock::itemNo),
         order_by(&Item::id), limit(20, offset(0))
     );
@@ -79,7 +79,8 @@ void stock_manager::refreshDb() {
                 std::get<1>(itm), // itemNo
                 std::get<2>(itm), // Name
                 std::get<3>(itm), // Price
-                std::get<4>(itm) // quantity
+                std::get<4>(itm), // capacity
+                std::get<5>(itm) // quantity
             }
         );
     }
@@ -102,12 +103,12 @@ void stock_manager::updateTable() {
         m_ui->tblStock->setItem(count, 2, tblItem3);
 
         QTableWidgetItem *tblItem4 = new QTableWidgetItem();
-        tblItem4->setText(QString::number(itm.quantity));
+        tblItem4->setText(QString::fromStdString(itm.capacity));
         m_ui->tblStock->setItem(count, 3, tblItem4);
 
-        // QTableWidgetItem *tblItem5 = new QTableWidgetItem();
-        // tblItem5->setText();
-        // m_ui->tblStock->setItem(count, 4, tblItem5);
+        QTableWidgetItem *tblItem5 = new QTableWidgetItem();
+        tblItem5->setText(QString::number(itm.quantity));
+        m_ui->tblStock->setItem(count, 4, tblItem5);
 
         count++;
     }

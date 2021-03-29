@@ -29,7 +29,6 @@ dlgSell::dlgSell(QMainWindow *parent):
     QDialog(parent),
     ui(new Ui::dlgSell)
 {
-
     dlg_add_new = new dlgAddNew(this);
 
     ui->setupUi(this);
