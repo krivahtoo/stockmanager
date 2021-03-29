@@ -10,11 +10,11 @@
     <x>0</x>
     <y>0</y>
     <width>321</width>
-    <height>163</height>
+    <height>145</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Add Item</string>
+   <string>Add Item to Cart</string>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -92,6 +92,10 @@
        <property name="text">
         <string>Cancel</string>
        </property>
+       <property name="icon">
+        <iconset resource="../stock_manager.qrc">
+         <normaloff>:/icons/cross.svg</normaloff>:/icons/cross.svg</iconset>
+       </property>
       </widget>
      </item>
      <item>
@@ -116,7 +120,11 @@
         </size>
        </property>
        <property name="text">
-        <string>Add</string>
+        <string>Add to Cart</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../stock_manager.qrc">
+         <normaloff>:/icons/cart.svg</normaloff>:/icons/cart.svg</iconset>
        </property>
       </widget>
      </item>
@@ -124,7 +132,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../stock_manager.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>btnCancel</sender>

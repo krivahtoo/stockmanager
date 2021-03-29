@@ -1,15 +1,16 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_newpTObST.ui'
+** Form generated from reading UI file 'add_newlqNnQO.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEWPTOBST_H
-#define ADD_NEWPTOBST_H
+#ifndef ADD_NEWLQNNQO_H
+#define ADD_NEWLQNNQO_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFormLayout>
@@ -117,6 +118,9 @@ public:
         btnCancel = new QPushButton(dlgAdd);
         btnCancel->setObjectName(QString::fromUtf8("btnCancel"));
         btnCancel->setMinimumSize(QSize(88, 26));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/icons/cross.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnCancel->setIcon(icon);
 
         horizontalLayout->addWidget(btnCancel);
 
@@ -127,6 +131,9 @@ public:
         btnSave = new QPushButton(dlgAdd);
         btnSave->setObjectName(QString::fromUtf8("btnSave"));
         btnSave->setMinimumSize(QSize(88, 26));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/icons/checkmark.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnSave->setIcon(icon1);
 
         horizontalLayout->addWidget(btnSave);
 
@@ -165,4 +172,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEWPTOBST_H
+#endif // ADD_NEWLQNNQO_H

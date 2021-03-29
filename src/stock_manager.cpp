@@ -35,6 +35,7 @@ stock_manager::stock_manager(QWidget *parent) :
     dlg_add = new dlgAdd(this);
     dlg_sell = new dlgSell(this);
     dlg_about = new dlgAbout(this);
+    ui_dlg_settings->setupUi(&dlg_settings);
     m_ui->setupUi(this);
 
     connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
@@ -43,7 +44,6 @@ stock_manager::stock_manager(QWidget *parent) :
     connect(m_ui->btnSellItem, &QPushButton::pressed, this, &stock_manager::show_SellItems);
     connect(m_ui->actAbout, &QAction::triggered, this, &stock_manager::show_About);
 
-    // m_ui->tblStock
     refreshDb();
     updateTable();
 }
@@ -55,7 +55,7 @@ void stock_manager::show_AddItem()
 
 void stock_manager::show_SellItems()
 {
-    dlg_sell->show();
+    m_ui->tabMain->setCurrentIndex(0);
 }
 
 void stock_manager::show_About()

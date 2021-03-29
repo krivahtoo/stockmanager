@@ -31,9 +31,11 @@
 #include "sell_items.h"
 #include "database.h"
 #include "ui_stock_manager.h"
+#include "ui_settings.h"
 
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QAction>
+#include <QtWidgets/QDialog>
 
 struct Items
 {
@@ -42,6 +44,7 @@ struct Items
     std::string name;
     long price;
     int quantity;
+    std::string capacity;
 };
 
 class stock_manager : public QMainWindow
@@ -63,6 +66,8 @@ private:
     dlgAdd *dlg_add;
     dlgSell *dlg_sell;
     dlgAbout *dlg_about;
+    QDialog dlg_settings;
+    Ui::dlgSettings ui_dlg_settings;
     std::vector<Items> items;
 };
 

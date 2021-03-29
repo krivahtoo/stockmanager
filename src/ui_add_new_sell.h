@@ -1,15 +1,16 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_new_sellivlvgp.ui'
+** Form generated from reading UI file 'add_new_sellzlQzrd.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEW_SELLIVLVGP_H
-#define ADD_NEW_SELLIVLVGP_H
+#ifndef ADD_NEW_SELLZLQZRD_H
+#define ADD_NEW_SELLZLQZRD_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFormLayout>
@@ -45,7 +46,7 @@ public:
         if (dlgAddNew->objectName().isEmpty())
             dlgAddNew->setObjectName(QString::fromUtf8("dlgAddNew"));
         dlgAddNew->setWindowModality(Qt::WindowModal);
-        dlgAddNew->resize(321, 163);
+        dlgAddNew->resize(321, 145);
         dlgAddNew->setModal(true);
         verticalLayout = new QVBoxLayout(dlgAddNew);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
@@ -88,6 +89,9 @@ public:
         btnCancel = new QPushButton(dlgAddNew);
         btnCancel->setObjectName(QString::fromUtf8("btnCancel"));
         btnCancel->setMinimumSize(QSize(88, 26));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/icons/cross.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnCancel->setIcon(icon);
 
         horizontalLayout->addWidget(btnCancel);
 
@@ -98,6 +102,9 @@ public:
         btnAdd = new QPushButton(dlgAddNew);
         btnAdd->setObjectName(QString::fromUtf8("btnAdd"));
         btnAdd->setMinimumSize(QSize(88, 26));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/icons/cart.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnAdd->setIcon(icon1);
 
         horizontalLayout->addWidget(btnAdd);
 
@@ -113,12 +120,12 @@ public:
 
     void retranslateUi(QDialog *dlgAddNew)
     {
-        dlgAddNew->setWindowTitle(QCoreApplication::translate("dlgAddNew", "Add Item", nullptr));
+        dlgAddNew->setWindowTitle(QCoreApplication::translate("dlgAddNew", "Add Item to Cart", nullptr));
         groupBox->setTitle(QCoreApplication::translate("dlgAddNew", "Item", nullptr));
         label->setText(QCoreApplication::translate("dlgAddNew", "Item Id:", nullptr));
         label_2->setText(QCoreApplication::translate("dlgAddNew", "Quantity:", nullptr));
         btnCancel->setText(QCoreApplication::translate("dlgAddNew", "Cancel", nullptr));
-        btnAdd->setText(QCoreApplication::translate("dlgAddNew", "Add", nullptr));
+        btnAdd->setText(QCoreApplication::translate("dlgAddNew", "Add to Cart", nullptr));
     } // retranslateUi
 
 };
@@ -129,4 +136,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEW_SELLIVLVGP_H
+#endif // ADD_NEW_SELLZLQZRD_H

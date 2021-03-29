@@ -143,6 +143,10 @@
        <property name="text">
         <string>Cancel</string>
        </property>
+       <property name="icon">
+        <iconset resource="../stock_manager.qrc">
+         <normaloff>:/icons/cross.svg</normaloff>:/icons/cross.svg</iconset>
+       </property>
       </widget>
      </item>
      <item>
@@ -169,6 +173,10 @@
        <property name="text">
         <string>Save</string>
        </property>
+       <property name="icon">
+        <iconset resource="../stock_manager.qrc">
+         <normaloff>:/icons/checkmark.svg</normaloff>:/icons/checkmark.svg</iconset>
+       </property>
        <property name="default">
         <bool>true</bool>
        </property>
@@ -178,7 +186,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../stock_manager.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>btnCancel</sender>
