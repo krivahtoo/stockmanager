@@ -39,6 +39,7 @@ struct Item
     std::string itemNo; // This can be WR2536 ;-
     std::string name;
     long price;
+    long buyingPrice;
     std::string capacity;
     std::string entryDate;
 };
@@ -67,6 +68,7 @@ inline auto initStorage(const std::string &path) {
             make_column("item_no", &Item::itemNo),
             make_column("name", &Item::name),
             make_column("price", &Item::price),
+            make_column("buying_price", &Item::buyingPrice),
             make_column("capacity", &Item::capacity),
             make_column("entry_date", &Item::entryDate)
         ),

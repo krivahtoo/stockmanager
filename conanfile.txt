@@ -4,7 +4,6 @@ nlohmann_json/3.9.1
 openssl/1.1.1j
 sqlcipher/4.4.2
 inja/3.1.0
-libsodium/1.0.18
 
 [generators]
 cmake_find_package
