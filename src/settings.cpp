@@ -24,7 +24,40 @@
  */
 
 #include "settings.h"
+#include "sha256.h"
 
-Settings::Settings (std::string configFile) {}
+Settings::Settings (std::string configFile):
+    file(configFile)
+{}
+
+std::string Settings::getConfigPath()
+{
+    return "";
+}
+
+void Settings::loadSettings()
+{}
+
+json Settings::getKey(std::string key)
+{
+    json val = data[key];
+    return val;
+}
+
+bool Settings::setKey(std::string key, std::string value)
+{
+    data[key] = value;
+    return 1;
+}
+
+std::string Settings::hash(std::string pass)
+{
+	std::vector<unsigned long> block;
+	block = convert_to_binary(pass);
+	block = pad_to_512bits(block);
+	block = resize_block(block);
+
+	return compute_hash(block);
+}
 
 Settings::~Settings () = default;

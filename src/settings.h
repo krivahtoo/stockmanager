@@ -30,14 +30,21 @@
 
 #include <string>
 
+using json = nlohmann::json;
+
 class Settings
 {
 private:
-    std::string data;
+    json data;
+    std::string file;
+    std::string getConfigPath();
+    void loadSettings();
 public:
     Settings(std::string configFile = "config.json");
     ~Settings();
-
+    json getKey(std::string key);
+    bool setKey(std::string key, std::string value);
+    static std::string hash(std::string pass);
 };
 
 #endif // SETTINGS_H
