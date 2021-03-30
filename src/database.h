@@ -40,7 +40,7 @@ struct Item
     std::string name;
     long price;
     long buyingPrice;
-    std::string capacity;
+    std::unique_ptr<std::string> capacity;
     long int entryDate;
 };
 

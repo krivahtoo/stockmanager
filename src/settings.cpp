@@ -26,6 +26,8 @@
 #include "settings.h"
 #include "sha256.h"
 
+#include <fstream>
+
 #include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QString>
@@ -67,7 +69,27 @@ std::string Settings::getConfigPath()
 
 void Settings::loadSettings()
 {
-    std::string path = getConfigPath();
+    QFile file = QFile(QString::fromStdString(getConfigPath()));
+    if (!file.exists())
+        data = {
+            {"name", "Shop Manager"},
+            {"theme", "default"},
+            {"currency", {
+                {"prefix", "Ksh. "},
+                {"suffix", ".00"}
+            }}
+        };
+
+    std::ifstream i(getConfigPath());
+    i >> data;
+    i.close();
+}
+
+void Settings::saveSettings()
+{
+    std::ofstream o(getConfigPath());
+    o << std::setw(4) << data << std::endl;
+    o.close();
 }
 
 json Settings::getKey(std::string key)

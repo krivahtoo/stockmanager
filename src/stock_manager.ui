@@ -19,7 +19,7 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="1">
+    <item row="0" column="0">
      <widget class="QTabWidget" name="tabMain">
       <property name="statusTip">
        <string>View items on stock</string>
@@ -92,6 +92,18 @@
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
               <widget class="QPushButton" name="btnAdd_Cart">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>50</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Add Item to Cart</string>
                </property>
@@ -139,6 +151,12 @@
              </item>
              <item>
               <widget class="QPushButton" name="btnDone_Cart">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>50</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Done</string>
                </property>

@@ -25,6 +25,7 @@
 
 #include "stock_manager.h"
 #include "database.h"
+#include "settings.h"
 
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QInputDialog>
@@ -33,11 +34,12 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    // app.setWindowIcon(QIcon());
     app.setApplicationDisplayName("Shop Manager");
     app.setApplicationName("Stock Manager");
     app.setApplicationVersion("0.1.0");
     app.setOrganizationName("KrivArt Software");
+    Settings settings;
+    // TODO: Find a better way
     if (!isDbFileExist()) {
         bool ok = false;
         QString pass = "";
@@ -48,6 +50,23 @@ int main(int argc, char *argv[])
                 "", &ok
             );
         }
+        Settings::db_key = pass.toStdString();
+        settings.setKey("db_key", Settings::hash(pass.toStdString()));
+        settings.saveSettings();
+    } else {
+        bool ok = false;
+        bool correct = false;
+        QString pass = "";
+        while (!ok && pass.isEmpty() && !correct) {
+            pass = QInputDialog::getText(nullptr,
+                "Enter Master Password", "Password",
+                QLineEdit::Password,
+                "", &ok
+            );
+            if (Settings::hash(pass.toStdString()) == settings.getKey("db_key").get<std::string>())
+                correct = true;
+        }
+        Settings::db_key = pass.toStdString();
     }
     updateDb();
     stock_manager w;

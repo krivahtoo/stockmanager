@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'stock_managerQipWDu.ui'
+** Form generated from reading UI file 'stock_managercpWItL.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef STOCK_MANAGERQIPWDU_H
-#define STOCK_MANAGERQIPWDU_H
+#ifndef STOCK_MANAGERCPWITL_H
+#define STOCK_MANAGERCPWITL_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -216,6 +216,8 @@ public:
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         btnAdd_Cart = new QPushButton(groupBox_5);
         btnAdd_Cart->setObjectName(QString::fromUtf8("btnAdd_Cart"));
+        btnAdd_Cart->setMinimumSize(QSize(0, 30));
+        btnAdd_Cart->setMaximumSize(QSize(16777215, 50));
         QIcon icon13;
         icon13.addFile(QString::fromUtf8(":/icons/cart.svg"), QSize(), QIcon::Normal, QIcon::Off);
         btnAdd_Cart->setIcon(icon13);
@@ -249,6 +251,7 @@ public:
 
         btnDone_Cart = new QPushButton(groupBox_5);
         btnDone_Cart->setObjectName(QString::fromUtf8("btnDone_Cart"));
+        btnDone_Cart->setMaximumSize(QSize(16777215, 50));
         QIcon icon15;
         icon15.addFile(QString::fromUtf8(":/icons/checkmark.svg"), QSize(), QIcon::Normal, QIcon::Off);
         btnDone_Cart->setIcon(icon15);
@@ -447,7 +450,7 @@ public:
 
         tabMain->addTab(tabStock, QString());
 
-        gridLayout->addWidget(tabMain, 0, 1, 1, 1);
+        gridLayout->addWidget(tabMain, 0, 0, 1, 1);
 
         stock_manager->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(stock_manager);
@@ -610,4 +613,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // STOCK_MANAGERQIPWDU_H
+#endif // STOCK_MANAGERCPWITL_H
