@@ -41,7 +41,7 @@ struct Item
     long price;
     long buyingPrice;
     std::string capacity;
-    std::string entryDate;
+    long int entryDate;
 };
 
 struct Stock
@@ -55,7 +55,7 @@ struct SoldItem
     std::string itemNo;
     int quantity;
     std::string paymentMethod;
-    std::string saleDate;
+    long int saleDate;
 };
 
 inline auto initStorage(const std::string &path) {

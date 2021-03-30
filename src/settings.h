@@ -45,6 +45,7 @@ public:
     json getKey(std::string key);
     bool setKey(std::string key, std::string value);
     static std::string hash(std::string pass);
+    static std::string db_key;
 };
 
 #endif // SETTINGS_H

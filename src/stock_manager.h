@@ -33,6 +33,8 @@
 #include "ui_stock_manager.h"
 #include "ui_settings.h"
 
+#include <nlohmann/json.hpp>
+
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QDialog>
@@ -47,6 +49,8 @@ struct Items
     int quantity;
 };
 
+using json = nlohmann::json;
+
 class stock_manager : public QMainWindow
 {
     Q_OBJECT
@@ -60,6 +64,7 @@ public:
     void show_About();
     void refreshDb();
     void updateTable();
+    void updateStats();
 
 private:
     QScopedPointer<Ui::stock_manager> m_ui;
@@ -69,6 +74,7 @@ private:
     QDialog dlg_settings;
     Ui::dlgSettings ui_dlg_settings;
     std::vector<Items> items;
+    json getStatsData();
 };
 
 #endif // STOCK_MANAGER_H

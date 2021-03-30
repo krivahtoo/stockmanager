@@ -26,6 +26,10 @@
 #include "stock_manager.h"
 #include "database.h"
 
+#include <inja/inja.hpp>
+#include <nlohmann/json.hpp>
+
+#include <QtCore/QDateTime>
 #include <QtWidgets/QPushButton>
 
 stock_manager::stock_manager(QWidget *parent) :
@@ -63,7 +67,8 @@ void stock_manager::show_About()
     dlg_about->show();
 }
 
-void stock_manager::refreshDb() {
+void stock_manager::refreshDb()
+{
     using namespace sqlite_orm;
     storage = std::make_unique<Storage>(initStorage(getDBPath()));
     auto allItems = storage->select(
@@ -86,7 +91,8 @@ void stock_manager::refreshDb() {
     }
 }
 
-void stock_manager::updateTable() {
+void stock_manager::updateTable()
+{
     int count = 0;
     m_ui->tblStock->setRowCount(items.size());
     for (const auto& itm: items) {
@@ -112,6 +118,79 @@ void stock_manager::updateTable() {
 
         count++;
     }
+}
+
+void stock_manager::updateStats ()
+{
+    using json = nlohmann::json;
+    json data = getStatsData();
+    QString stats_template = "<html><head/><body>";
+
+    if (data.contains("stock"))
+        stats_template.push_back(
+            QString::fromStdString(
+                inja::render("<p>Stock: {{ stock }}</p>", data)
+            )
+        );
+
+    if (data.contains("sales"))
+        stats_template.push_back(
+            QString::fromStdString(
+                inja::render("<p>Sales Today: {{ sales.count }} for {{ sales.price }}</p>", data)
+            )
+        );
+    
+    if (data.contains("items") && data["items"].size() > 0)
+        stats_template.push_back(
+            QString::fromStdString(
+                inja::render(R"(<p><span style=" font-weight:600;">Items Out of Stock:</span></p>: <p>
+## for item in items
+{{ loop.index1 }}: {{ item }}<br/>
+## endfor
+</p>)", data)
+            )
+        );
+    stats_template.push_back("</body></html>");
+
+    m_ui->lblStats->setText(stats_template);
+}
+
+json stock_manager::getStatsData()
+{
+    using namespace sqlite_orm;
+    json j;
+    storage = std::make_unique<Storage>(initStorage(getDBPath()));
+    j["stock"] = storage->count<Stock>();
+    auto items = storage->select(
+        columns(&Item::name, &Stock::quantity),
+        where(c(&Item::itemNo) == &Stock::itemNo and c(&Stock::quantity) < 1)
+    );
+
+    QDateTime date_time = QDateTime::currentDateTime();
+    date_time.setTime(QTime::fromString("00:00:00", "HH:mm:ss"));
+
+    long int timestamp = date_time.toSecsSinceEpoch();
+
+    auto sales = storage->select(
+        columns(&Item::price, &SoldItem::quantity),
+        where(c(&Item::itemNo) == &Stock::itemNo and c(&SoldItem::saleDate) >= timestamp)
+    );
+
+    int count = 0;
+    long price = 0;
+
+    for (auto &sale: sales) {
+        price += std::get<0>(sale);
+        count += std::get<1>(sale);
+    }
+
+    j["sales"]["count"] = count;
+    j["sales"]["price"] = price;
+
+    for (auto &itm: items) {
+        j["items"].push_back(std::get<0>(itm));
+    }
+    return j;
 }
 
 stock_manager::~stock_manager() = default;
