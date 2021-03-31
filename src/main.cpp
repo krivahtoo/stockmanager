@@ -27,20 +27,22 @@
 #include "database.h"
 #include "settings.h"
 
+#include <QtCore/QFile>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QInputDialog>
-#include <QtGui/QIcon>
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    app.setApplicationDisplayName("Shop Manager");
+    // app.setApplicationDisplayName("Shop Manager");
     app.setApplicationName("Stock Manager");
     app.setApplicationVersion("0.1.0");
     app.setOrganizationName("KrivArt Software");
     Settings settings;
+    QFile config_file;
+    config_file.setFileName(QString::fromStdString(Settings::config_path));
     // TODO: Find a better way
-    if (!isDbFileExist()) {
+    if (!isDbFileExist() || !config_file.exists()) {
         bool ok = false;
         QString pass = "";
         while (!ok && pass.isEmpty()) {
@@ -50,14 +52,13 @@ int main(int argc, char *argv[])
                 "", &ok
             );
         }
-        Settings::db_key = pass.toStdString();
+        settings.setDBKey(pass.toStdString());
         settings.setKey("db_key", Settings::hash(pass.toStdString()));
-        settings.saveSettings();
     } else {
         bool ok = false;
         bool correct = false;
         QString pass = "";
-        while (!ok && pass.isEmpty() && !correct) {
+        while (pass.isEmpty() || !correct) {
             pass = QInputDialog::getText(nullptr,
                 "Enter Master Password", "Password",
                 QLineEdit::Password,
@@ -65,11 +66,15 @@ int main(int argc, char *argv[])
             );
             if (Settings::hash(pass.toStdString()) == settings.getKey("db_key").get<std::string>())
                 correct = true;
+            
+            if (!ok) exit(1);
         }
-        Settings::db_key = pass.toStdString();
+        settings.setDBKey(pass.toStdString());
     }
+    settings.saveSettings();
     updateDb();
     stock_manager w;
+    w.setWindowState(Qt::WindowMaximized);
     w.show();
 
     return app.exec();

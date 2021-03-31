@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>415</width>
-    <height>250</height>
+    <width>460</width>
+    <height>271</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -117,7 +117,7 @@
          <item row="1" column="0">
           <widget class="QLabel" name="lblPrice">
            <property name="text">
-            <string>Price:</string>
+            <string>Selling Price:</string>
            </property>
           </widget>
          </item>
@@ -158,6 +158,23 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Capacity / Weight:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="txtCapacity">
+        <property name="maximumSize">
+         <size>
+          <width>181</width>
+          <height>16777215</height>
+         </size>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

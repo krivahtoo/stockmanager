@@ -39,6 +39,9 @@ Settings::Settings (std::string configFile):
     loadSettings();
 }
 
+std::string Settings::config_path = "";
+std::string Settings::db_key = "";
+
 std::string Settings::getConfigPath()
 {
     QString path = QStandardPaths::locate(
@@ -69,8 +72,10 @@ std::string Settings::getConfigPath()
 
 void Settings::loadSettings()
 {
-    QFile file = QFile(QString::fromStdString(getConfigPath()));
-    if (!file.exists())
+    QFile file;
+    file.setFileName(QString::fromStdString(getConfigPath()));
+    Settings::config_path = getConfigPath();
+    if (!file.exists()) {
         data = {
             {"name", "Shop Manager"},
             {"theme", "default"},
@@ -79,6 +84,8 @@ void Settings::loadSettings()
                 {"suffix", ".00"}
             }}
         };
+        return;
+    }
 
     std::ifstream i(getConfigPath());
     i >> data;
@@ -112,6 +119,11 @@ std::string Settings::hash(std::string pass)
 	block = resize_block(block);
 
 	return compute_hash(block);
+}
+
+void Settings::setDBKey(std::string dbKey)
+{
+    Settings::db_key = dbKey;
 }
 
 Settings::~Settings () = default;

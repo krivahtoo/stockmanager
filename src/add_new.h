@@ -43,10 +43,13 @@ public:
 
 private:
     QScopedPointer<Ui::dlgAdd> ui;
+    bool newItem;
     std::string name;
     std::string itemNo;
     long price;
+    long buyingPrice;
     int quantity;
+    std::string capacity;
     void add();
     void clearData();
 };

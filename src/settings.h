@@ -43,10 +43,12 @@ public:
     Settings(std::string configFile = "config.json");
     ~Settings();
     static std::string db_key;
+    static std::string config_path;
     json getKey(std::string key);
     bool setKey(std::string key, std::string value);
     static std::string hash(std::string pass);
     void saveSettings();
+    void setDBKey(std::string dbKey);
 };
 
 #endif // SETTINGS_H

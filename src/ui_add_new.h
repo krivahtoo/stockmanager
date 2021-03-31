@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_newYCshOS.ui'
+** Form generated from reading UI file 'add_newAhQPGr.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEWYCSHOS_H
-#define ADD_NEWYCSHOS_H
+#ifndef ADD_NEWAHQPGR_H
+#define ADD_NEWAHQPGR_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -44,6 +44,8 @@ public:
     QLabel *lblPrice;
     QSpinBox *spnPrice;
     QSpacerItem *verticalSpacer;
+    QLabel *label_2;
+    QLineEdit *txtCapacity;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnCancel;
     QSpacerItem *horizontalSpacer;
@@ -54,7 +56,7 @@ public:
         if (dlgAdd->objectName().isEmpty())
             dlgAdd->setObjectName(QString::fromUtf8("dlgAdd"));
         dlgAdd->setWindowModality(Qt::WindowModal);
-        dlgAdd->resize(414, 250);
+        dlgAdd->resize(460, 271);
         dlgAdd->setMinimumSize(QSize(0, 0));
         dlgAdd->setMaximumSize(QSize(41055, 25455));
         dlgAdd->setModal(true);
@@ -132,6 +134,17 @@ public:
 
         formLayout->setItem(5, QFormLayout::SpanningRole, verticalSpacer);
 
+        label_2 = new QLabel(grpItem);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        formLayout->setWidget(3, QFormLayout::LabelRole, label_2);
+
+        txtCapacity = new QLineEdit(grpItem);
+        txtCapacity->setObjectName(QString::fromUtf8("txtCapacity"));
+        txtCapacity->setMaximumSize(QSize(181, 16777215));
+
+        formLayout->setWidget(3, QFormLayout::FieldRole, txtCapacity);
+
 
         verticalLayout->addWidget(grpItem);
 
@@ -183,9 +196,10 @@ public:
         label->setText(QCoreApplication::translate("dlgAdd", "Buying Price:", nullptr));
         spnBuyingPrice->setSuffix(QCoreApplication::translate("dlgAdd", ".00", nullptr));
         spnBuyingPrice->setPrefix(QCoreApplication::translate("dlgAdd", "Ksh. ", nullptr));
-        lblPrice->setText(QCoreApplication::translate("dlgAdd", "Price:", nullptr));
+        lblPrice->setText(QCoreApplication::translate("dlgAdd", "Selling Price:", nullptr));
         spnPrice->setSuffix(QCoreApplication::translate("dlgAdd", ".00", nullptr));
         spnPrice->setPrefix(QCoreApplication::translate("dlgAdd", "Ksh. ", nullptr));
+        label_2->setText(QCoreApplication::translate("dlgAdd", "Capacity / Weight:", nullptr));
         btnCancel->setText(QCoreApplication::translate("dlgAdd", "Cancel", nullptr));
         btnSave->setText(QCoreApplication::translate("dlgAdd", "Save", nullptr));
     } // retranslateUi
@@ -198,4 +212,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEWYCSHOS_H
+#endif // ADD_NEWAHQPGR_H
