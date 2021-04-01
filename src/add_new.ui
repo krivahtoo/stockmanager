@@ -112,6 +112,9 @@
            <property name="prefix">
             <string>Ksh. </string>
            </property>
+           <property name="maximum">
+            <number>999999</number>
+           </property>
           </widget>
          </item>
          <item row="1" column="0">

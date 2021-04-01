@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'stock_managercpWItL.ui'
+** Form generated from reading UI file 'stock_managermIUusb.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef STOCK_MANAGERCPWITL_H
-#define STOCK_MANAGERCPWITL_H
+#ifndef STOCK_MANAGERMIUUSB_H
+#define STOCK_MANAGERMIUUSB_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -144,6 +144,7 @@ public:
         QIcon icon6;
         icon6.addFile(QString::fromUtf8(":/icons/copy.svg"), QSize(), QIcon::Normal, QIcon::Off);
         actionCopy->setIcon(icon6);
+        actionCopy->setMenuRole(QAction::TextHeuristicRole);
         actionPaste = new QAction(stock_manager);
         actionPaste->setObjectName(QString::fromUtf8("actionPaste"));
         QIcon icon7;
@@ -613,4 +614,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // STOCK_MANAGERCPWITL_H
+#endif // STOCK_MANAGERMIUUSB_H

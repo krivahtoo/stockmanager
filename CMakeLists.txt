@@ -21,6 +21,10 @@ find_package(nlohmann_json)
 
 find_package(inja)
 
+find_package(sqlcipher)
+
+find_package(OpenSSL)
+
 set(stock_manager_SRC
   src/main.cpp
   src/stock_manager.cpp
@@ -40,6 +44,10 @@ include_directories(${nlohmann_json_INCLUDE_DIRS})
 
 # Inja include dirs
 include_directories(${pantor_INCLUDE_DIRS})
+
+include_directories(${sqlcipher_INCLUDE_DIRS})
+
+include_directories(${OpenSSL_INCLUDE_DIRS})
 
 # Tell CMake to create the stock_manager executable
 add_executable(stock_manager ${stock_manager_SRC})

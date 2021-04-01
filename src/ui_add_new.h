@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_newAhQPGr.ui'
+** Form generated from reading UI file 'add_newPqxASa.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEWAHQPGR_H
-#define ADD_NEWAHQPGR_H
+#ifndef ADD_NEWPQXASA_H
+#define ADD_NEWPQXASA_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -111,6 +111,7 @@ public:
         spnBuyingPrice = new QSpinBox(groupBox);
         spnBuyingPrice->setObjectName(QString::fromUtf8("spnBuyingPrice"));
         spnBuyingPrice->setMaximumSize(QSize(141, 16777215));
+        spnBuyingPrice->setMaximum(999999);
 
         formLayout_2->setWidget(0, QFormLayout::FieldRole, spnBuyingPrice);
 
@@ -212,4 +213,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEWAHQPGR_H
+#endif // ADD_NEWPQXASA_H

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>630</width>
-    <height>303</height>
+    <width>623</width>
+    <height>309</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -297,5 +297,22 @@
  <resources>
   <include location="../stock_manager.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>dlgSettings</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>362</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>286</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

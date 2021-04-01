@@ -631,6 +631,9 @@
    <property name="shortcut">
     <string>Ctrl+C</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::TextHeuristicRole</enum>
+   </property>
   </action>
   <action name="actionPaste">
    <property name="icon">

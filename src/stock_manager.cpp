@@ -39,32 +39,72 @@ stock_manager::stock_manager(QWidget *parent) :
     dlg_add = new dlgAdd(this);
     dlg_sell = new dlgSell(this);
     dlg_about = new dlgAbout(this);
+    dlg_add_new = new dlgAddNew(this);
+
     ui_dlg_settings.setupUi(&dlg_settings);
     m_ui->setupUi(this);
 
+    connect(m_ui->btnAdd_Cart, &QPushButton::pressed, this, &stock_manager::show_AddCart);
     connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
     connect(m_ui->actQuit, &QAction::triggered, this, &QCoreApplication::quit);
-    connect(m_ui->btnAddItem, &QPushButton::pressed, this, &stock_manager::show_AddItem);
-    connect(m_ui->btnSellItem, &QPushButton::pressed, this, &stock_manager::show_SellItems);
-    connect(m_ui->actAbout, &QAction::triggered, this, &stock_manager::show_About);
+    connect(
+        m_ui->btnAddItem,
+        &QPushButton::pressed, this,
+        [=](){ dlg_add->show(); }
+    );
+    connect(
+        m_ui->btnSellItem,
+        &QPushButton::pressed, this,
+        [&](){ m_ui->tabMain->setCurrentIndex(0); }
+    );
+    connect(
+        m_ui->btnRefresh,
+        &QPushButton::pressed, this,
+        [&](){
+            refreshDb();
+            updateTable();
+        }
+    );
+    connect(
+        m_ui->actSettings,
+        &QAction::triggered, this,
+        [=](){ dlg_settings.show(); }
+    );
+    connect(
+        m_ui->actAbout,
+        &QAction::triggered, this,
+        [=](){ dlg_about->show(); }
+    );
+    connect(
+        m_ui->actHome,
+        &QAction::triggered, this,
+        [&](){
+            m_ui->tabMain->setCurrentIndex(0);
+        }
+    );
+    connect(
+        m_ui->actSales,
+        &QAction::triggered, this,
+        [&](){
+            m_ui->tabMain->setCurrentIndex(1);
+        }
+    );
+    connect(
+        m_ui->actStock,
+        &QAction::triggered, this,
+        [&](){
+            m_ui->tabMain->setCurrentIndex(2);
+        }
+    );
 
     refreshDb();
     updateTable();
+    updateStats();
 }
 
-void stock_manager::show_AddItem()
+void stock_manager::show_AddCart()
 {
-    dlg_add->show();
-}
-
-void stock_manager::show_SellItems()
-{
-    m_ui->tabMain->setCurrentIndex(0);
-}
-
-void stock_manager::show_About()
-{
-    dlg_about->show();
+    dlg_add_new->show();
 }
 
 void stock_manager::refreshDb()
@@ -72,7 +112,10 @@ void stock_manager::refreshDb()
     using namespace sqlite_orm;
     storage = std::make_unique<Storage>(initStorage(getDBPath()));
     auto allItems = storage->select(
-        columns(&Item::id, &Item::itemNo, &Item::name, &Item::price, &Item::capacity, &Stock::quantity),
+        columns(
+            &Item::id, &Item::itemNo, &Item::name,
+            &Item::price, &Item::capacity, &Stock::quantity
+        ),
         where(c(&Item::itemNo) == &Stock::itemNo),
         order_by(&Item::id), limit(20, offset(0))
     );
@@ -93,6 +136,7 @@ void stock_manager::refreshDb()
 
 void stock_manager::updateTable()
 {
+    using json = nlohmann::json;
     int count = 0;
     m_ui->tblStock->setRowCount(items.size());
     for (const auto& itm: items) {
@@ -104,8 +148,11 @@ void stock_manager::updateTable()
         tblItem2->setText(QString::fromStdString(itm.name));
         m_ui->tblStock->setItem(count, 1, tblItem2);
 
+        json dat;
+        dat["price"] = itm.price;
+
         QTableWidgetItem *tblItem3 = new QTableWidgetItem();
-        tblItem3->setText(QString::number(itm.price));
+        tblItem3->setText(QString::fromStdString(inja::render("Ksh. {{ price }}.00", dat)));
         m_ui->tblStock->setItem(count, 2, tblItem3);
 
         QTableWidgetItem *tblItem4 = new QTableWidgetItem();
@@ -120,9 +167,8 @@ void stock_manager::updateTable()
     }
 }
 
-void stock_manager::updateStats ()
+void stock_manager::updateStats()
 {
-    using json = nlohmann::json;
     json data = getStatsData();
     QString stats_template = "<html><head/><body>";
 
@@ -136,7 +182,7 @@ void stock_manager::updateStats ()
     if (data.contains("sales"))
         stats_template.push_back(
             QString::fromStdString(
-                inja::render("<p>Sales Today: {{ sales.count }} for {{ sales.price }}</p>", data)
+                inja::render("<p>Sales Today: {{ sales.count }} for Ksh. {{ sales.price }}.00</p>", data)
             )
         );
     

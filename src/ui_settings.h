@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'settingsxZbSef.ui'
+** Form generated from reading UI file 'settingscNrlQu.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SETTINGSXZBSEF_H
-#define SETTINGSXZBSEF_H
+#ifndef SETTINGSCNRLQU_H
+#define SETTINGSCNRLQU_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -70,7 +70,7 @@ public:
     {
         if (dlgSettings->objectName().isEmpty())
             dlgSettings->setObjectName(QString::fromUtf8("dlgSettings"));
-        dlgSettings->resize(630, 303);
+        dlgSettings->resize(623, 309);
         verticalLayout = new QVBoxLayout(dlgSettings);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         groupBox = new QGroupBox(dlgSettings);
@@ -250,6 +250,7 @@ public:
 
 
         retranslateUi(dlgSettings);
+        QObject::connect(pushButton_3, SIGNAL(clicked()), dlgSettings, SLOT(reject()));
 
         QMetaObject::connectSlotsByName(dlgSettings);
     } // setupUi
@@ -287,4 +288,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SETTINGSXZBSEF_H
+#endif // SETTINGSCNRLQU_H

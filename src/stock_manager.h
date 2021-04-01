@@ -32,6 +32,7 @@
 #include "database.h"
 #include "ui_stock_manager.h"
 #include "ui_settings.h"
+#include "add_new_sell.h"
 
 #include <nlohmann/json.hpp>
 
@@ -59,9 +60,7 @@ public:
     explicit stock_manager(QWidget *parent = nullptr);
     ~stock_manager() override;
 
-    void show_AddItem();
-    void show_SellItems();
-    void show_About();
+    void show_AddCart();
     void refreshDb();
     void updateTable();
     void updateStats();
@@ -71,9 +70,11 @@ private:
     dlgAdd *dlg_add;
     dlgSell *dlg_sell;
     dlgAbout *dlg_about;
+    dlgAddNew *dlg_add_new;
     QDialog dlg_settings;
     Ui::dlgSettings ui_dlg_settings;
     std::vector<Items> items;
+    json cart;
     json getStatsData();
 };
 
