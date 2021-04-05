@@ -25,6 +25,7 @@
 
 #include "stock_manager.h"
 #include "database.h"
+#include "utils.h"
 
 #include <inja/inja.hpp>
 #include <nlohmann/json.hpp>
@@ -37,12 +38,13 @@ stock_manager::stock_manager(QWidget *parent) :
     m_ui(new Ui::stock_manager)
 {
     dlg_add = new dlgAdd(this);
-    dlg_sell = new dlgSell(this);
     dlg_about = new dlgAbout(this);
-    dlg_add_new = new dlgAddNew(this);
+    dlg_add_new = new dlgAddNew(this, cart);
 
     ui_dlg_settings.setupUi(&dlg_settings);
     m_ui->setupUi(this);
+
+    this->stockCount = 0;
 
     connect(m_ui->btnAdd_Cart, &QPushButton::pressed, this, &stock_manager::show_AddCart);
     connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
@@ -55,7 +57,9 @@ stock_manager::stock_manager(QWidget *parent) :
     connect(
         m_ui->btnSellItem,
         &QPushButton::pressed, this,
-        [&](){ m_ui->tabMain->setCurrentIndex(0); }
+        [&](){
+            m_ui->tabMain->setCurrentIndex(0);
+        }
     );
     connect(
         m_ui->btnRefresh,
@@ -63,6 +67,16 @@ stock_manager::stock_manager(QWidget *parent) :
         [&](){
             refreshDb();
             updateTable();
+            updateStats();
+        }
+    );
+    connect(
+        dlg_add,
+        &QDialog::accepted, this,
+        [&](){
+            refreshDb();
+            updateTable();
+            updateStats();
         }
     );
     connect(
@@ -110,6 +124,7 @@ void stock_manager::show_AddCart()
 void stock_manager::refreshDb()
 {
     using namespace sqlite_orm;
+    items.clear();
     storage = std::make_unique<Storage>(initStorage(getDBPath()));
     auto allItems = storage->select(
         columns(
@@ -136,8 +151,8 @@ void stock_manager::refreshDb()
 
 void stock_manager::updateTable()
 {
-    using json = nlohmann::json;
     int count = 0;
+    m_ui->tblStock->clearContents();
     m_ui->tblStock->setRowCount(items.size());
     for (const auto& itm: items) {
         QTableWidgetItem *tblItem1 = new QTableWidgetItem();
@@ -148,11 +163,14 @@ void stock_manager::updateTable()
         tblItem2->setText(QString::fromStdString(itm.name));
         m_ui->tblStock->setItem(count, 1, tblItem2);
 
-        json dat;
-        dat["price"] = itm.price;
-
         QTableWidgetItem *tblItem3 = new QTableWidgetItem();
-        tblItem3->setText(QString::fromStdString(inja::render("Ksh. {{ price }}.00", dat)));
+        tblItem3->setText(
+            QString::fromStdString(
+                util::formatCurrency(
+                    util::formatNumber(itm.price)
+                )
+            )
+        );
         m_ui->tblStock->setItem(count, 2, tblItem3);
 
         QTableWidgetItem *tblItem4 = new QTableWidgetItem();
@@ -162,6 +180,8 @@ void stock_manager::updateTable()
         QTableWidgetItem *tblItem5 = new QTableWidgetItem();
         tblItem5->setText(QString::number(itm.quantity));
         m_ui->tblStock->setItem(count, 4, tblItem5);
+
+        this->stockCount += itm.quantity;
 
         count++;
     }
@@ -175,17 +195,17 @@ void stock_manager::updateStats()
     if (data.contains("stock"))
         stats_template.push_back(
             QString::fromStdString(
-                inja::render("<p>Stock: {{ stock }}</p>", data)
+                inja::render("<p>Stock: {{ stock.count }} of {{ stock.items }} items</p>", data)
             )
         );
 
     if (data.contains("sales"))
         stats_template.push_back(
             QString::fromStdString(
-                inja::render("<p>Sales Today: {{ sales.count }} for Ksh. {{ sales.price }}.00</p>", data)
+                inja::render("<p>Sales Today: {{ sales.count }} for {{ sales.price }}</p>", data)
             )
         );
-    
+
     if (data.contains("items") && data["items"].size() > 0)
         stats_template.push_back(
             QString::fromStdString(
@@ -206,11 +226,8 @@ json stock_manager::getStatsData()
     using namespace sqlite_orm;
     json j;
     storage = std::make_unique<Storage>(initStorage(getDBPath()));
-    j["stock"] = storage->count<Stock>();
-    auto items = storage->select(
-        columns(&Item::name, &Stock::quantity),
-        where(c(&Item::itemNo) == &Stock::itemNo and c(&Stock::quantity) < 1)
-    );
+    j["stock"]["items"] = storage->count<Stock>();
+    j["stock"]["count"] = this->stockCount;
 
     QDateTime date_time = QDateTime::currentDateTime();
     date_time.setTime(QTime::fromString("00:00:00", "HH:mm:ss"));
@@ -231,7 +248,12 @@ json stock_manager::getStatsData()
     }
 
     j["sales"]["count"] = count;
-    j["sales"]["price"] = price;
+    j["sales"]["price"] = util::formatCurrency(util::formatNumber(price));
+
+    auto items = storage->select(
+        columns(&Item::name, &Stock::quantity),
+        where(c(&Item::itemNo) == &Stock::itemNo and c(&Stock::quantity) < 1)
+    );
 
     for (auto &itm: items) {
         j["items"].push_back(std::get<0>(itm));

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Noah Too
+ * Copyright (c) 2021 Noah Too
  * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,25 +23,15 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "add_new_sell.h"
+#ifndef UTILS_H
+#define UTILS_H
 
-#include <QtWidgets/QPushButton>
+#include <string>
 
-dlgAddNew::dlgAddNew(QWidget *parent, std::vector<CartItem> &cart_items):
-    QDialog(parent),
-    ui(new Ui::dlgAddNew),
-    cart(cart_items)
+namespace util
 {
-    ui->setupUi(this);
-
-    connect(ui->btnAdd, &QPushButton::pressed, this, &dlgAddNew::addToCart);
+    std::string formatCurrency(std::string price);
+    std::string formatNumber(int number);
 }
 
-void dlgAddNew::addToCart()
-{
-    this->item.totalPrice = item.price * item.quantity;
-    this->cart.push_back(item);
-    accept();
-}
-
-dlgAddNew::~dlgAddNew() = default;
+#endif // UTILS_H

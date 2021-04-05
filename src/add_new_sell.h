@@ -27,6 +27,7 @@
 #define ADD_NEW_SELL_H
 
 #include "ui_add_new_sell.h"
+#include "database.h"
 
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QDialog>
@@ -36,11 +37,14 @@ class dlgAddNew: public QDialog
     Q_OBJECT
 
 public:
-    explicit dlgAddNew(QWidget *parent);
+    explicit dlgAddNew(QWidget *parent, std::vector<CartItem> &cart);
     ~dlgAddNew() override;
 
 private:
     QScopedPointer<Ui::dlgAddNew> ui;
+    std::vector<CartItem> &cart;
+    CartItem item;
+    void addToCart();
 };
 
 #endif // ABOUT_ITEMS_H

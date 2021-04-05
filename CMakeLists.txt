@@ -35,6 +35,7 @@ set(stock_manager_SRC
   src/database.cpp
   src/settings.cpp
   src/sha256.cpp
+  src/utils.cpp
   rc_stock_manager.cpp
 )
 

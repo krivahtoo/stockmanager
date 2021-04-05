@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Noah Too
+ * Copyright (c) 2021 Noah Too
  * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,25 +23,43 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "add_new_sell.h"
+#include "utils.h"
+#include "settings.h"
 
-#include <QtWidgets/QPushButton>
+#include <inja/inja.hpp>
+#include <nlohmann/json.hpp>
 
-dlgAddNew::dlgAddNew(QWidget *parent, std::vector<CartItem> &cart_items):
-    QDialog(parent),
-    ui(new Ui::dlgAddNew),
-    cart(cart_items)
+#include <string>
+#include <algorithm>
+
+namespace util
 {
-    ui->setupUi(this);
+    std::string formatCurrency(std::string price)
+    {
+        using json = nlohmann::json;
+        Settings settings;
+        json data = settings.getKey("currency");
+        data["price"] = price;
+        return inja::render("{{ prefix }}{{ price }}{{ suffix }}", data);
+    }
 
-    connect(ui->btnAdd, &QPushButton::pressed, this, &dlgAddNew::addToCart);
+    std::string formatNumber(int number)
+    {
+        auto src = std::to_string(number);
+        auto dest = std::string();
+        auto count = 3;
+        for(auto i = src.crbegin() ; i != src.crend() ; ++i) {
+            if (count == 0) {
+                dest.push_back(',');
+                count = 3;
+            }
+            if (count--) {
+                dest.push_back(*i);
+            }
+        }
+        std::reverse(dest.begin(), dest.end());
+
+        return dest;
+    }
 }
 
-void dlgAddNew::addToCart()
-{
-    this->item.totalPrice = item.price * item.quantity;
-    this->cart.push_back(item);
-    accept();
-}
-
-dlgAddNew::~dlgAddNew() = default;

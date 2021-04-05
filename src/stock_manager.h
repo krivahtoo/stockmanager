@@ -28,7 +28,6 @@
 
 #include "about.h"
 #include "add_new.h"
-#include "sell_items.h"
 #include "database.h"
 #include "ui_stock_manager.h"
 #include "ui_settings.h"
@@ -68,13 +67,13 @@ public:
 private:
     QScopedPointer<Ui::stock_manager> m_ui;
     dlgAdd *dlg_add;
-    dlgSell *dlg_sell;
     dlgAbout *dlg_about;
     dlgAddNew *dlg_add_new;
     QDialog dlg_settings;
     Ui::dlgSettings ui_dlg_settings;
     std::vector<Items> items;
-    json cart;
+    std::vector<CartItem> cart;
+    int stockCount;
     json getStatsData();
 };
 

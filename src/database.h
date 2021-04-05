@@ -58,6 +58,15 @@ struct SoldItem
     long int saleDate;
 };
 
+struct CartItem
+{
+    std::string itemNo;
+    std::string name;
+    long price;
+    int quantity;
+    long totalPrice;
+};
+
 inline auto initStorage(const std::string &path) {
 
     using namespace sqlite_orm;

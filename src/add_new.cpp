@@ -96,6 +96,7 @@ void dlgAdd::clearData()
     ui->txtId->clear();
     ui->txtName->clear();
     ui->spnPrice->setValue(0);
+    ui->txtCapacity->clear();
     ui->spnBuyingPrice->setValue(0);
     ui->spnQuantity->setValue(1);
 }
