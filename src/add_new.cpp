@@ -23,6 +23,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include "utils.h"
 #include "add_new.h"
 #include "database.h"
 
@@ -43,7 +44,7 @@ dlgAdd::dlgAdd(QMainWindow *parent):
 void dlgAdd::add()
 {
     using namespace sqlite_orm;
-    storage = std::make_unique<Storage>(initStorage(getDBPath()));
+    storage = std::make_unique<Storage>(initStorage(util::getDBPath()));
     if (newItem) {
         name = ui->txtName->text().toStdString();
         itemNo = ui->txtId->text().toStdString();

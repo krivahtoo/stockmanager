@@ -23,6 +23,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#ifndef STRUCTS_H
+#define STRUCTS_H
+
 #include <string>
 
 struct Item
@@ -68,3 +71,5 @@ struct Items
     std::string capacity;
     int quantity;
 };
+
+#endif // STRUCTS_H
