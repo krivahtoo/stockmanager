@@ -32,6 +32,10 @@
 #include <string>
 #include <algorithm>
 
+#include <QtCore/QDir>
+#include <QtCore/QFile>
+#include <QtCore/QStandardPaths>
+
 namespace util
 {
     std::string formatCurrency(std::string price)
@@ -61,5 +65,37 @@ namespace util
 
         return dest;
     }
-}
 
+    std::string getDBPath(QString file)
+    {
+        QDir dir;
+        QString path = QStandardPaths::locate(
+            QStandardPaths::AppDataLocation,
+            QString("data"), QStandardPaths::LocateDirectory
+        );
+        if (path.isEmpty()) {
+            dir = QDir(
+                QStandardPaths::standardLocations(
+                    QStandardPaths::AppDataLocation
+                ).first()
+            );
+            if (!dir.exists())
+                qWarning("Cannot find the data directory");
+            QDir hdir = QDir::home();
+            if (
+                !hdir.mkpath(
+                    QStandardPaths::standardLocations(
+                        QStandardPaths::AppDataLocation
+                    ).first()
+                )
+            ) qWarning("Could not create data directory");
+                
+            dir.mkdir("data");
+            dir.cd("data");
+        } else {
+            dir = QDir(path);
+        }
+        path = dir.filePath(file);
+        return path.toStdString();
+    }
+}

@@ -27,6 +27,7 @@
 #define STOCK_MANAGER_H
 
 #include "about.h"
+#include "structs.h"
 #include "add_new.h"
 #include "database.h"
 #include "ui_stock_manager.h"
@@ -38,16 +39,6 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QDialog>
-
-struct Items
-{
-    int id;
-    std::string itemNo; // This can be WR2536 ;-
-    std::string name;
-    long price;
-    std::string capacity;
-    int quantity;
-};
 
 using json = nlohmann::json;
 

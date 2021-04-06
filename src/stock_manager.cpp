@@ -125,7 +125,7 @@ void stock_manager::refreshDb()
 {
     using namespace sqlite_orm;
     items.clear();
-    storage = std::make_unique<Storage>(initStorage(getDBPath()));
+    storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
     auto allItems = storage->select(
         columns(
             &Item::id, &Item::itemNo, &Item::name,
@@ -206,7 +206,7 @@ void stock_manager::updateStats()
             )
         );
 
-    if (data.contains("items") && data["items"].size() > 0)
+    if (data.contains("items") || data["items"].size() > 0)
         stats_template.push_back(
             QString::fromStdString(
                 inja::render(R"(<p><span style=" font-weight:600;">Items Out of Stock:</span></p>: <p>
@@ -225,7 +225,7 @@ json stock_manager::getStatsData()
 {
     using namespace sqlite_orm;
     json j;
-    storage = std::make_unique<Storage>(initStorage(getDBPath()));
+    storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
     j["stock"]["items"] = storage->count<Stock>();
     j["stock"]["count"] = this->stockCount;
 

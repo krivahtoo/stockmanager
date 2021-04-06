@@ -26,46 +26,13 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
-#include <iostream>
 #include <string>
 
 #include "../sqlite_orm/sqlite_orm.h"
 
+#include "structs.h"
+
 #define DB_FILE "items.db"
-
-struct Item
-{
-    int id;
-    std::string itemNo; // This can be WR2536 ;-
-    std::string name;
-    long price;
-    long buyingPrice;
-    std::string capacity;
-    long int entryDate;
-};
-
-struct Stock
-{
-    std::string itemNo;
-    int quantity;
-};
-
-struct SoldItem
-{
-    std::string itemNo;
-    int quantity;
-    std::string paymentMethod;
-    long int saleDate;
-};
-
-struct CartItem
-{
-    std::string itemNo;
-    std::string name;
-    long price;
-    int quantity;
-    long totalPrice;
-};
 
 inline auto initStorage(const std::string &path) {
 
@@ -97,8 +64,6 @@ inline auto initStorage(const std::string &path) {
 using Storage = decltype(initStorage(""));
 
 static std::unique_ptr<Storage> storage;
-
-std::string getDBPath();
 
 void updateDb();
 

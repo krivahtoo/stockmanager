@@ -23,18 +23,48 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef UTILS_H
-#define UTILS_H
-
 #include <string>
 
-#include <QtCore/QString>
-
-namespace util
+struct Item
 {
-    std::string formatCurrency(std::string price);
-    std::string formatNumber(int number);
-    std::string getDBPath(QString file = "items.db");
-}
+    int id;
+    std::string itemNo; // This can be WR2536 ;-
+    std::string name;
+    long price;
+    long buyingPrice;
+    std::string capacity;
+    long int entryDate;
+};
 
-#endif // UTILS_H
+struct Stock
+{
+    std::string itemNo;
+    int quantity;
+};
+
+struct SoldItem
+{
+    std::string itemNo;
+    int quantity;
+    std::string paymentMethod;
+    long int saleDate;
+};
+
+struct CartItem
+{
+    std::string itemNo;
+    std::string name;
+    long price;
+    int quantity;
+    long totalPrice;
+};
+
+struct Items
+{
+    int id;
+    std::string itemNo;
+    std::string name;
+    long price;
+    std::string capacity;
+    int quantity;
+};
