@@ -27,6 +27,8 @@
 #include "database.h"
 #include "utils.h"
 
+#include <iostream>
+
 #include <inja/inja.hpp>
 #include <nlohmann/json.hpp>
 
@@ -47,6 +49,7 @@ stock_manager::stock_manager(QWidget *parent) :
     this->stockCount = 0;
 
     connect(m_ui->btnAdd_Cart, &QPushButton::pressed, this, &stock_manager::show_AddCart);
+    connect(m_ui->btnSell_Cart, &QPushButton::pressed, this, &stock_manager::sellItems);
     connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
     connect(m_ui->actQuit, &QAction::triggered, this, &QCoreApplication::quit);
     connect(
@@ -138,7 +141,7 @@ void stock_manager::refreshDb()
             &Item::id, &Item::itemNo, &Item::name,
             &Item::price, &Item::capacity, &Stock::quantity
         ),
-        where(c(&Item::itemNo) == &Stock::itemNo),
+        where(c(&Item::itemNo) == &Stock::itemNo and c(&Stock::quantity) > 0),
         order_by(&Item::id), limit(20, offset(0))
     );
 
@@ -159,6 +162,7 @@ void stock_manager::refreshDb()
 void stock_manager::updateTable()
 {
     int count = 0;
+    this->stockCount = 0;
     m_ui->tblStock->clearContents();
     m_ui->tblStock->setRowCount(items.size());
     for (const auto& itm: items) {
@@ -216,7 +220,7 @@ void stock_manager::updateStats()
     if (data.contains("items") || data["items"].size() > 0)
         stats_template.push_back(
             QString::fromStdString(
-                inja::render(R"(<p><span style=" font-weight:600;">Items Out of Stock:</span></p>: <p>
+                inja::render(R"(<p><span style=" font-weight:600;">Items Out of Stock:</span></p><p>
 ## for item in items
 {{ loop.index1 }}: {{ item }}<br/>
 ## endfor
@@ -243,7 +247,7 @@ json stock_manager::getStatsData()
 
     auto sales = storage->select(
         columns(&Item::price, &SoldItem::quantity),
-        where(c(&Item::itemNo) == &Stock::itemNo and c(&SoldItem::saleDate) >= timestamp)
+        where(c(&Item::itemNo) == &SoldItem::itemNo and c(&SoldItem::saleDate) >= timestamp)
     );
 
     int count = 0;
@@ -329,6 +333,42 @@ void stock_manager::updateCart()
             )
         )
     );
+}
+
+void stock_manager::sellItems()
+{
+    using namespace sqlite_orm;
+    storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    long int date = QDateTime::currentSecsSinceEpoch();
+    std::string payment_method = this->m_ui->cmbPayment_Method->currentText().toStdString();
+
+    try {
+        auto guard = storage->transaction_guard(); 
+        for(auto &itm: this->cart) {
+            storage->insert(SoldItem{
+                itm.itemNo,
+                itm.quantity,
+                payment_method,
+                date
+            });
+            auto items = storage->get_all_pointer<Stock>(
+                where(c(&Stock::itemNo) == itm.itemNo)
+            );
+
+            storage->update_all(
+                set(c(&Stock::quantity) = items[0]->quantity - itm.quantity),
+                where(c(&Stock::itemNo) == itm.itemNo)
+            );
+        }
+        guard.commit();
+        this->m_ui->tblCart->clearContents();
+        this->m_ui->tblCart->setRowCount(0);
+        this->cart.clear();
+    } catch(std::system_error e) {
+        std::cout << e.what() << std::endl;
+    } catch(...) {
+        std::cout << "Unknown Error occurred." << std::endl;
+    }
 }
 
 stock_manager::~stock_manager() = default;

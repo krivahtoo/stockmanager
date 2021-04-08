@@ -67,6 +67,7 @@ private:
     int stockCount;
     json getStatsData();
     void updateCart();
+    void sellItems();
 };
 
 #endif // STOCK_MANAGER_H
