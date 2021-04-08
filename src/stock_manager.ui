@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>755</width>
-    <height>453</height>
+    <width>799</width>
+    <height>492</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,12 +17,18 @@
    <iconset resource="../stock_manager.qrc">
     <normaloff>:/images/logo.svg</normaloff>:/images/logo.svg</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabMain">
       <property name="statusTip">
        <string>View items on stock</string>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
       </property>
       <property name="tabPosition">
        <enum>QTabWidget::North</enum>
@@ -41,13 +47,19 @@
       </property>
       <widget class="QWidget" name="tabHome">
        <attribute name="title">
-        <string>Home</string>
+        <string>Cart</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <property name="spacing">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QTableWidget" name="tblCart">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="selectionBehavior">
              <enum>QAbstractItemView::SelectRows</enum>
             </property>
@@ -69,11 +81,6 @@
             </column>
             <column>
              <property name="text">
-              <string>Weight / Capacity</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
               <string>Quantity</string>
              </property>
             </column>
@@ -82,10 +89,15 @@
               <string>Price</string>
              </property>
             </column>
+            <column>
+             <property name="text">
+              <string>Total Price</string>
+             </property>
+            </column>
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupBox_5">
+           <widget class="QGroupBox" name="grpCart">
             <property name="title">
              <string/>
             </property>
@@ -101,7 +113,7 @@
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
-                 <height>50</height>
+                 <height>16777215</height>
                 </size>
                </property>
                <property name="text">
@@ -127,14 +139,14 @@
              <item>
               <layout class="QFormLayout" name="formLayout_5">
                <item row="0" column="0">
-                <widget class="QLabel" name="label_4">
+                <widget class="QLabel" name="lblPayment_Method">
                  <property name="text">
                   <string>Payment Method:</string>
                  </property>
                 </widget>
                </item>
                <item row="0" column="1">
-                <widget class="QComboBox" name="comboBox_2">
+                <widget class="QComboBox" name="cmbPayment_Method">
                  <item>
                   <property name="text">
                    <string>Cash</string>
@@ -150,19 +162,27 @@
               </layout>
              </item>
              <item>
-              <widget class="QPushButton" name="btnDone_Cart">
+              <widget class="QPushButton" name="btnSell_Cart">
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
-                 <height>50</height>
+                 <height>16777215</height>
                 </size>
                </property>
+               <property name="font">
+                <font>
+                 <pointsize>16</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
+               </property>
                <property name="text">
-                <string>Done</string>
+                <string>Sell</string>
                </property>
                <property name="icon">
                 <iconset resource="../stock_manager.qrc">
-                 <normaloff>:/icons/checkmark.svg</normaloff>:/icons/checkmark.svg</iconset>
+                 <normaloff>:/icons/basket.svg</normaloff>:/icons/basket.svg</iconset>
                </property>
               </widget>
              </item>
@@ -173,10 +193,13 @@
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <property name="spacing">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QGroupBox" name="grbCart_Stats">
             <property name="title">
-             <string>Stats</string>
+             <string/>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_7">
              <item>
@@ -279,7 +302,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="groupBox">
+         <widget class="QGroupBox" name="grpSales">
           <property name="title">
            <string/>
           </property>
@@ -291,7 +314,7 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_7">
            <item>
-            <widget class="QGroupBox" name="groupBox_8">
+            <widget class="QGroupBox" name="grpOptions">
              <property name="title">
               <string>Options</string>
              </property>
@@ -351,7 +374,7 @@
             </spacer>
            </item>
            <item>
-            <widget class="QGroupBox" name="groupBox_6">
+            <widget class="QGroupBox" name="grpStats">
              <property name="title">
               <string>Stats</string>
              </property>
@@ -415,7 +438,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="groupBox">
+         <widget class="QGroupBox" name="grpStock">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -434,7 +457,7 @@
              <property name="maximumSize">
               <size>
                <width>16777215</width>
-               <height>50</height>
+               <height>16777215</height>
               </size>
              </property>
              <property name="statusTip">
@@ -454,7 +477,7 @@
              <property name="maximumSize">
               <size>
                <width>16777215</width>
-               <height>40</height>
+               <height>16777215</height>
               </size>
              </property>
              <property name="statusTip">
@@ -474,7 +497,7 @@
              <property name="maximumSize">
               <size>
                <width>16777215</width>
-               <height>40</height>
+               <height>16777215</height>
               </size>
              </property>
              <property name="statusTip">
@@ -492,7 +515,7 @@
            <item>
             <widget class="QGroupBox" name="groupBox_7">
              <property name="title">
-              <string>Stats</string>
+              <string/>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_5">
               <item>
@@ -519,7 +542,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>755</width>
+     <width>799</width>
      <height>27</height>
     </rect>
    </property>

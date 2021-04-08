@@ -29,6 +29,7 @@
 #include "ui_add_new_sell.h"
 #include "database.h"
 
+#include <QtCore/QString>
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QDialog>
 
@@ -45,6 +46,7 @@ private:
     std::vector<CartItem> &cart;
     CartItem item;
     void addToCart();
+    void updateItem(QString id);
 };
 
 #endif // ABOUT_ITEMS_H

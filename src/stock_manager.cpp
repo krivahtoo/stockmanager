@@ -80,6 +80,13 @@ stock_manager::stock_manager(QWidget *parent) :
         }
     );
     connect(
+        dlg_add_new,
+        &QDialog::accepted, this,
+        [&](){
+            updateCart();
+        }
+    );
+    connect(
         m_ui->actSettings,
         &QAction::triggered, this,
         [=](){ dlg_settings.show(); }
@@ -259,6 +266,69 @@ json stock_manager::getStatsData()
         j["items"].push_back(std::get<0>(itm));
     }
     return j;
+}
+
+void stock_manager::updateCart()
+{
+    json j;
+    int count = 0;
+    long totalPrice = 0;
+    m_ui->tblCart->clearContents();
+    m_ui->tblCart->setRowCount(this->cart.size());
+    for(auto &itm: this->cart) {
+        QTableWidgetItem *tblItem1 = new QTableWidgetItem();
+        tblItem1->setText(QString::fromStdString(itm.itemNo));
+        m_ui->tblCart->setItem(count, 0, tblItem1);
+
+        QTableWidgetItem *tblItem2 = new QTableWidgetItem();
+        tblItem2->setText(QString::fromStdString(itm.name));
+        m_ui->tblCart->setItem(count, 1, tblItem2);
+
+        QTableWidgetItem *tblItem3 = new QTableWidgetItem();
+        tblItem3->setText(
+            QString::fromStdString(
+                util::formatCurrency(
+                    util::formatNumber(itm.price)
+                )
+            )
+        );
+        m_ui->tblCart->setItem(count, 2, tblItem3);
+
+        QTableWidgetItem *tblItem4 = new QTableWidgetItem();
+        tblItem4->setText(QString::number(itm.quantity));
+        m_ui->tblCart->setItem(count, 3, tblItem4);
+
+        QTableWidgetItem *tblItem5 = new QTableWidgetItem();
+        tblItem5->setText(
+            QString::fromStdString(
+                util::formatCurrency(
+                    util::formatNumber(itm.totalPrice)
+                )
+            )
+        );
+        totalPrice += itm.totalPrice;
+        m_ui->tblCart->setItem(count, 4, tblItem5);
+
+        count++;
+    }
+    j["count"] = count;
+    j["total"] = util::formatCurrency(util::formatNumber(totalPrice));
+    m_ui->lblItem_Count->setText(
+        QString::fromStdString(
+            inja::render(
+                "<html><head/><body><p><span style=\" font-size:12pt;\">Items On Cart: {{ count }}</span></p></body></html>",
+                j
+            )
+        )
+    );
+    m_ui->lblTotal->setText(
+        QString::fromStdString(
+            inja::render(
+                "<html><head/><body><p><span style=\" font-size:16pt;\">Total: {{ total }}</span></p></body></html>",
+                j
+            )
+        )
+    );
 }
 
 stock_manager::~stock_manager() = default;

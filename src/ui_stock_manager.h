@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'stock_managermIUusb.ui'
+** Form generated from reading UI file 'stock_manageruYcXvr.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef STOCK_MANAGERMIUUSB_H
-#define STOCK_MANAGERMIUUSB_H
+#ifndef STOCK_MANAGERUYCXVR_H
+#define STOCK_MANAGERUYCXVR_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -57,14 +57,14 @@ public:
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_5;
     QTableWidget *tblCart;
-    QGroupBox *groupBox_5;
+    QGroupBox *grpCart;
     QVBoxLayout *verticalLayout_4;
     QPushButton *btnAdd_Cart;
     QPushButton *btnRemove_Cart;
     QFormLayout *formLayout_5;
-    QLabel *label_4;
-    QComboBox *comboBox_2;
-    QPushButton *btnDone_Cart;
+    QLabel *lblPayment_Method;
+    QComboBox *cmbPayment_Method;
+    QPushButton *btnSell_Cart;
     QHBoxLayout *horizontalLayout_6;
     QGroupBox *grbCart_Stats;
     QHBoxLayout *horizontalLayout_7;
@@ -74,22 +74,22 @@ public:
     QWidget *tabSales;
     QHBoxLayout *horizontalLayout_2;
     QTableWidget *tblSales;
-    QGroupBox *groupBox;
+    QGroupBox *grpSales;
     QVBoxLayout *verticalLayout_7;
-    QGroupBox *groupBox_8;
+    QGroupBox *grpOptions;
     QFormLayout *formLayout_6;
     QPushButton *btnRefreshSales;
     QLabel *label_2;
     QDateEdit *dateSales;
     QLabel *label_3;
     QSpacerItem *verticalSpacer;
-    QGroupBox *groupBox_6;
+    QGroupBox *grpStats;
     QVBoxLayout *verticalLayout_6;
     QLabel *lblSalesStats;
     QWidget *tabStock;
     QHBoxLayout *horizontalLayout;
     QTableWidget *tblStock;
-    QGroupBox *groupBox1;
+    QGroupBox *grpStock;
     QVBoxLayout *verticalLayout;
     QPushButton *btnSellItem;
     QPushButton *btnAddItem;
@@ -107,10 +107,11 @@ public:
     {
         if (stock_manager->objectName().isEmpty())
             stock_manager->setObjectName(QString::fromUtf8("stock_manager"));
-        stock_manager->resize(755, 453);
+        stock_manager->resize(799, 492);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/images/logo.svg"), QSize(), QIcon::Normal, QIcon::Off);
         stock_manager->setWindowIcon(icon);
+        stock_manager->setStyleSheet(QString::fromUtf8(""));
         actQuit = new QAction(stock_manager);
         actQuit->setObjectName(QString::fromUtf8("actQuit"));
         QIcon icon1;
@@ -181,6 +182,7 @@ public:
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         tabMain = new QTabWidget(centralWidget);
         tabMain->setObjectName(QString::fromUtf8("tabMain"));
+        tabMain->setAutoFillBackground(false);
         tabMain->setTabPosition(QTabWidget::North);
         tabMain->setTabShape(QTabWidget::Rounded);
         tabMain->setElideMode(Qt::ElideNone);
@@ -190,6 +192,7 @@ public:
         verticalLayout_3 = new QVBoxLayout(tabHome);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(0);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         tblCart = new QTableWidget(tabHome);
         if (tblCart->columnCount() < 5)
@@ -205,27 +208,28 @@ public:
         QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
         tblCart->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         tblCart->setObjectName(QString::fromUtf8("tblCart"));
+        tblCart->setStyleSheet(QString::fromUtf8(""));
         tblCart->setSelectionBehavior(QAbstractItemView::SelectRows);
         tblCart->horizontalHeader()->setCascadingSectionResizes(true);
         tblCart->horizontalHeader()->setStretchLastSection(true);
 
         horizontalLayout_5->addWidget(tblCart);
 
-        groupBox_5 = new QGroupBox(tabHome);
-        groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
-        verticalLayout_4 = new QVBoxLayout(groupBox_5);
+        grpCart = new QGroupBox(tabHome);
+        grpCart->setObjectName(QString::fromUtf8("grpCart"));
+        verticalLayout_4 = new QVBoxLayout(grpCart);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        btnAdd_Cart = new QPushButton(groupBox_5);
+        btnAdd_Cart = new QPushButton(grpCart);
         btnAdd_Cart->setObjectName(QString::fromUtf8("btnAdd_Cart"));
         btnAdd_Cart->setMinimumSize(QSize(0, 30));
-        btnAdd_Cart->setMaximumSize(QSize(16777215, 50));
+        btnAdd_Cart->setMaximumSize(QSize(16777215, 16777215));
         QIcon icon13;
         icon13.addFile(QString::fromUtf8(":/icons/cart.svg"), QSize(), QIcon::Normal, QIcon::Off);
         btnAdd_Cart->setIcon(icon13);
 
         verticalLayout_4->addWidget(btnAdd_Cart);
 
-        btnRemove_Cart = new QPushButton(groupBox_5);
+        btnRemove_Cart = new QPushButton(grpCart);
         btnRemove_Cart->setObjectName(QString::fromUtf8("btnRemove_Cart"));
         QIcon icon14;
         icon14.addFile(QString::fromUtf8(":/icons/cross.svg"), QSize(), QIcon::Normal, QIcon::Off);
@@ -235,37 +239,44 @@ public:
 
         formLayout_5 = new QFormLayout();
         formLayout_5->setObjectName(QString::fromUtf8("formLayout_5"));
-        label_4 = new QLabel(groupBox_5);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        lblPayment_Method = new QLabel(grpCart);
+        lblPayment_Method->setObjectName(QString::fromUtf8("lblPayment_Method"));
 
-        formLayout_5->setWidget(0, QFormLayout::LabelRole, label_4);
+        formLayout_5->setWidget(0, QFormLayout::LabelRole, lblPayment_Method);
 
-        comboBox_2 = new QComboBox(groupBox_5);
-        comboBox_2->addItem(QString());
-        comboBox_2->addItem(QString());
-        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
+        cmbPayment_Method = new QComboBox(grpCart);
+        cmbPayment_Method->addItem(QString());
+        cmbPayment_Method->addItem(QString());
+        cmbPayment_Method->setObjectName(QString::fromUtf8("cmbPayment_Method"));
 
-        formLayout_5->setWidget(0, QFormLayout::FieldRole, comboBox_2);
+        formLayout_5->setWidget(0, QFormLayout::FieldRole, cmbPayment_Method);
 
 
         verticalLayout_4->addLayout(formLayout_5);
 
-        btnDone_Cart = new QPushButton(groupBox_5);
-        btnDone_Cart->setObjectName(QString::fromUtf8("btnDone_Cart"));
-        btnDone_Cart->setMaximumSize(QSize(16777215, 50));
+        btnSell_Cart = new QPushButton(grpCart);
+        btnSell_Cart->setObjectName(QString::fromUtf8("btnSell_Cart"));
+        btnSell_Cart->setMaximumSize(QSize(16777215, 16777215));
+        QFont font;
+        font.setPointSize(16);
+        font.setBold(false);
+        font.setItalic(false);
+        font.setWeight(50);
+        btnSell_Cart->setFont(font);
         QIcon icon15;
-        icon15.addFile(QString::fromUtf8(":/icons/checkmark.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnDone_Cart->setIcon(icon15);
+        icon15.addFile(QString::fromUtf8(":/icons/basket.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnSell_Cart->setIcon(icon15);
 
-        verticalLayout_4->addWidget(btnDone_Cart);
+        verticalLayout_4->addWidget(btnSell_Cart);
 
 
-        horizontalLayout_5->addWidget(groupBox_5);
+        horizontalLayout_5->addWidget(grpCart);
 
 
         verticalLayout_3->addLayout(horizontalLayout_5);
 
         horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setSpacing(0);
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         grbCart_Stats = new QGroupBox(tabHome);
         grbCart_Stats->setObjectName(QString::fromUtf8("grbCart_Stats"));
@@ -324,17 +335,17 @@ public:
 
         horizontalLayout_2->addWidget(tblSales);
 
-        groupBox = new QGroupBox(tabSales);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setFlat(false);
-        groupBox->setCheckable(false);
-        verticalLayout_7 = new QVBoxLayout(groupBox);
+        grpSales = new QGroupBox(tabSales);
+        grpSales->setObjectName(QString::fromUtf8("grpSales"));
+        grpSales->setFlat(false);
+        grpSales->setCheckable(false);
+        verticalLayout_7 = new QVBoxLayout(grpSales);
         verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
-        groupBox_8 = new QGroupBox(groupBox);
-        groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
-        formLayout_6 = new QFormLayout(groupBox_8);
+        grpOptions = new QGroupBox(grpSales);
+        grpOptions->setObjectName(QString::fromUtf8("grpOptions"));
+        formLayout_6 = new QFormLayout(grpOptions);
         formLayout_6->setObjectName(QString::fromUtf8("formLayout_6"));
-        btnRefreshSales = new QPushButton(groupBox_8);
+        btnRefreshSales = new QPushButton(grpOptions);
         btnRefreshSales->setObjectName(QString::fromUtf8("btnRefreshSales"));
         QIcon icon16;
         icon16.addFile(QString::fromUtf8(":/icons/clockwise.svg"), QSize(), QIcon::Normal, QIcon::Off);
@@ -342,43 +353,43 @@ public:
 
         formLayout_6->setWidget(7, QFormLayout::FieldRole, btnRefreshSales);
 
-        label_2 = new QLabel(groupBox_8);
+        label_2 = new QLabel(grpOptions);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
         formLayout_6->setWidget(2, QFormLayout::LabelRole, label_2);
 
-        dateSales = new QDateEdit(groupBox_8);
+        dateSales = new QDateEdit(grpOptions);
         dateSales->setObjectName(QString::fromUtf8("dateSales"));
 
         formLayout_6->setWidget(2, QFormLayout::FieldRole, dateSales);
 
-        label_3 = new QLabel(groupBox_8);
+        label_3 = new QLabel(grpOptions);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setMaximumSize(QSize(16777215, 27));
 
         formLayout_6->setWidget(0, QFormLayout::SpanningRole, label_3);
 
 
-        verticalLayout_7->addWidget(groupBox_8);
+        verticalLayout_7->addWidget(grpOptions);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_7->addItem(verticalSpacer);
 
-        groupBox_6 = new QGroupBox(groupBox);
-        groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
-        verticalLayout_6 = new QVBoxLayout(groupBox_6);
+        grpStats = new QGroupBox(grpSales);
+        grpStats->setObjectName(QString::fromUtf8("grpStats"));
+        verticalLayout_6 = new QVBoxLayout(grpStats);
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
-        lblSalesStats = new QLabel(groupBox_6);
+        lblSalesStats = new QLabel(grpStats);
         lblSalesStats->setObjectName(QString::fromUtf8("lblSalesStats"));
 
         verticalLayout_6->addWidget(lblSalesStats);
 
 
-        verticalLayout_7->addWidget(groupBox_6);
+        verticalLayout_7->addWidget(grpStats);
 
 
-        horizontalLayout_2->addWidget(groupBox);
+        horizontalLayout_2->addWidget(grpSales);
 
         tabMain->addTab(tabSales, QString());
         tabStock = new QWidget();
@@ -405,36 +416,36 @@ public:
 
         horizontalLayout->addWidget(tblStock);
 
-        groupBox1 = new QGroupBox(tabStock);
-        groupBox1->setObjectName(QString::fromUtf8("groupBox1"));
-        groupBox1->setMinimumSize(QSize(0, 0));
-        groupBox1->setMaximumSize(QSize(240, 16777215));
-        verticalLayout = new QVBoxLayout(groupBox1);
+        grpStock = new QGroupBox(tabStock);
+        grpStock->setObjectName(QString::fromUtf8("grpStock"));
+        grpStock->setMinimumSize(QSize(0, 0));
+        grpStock->setMaximumSize(QSize(240, 16777215));
+        verticalLayout = new QVBoxLayout(grpStock);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        btnSellItem = new QPushButton(groupBox1);
+        btnSellItem = new QPushButton(grpStock);
         btnSellItem->setObjectName(QString::fromUtf8("btnSellItem"));
-        btnSellItem->setMaximumSize(QSize(16777215, 50));
+        btnSellItem->setMaximumSize(QSize(16777215, 16777215));
         btnSellItem->setIcon(icon13);
 
         verticalLayout->addWidget(btnSellItem);
 
-        btnAddItem = new QPushButton(groupBox1);
+        btnAddItem = new QPushButton(grpStock);
         btnAddItem->setObjectName(QString::fromUtf8("btnAddItem"));
-        btnAddItem->setMaximumSize(QSize(16777215, 40));
+        btnAddItem->setMaximumSize(QSize(16777215, 16777215));
         QIcon icon17;
         icon17.addFile(QString::fromUtf8(":/icons/plus.svg"), QSize(), QIcon::Normal, QIcon::Off);
         btnAddItem->setIcon(icon17);
 
         verticalLayout->addWidget(btnAddItem);
 
-        btnRefresh = new QPushButton(groupBox1);
+        btnRefresh = new QPushButton(grpStock);
         btnRefresh->setObjectName(QString::fromUtf8("btnRefresh"));
-        btnRefresh->setMaximumSize(QSize(16777215, 40));
+        btnRefresh->setMaximumSize(QSize(16777215, 16777215));
         btnRefresh->setIcon(icon16);
 
         verticalLayout->addWidget(btnRefresh);
 
-        groupBox_7 = new QGroupBox(groupBox1);
+        groupBox_7 = new QGroupBox(grpStock);
         groupBox_7->setObjectName(QString::fromUtf8("groupBox_7"));
         verticalLayout_5 = new QVBoxLayout(groupBox_7);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
@@ -447,7 +458,7 @@ public:
         verticalLayout->addWidget(groupBox_7);
 
 
-        horizontalLayout->addWidget(groupBox1);
+        horizontalLayout->addWidget(grpStock);
 
         tabMain->addTab(tabStock, QString());
 
@@ -456,7 +467,7 @@ public:
         stock_manager->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(stock_manager);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 755, 27));
+        menuBar->setGeometry(QRect(0, 0, 799, 27));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuHelp = new QMenu(menuBar);
@@ -536,23 +547,23 @@ public:
         QTableWidgetItem *___qtablewidgetitem1 = tblCart->horizontalHeaderItem(1);
         ___qtablewidgetitem1->setText(QCoreApplication::translate("stock_manager", "Name", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = tblCart->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QCoreApplication::translate("stock_manager", "Weight / Capacity", nullptr));
+        ___qtablewidgetitem2->setText(QCoreApplication::translate("stock_manager", "Quantity", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = tblCart->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QCoreApplication::translate("stock_manager", "Quantity", nullptr));
+        ___qtablewidgetitem3->setText(QCoreApplication::translate("stock_manager", "Price", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = tblCart->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QCoreApplication::translate("stock_manager", "Price", nullptr));
-        groupBox_5->setTitle(QString());
+        ___qtablewidgetitem4->setText(QCoreApplication::translate("stock_manager", "Total Price", nullptr));
+        grpCart->setTitle(QString());
         btnAdd_Cart->setText(QCoreApplication::translate("stock_manager", "Add Item to Cart", nullptr));
         btnRemove_Cart->setText(QCoreApplication::translate("stock_manager", "Remove Item", nullptr));
-        label_4->setText(QCoreApplication::translate("stock_manager", "Payment Method:", nullptr));
-        comboBox_2->setItemText(0, QCoreApplication::translate("stock_manager", "Cash", nullptr));
-        comboBox_2->setItemText(1, QCoreApplication::translate("stock_manager", "Mpesa", nullptr));
+        lblPayment_Method->setText(QCoreApplication::translate("stock_manager", "Payment Method:", nullptr));
+        cmbPayment_Method->setItemText(0, QCoreApplication::translate("stock_manager", "Cash", nullptr));
+        cmbPayment_Method->setItemText(1, QCoreApplication::translate("stock_manager", "Mpesa", nullptr));
 
-        btnDone_Cart->setText(QCoreApplication::translate("stock_manager", "Done", nullptr));
-        grbCart_Stats->setTitle(QCoreApplication::translate("stock_manager", "Stats", nullptr));
+        btnSell_Cart->setText(QCoreApplication::translate("stock_manager", "Sell", nullptr));
+        grbCart_Stats->setTitle(QString());
         lblItem_Count->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p><span style=\" font-size:12pt;\">Items On Cart: 8</span></p></body></html>", nullptr));
         lblTotal->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p><span style=\" font-size:16pt;\">Total: Kshs. 2,030</span></p></body></html>", nullptr));
-        tabMain->setTabText(tabMain->indexOf(tabHome), QCoreApplication::translate("stock_manager", "Home", nullptr));
+        tabMain->setTabText(tabMain->indexOf(tabHome), QCoreApplication::translate("stock_manager", "Cart", nullptr));
         QTableWidgetItem *___qtablewidgetitem5 = tblSales->horizontalHeaderItem(0);
         ___qtablewidgetitem5->setText(QCoreApplication::translate("stock_manager", "Item Number / Id", nullptr));
         QTableWidgetItem *___qtablewidgetitem6 = tblSales->horizontalHeaderItem(1);
@@ -567,13 +578,13 @@ public:
         ___qtablewidgetitem10->setText(QCoreApplication::translate("stock_manager", "Payment Method", nullptr));
         QTableWidgetItem *___qtablewidgetitem11 = tblSales->horizontalHeaderItem(6);
         ___qtablewidgetitem11->setText(QCoreApplication::translate("stock_manager", "Sale Date", nullptr));
-        groupBox->setTitle(QString());
-        groupBox_8->setTitle(QCoreApplication::translate("stock_manager", "Options", nullptr));
+        grpSales->setTitle(QString());
+        grpOptions->setTitle(QCoreApplication::translate("stock_manager", "Options", nullptr));
         btnRefreshSales->setText(QCoreApplication::translate("stock_manager", "Refresh", nullptr));
         label_2->setText(QCoreApplication::translate("stock_manager", "Enter Date:", nullptr));
         dateSales->setDisplayFormat(QCoreApplication::translate("stock_manager", "dd-MM-yyyy", nullptr));
         label_3->setText(QCoreApplication::translate("stock_manager", "Select the date you want to view sales", nullptr));
-        groupBox_6->setTitle(QCoreApplication::translate("stock_manager", "Stats", nullptr));
+        grpStats->setTitle(QCoreApplication::translate("stock_manager", "Stats", nullptr));
         lblSalesStats->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p><span style=\" font-size:12pt;\">Sales Made on </span><span style=\" font-size:12pt; font-weight:600;\">Wed 15 July 2021</span></p><p><span style=\" font-size:12pt;\">Items Sold: </span><span style=\" font-size:12pt; font-weight:600;\">244</span></p><p><span style=\" font-size:12pt;\">Sales Made: </span><span style=\" font-size:12pt; font-weight:600;\">Ksh. 3,245</span></p></body></html>", nullptr));
         tabMain->setTabText(tabMain->indexOf(tabSales), QCoreApplication::translate("stock_manager", "Sales", nullptr));
         QTableWidgetItem *___qtablewidgetitem12 = tblStock->horizontalHeaderItem(0);
@@ -598,7 +609,7 @@ public:
         btnRefresh->setStatusTip(QCoreApplication::translate("stock_manager", "Display sales statistics", nullptr));
 #endif // QT_CONFIG(statustip)
         btnRefresh->setText(QCoreApplication::translate("stock_manager", "Refresh", nullptr));
-        groupBox_7->setTitle(QCoreApplication::translate("stock_manager", "Stats", nullptr));
+        groupBox_7->setTitle(QString());
         lblStats->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p>Stock: 244</p><p>Sales Today: 23 for Ksh. 2,244</p><p><span style=\" font-weight:600;\">Items Out of Stock:</span></p><p>1. Milk<br/>2. TipTop<br/>3. Oreo</p></body></html>", nullptr));
         tabMain->setTabText(tabMain->indexOf(tabStock), QCoreApplication::translate("stock_manager", "Stock", nullptr));
         menuFile->setTitle(QCoreApplication::translate("stock_manager", "File", nullptr));
@@ -614,4 +625,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // STOCK_MANAGERMIUUSB_H
+#endif // STOCK_MANAGERUYCXVR_H

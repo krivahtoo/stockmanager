@@ -66,6 +66,7 @@ private:
     std::vector<CartItem> cart;
     int stockCount;
     json getStatsData();
+    void updateCart();
 };
 
 #endif // STOCK_MANAGER_H
