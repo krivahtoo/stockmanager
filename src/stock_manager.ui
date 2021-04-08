@@ -60,13 +60,25 @@
             <property name="styleSheet">
              <string notr="true"/>
             </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::ExtendedSelection</enum>
+            </property>
             <property name="selectionBehavior">
              <enum>QAbstractItemView::SelectRows</enum>
+            </property>
+            <property name="sortingEnabled">
+             <bool>false</bool>
             </property>
             <attribute name="horizontalHeaderCascadingSectionResizes">
              <bool>true</bool>
             </attribute>
             <attribute name="horizontalHeaderStretchLastSection">
+             <bool>true</bool>
+            </attribute>
+            <attribute name="verticalHeaderShowSortIndicator" stdset="0">
              <bool>true</bool>
             </attribute>
             <column>
@@ -123,16 +135,25 @@
                 <iconset resource="../stock_manager.qrc">
                  <normaloff>:/icons/cart.svg</normaloff>:/icons/cart.svg</iconset>
                </property>
+               <property name="shortcut">
+                <string>Ctrl+A</string>
+               </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="btnRemove_Cart">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>Remove Item</string>
                </property>
                <property name="icon">
                 <iconset resource="../stock_manager.qrc">
                  <normaloff>:/icons/cross.svg</normaloff>:/icons/cross.svg</iconset>
+               </property>
+               <property name="shortcut">
+                <string>Ctrl+D</string>
                </property>
               </widget>
              </item>
@@ -147,6 +168,9 @@
                </item>
                <item row="0" column="1">
                 <widget class="QComboBox" name="cmbPayment_Method">
+                 <property name="currentText">
+                  <string notr="true">Cash</string>
+                 </property>
                  <item>
                   <property name="text">
                    <string>Cash</string>
@@ -184,6 +208,12 @@
                 <iconset resource="../stock_manager.qrc">
                  <normaloff>:/icons/basket.svg</normaloff>:/icons/basket.svg</iconset>
                </property>
+               <property name="autoDefault">
+                <bool>true</bool>
+               </property>
+               <property name="default">
+                <bool>true</bool>
+               </property>
               </widget>
              </item>
             </layout>
@@ -205,7 +235,7 @@
              <item>
               <widget class="QLabel" name="lblItem_Count">
                <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Items On Cart: 8&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Items On Cart: 0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
               </widget>
              </item>
@@ -225,7 +255,7 @@
              <item>
               <widget class="QLabel" name="lblTotal">
                <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Total: Kshs. 2,030&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Total: Kshs. 0.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
               </widget>
              </item>
@@ -266,7 +296,7 @@
           </attribute>
           <column>
            <property name="text">
-            <string>Item Number / Id</string>
+            <string>Item Number</string>
            </property>
           </column>
           <column>
@@ -557,8 +587,6 @@
     <addaction name="actSales"/>
     <addaction name="actStock"/>
     <addaction name="separator"/>
-    <addaction name="actSettings"/>
-    <addaction name="separator"/>
     <addaction name="actQuit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -577,6 +605,8 @@
     <addaction name="actionCopy"/>
     <addaction name="actionPaste"/>
     <addaction name="actionCut"/>
+    <addaction name="separator"/>
+    <addaction name="actSettings_2"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -710,6 +740,15 @@
    </property>
   </action>
   <action name="actSettings">
+   <property name="icon">
+    <iconset resource="../stock_manager.qrc">
+     <normaloff>:/icons/gear.svg</normaloff>:/icons/gear.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actSettings_2">
    <property name="icon">
     <iconset resource="../stock_manager.qrc">
      <normaloff>:/icons/gear.svg</normaloff>:/icons/gear.svg</iconset>

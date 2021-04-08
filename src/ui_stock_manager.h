@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'stock_manageruYcXvr.ui'
+** Form generated from reading UI file 'stock_manageruiUKmm.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef STOCK_MANAGERUYCXVR_H
-#define STOCK_MANAGERUYCXVR_H
+#ifndef STOCK_MANAGERUIUKMM_H
+#define STOCK_MANAGERUIUKMM_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -50,6 +50,7 @@ public:
     QAction *actSales;
     QAction *actStock;
     QAction *actSettings;
+    QAction *actSettings_2;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QTabWidget *tabMain;
@@ -176,6 +177,9 @@ public:
         QIcon icon12;
         icon12.addFile(QString::fromUtf8(":/icons/gear.svg"), QSize(), QIcon::Normal, QIcon::Off);
         actSettings->setIcon(icon12);
+        actSettings_2 = new QAction(stock_manager);
+        actSettings_2->setObjectName(QString::fromUtf8("actSettings_2"));
+        actSettings_2->setIcon(icon12);
         centralWidget = new QWidget(stock_manager);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -209,9 +213,13 @@ public:
         tblCart->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         tblCart->setObjectName(QString::fromUtf8("tblCart"));
         tblCart->setStyleSheet(QString::fromUtf8(""));
+        tblCart->setEditTriggers(QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked);
+        tblCart->setSelectionMode(QAbstractItemView::ExtendedSelection);
         tblCart->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tblCart->setSortingEnabled(false);
         tblCart->horizontalHeader()->setCascadingSectionResizes(true);
         tblCart->horizontalHeader()->setStretchLastSection(true);
+        tblCart->verticalHeader()->setProperty("showSortIndicator", QVariant(true));
 
         horizontalLayout_5->addWidget(tblCart);
 
@@ -231,6 +239,7 @@ public:
 
         btnRemove_Cart = new QPushButton(grpCart);
         btnRemove_Cart->setObjectName(QString::fromUtf8("btnRemove_Cart"));
+        btnRemove_Cart->setEnabled(false);
         QIcon icon14;
         icon14.addFile(QString::fromUtf8(":/icons/cross.svg"), QSize(), QIcon::Normal, QIcon::Off);
         btnRemove_Cart->setIcon(icon14);
@@ -248,6 +257,7 @@ public:
         cmbPayment_Method->addItem(QString());
         cmbPayment_Method->addItem(QString());
         cmbPayment_Method->setObjectName(QString::fromUtf8("cmbPayment_Method"));
+        cmbPayment_Method->setCurrentText(QString::fromUtf8("Cash"));
 
         formLayout_5->setWidget(0, QFormLayout::FieldRole, cmbPayment_Method);
 
@@ -266,6 +276,7 @@ public:
         QIcon icon15;
         icon15.addFile(QString::fromUtf8(":/icons/basket.svg"), QSize(), QIcon::Normal, QIcon::Off);
         btnSell_Cart->setIcon(icon15);
+        btnSell_Cart->setAutoDefault(true);
 
         verticalLayout_4->addWidget(btnSell_Cart);
 
@@ -489,8 +500,6 @@ public:
         menuFile->addAction(actSales);
         menuFile->addAction(actStock);
         menuFile->addSeparator();
-        menuFile->addAction(actSettings);
-        menuFile->addSeparator();
         menuFile->addAction(actQuit);
         menuHelp->addAction(actQt_About);
         menuHelp->addAction(actAbout);
@@ -499,10 +508,13 @@ public:
         menuEdit->addAction(actionCopy);
         menuEdit->addAction(actionPaste);
         menuEdit->addAction(actionCut);
+        menuEdit->addSeparator();
+        menuEdit->addAction(actSettings_2);
 
         retranslateUi(stock_manager);
 
         tabMain->setCurrentIndex(0);
+        btnSell_Cart->setDefault(true);
 
 
         QMetaObject::connectSlotsByName(stock_manager);
@@ -539,6 +551,7 @@ public:
         actSales->setText(QCoreApplication::translate("stock_manager", "Sales", nullptr));
         actStock->setText(QCoreApplication::translate("stock_manager", "Stock", nullptr));
         actSettings->setText(QCoreApplication::translate("stock_manager", "Settings", nullptr));
+        actSettings_2->setText(QCoreApplication::translate("stock_manager", "Settings", nullptr));
 #if QT_CONFIG(statustip)
         tabMain->setStatusTip(QCoreApplication::translate("stock_manager", "View items on stock", nullptr));
 #endif // QT_CONFIG(statustip)
@@ -554,18 +567,24 @@ public:
         ___qtablewidgetitem4->setText(QCoreApplication::translate("stock_manager", "Total Price", nullptr));
         grpCart->setTitle(QString());
         btnAdd_Cart->setText(QCoreApplication::translate("stock_manager", "Add Item to Cart", nullptr));
+#if QT_CONFIG(shortcut)
+        btnAdd_Cart->setShortcut(QCoreApplication::translate("stock_manager", "Ctrl+A", nullptr));
+#endif // QT_CONFIG(shortcut)
         btnRemove_Cart->setText(QCoreApplication::translate("stock_manager", "Remove Item", nullptr));
+#if QT_CONFIG(shortcut)
+        btnRemove_Cart->setShortcut(QCoreApplication::translate("stock_manager", "Ctrl+D", nullptr));
+#endif // QT_CONFIG(shortcut)
         lblPayment_Method->setText(QCoreApplication::translate("stock_manager", "Payment Method:", nullptr));
         cmbPayment_Method->setItemText(0, QCoreApplication::translate("stock_manager", "Cash", nullptr));
         cmbPayment_Method->setItemText(1, QCoreApplication::translate("stock_manager", "Mpesa", nullptr));
 
         btnSell_Cart->setText(QCoreApplication::translate("stock_manager", "Sell", nullptr));
         grbCart_Stats->setTitle(QString());
-        lblItem_Count->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p><span style=\" font-size:12pt;\">Items On Cart: 8</span></p></body></html>", nullptr));
-        lblTotal->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p><span style=\" font-size:16pt;\">Total: Kshs. 2,030</span></p></body></html>", nullptr));
+        lblItem_Count->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p><span style=\" font-size:12pt;\">Items On Cart: 0</span></p></body></html>", nullptr));
+        lblTotal->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p><span style=\" font-size:16pt;\">Total: Kshs. 0.00</span></p></body></html>", nullptr));
         tabMain->setTabText(tabMain->indexOf(tabHome), QCoreApplication::translate("stock_manager", "Cart", nullptr));
         QTableWidgetItem *___qtablewidgetitem5 = tblSales->horizontalHeaderItem(0);
-        ___qtablewidgetitem5->setText(QCoreApplication::translate("stock_manager", "Item Number / Id", nullptr));
+        ___qtablewidgetitem5->setText(QCoreApplication::translate("stock_manager", "Item Number", nullptr));
         QTableWidgetItem *___qtablewidgetitem6 = tblSales->horizontalHeaderItem(1);
         ___qtablewidgetitem6->setText(QCoreApplication::translate("stock_manager", "Name", nullptr));
         QTableWidgetItem *___qtablewidgetitem7 = tblSales->horizontalHeaderItem(2);
@@ -625,4 +644,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // STOCK_MANAGERUYCXVR_H
+#endif // STOCK_MANAGERUIUKMM_H

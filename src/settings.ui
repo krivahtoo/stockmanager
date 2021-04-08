@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>623</width>
-    <height>309</height>
+    <width>592</width>
+    <height>361</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,6 +40,9 @@
              <width>300</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="placeholderText">
+            <string>Shop name...</string>
            </property>
           </widget>
          </item>
@@ -197,6 +200,12 @@
          </item>
          <item row="0" column="1">
           <widget class="QComboBox" name="cmbTheme">
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <property name="placeholderText">
+            <string>Select Theme..</string>
+           </property>
            <item>
             <property name="text">
              <string>Default</string>
@@ -212,12 +221,51 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLineEdit" name="txtDate_Format"/>
+          <widget class="QLineEdit" name="txtDate_Format">
+           <property name="placeholderText">
+            <string>e.g. dd/MM/YY</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Prefix:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="txtPrefix">
+           <property name="placeholderText">
+            <string>e.g. Ksh.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Surfix:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="txtSurfix">
+           <property name="placeholderText">
+            <string>e.g. .00</string>
+           </property>
+          </widget>
          </item>
          <item row="2" column="0" colspan="2">
           <widget class="QLabel" name="label_7">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>false</underline>
+            </font>
+           </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;dd,DDD,dddd &lt;span style=&quot; font-style:normal;&quot;&gt;for Date,&lt;/span&gt;&lt;br/&gt;MM, MMMM &lt;span style=&quot; font-style:normal;&quot;&gt;for month,&lt;/span&gt;&lt;br/&gt;YY, yyyy &lt;span style=&quot; font-style:normal;&quot;&gt;for year&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:normal;&quot;&gt;Default &lt;/span&gt;'ddd dd MMMM yyyy'&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>Currency</string>
            </property>
           </widget>
          </item>

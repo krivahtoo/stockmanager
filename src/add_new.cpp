@@ -39,6 +39,11 @@ dlgAdd::dlgAdd(QMainWindow *parent):
     ui->setupUi(this);
 
     connect(ui->btnSave, &QPushButton::pressed, this, &dlgAdd::add);
+    connect(ui->txtId, &QLineEdit::textChanged, this, &dlgAdd::updateItem);
+
+    ui->txtCapacity->setPlaceholderText("e.g. 500g, 100ml");
+    ui->txtId->setPlaceholderText("Enter item no/ serial no...");
+    ui->txtName->setPlaceholderText("Enter the item name...");
 }
 
 void dlgAdd::add()
@@ -79,9 +84,10 @@ void dlgAdd::add()
     msgBox.setDefaultButton(QMessageBox::Ok);
     int result = msgBox.exec();
 
+    clearData();
+
     switch (result) {
         case QMessageBox::Ok:
-            clearData();
             return;
             break;
         case QMessageBox::Cancel:
@@ -100,6 +106,37 @@ void dlgAdd::clearData()
     ui->txtCapacity->clear();
     ui->spnBuyingPrice->setValue(0);
     ui->spnQuantity->setValue(1);
+}
+
+// new QListWidgetItem(tr("Oak"), this->m_ui->ls);
+
+void dlgAdd::updateItem(QString id)
+{
+    using namespace sqlite_orm;
+    storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    auto item_count = storage->count<Item>(
+        where(c(&Item::itemNo) == id.toStdString())
+    );
+    if (item_count < 1) {
+        this->newItem = true;
+        return;
+    } else {
+        this->newItem = false;
+        auto stock = storage->get_all_pointer<Item>(
+            where(c(&Item::itemNo) == id.toStdString())
+        );
+
+        this->ui->txtName->setEnabled(false);
+        this->ui->txtCapacity->setEnabled(false);
+    
+        auto itm = storage->get_all_pointer<Item>(
+            where(c(&Item::itemNo) == id.toStdString())
+        );
+        this->ui->txtName->setText(QString::fromStdString(itm[0]->name));
+        this->ui->txtCapacity->setText(QString::fromStdString(itm[0]->capacity));
+        this->ui->spnPrice->setValue(itm[0]->price);
+        this->ui->spnBuyingPrice->setValue(itm[0]->buyingPrice);
+    }
 }
 
 dlgAdd::~dlgAdd() = default;

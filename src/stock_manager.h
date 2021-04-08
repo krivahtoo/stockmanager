@@ -68,6 +68,7 @@ private:
     json getStatsData();
     void updateCart();
     void sellItems();
+    void updateSales(QDate ch_date = QDate::currentDate());
 };
 
 #endif // STOCK_MANAGER_H

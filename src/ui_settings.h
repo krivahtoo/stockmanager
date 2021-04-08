@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'settingscNrlQu.ui'
+** Form generated from reading UI file 'settingsUKCZzY.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SETTINGSCNRLQU_H
-#define SETTINGSCNRLQU_H
+#ifndef SETTINGSUKCZZY_H
+#define SETTINGSUKCZZY_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -59,6 +59,10 @@ public:
     QComboBox *cmbTheme;
     QLabel *label_6;
     QLineEdit *txtDate_Format;
+    QLabel *label_9;
+    QLineEdit *txtPrefix;
+    QLabel *label_10;
+    QLineEdit *txtSurfix;
     QLabel *label_7;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer_2;
@@ -70,7 +74,7 @@ public:
     {
         if (dlgSettings->objectName().isEmpty())
             dlgSettings->setObjectName(QString::fromUtf8("dlgSettings"));
-        dlgSettings->resize(623, 309);
+        dlgSettings->resize(592, 361);
         verticalLayout = new QVBoxLayout(dlgSettings);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         groupBox = new QGroupBox(dlgSettings);
@@ -202,8 +206,33 @@ public:
 
         formLayout_3->setWidget(1, QFormLayout::FieldRole, txtDate_Format);
 
+        label_9 = new QLabel(grpOther);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        formLayout_3->setWidget(3, QFormLayout::LabelRole, label_9);
+
+        txtPrefix = new QLineEdit(grpOther);
+        txtPrefix->setObjectName(QString::fromUtf8("txtPrefix"));
+
+        formLayout_3->setWidget(3, QFormLayout::FieldRole, txtPrefix);
+
+        label_10 = new QLabel(grpOther);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+
+        formLayout_3->setWidget(4, QFormLayout::LabelRole, label_10);
+
+        txtSurfix = new QLineEdit(grpOther);
+        txtSurfix->setObjectName(QString::fromUtf8("txtSurfix"));
+
+        formLayout_3->setWidget(4, QFormLayout::FieldRole, txtSurfix);
+
         label_7 = new QLabel(grpOther);
         label_7->setObjectName(QString::fromUtf8("label_7"));
+        QFont font;
+        font.setBold(true);
+        font.setUnderline(false);
+        font.setWeight(75);
+        label_7->setFont(font);
 
         formLayout_3->setWidget(2, QFormLayout::SpanningRole, label_7);
 
@@ -252,6 +281,9 @@ public:
         retranslateUi(dlgSettings);
         QObject::connect(pushButton_3, SIGNAL(clicked()), dlgSettings, SLOT(reject()));
 
+        cmbTheme->setCurrentIndex(0);
+
+
         QMetaObject::connectSlotsByName(dlgSettings);
     } // setupUi
 
@@ -261,6 +293,7 @@ public:
         groupBox->setTitle(QString());
         grpShop->setTitle(QCoreApplication::translate("dlgSettings", "Shop", nullptr));
         label_4->setText(QCoreApplication::translate("dlgSettings", "Shop Name:", nullptr));
+        txtName->setPlaceholderText(QCoreApplication::translate("dlgSettings", "Shop name...", nullptr));
         grpAdvance->setTitle(QCoreApplication::translate("dlgSettings", "Advance", nullptr));
         chkDev_Mode->setText(QCoreApplication::translate("dlgSettings", "Dev Mode", nullptr));
         grpPass->setTitle(QCoreApplication::translate("dlgSettings", "Change Password", nullptr));
@@ -273,8 +306,14 @@ public:
         label_5->setText(QCoreApplication::translate("dlgSettings", "Change Theme:", nullptr));
         cmbTheme->setItemText(0, QCoreApplication::translate("dlgSettings", "Default", nullptr));
 
+        cmbTheme->setPlaceholderText(QCoreApplication::translate("dlgSettings", "Select Theme..", nullptr));
         label_6->setText(QCoreApplication::translate("dlgSettings", "Date Format:", nullptr));
-        label_7->setText(QCoreApplication::translate("dlgSettings", "<html><head/><body><p>dd,DDD,dddd <span style=\" font-style:normal;\">for Date,</span><br/>MM, MMMM <span style=\" font-style:normal;\">for month,</span><br/>YY, yyyy <span style=\" font-style:normal;\">for year</span></p><p><span style=\" font-style:normal;\">Default </span>'ddd dd MMMM yyyy'</p></body></html>", nullptr));
+        txtDate_Format->setPlaceholderText(QCoreApplication::translate("dlgSettings", "e.g. dd/MM/YY", nullptr));
+        label_9->setText(QCoreApplication::translate("dlgSettings", "Prefix:", nullptr));
+        txtPrefix->setPlaceholderText(QCoreApplication::translate("dlgSettings", "e.g. Ksh.", nullptr));
+        label_10->setText(QCoreApplication::translate("dlgSettings", "Surfix:", nullptr));
+        txtSurfix->setPlaceholderText(QCoreApplication::translate("dlgSettings", "e.g. .00", nullptr));
+        label_7->setText(QCoreApplication::translate("dlgSettings", "Currency", nullptr));
         pushButton_3->setText(QCoreApplication::translate("dlgSettings", "Close", nullptr));
         pushButton_4->setText(QCoreApplication::translate("dlgSettings", "Reset", nullptr));
         pushButton_2->setText(QCoreApplication::translate("dlgSettings", "Save Settings", nullptr));
@@ -288,4 +327,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SETTINGSCNRLQU_H
+#endif // SETTINGSUKCZZY_H

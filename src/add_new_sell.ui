@@ -84,18 +84,11 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QLineEdit" name="txtSearch"/>
-           </item>
-           <item>
-            <widget class="QPushButton" name="btnSearch">
-             <property name="text">
-              <string>Search</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QLineEdit" name="txtSearch">
+           <property name="placeholderText">
+            <string>Search...</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QListWidget" name="lstSearch"/>

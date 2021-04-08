@@ -47,11 +47,14 @@ stock_manager::stock_manager(QWidget *parent) :
     m_ui->setupUi(this);
 
     this->stockCount = 0;
+    m_ui->dateSales->setDate(QDate::currentDate());
+    m_ui->dateSales->setMaximumDate(QDate::currentDate());
 
     connect(m_ui->btnAdd_Cart, &QPushButton::pressed, this, &stock_manager::show_AddCart);
     connect(m_ui->btnSell_Cart, &QPushButton::pressed, this, &stock_manager::sellItems);
     connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
     connect(m_ui->actQuit, &QAction::triggered, this, &QCoreApplication::quit);
+    connect(m_ui->dateSales, &QDateEdit::dateChanged, this, &stock_manager::updateSales);
     connect(
         m_ui->btnAddItem,
         &QPushButton::pressed, this,
@@ -124,6 +127,7 @@ stock_manager::stock_manager(QWidget *parent) :
     refreshDb();
     updateTable();
     updateStats();
+    updateSales();
 }
 
 void stock_manager::show_AddCart()
@@ -364,11 +368,93 @@ void stock_manager::sellItems()
         this->m_ui->tblCart->clearContents();
         this->m_ui->tblCart->setRowCount(0);
         this->cart.clear();
-    } catch(std::system_error e) {
+    } catch(std::system_error &e) {
         std::cout << e.what() << std::endl;
     } catch(...) {
         std::cout << "Unknown Error occurred." << std::endl;
     }
+}
+
+void stock_manager::updateSales(QDate ch_date)
+{
+    using namespace sqlite_orm;
+    long start, end;
+    json j;
+    QDateTime date;
+    storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    date.setDate(ch_date);
+    date.setTime(QTime::fromString("00:00:00", "HH:mm:ss"));
+    start = date.toSecsSinceEpoch();
+    date.setTime(QTime::fromString("23:59:59", "HH:mm:ss"));
+    end = date.toSecsSinceEpoch();
+
+    auto items = storage->select(
+        columns(&Item::itemNo, &Item::name, &SoldItem::quantity, &Item::price, &SoldItem::paymentMethod, &SoldItem::saleDate),
+        where(c(&Item::itemNo) == &SoldItem::itemNo and c(&SoldItem::saleDate) >= start and c(&SoldItem::saleDate) <= end)
+    );
+
+    int count = 0;
+    long salesMade = 0;
+    this->m_ui->tblSales->clearContents();
+    this->m_ui->tblSales->setRowCount(items.size());
+
+    for(auto &itm: items) {
+        // Item::itemNo
+        QTableWidgetItem *tblItem0 = new QTableWidgetItem();
+        tblItem0->setText(QString::fromStdString(std::get<0>(itm)));
+        m_ui->tblSales->setItem(count, 0, tblItem0);
+
+        // Item::name
+        QTableWidgetItem *tblItem1 = new QTableWidgetItem();
+        tblItem1->setText(QString::fromStdString(std::get<1>(itm)));
+        m_ui->tblSales->setItem(count, 1, tblItem1);
+
+        // SoldItem::quantity
+        QTableWidgetItem *tblItem2 = new QTableWidgetItem();
+        tblItem2->setText(QString::number(std::get<2>(itm)));
+        m_ui->tblSales->setItem(count, 2, tblItem2);
+
+        // Item::price
+        QTableWidgetItem *tblItem3 = new QTableWidgetItem();
+        tblItem3->setText(QString::fromStdString(
+            util::formatCurrency(util::formatNumber(std::get<3>(itm)))
+        ));
+        m_ui->tblSales->setItem(count, 3, tblItem3);
+
+        // Total price
+        QTableWidgetItem *tblItem4 = new QTableWidgetItem();
+        tblItem4->setText(QString::fromStdString(
+            util::formatCurrency(
+                util::formatNumber(std::get<3>(itm) * std::get<2>(itm))
+            )
+        ));
+        m_ui->tblSales->setItem(count, 4, tblItem4);
+
+        // SoldItem::paymentMethod
+        QTableWidgetItem *tblItem5 = new QTableWidgetItem();
+        tblItem5->setText(QString::fromStdString(std::get<4>(itm)));
+        m_ui->tblSales->setItem(count, 5, tblItem5);
+
+        // SoldItem::saleDate
+        QDateTime date_time = QDateTime::fromSecsSinceEpoch(std::get<5>(itm));
+        QTableWidgetItem *tblItem6 = new QTableWidgetItem();
+        tblItem6->setText(date_time.toString("ddd dd MMMM yyyy"));
+        m_ui->tblSales->setItem(count, 6, tblItem6);
+
+        salesMade += std::get<3>(itm) * std::get<2>(itm);
+        count++;
+    }
+    j["count"] = count;
+    j["sales"] = util::formatCurrency(util::formatNumber(salesMade));
+    j["date"] = date.toString("ddd dd MMMM yyyy").toStdString();
+    this->m_ui->lblSalesStats->setText(
+        QString::fromStdString(
+            inja::render(
+                "<html><head/><body><p><span style=\" font-size:12pt;\">Sales Made on </span><span style=\" font-size:12pt; font-weight:600;\">{{ date }}</span></p><p><span style=\" font-size:12pt;\">Items Sold: </span><span style=\" font-size:12pt; font-weight:600;\">{{ count }}</span></p><p><span style=\" font-size:12pt;\">Sales Made: </span><span style=\" font-size:12pt; font-weight:600;\">{{ sales }}</span></p></body></html>",
+                j
+            )
+        )
+    );
 }
 
 stock_manager::~stock_manager() = default;

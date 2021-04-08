@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_new_sellACgRar.ui'
+** Form generated from reading UI file 'add_new_sellmWEPWO.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEW_SELLACGRAR_H
-#define ADD_NEW_SELLACGRAR_H
+#ifndef ADD_NEW_SELLMWEPWO_H
+#define ADD_NEW_SELLMWEPWO_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -40,9 +40,7 @@ public:
     QLineEdit *txtName;
     QGroupBox *grpSearch;
     QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout_2;
     QLineEdit *txtSearch;
-    QPushButton *btnSearch;
     QListWidget *lstSearch;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnCancel;
@@ -99,20 +97,10 @@ public:
         grpSearch->setObjectName(QString::fromUtf8("grpSearch"));
         verticalLayout = new QVBoxLayout(grpSearch);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         txtSearch = new QLineEdit(grpSearch);
         txtSearch->setObjectName(QString::fromUtf8("txtSearch"));
 
-        horizontalLayout_2->addWidget(txtSearch);
-
-        btnSearch = new QPushButton(grpSearch);
-        btnSearch->setObjectName(QString::fromUtf8("btnSearch"));
-
-        horizontalLayout_2->addWidget(btnSearch);
-
-
-        verticalLayout->addLayout(horizontalLayout_2);
+        verticalLayout->addWidget(txtSearch);
 
         lstSearch = new QListWidget(grpSearch);
         lstSearch->setObjectName(QString::fromUtf8("lstSearch"));
@@ -169,7 +157,7 @@ public:
         label_3->setText(QCoreApplication::translate("dlgAddNew", "Name:", nullptr));
         txtName->setText(QCoreApplication::translate("dlgAddNew", "No id entered...", nullptr));
         grpSearch->setTitle(QCoreApplication::translate("dlgAddNew", "Search", nullptr));
-        btnSearch->setText(QCoreApplication::translate("dlgAddNew", "Search", nullptr));
+        txtSearch->setPlaceholderText(QCoreApplication::translate("dlgAddNew", "Search...", nullptr));
         btnCancel->setText(QCoreApplication::translate("dlgAddNew", "Cancel", nullptr));
         btnAdd->setText(QCoreApplication::translate("dlgAddNew", "Add to Cart", nullptr));
     } // retranslateUi
@@ -182,4 +170,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEW_SELLACGRAR_H
+#endif // ADD_NEW_SELLMWEPWO_H

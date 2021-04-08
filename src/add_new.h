@@ -52,6 +52,7 @@ private:
     std::string capacity;
     void add();
     void clearData();
+    void updateItem(QString id);
 };
 
 #endif // ADD_NEW

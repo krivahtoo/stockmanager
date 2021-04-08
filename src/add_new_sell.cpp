@@ -55,6 +55,8 @@ void dlgAddNew::addToCart()
     this->item.quantity = this->ui->spbQuantity->text().toInt();
     this->item.totalPrice = item.price * item.quantity;
     this->cart.push_back(item);
+    this->ui->txtId->clear();
+    this->ui->spbQuantity->setValue(1);
     accept();
 }
 
@@ -90,5 +92,7 @@ void dlgAddNew::updateItem(QString id)
         this->item.price = itm[0]->price;
     }
 }
+
+// new QListWidgetItem(tr("Oak"), this->m_ui->ls);
 
 dlgAddNew::~dlgAddNew() = default;
