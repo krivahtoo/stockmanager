@@ -41,6 +41,13 @@ dlgAddNew::dlgAddNew(QWidget *parent, std::vector<CartItem> &cart_items):
 
     connect(ui->btnAdd, &QPushButton::pressed, this, &dlgAddNew::addToCart);
     connect(ui->txtId, &QLineEdit::textChanged, this, &dlgAddNew::updateItem);
+
+    ui->btnAdd->setEnabled(false);
+    ui->spbQuantity->setEnabled(false);
+    ui->spbQuantity->setMinimum(1);
+
+    ui->txtSearch->setPlaceholderText("Search...");
+    ui->txtId->setPlaceholderText("Enter item id...");
 }
 
 void dlgAddNew::addToCart()
@@ -60,16 +67,18 @@ void dlgAddNew::updateItem(QString id)
     );
     if (item_count < 1) {
         this->ui->txtName->setText("Item you entered does not exists..");
-        this->ui->btnAdd->setEnabled(false);
-        this->ui->spbQuantity->setEnabled(false);
         return;
     } else {
-        this->ui->spbQuantity->setEnabled(true);
-        this->ui->btnAdd->setEnabled(true);
-
         auto stock = storage->get_all_pointer<Stock>(
             where(c(&Stock::itemNo) == id.toStdString())
         );
+
+        if (stock[0]->quantity < 1) {
+            this->ui->txtName->setText("Item you entered is out of stock..");
+            return;
+        }
+        this->ui->spbQuantity->setEnabled(true);
+        this->ui->btnAdd->setEnabled(true);
         this->ui->spbQuantity->setMaximum(stock[0]->quantity);
     
         auto itm = storage->get_all_pointer<Item>(
