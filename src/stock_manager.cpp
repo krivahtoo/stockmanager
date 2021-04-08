@@ -254,7 +254,7 @@ json stock_manager::getStatsData()
     long price = 0;
 
     for (auto &sale: sales) {
-        price += std::get<0>(sale);
+        price += std::get<0>(sale) * std::get<1>(sale);
         count += std::get<1>(sale);
     }
 
