@@ -25,8 +25,10 @@
 
 #include "stock_manager.h"
 #include "database.h"
+#include "settings.h"
 #include "utils.h"
 
+#include <sqlcipher/sqlite3.h>
 #include <iostream>
 
 #include <inja/inja.hpp>
@@ -140,6 +142,9 @@ void stock_manager::refreshDb()
     using namespace sqlite_orm;
     items.clear();
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    storage->on_open = [&](sqlite3* db){
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
     auto allItems = storage->select(
         columns(
             &Item::id, &Item::itemNo, &Item::name,
@@ -241,6 +246,9 @@ json stock_manager::getStatsData()
     using namespace sqlite_orm;
     json j;
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    storage->on_open = [&](sqlite3* db){
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
     j["stock"]["items"] = storage->count<Stock>();
     j["stock"]["count"] = this->stockCount;
 
@@ -343,6 +351,9 @@ void stock_manager::sellItems()
 {
     using namespace sqlite_orm;
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    storage->on_open = [&](sqlite3* db){
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
     long int date = QDateTime::currentSecsSinceEpoch();
     std::string payment_method = this->m_ui->cmbPayment_Method->currentText().toStdString();
 
@@ -382,6 +393,9 @@ void stock_manager::updateSales(QDate ch_date)
     json j;
     QDateTime date;
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    storage->on_open = [&](sqlite3* db){
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
     date.setDate(ch_date);
     date.setTime(QTime::fromString("00:00:00", "HH:mm:ss"));
     start = date.toSecsSinceEpoch();
@@ -394,6 +408,7 @@ void stock_manager::updateSales(QDate ch_date)
     );
 
     int count = 0;
+    int quantity = 0;
     long salesMade = 0;
     this->m_ui->tblSales->clearContents();
     this->m_ui->tblSales->setRowCount(items.size());
@@ -413,6 +428,7 @@ void stock_manager::updateSales(QDate ch_date)
         QTableWidgetItem *tblItem2 = new QTableWidgetItem();
         tblItem2->setText(QString::number(std::get<2>(itm)));
         m_ui->tblSales->setItem(count, 2, tblItem2);
+        quantity += std::get<2>(itm);
 
         // Item::price
         QTableWidgetItem *tblItem3 = new QTableWidgetItem();
@@ -438,13 +454,13 @@ void stock_manager::updateSales(QDate ch_date)
         // SoldItem::saleDate
         QDateTime date_time = QDateTime::fromSecsSinceEpoch(std::get<5>(itm));
         QTableWidgetItem *tblItem6 = new QTableWidgetItem();
-        tblItem6->setText(date_time.toString("ddd dd MMMM yyyy"));
+        tblItem6->setText(date_time.toString("dd-MM-yyyy"));
         m_ui->tblSales->setItem(count, 6, tblItem6);
 
         salesMade += std::get<3>(itm) * std::get<2>(itm);
         count++;
     }
-    j["count"] = count;
+    j["count"] = quantity;
     j["sales"] = util::formatCurrency(util::formatNumber(salesMade));
     j["date"] = date.toString("ddd dd MMMM yyyy").toStdString();
     this->m_ui->lblSalesStats->setText(

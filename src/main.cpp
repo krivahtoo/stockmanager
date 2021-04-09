@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     app.setApplicationDisplayName("Shop Manager");
     app.setApplicationName("Stock Manager");
     app.setApplicationVersion("0.1.0");
-    app.setOrganizationName("KrivArt Software");
+    // app.setOrganizationName("KrivArt Software");
     Settings settings;
     QFile config_file;
     config_file.setFileName(QString::fromStdString(Settings::config_path));
@@ -45,11 +45,16 @@ int main(int argc, char *argv[])
     if (!isDbFileExist() || !config_file.exists()) {
         bool ok = false;
         QString pass = "";
-        while (!ok && pass.isEmpty()) {
+        QString confirm = "";
+        while ((!ok && pass.isEmpty()) || pass != confirm) {
             pass = QInputDialog::getText(nullptr,
                 "Set Master password", "Password",
                 QLineEdit::Password,
                 "", &ok
+            );
+            confirm = QInputDialog::getText(nullptr,
+                "Confirm Master password", "Confirm Password",
+                QLineEdit::Password
             );
         }
         settings.setDBKey(pass.toStdString());

@@ -25,8 +25,11 @@
 
 #include "add_new_sell.h"
 #include "database.h"
+#include "settings.h"
 #include "structs.h"
 #include "utils.h"
+
+#include <sqlcipher/sqlite3.h>
 
 #include <QtCore/QString>
 #include <QtWidgets/QLineEdit>
@@ -64,6 +67,9 @@ void dlgAddNew::updateItem(QString id)
 {
     using namespace sqlite_orm;
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    storage->on_open = [&](sqlite3* db){
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
     auto item_count = storage->count<Item>(
         where(c(&Item::itemNo) == id.toStdString())
     );

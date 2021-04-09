@@ -26,6 +26,9 @@
 #include "utils.h"
 #include "add_new.h"
 #include "database.h"
+#include "settings.h"
+
+#include <sqlcipher/sqlite3.h>
 
 #include <QtCore/QDateTime>
 #include <QtCore/QVariant>
@@ -50,6 +53,9 @@ void dlgAdd::add()
 {
     using namespace sqlite_orm;
     storage = std::make_unique<Storage>(initStorage(util::getDBPath()));
+    storage->on_open = [&](sqlite3* db){
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
     if (newItem) {
         name = ui->txtName->text().toStdString();
         itemNo = ui->txtId->text().toStdString();
@@ -114,6 +120,9 @@ void dlgAdd::updateItem(QString id)
 {
     using namespace sqlite_orm;
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    storage->on_open = [&](sqlite3* db){
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
     auto item_count = storage->count<Item>(
         where(c(&Item::itemNo) == id.toStdString())
     );

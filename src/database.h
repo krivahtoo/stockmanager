@@ -26,6 +26,8 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
+#define SQLITE_HAS_CODEC 1
+
 #include <string>
 
 #include "../sqlite_orm/sqlite_orm.h"
