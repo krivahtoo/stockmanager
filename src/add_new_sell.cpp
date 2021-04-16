@@ -44,6 +44,7 @@ dlgAddNew::dlgAddNew(QWidget *parent, std::vector<CartItem> &cart_items):
 
     connect(ui->btnAdd, &QPushButton::pressed, this, &dlgAddNew::addToCart);
     connect(ui->txtId, &QLineEdit::textChanged, this, &dlgAddNew::updateItem);
+    connect(ui->txtSearch, &QLineEdit::textChanged, this, &dlgAddNew::updateSearch);
 
     ui->btnAdd->setEnabled(false);
     ui->spbQuantity->setEnabled(false);
@@ -99,6 +100,31 @@ void dlgAddNew::updateItem(QString id)
     }
 }
 
-// new QListWidgetItem(tr("Oak"), this->m_ui->ls);
+void dlgAddNew::updateSearch(QString text)
+{
+    using namespace sqlite_orm;
+    storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    storage->on_open = [&](sqlite3* db){
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
+    this->ui->lstSearch->clear();
+    if (text.isEmpty()) return;
+    text.prepend("%");
+    text.append("%");
+    auto items = storage->get_all_pointer<Item>(where(like(&Item::name, text.toStdString())));
+    // cout << "items = " << items.size() << endl;
+    for(auto &item : items) {
+        QString txt = QString::fromStdString(item->itemNo);
+        txt.append(" | ");
+        txt.append(QString::fromStdString(item->name));
+        txt.append(" | ");
+        txt.append(QString::fromStdString(
+            util::formatCurrency(
+                util::formatNumber(item->price)
+            )
+        ));
+        new QListWidgetItem(txt, this->ui->lstSearch);
+    }
+}
 
 dlgAddNew::~dlgAddNew() = default;

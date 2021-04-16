@@ -47,6 +47,7 @@ private:
     CartItem item;
     void addToCart();
     void updateItem(QString id);
+    void updateSearch(QString text);
 };
 
 #endif // ABOUT_ITEMS_H
