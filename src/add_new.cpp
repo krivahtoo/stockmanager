@@ -56,14 +56,13 @@ void dlgAdd::add()
     storage->on_open = [&](sqlite3* db){
         sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
     };
+    name = ui->txtName->text().toStdString();
+    itemNo = ui->txtId->text().toStdString();
+    price = ui->spnPrice->cleanText().toLong();
+    buyingPrice = ui->spnBuyingPrice->cleanText().toLong();
+    capacity = ui->txtCapacity->text().toStdString();
+    quantity = ui->spnQuantity->cleanText().toInt();
     if (newItem) {
-        name = ui->txtName->text().toStdString();
-        itemNo = ui->txtId->text().toStdString();
-        price = ui->spnPrice->cleanText().toLong();
-        buyingPrice = ui->spnBuyingPrice->cleanText().toLong();
-        capacity = ui->txtCapacity->text().toStdString();
-        quantity = ui->spnQuantity->cleanText().toInt();
-        
         storage->insert(Item {-1,
             itemNo, name, price,
             buyingPrice, capacity,
@@ -131,9 +130,6 @@ void dlgAdd::updateItem(QString id)
         return;
     } else {
         this->newItem = false;
-        auto stock = storage->get_all_pointer<Item>(
-            where(c(&Item::itemNo) == id.toStdString())
-        );
 
         this->ui->txtName->setEnabled(false);
         this->ui->txtCapacity->setEnabled(false);
