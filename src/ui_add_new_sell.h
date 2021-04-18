@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_new_sellmWEPWO.ui'
+** Form generated from reading UI file 'add_new_sellxPJLUU.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEW_SELLMWEPWO_H
-#define ADD_NEW_SELLMWEPWO_H
+#ifndef ADD_NEW_SELLXPJLUU_H
+#define ADD_NEW_SELLXPJLUU_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -40,7 +40,9 @@ public:
     QLineEdit *txtName;
     QGroupBox *grpSearch;
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_2;
     QLineEdit *txtSearch;
+    QLabel *lblItems;
     QListWidget *lstSearch;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnCancel;
@@ -79,6 +81,8 @@ public:
         spbQuantity = new QSpinBox(grpItem);
         spbQuantity->setObjectName(QString::fromUtf8("spbQuantity"));
         spbQuantity->setMaximumSize(QSize(75, 16777215));
+        spbQuantity->setMinimum(1);
+        spbQuantity->setMaximum(99999);
 
         formLayout->setWidget(1, QFormLayout::FieldRole, spbQuantity);
 
@@ -97,10 +101,22 @@ public:
         grpSearch->setObjectName(QString::fromUtf8("grpSearch"));
         verticalLayout = new QVBoxLayout(grpSearch);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(2);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(-1, -1, -1, 0);
         txtSearch = new QLineEdit(grpSearch);
         txtSearch->setObjectName(QString::fromUtf8("txtSearch"));
 
-        verticalLayout->addWidget(txtSearch);
+        horizontalLayout_2->addWidget(txtSearch);
+
+        lblItems = new QLabel(grpSearch);
+        lblItems->setObjectName(QString::fromUtf8("lblItems"));
+
+        horizontalLayout_2->addWidget(lblItems);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
 
         lstSearch = new QListWidget(grpSearch);
         lstSearch->setObjectName(QString::fromUtf8("lstSearch"));
@@ -153,11 +169,13 @@ public:
         dlgAddNew->setWindowTitle(QCoreApplication::translate("dlgAddNew", "Add Item to Cart", nullptr));
         grpItem->setTitle(QCoreApplication::translate("dlgAddNew", "Item", nullptr));
         label->setText(QCoreApplication::translate("dlgAddNew", "Item Id:", nullptr));
+        txtId->setPlaceholderText(QCoreApplication::translate("dlgAddNew", "Enter item id..", nullptr));
         label_2->setText(QCoreApplication::translate("dlgAddNew", "Quantity:", nullptr));
         label_3->setText(QCoreApplication::translate("dlgAddNew", "Name:", nullptr));
         txtName->setText(QCoreApplication::translate("dlgAddNew", "No id entered...", nullptr));
         grpSearch->setTitle(QCoreApplication::translate("dlgAddNew", "Search", nullptr));
         txtSearch->setPlaceholderText(QCoreApplication::translate("dlgAddNew", "Search...", nullptr));
+        lblItems->setText(QCoreApplication::translate("dlgAddNew", "Type to search", nullptr));
         btnCancel->setText(QCoreApplication::translate("dlgAddNew", "Cancel", nullptr));
         btnAdd->setText(QCoreApplication::translate("dlgAddNew", "Add to Cart", nullptr));
     } // retranslateUi
@@ -170,4 +188,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEW_SELLMWEPWO_H
+#endif // ADD_NEW_SELLXPJLUU_H

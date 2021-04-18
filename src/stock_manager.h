@@ -55,6 +55,11 @@ public:
     void updateTable();
     void updateStats();
 
+protected:
+#ifndef QT_NO_CONTEXTMENU
+    void contextMenuEvent(QContextMenuEvent *event) override;
+#endif // QT_NO_CONTEXTMENU
+
 private:
     QScopedPointer<Ui::stock_manager> m_ui;
     dlgAdd *dlg_add;
@@ -69,6 +74,7 @@ private:
     void updateCart();
     void sellItems();
     void updateSales(QDate ch_date = QDate::currentDate());
+    void updateSalesStats();
 };
 
 #endif // STOCK_MANAGER_H

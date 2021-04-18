@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'stock_manageruiUKmm.ui'
+** Form generated from reading UI file 'stock_managerkRBGsX.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef STOCK_MANAGERUIUKMM_H
-#define STOCK_MANAGERUIUKMM_H
+#ifndef STOCK_MANAGERKRBGSX_H
+#define STOCK_MANAGERKRBGSX_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -62,6 +62,7 @@ public:
     QVBoxLayout *verticalLayout_4;
     QPushButton *btnAdd_Cart;
     QPushButton *btnRemove_Cart;
+    QPushButton *btnClear_Cart;
     QFormLayout *formLayout_5;
     QLabel *lblPayment_Method;
     QComboBox *cmbPayment_Method;
@@ -83,10 +84,12 @@ public:
     QLabel *label_2;
     QDateEdit *dateSales;
     QLabel *label_3;
-    QSpacerItem *verticalSpacer;
     QGroupBox *grpStats;
     QVBoxLayout *verticalLayout_6;
     QLabel *lblSalesStats;
+    QGroupBox *grpSalesStats;
+    QVBoxLayout *verticalLayout_2;
+    QLabel *lblSalesStats_2;
     QWidget *tabStock;
     QHBoxLayout *horizontalLayout;
     QTableWidget *tblStock;
@@ -160,7 +163,7 @@ public:
         actHome = new QAction(stock_manager);
         actHome->setObjectName(QString::fromUtf8("actHome"));
         QIcon icon9;
-        icon9.addFile(QString::fromUtf8(":/icons/home.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        icon9.addFile(QString::fromUtf8(":/icons/cart.svg"), QSize(), QIcon::Normal, QIcon::Off);
         actHome->setIcon(icon9);
         actSales = new QAction(stock_manager);
         actSales->setObjectName(QString::fromUtf8("actSales"));
@@ -231,20 +234,26 @@ public:
         btnAdd_Cart->setObjectName(QString::fromUtf8("btnAdd_Cart"));
         btnAdd_Cart->setMinimumSize(QSize(0, 30));
         btnAdd_Cart->setMaximumSize(QSize(16777215, 16777215));
-        QIcon icon13;
-        icon13.addFile(QString::fromUtf8(":/icons/cart.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnAdd_Cart->setIcon(icon13);
+        btnAdd_Cart->setIcon(icon9);
 
         verticalLayout_4->addWidget(btnAdd_Cart);
 
         btnRemove_Cart = new QPushButton(grpCart);
         btnRemove_Cart->setObjectName(QString::fromUtf8("btnRemove_Cart"));
         btnRemove_Cart->setEnabled(false);
-        QIcon icon14;
-        icon14.addFile(QString::fromUtf8(":/icons/cross.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnRemove_Cart->setIcon(icon14);
+        QIcon icon13;
+        icon13.addFile(QString::fromUtf8(":/icons/cross.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnRemove_Cart->setIcon(icon13);
 
         verticalLayout_4->addWidget(btnRemove_Cart);
+
+        btnClear_Cart = new QPushButton(grpCart);
+        btnClear_Cart->setObjectName(QString::fromUtf8("btnClear_Cart"));
+        QIcon icon14;
+        icon14.addFile(QString::fromUtf8(":/icons/trash.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnClear_Cart->setIcon(icon14);
+
+        verticalLayout_4->addWidget(btnClear_Cart);
 
         formLayout_5 = new QFormLayout();
         formLayout_5->setObjectName(QString::fromUtf8("formLayout_5"));
@@ -383,10 +392,6 @@ public:
 
         verticalLayout_7->addWidget(grpOptions);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_7->addItem(verticalSpacer);
-
         grpStats = new QGroupBox(grpSales);
         grpStats->setObjectName(QString::fromUtf8("grpStats"));
         verticalLayout_6 = new QVBoxLayout(grpStats);
@@ -395,6 +400,18 @@ public:
         lblSalesStats->setObjectName(QString::fromUtf8("lblSalesStats"));
 
         verticalLayout_6->addWidget(lblSalesStats);
+
+        grpSalesStats = new QGroupBox(grpStats);
+        grpSalesStats->setObjectName(QString::fromUtf8("grpSalesStats"));
+        verticalLayout_2 = new QVBoxLayout(grpSalesStats);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        lblSalesStats_2 = new QLabel(grpSalesStats);
+        lblSalesStats_2->setObjectName(QString::fromUtf8("lblSalesStats_2"));
+
+        verticalLayout_2->addWidget(lblSalesStats_2);
+
+
+        verticalLayout_6->addWidget(grpSalesStats);
 
 
         verticalLayout_7->addWidget(grpStats);
@@ -436,7 +453,7 @@ public:
         btnSellItem = new QPushButton(grpStock);
         btnSellItem->setObjectName(QString::fromUtf8("btnSellItem"));
         btnSellItem->setMaximumSize(QSize(16777215, 16777215));
-        btnSellItem->setIcon(icon13);
+        btnSellItem->setIcon(icon9);
 
         verticalLayout->addWidget(btnSellItem);
 
@@ -489,6 +506,18 @@ public:
         statusBar = new QStatusBar(stock_manager);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         stock_manager->setStatusBar(statusBar);
+        QWidget::setTabOrder(btnAdd_Cart, btnRemove_Cart);
+        QWidget::setTabOrder(btnRemove_Cart, cmbPayment_Method);
+        QWidget::setTabOrder(cmbPayment_Method, btnSell_Cart);
+        QWidget::setTabOrder(btnSell_Cart, dateSales);
+        QWidget::setTabOrder(dateSales, btnRefreshSales);
+        QWidget::setTabOrder(btnRefreshSales, btnAddItem);
+        QWidget::setTabOrder(btnAddItem, btnSellItem);
+        QWidget::setTabOrder(btnSellItem, tabMain);
+        QWidget::setTabOrder(tabMain, tblStock);
+        QWidget::setTabOrder(tblStock, tblCart);
+        QWidget::setTabOrder(tblCart, tblSales);
+        QWidget::setTabOrder(tblSales, btnRefresh);
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuEdit->menuAction());
@@ -547,7 +576,7 @@ public:
 #if QT_CONFIG(shortcut)
         actionCut->setShortcut(QCoreApplication::translate("stock_manager", "Ctrl+X", nullptr));
 #endif // QT_CONFIG(shortcut)
-        actHome->setText(QCoreApplication::translate("stock_manager", "Home", nullptr));
+        actHome->setText(QCoreApplication::translate("stock_manager", "Cart", nullptr));
         actSales->setText(QCoreApplication::translate("stock_manager", "Sales", nullptr));
         actStock->setText(QCoreApplication::translate("stock_manager", "Stock", nullptr));
         actSettings->setText(QCoreApplication::translate("stock_manager", "Settings", nullptr));
@@ -574,11 +603,15 @@ public:
 #if QT_CONFIG(shortcut)
         btnRemove_Cart->setShortcut(QCoreApplication::translate("stock_manager", "Ctrl+D", nullptr));
 #endif // QT_CONFIG(shortcut)
+        btnClear_Cart->setText(QCoreApplication::translate("stock_manager", "Clear Cart", nullptr));
         lblPayment_Method->setText(QCoreApplication::translate("stock_manager", "Payment Method:", nullptr));
         cmbPayment_Method->setItemText(0, QCoreApplication::translate("stock_manager", "Cash", nullptr));
         cmbPayment_Method->setItemText(1, QCoreApplication::translate("stock_manager", "Mpesa", nullptr));
 
         btnSell_Cart->setText(QCoreApplication::translate("stock_manager", "Sell", nullptr));
+#if QT_CONFIG(shortcut)
+        btnSell_Cart->setShortcut(QCoreApplication::translate("stock_manager", "Ctrl+S", nullptr));
+#endif // QT_CONFIG(shortcut)
         grbCart_Stats->setTitle(QString());
         lblItem_Count->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p><span style=\" font-size:12pt;\">Items On Cart: 0</span></p></body></html>", nullptr));
         lblTotal->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p><span style=\" font-size:16pt;\">Total: Kshs. 0.00</span></p></body></html>", nullptr));
@@ -600,11 +633,16 @@ public:
         grpSales->setTitle(QString());
         grpOptions->setTitle(QCoreApplication::translate("stock_manager", "Options", nullptr));
         btnRefreshSales->setText(QCoreApplication::translate("stock_manager", "Refresh", nullptr));
+#if QT_CONFIG(shortcut)
+        btnRefreshSales->setShortcut(QCoreApplication::translate("stock_manager", "Ctrl+R", nullptr));
+#endif // QT_CONFIG(shortcut)
         label_2->setText(QCoreApplication::translate("stock_manager", "Enter Date:", nullptr));
         dateSales->setDisplayFormat(QCoreApplication::translate("stock_manager", "dd-MM-yyyy", nullptr));
         label_3->setText(QCoreApplication::translate("stock_manager", "Select the date you want to view sales", nullptr));
         grpStats->setTitle(QCoreApplication::translate("stock_manager", "Stats", nullptr));
         lblSalesStats->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p><span style=\" font-size:12pt;\">Sales Made on </span><span style=\" font-size:12pt; font-weight:600;\">Wed 15 July 2021</span></p><p><span style=\" font-size:12pt;\">Items Sold: </span><span style=\" font-size:12pt; font-weight:600;\">244</span></p><p><span style=\" font-size:12pt;\">Sales Made: </span><span style=\" font-size:12pt; font-weight:600;\">Ksh. 3,245</span></p></body></html>", nullptr));
+        grpSalesStats->setTitle(QCoreApplication::translate("stock_manager", "Week and Month", nullptr));
+        lblSalesStats_2->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p><span style=\" font-weight:600;\">Sales this week:</span><br/>0 items for <span style=\" font-weight:600;\">Ksh. 0.00</span></p><p><span style=\" font-weight:600;\">Sales this Month:</span><br/>0 items for <span style=\" font-weight:600;\">Ksh. 0.00</span></p></body></html>", nullptr));
         tabMain->setTabText(tabMain->indexOf(tabSales), QCoreApplication::translate("stock_manager", "Sales", nullptr));
         QTableWidgetItem *___qtablewidgetitem12 = tblStock->horizontalHeaderItem(0);
         ___qtablewidgetitem12->setText(QCoreApplication::translate("stock_manager", "Id", nullptr));
@@ -620,14 +658,23 @@ public:
         btnSellItem->setStatusTip(QCoreApplication::translate("stock_manager", "Record sold items", nullptr));
 #endif // QT_CONFIG(statustip)
         btnSellItem->setText(QCoreApplication::translate("stock_manager", "Sell Items", nullptr));
+#if QT_CONFIG(shortcut)
+        btnSellItem->setShortcut(QCoreApplication::translate("stock_manager", "Ctrl+S", nullptr));
+#endif // QT_CONFIG(shortcut)
 #if QT_CONFIG(statustip)
         btnAddItem->setStatusTip(QCoreApplication::translate("stock_manager", "Add new item into stock", nullptr));
 #endif // QT_CONFIG(statustip)
         btnAddItem->setText(QCoreApplication::translate("stock_manager", "Add Item", nullptr));
+#if QT_CONFIG(shortcut)
+        btnAddItem->setShortcut(QCoreApplication::translate("stock_manager", "Ctrl+A", nullptr));
+#endif // QT_CONFIG(shortcut)
 #if QT_CONFIG(statustip)
         btnRefresh->setStatusTip(QCoreApplication::translate("stock_manager", "Display sales statistics", nullptr));
 #endif // QT_CONFIG(statustip)
         btnRefresh->setText(QCoreApplication::translate("stock_manager", "Refresh", nullptr));
+#if QT_CONFIG(shortcut)
+        btnRefresh->setShortcut(QCoreApplication::translate("stock_manager", "Ctrl+R", nullptr));
+#endif // QT_CONFIG(shortcut)
         groupBox_7->setTitle(QString());
         lblStats->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p>Stock: 244</p><p>Sales Today: 23 for Ksh. 2,244</p><p><span style=\" font-weight:600;\">Items Out of Stock:</span></p><p>1. Milk<br/>2. TipTop<br/>3. Oreo</p></body></html>", nullptr));
         tabMain->setTabText(tabMain->indexOf(tabStock), QCoreApplication::translate("stock_manager", "Stock", nullptr));
@@ -644,4 +691,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // STOCK_MANAGERUIUKMM_H
+#endif // STOCK_MANAGERKRBGSX_H

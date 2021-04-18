@@ -53,10 +53,17 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="placeholderText">
+         <string>Item id / Serial no..</string>
+        </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="txtName"/>
+       <widget class="QLineEdit" name="txtName">
+        <property name="placeholderText">
+         <string>Item name..</string>
+        </property>
+       </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="lblName">
@@ -82,6 +89,9 @@
         </property>
         <property name="minimum">
          <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
         </property>
        </widget>
       </item>
@@ -176,6 +186,9 @@
           <width>181</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="placeholderText">
+         <string>e.g. 500g, 100ml</string>
         </property>
        </widget>
       </item>

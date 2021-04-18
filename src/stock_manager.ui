@@ -158,6 +158,17 @@
               </widget>
              </item>
              <item>
+              <widget class="QPushButton" name="btnClear_Cart">
+               <property name="text">
+                <string>Clear Cart</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../stock_manager.qrc">
+                 <normaloff>:/icons/trash.svg</normaloff>:/icons/trash.svg</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
               <layout class="QFormLayout" name="formLayout_5">
                <item row="0" column="0">
                 <widget class="QLabel" name="lblPayment_Method">
@@ -207,6 +218,9 @@
                <property name="icon">
                 <iconset resource="../stock_manager.qrc">
                  <normaloff>:/icons/basket.svg</normaloff>:/icons/basket.svg</iconset>
+               </property>
+               <property name="shortcut">
+                <string>Ctrl+S</string>
                </property>
                <property name="autoDefault">
                 <bool>true</bool>
@@ -358,6 +372,9 @@
                  <iconset resource="../stock_manager.qrc">
                   <normaloff>:/icons/clockwise.svg</normaloff>:/icons/clockwise.svg</iconset>
                 </property>
+                <property name="shortcut">
+                 <string>Ctrl+R</string>
+                </property>
                </widget>
               </item>
               <item row="2" column="0">
@@ -391,19 +408,6 @@
             </widget>
            </item>
            <item>
-            <spacer name="verticalSpacer">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
             <widget class="QGroupBox" name="grpStats">
              <property name="title">
               <string>Stats</string>
@@ -414,6 +418,22 @@
                 <property name="text">
                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Sales Made on &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Wed 15 July 2021&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Items Sold: &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;244&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Sales Made: &lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Ksh. 3,245&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="grpSalesStats">
+                <property name="title">
+                 <string>Week and Month</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_2">
+                 <item>
+                  <widget class="QLabel" name="lblSalesStats_2">
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Sales this week:&lt;/span&gt;&lt;br/&gt;0 items for &lt;span style=&quot; font-weight:600;&quot;&gt;Ksh. 0.00&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Sales this Month:&lt;/span&gt;&lt;br/&gt;0 items for &lt;span style=&quot; font-weight:600;&quot;&gt;Ksh. 0.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </widget>
               </item>
              </layout>
@@ -500,6 +520,9 @@
               <iconset resource="../stock_manager.qrc">
                <normaloff>:/icons/cart.svg</normaloff>:/icons/cart.svg</iconset>
              </property>
+             <property name="shortcut">
+              <string>Ctrl+S</string>
+             </property>
             </widget>
            </item>
            <item>
@@ -520,6 +543,9 @@
               <iconset resource="../stock_manager.qrc">
                <normaloff>:/icons/plus.svg</normaloff>:/icons/plus.svg</iconset>
              </property>
+             <property name="shortcut">
+              <string>Ctrl+A</string>
+             </property>
             </widget>
            </item>
            <item>
@@ -539,6 +565,9 @@
              <property name="icon">
               <iconset resource="../stock_manager.qrc">
                <normaloff>:/icons/clockwise.svg</normaloff>:/icons/clockwise.svg</iconset>
+             </property>
+             <property name="shortcut">
+              <string>Ctrl+R</string>
              </property>
             </widget>
            </item>
@@ -715,10 +744,10 @@
   <action name="actHome">
    <property name="icon">
     <iconset resource="../stock_manager.qrc">
-     <normaloff>:/icons/home.svg</normaloff>:/icons/home.svg</iconset>
+     <normaloff>:/icons/cart.svg</normaloff>:/icons/cart.svg</iconset>
    </property>
    <property name="text">
-    <string>Home</string>
+    <string>Cart</string>
    </property>
   </action>
   <action name="actSales">
@@ -758,6 +787,21 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>btnAdd_Cart</tabstop>
+  <tabstop>btnRemove_Cart</tabstop>
+  <tabstop>cmbPayment_Method</tabstop>
+  <tabstop>btnSell_Cart</tabstop>
+  <tabstop>dateSales</tabstop>
+  <tabstop>btnRefreshSales</tabstop>
+  <tabstop>btnAddItem</tabstop>
+  <tabstop>btnSellItem</tabstop>
+  <tabstop>tabMain</tabstop>
+  <tabstop>tblStock</tabstop>
+  <tabstop>tblCart</tabstop>
+  <tabstop>tblSales</tabstop>
+  <tabstop>btnRefresh</tabstop>
+ </tabstops>
  <resources>
   <include location="../stock_manager.qrc"/>
  </resources>

@@ -67,6 +67,7 @@ void dlgAddNew::addToCart()
 void dlgAddNew::updateItem(QString id)
 {
     using namespace sqlite_orm;
+    this->setCursor(Qt::BusyCursor);
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
     storage->on_open = [&](sqlite3* db){
         sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
@@ -98,11 +99,13 @@ void dlgAddNew::updateItem(QString id)
         this->item.name = itm[0]->name;
         this->item.price = itm[0]->price;
     }
+    this->unsetCursor();
 }
 
 void dlgAddNew::updateSearch(QString text)
 {
     using namespace sqlite_orm;
+    this->setCursor(Qt::BusyCursor);
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
     storage->on_open = [&](sqlite3* db){
         sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
@@ -125,6 +128,7 @@ void dlgAddNew::updateSearch(QString text)
         ));
         new QListWidgetItem(txt, this->ui->lstSearch);
     }
+    this->unsetCursor();
 }
 
 dlgAddNew::~dlgAddNew() = default;

@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_newPqxASa.ui'
+** Form generated from reading UI file 'add_newOxfPBZ.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEWPQXASA_H
-#define ADD_NEWPQXASA_H
+#ifndef ADD_NEWOXFPBZ_H
+#define ADD_NEWOXFPBZ_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -96,6 +96,7 @@ public:
         spnQuantity->setObjectName(QString::fromUtf8("spnQuantity"));
         spnQuantity->setMaximumSize(QSize(101, 16777215));
         spnQuantity->setMinimum(1);
+        spnQuantity->setMaximum(99999);
 
         formLayout->setWidget(2, QFormLayout::FieldRole, spnQuantity);
 
@@ -191,6 +192,8 @@ public:
         dlgAdd->setWindowTitle(QCoreApplication::translate("dlgAdd", "Add New Item", nullptr));
         grpItem->setTitle(QCoreApplication::translate("dlgAdd", "Item", nullptr));
         lblId->setText(QCoreApplication::translate("dlgAdd", "Item Number / Id:", nullptr));
+        txtId->setPlaceholderText(QCoreApplication::translate("dlgAdd", "Item id / Serial no..", nullptr));
+        txtName->setPlaceholderText(QCoreApplication::translate("dlgAdd", "Item name..", nullptr));
         lblName->setText(QCoreApplication::translate("dlgAdd", "Name:", nullptr));
         lblQuantity->setText(QCoreApplication::translate("dlgAdd", "Quantity:", nullptr));
         groupBox->setTitle(QCoreApplication::translate("dlgAdd", "Prices per Item", nullptr));
@@ -201,6 +204,7 @@ public:
         spnPrice->setSuffix(QCoreApplication::translate("dlgAdd", ".00", nullptr));
         spnPrice->setPrefix(QCoreApplication::translate("dlgAdd", "Ksh. ", nullptr));
         label_2->setText(QCoreApplication::translate("dlgAdd", "Capacity / Weight:", nullptr));
+        txtCapacity->setPlaceholderText(QCoreApplication::translate("dlgAdd", "e.g. 500g, 100ml", nullptr));
         btnCancel->setText(QCoreApplication::translate("dlgAdd", "Cancel", nullptr));
         btnSave->setText(QCoreApplication::translate("dlgAdd", "Save", nullptr));
     } // retranslateUi
@@ -213,4 +217,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEWPQXASA_H
+#endif // ADD_NEWOXFPBZ_H

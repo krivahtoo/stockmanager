@@ -41,6 +41,9 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="placeholderText">
+         <string>Enter item id..</string>
+        </property>
        </widget>
       </item>
       <item row="1" column="0">
@@ -57,6 +60,12 @@
           <width>75</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
         </property>
        </widget>
       </item>
@@ -84,11 +93,28 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <widget class="QLineEdit" name="txtSearch">
-           <property name="placeholderText">
-            <string>Search...</string>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <property name="spacing">
+            <number>2</number>
            </property>
-          </widget>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLineEdit" name="txtSearch">
+             <property name="placeholderText">
+              <string>Search...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lblItems">
+             <property name="text">
+              <string>Type to search</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
           <widget class="QListWidget" name="lstSearch"/>

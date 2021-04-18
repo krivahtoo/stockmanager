@@ -35,7 +35,10 @@
 #include <nlohmann/json.hpp>
 
 #include <QtCore/QDateTime>
+#include <QtGui/QKeySequence>
+#include <QtGui/QContextMenuEvent>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QShortcut>
 
 stock_manager::stock_manager(QWidget *parent) :
     QMainWindow(parent),
@@ -52,84 +55,91 @@ stock_manager::stock_manager(QWidget *parent) :
     m_ui->dateSales->setDate(QDate::currentDate());
     m_ui->dateSales->setMaximumDate(QDate::currentDate());
 
+    QShortcut *cartShortcut = new QShortcut(QKeySequence("Ctrl+1"), this);
+    QShortcut *salesShortcut = new QShortcut(QKeySequence("Ctrl+2"), this);
+    QShortcut *stockShortcut = new QShortcut(QKeySequence("Ctrl+3"), this);
+
     connect(m_ui->btnAdd_Cart, &QPushButton::pressed, this, &stock_manager::show_AddCart);
     connect(m_ui->btnSell_Cart, &QPushButton::pressed, this, &stock_manager::sellItems);
     connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
     connect(m_ui->actQuit, &QAction::triggered, this, &QCoreApplication::quit);
     connect(m_ui->dateSales, &QDateEdit::dateChanged, this, &stock_manager::updateSales);
+    connect(cartShortcut, &QShortcut::activated, this,
+        [&]() {
+            m_ui->tabMain->setCurrentIndex(0);
+        });
+    connect(salesShortcut, &QShortcut::activated, this,
+        [&]() {
+            m_ui->tabMain->setCurrentIndex(1);
+        });
+    connect(stockShortcut, &QShortcut::activated, this,
+        [&]() {
+            m_ui->tabMain->setCurrentIndex(2);
+        });
     connect(
         m_ui->btnAddItem,
         &QPushButton::pressed, this,
-        [=](){ dlg_add->show(); }
-    );
+        [=]() { dlg_add->show(); });
     connect(
         m_ui->btnSellItem,
         &QPushButton::pressed, this,
-        [&](){
+        [&]() {
             m_ui->tabMain->setCurrentIndex(0);
-        }
-    );
+        });
     connect(
         m_ui->btnRefresh,
         &QPushButton::pressed, this,
-        [&](){
+        [&]() {
             refreshDb();
             updateTable();
             updateStats();
-        }
-    );
+        });
     connect(
         dlg_add,
         &QDialog::accepted, this,
-        [&](){
+        [&]() {
             refreshDb();
             updateTable();
             updateStats();
-        }
-    );
+        });
     connect(
         dlg_add_new,
         &QDialog::accepted, this,
-        [&](){
+        [&]() {
             updateCart();
-        }
-    );
+        });
     connect(
-        m_ui->actSettings,
+        m_ui->actSettings_2,
         &QAction::triggered, this,
-        [=](){ dlg_settings.show(); }
-    );
+        [=]() { dlg_settings.show(); });
     connect(
         m_ui->actAbout,
         &QAction::triggered, this,
-        [=](){ dlg_about->show(); }
-    );
+        [=]() { dlg_about->show(); });
     connect(
         m_ui->actHome,
         &QAction::triggered, this,
-        [&](){
+        [&]() {
             m_ui->tabMain->setCurrentIndex(0);
-        }
-    );
+        });
     connect(
         m_ui->actSales,
         &QAction::triggered, this,
-        [&](){
+        [&]() {
             m_ui->tabMain->setCurrentIndex(1);
-        }
-    );
+        });
     connect(
         m_ui->actStock,
         &QAction::triggered, this,
-        [&](){
+        [&]() {
             m_ui->tabMain->setCurrentIndex(2);
-        }
-    );
+        });
 
     refreshDb();
     updateTable();
     updateStats();
     updateSales();
+    updateSalesStats();
 }
 
 void stock_manager::show_AddCart()
@@ -140,21 +150,20 @@ void stock_manager::show_AddCart()
 void stock_manager::refreshDb()
 {
     using namespace sqlite_orm;
+    this->setCursor(Qt::BusyCursor);
     items.clear();
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
-    storage->on_open = [&](sqlite3* db){
+    storage->on_open = [&](sqlite3 *db) {
         sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
     };
     auto allItems = storage->select(
         columns(
             &Item::id, &Item::itemNo, &Item::name,
-            &Item::price, &Item::capacity, &Stock::quantity
-        ),
+            &Item::price, &Item::capacity, &Stock::quantity),
         where(c(&Item::itemNo) == &Stock::itemNo and c(&Stock::quantity) > 0),
-        order_by(&Item::id), limit(20, offset(0))
-    );
+        order_by(&Item::id), limit(20, offset(0)));
 
-    for (auto &itm: allItems) {
+    for (auto &itm : allItems) {
         items.push_back(
             Items{
                 std::get<0>(itm), // id
@@ -162,10 +171,10 @@ void stock_manager::refreshDb()
                 std::get<2>(itm), // Name
                 std::get<3>(itm), // Price
                 std::get<4>(itm), // capacity
-                std::get<5>(itm) // quantity
-            }
-        );
+                std::get<5>(itm)  // quantity
+            });
     }
+    this->unsetCursor();
 }
 
 void stock_manager::updateTable()
@@ -174,7 +183,7 @@ void stock_manager::updateTable()
     this->stockCount = 0;
     m_ui->tblStock->clearContents();
     m_ui->tblStock->setRowCount(items.size());
-    for (const auto& itm: items) {
+    for (const auto &itm : items) {
         QTableWidgetItem *tblItem1 = new QTableWidgetItem();
         tblItem1->setText(QString::fromStdString(itm.itemNo));
         m_ui->tblStock->setItem(count, 0, tblItem1);
@@ -187,10 +196,7 @@ void stock_manager::updateTable()
         tblItem3->setText(
             QString::fromStdString(
                 util::formatCurrency(
-                    util::formatNumber(itm.price)
-                )
-            )
-        );
+                    util::formatNumber(itm.price))));
         m_ui->tblStock->setItem(count, 2, tblItem3);
 
         QTableWidgetItem *tblItem4 = new QTableWidgetItem();
@@ -215,16 +221,12 @@ void stock_manager::updateStats()
     if (data.contains("stock"))
         stats_template.push_back(
             QString::fromStdString(
-                inja::render("<p>Stock: {{ stock.count }} of {{ stock.items }} items</p>", data)
-            )
-        );
+                inja::render("<p>Stock: {{ stock.count }} of {{ stock.items }} items</p>", data)));
 
     if (data.contains("sales"))
         stats_template.push_back(
             QString::fromStdString(
-                inja::render("<p>Sales Today: {{ sales.count }} for {{ sales.price }}</p>", data)
-            )
-        );
+                inja::render("<p>Sales Today: {{ sales.count }} for {{ sales.price }}</p>", data)));
 
     if (data.contains("items") || data["items"].size() > 0)
         stats_template.push_back(
@@ -233,9 +235,8 @@ void stock_manager::updateStats()
 ## for item in items
 {{ loop.index1 }}: {{ item }}<br/>
 ## endfor
-</p>)", data)
-            )
-        );
+</p>)",
+                             data)));
     stats_template.push_back("</body></html>");
 
     m_ui->lblStats->setText(stats_template);
@@ -246,7 +247,7 @@ json stock_manager::getStatsData()
     using namespace sqlite_orm;
     json j;
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
-    storage->on_open = [&](sqlite3* db){
+    storage->on_open = [&](sqlite3 *db) {
         sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
     };
     j["stock"]["items"] = storage->count<Stock>();
@@ -259,13 +260,12 @@ json stock_manager::getStatsData()
 
     auto sales = storage->select(
         columns(&Item::price, &SoldItem::quantity),
-        where(c(&Item::itemNo) == &SoldItem::itemNo and c(&SoldItem::saleDate) >= timestamp)
-    );
+        where(c(&Item::itemNo) == &SoldItem::itemNo and c(&SoldItem::saleDate) >= timestamp));
 
     int count = 0;
     long price = 0;
 
-    for (auto &sale: sales) {
+    for (auto &sale : sales) {
         price += std::get<0>(sale) * std::get<1>(sale);
         count += std::get<1>(sale);
     }
@@ -275,10 +275,9 @@ json stock_manager::getStatsData()
 
     auto items = storage->select(
         columns(&Item::name, &Stock::quantity),
-        where(c(&Item::itemNo) == &Stock::itemNo and c(&Stock::quantity) < 1)
-    );
+        where(c(&Item::itemNo) == &Stock::itemNo and c(&Stock::quantity) < 1));
 
-    for (auto &itm: items) {
+    for (auto &itm : items) {
         j["items"].push_back(std::get<0>(itm));
     }
     return j;
@@ -291,7 +290,7 @@ void stock_manager::updateCart()
     long totalPrice = 0;
     m_ui->tblCart->clearContents();
     m_ui->tblCart->setRowCount(this->cart.size());
-    for(auto &itm: this->cart) {
+    for (auto &itm : this->cart) {
         QTableWidgetItem *tblItem1 = new QTableWidgetItem();
         tblItem1->setText(QString::fromStdString(itm.itemNo));
         m_ui->tblCart->setItem(count, 0, tblItem1);
@@ -304,10 +303,7 @@ void stock_manager::updateCart()
         tblItem3->setText(
             QString::fromStdString(
                 util::formatCurrency(
-                    util::formatNumber(itm.price)
-                )
-            )
-        );
+                    util::formatNumber(itm.price))));
         m_ui->tblCart->setItem(count, 2, tblItem3);
 
         QTableWidgetItem *tblItem4 = new QTableWidgetItem();
@@ -318,10 +314,7 @@ void stock_manager::updateCart()
         tblItem5->setText(
             QString::fromStdString(
                 util::formatCurrency(
-                    util::formatNumber(itm.totalPrice)
-                )
-            )
-        );
+                    util::formatNumber(itm.totalPrice))));
         totalPrice += itm.totalPrice;
         m_ui->tblCart->setItem(count, 4, tblItem5);
 
@@ -331,59 +324,65 @@ void stock_manager::updateCart()
     j["total"] = util::formatCurrency(util::formatNumber(totalPrice));
     m_ui->lblItem_Count->setText(
         QString::fromStdString(
-            inja::render(
-                "<html><head/><body><p><span style=\" font-size:12pt;\">Items On Cart: {{ count }}</span></p></body></html>",
-                j
-            )
-        )
-    );
+            inja::render(R"(
+<html>
+    <head/>
+    <body>
+        <p>
+            <span style="font-size:12pt;">Items On Cart: {{ count }}</span>
+        </p>
+    </body>
+</html>)",
+                j)));
     m_ui->lblTotal->setText(
         QString::fromStdString(
-            inja::render(
-                "<html><head/><body><p><span style=\" font-size:16pt;\">Total: {{ total }}</span></p></body></html>",
-                j
-            )
-        )
-    );
+            inja::render(R"(
+<html>
+    <head/>
+    <body>
+    <p><span style="font-size:16pt;">Total: {{ total }}</span></p>
+    </body>
+</html>)",
+                j)));
 }
 
 void stock_manager::sellItems()
 {
     using namespace sqlite_orm;
+    this->setCursor(Qt::BusyCursor);
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
-    storage->on_open = [&](sqlite3* db){
+    storage->on_open = [&](sqlite3 *db) {
         sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
     };
     long int date = QDateTime::currentSecsSinceEpoch();
     std::string payment_method = this->m_ui->cmbPayment_Method->currentText().toStdString();
 
     try {
-        auto guard = storage->transaction_guard(); 
-        for(auto &itm: this->cart) {
+        auto guard = storage->transaction_guard();
+        for (auto &itm : this->cart) {
             storage->insert(SoldItem{
                 itm.itemNo,
                 itm.quantity,
                 payment_method,
-                date
-            });
+                date});
             auto items = storage->get_all_pointer<Stock>(
-                where(c(&Stock::itemNo) == itm.itemNo)
-            );
+                where(c(&Stock::itemNo) == itm.itemNo));
 
             storage->update_all(
                 set(c(&Stock::quantity) = items[0]->quantity - itm.quantity),
-                where(c(&Stock::itemNo) == itm.itemNo)
-            );
+                where(c(&Stock::itemNo) == itm.itemNo));
         }
         guard.commit();
         this->m_ui->tblCart->clearContents();
         this->m_ui->tblCart->setRowCount(0);
         this->cart.clear();
-    } catch(std::system_error &e) {
+    }
+    catch (std::system_error &e) {
         std::cout << e.what() << std::endl;
-    } catch(...) {
+    } catch (...) {
         std::cout << "Unknown Error occurred." << std::endl;
     }
+    this->unsetCursor();
 }
 
 void stock_manager::updateSales(QDate ch_date)
@@ -392,8 +391,9 @@ void stock_manager::updateSales(QDate ch_date)
     long start, end;
     json j;
     QDateTime date;
+    this->setCursor(Qt::BusyCursor);
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
-    storage->on_open = [&](sqlite3* db){
+    storage->on_open = [&](sqlite3 *db) {
         sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
     };
     date.setDate(ch_date);
@@ -403,9 +403,10 @@ void stock_manager::updateSales(QDate ch_date)
     end = date.toSecsSinceEpoch();
 
     auto items = storage->select(
-        columns(&Item::itemNo, &Item::name, &SoldItem::quantity, &Item::price, &SoldItem::paymentMethod, &SoldItem::saleDate),
-        where(c(&Item::itemNo) == &SoldItem::itemNo and c(&SoldItem::saleDate) >= start and c(&SoldItem::saleDate) <= end)
-    );
+        columns(&Item::itemNo, &Item::name, &SoldItem::quantity,
+            &Item::price, &SoldItem::paymentMethod, &SoldItem::saleDate),
+        where(c(&Item::itemNo) == &SoldItem::itemNo and
+            c(&SoldItem::saleDate) >= start and c(&SoldItem::saleDate) <= end));
 
     int count = 0;
     int quantity = 0;
@@ -413,7 +414,7 @@ void stock_manager::updateSales(QDate ch_date)
     this->m_ui->tblSales->clearContents();
     this->m_ui->tblSales->setRowCount(items.size());
 
-    for(auto &itm: items) {
+    for (auto &itm : items) {
         // Item::itemNo
         QTableWidgetItem *tblItem0 = new QTableWidgetItem();
         tblItem0->setText(QString::fromStdString(std::get<0>(itm)));
@@ -433,17 +434,14 @@ void stock_manager::updateSales(QDate ch_date)
         // Item::price
         QTableWidgetItem *tblItem3 = new QTableWidgetItem();
         tblItem3->setText(QString::fromStdString(
-            util::formatCurrency(util::formatNumber(std::get<3>(itm)))
-        ));
+            util::formatCurrency(util::formatNumber(std::get<3>(itm)))));
         m_ui->tblSales->setItem(count, 3, tblItem3);
 
         // Total price
         QTableWidgetItem *tblItem4 = new QTableWidgetItem();
         tblItem4->setText(QString::fromStdString(
             util::formatCurrency(
-                util::formatNumber(std::get<3>(itm) * std::get<2>(itm))
-            )
-        ));
+                util::formatNumber(std::get<3>(itm) * std::get<2>(itm)))));
         m_ui->tblSales->setItem(count, 4, tblItem4);
 
         // SoldItem::paymentMethod
@@ -465,12 +463,123 @@ void stock_manager::updateSales(QDate ch_date)
     j["date"] = date.toString("ddd dd MMMM yyyy").toStdString();
     this->m_ui->lblSalesStats->setText(
         QString::fromStdString(
-            inja::render(
-                "<html><head/><body><p><span style=\" font-size:12pt;\">Sales Made on </span><span style=\" font-size:12pt; font-weight:600;\">{{ date }}</span></p><p><span style=\" font-size:12pt;\">Items Sold: </span><span style=\" font-size:12pt; font-weight:600;\">{{ count }}</span></p><p><span style=\" font-size:12pt;\">Sales Made: </span><span style=\" font-size:12pt; font-weight:600;\">{{ sales }}</span></p></body></html>",
-                j
-            )
-        )
-    );
+            inja::render(R"(
+<html>
+    <head/>
+    <body>
+        <p>
+            <span style="font-size:12pt;">Sales Made on </span>
+            <span style="font-size:12pt; font-weight:600;">{{ date }}</span>
+        </p>
+        <p>
+            <span style="font-size:12pt;">Items Sold: </span>
+            <span style="font-size:12pt; font-weight:600;">{{ count }}</span>
+        </p>
+        <p>
+            <span style="font-size:12pt;">Sales Made: </span>
+            <span style="font-size:12pt; font-weight:600;">{{ sales }}</span>
+        </p>
+    </body>
+</html>)",
+                j)));
+    this->unsetCursor();
 }
+
+void stock_manager::updateSalesStats()
+{
+    using namespace sqlite_orm;
+    json j, jDate;
+    QDate dt;
+    QDateTime date;
+    long wStart, mStart, end;
+    storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    storage->on_open = [&](sqlite3 *db) {
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
+    date = QDateTime::currentDateTime();
+    end = date.toSecsSinceEpoch();
+    dt = date.date();
+    jDate["month"] = dt.month();
+    jDate["year"] = dt.year();
+    jDate["date"] = dt.day() - (dt.dayOfWeek() - 1);
+    dt = QDate::fromString(
+        QString::fromStdString(
+            inja::render(
+                "{{ date }}-{{ month }}-{{ year }}",
+                jDate
+            )
+        ),
+        "d-M-yyyy"
+    );
+    date = dt.startOfDay();
+    wStart = date.toSecsSinceEpoch();
+    dt = QDate::fromString(
+        QString::fromStdString(
+            inja::render(
+                "1-{{ month }}-{{ year }}",
+                jDate
+            )
+        ),
+        "d-M-yyyy"
+    );
+    date = dt.startOfDay();
+    mStart = date.toSecsSinceEpoch();
+
+    auto wItems = storage->select(
+        columns(&SoldItem::quantity, &Item::price),
+        where(c(&Item::itemNo) == &SoldItem::itemNo and
+            c(&SoldItem::saleDate) >= wStart and c(&SoldItem::saleDate) <= end));
+    int w_count = 0;
+    int w_sales = 0;
+    for (auto &itm: wItems) {
+        w_count += std::get<0>(itm);
+        w_sales += std::get<1>(itm) * std::get<0>(itm);
+    }
+    j["w_count"] = w_count;
+    j["w_sales"] = util::formatCurrency(util::formatNumber(w_sales));
+
+    auto mItems = storage->select(
+        columns(&SoldItem::quantity, &Item::price),
+        where(c(&Item::itemNo) == &SoldItem::itemNo and
+            c(&SoldItem::saleDate) >= mStart and c(&SoldItem::saleDate) <= end));
+    int m_count = 0;
+    int m_sales = 0;
+    for (auto &itm: mItems) {
+        m_count += std::get<0>(itm);
+        m_sales += std::get<1>(itm) * std::get<0>(itm);
+    }
+    j["m_count"] = m_count;
+    j["m_sales"] = util::formatCurrency(util::formatNumber(m_sales));
+
+    m_ui->lblSalesStats_2->setText(
+        QString::fromStdString(
+            inja::render(R"(
+<html>
+    <head/>
+    <body>
+    <p>
+        <span style=" font-weight:600;">Sales this week:</span><br/>
+        {{ w_count }} items for <span style=" font-weight:600;">{{ w_sales }}</span>
+    </p>
+    <p>
+        <span style=" font-weight:600;">Sales this Month:</span><br/>
+        {{ m_count }} items for <span style=" font-weight:600;">{{ m_sales }}</span>
+    </p>
+    </body>
+</html>)", j)));
+}
+
+#ifndef QT_NO_CONTEXTMENU
+void stock_manager::contextMenuEvent(QContextMenuEvent *event)
+{
+    QMenu menu(this);
+    menu.addAction(this->m_ui->actHome);
+    menu.addAction(this->m_ui->actSales);
+    menu.addAction(this->m_ui->actStock);
+    menu.addSeparator();
+    menu.addAction(this->m_ui->actQuit);
+    menu.exec(event->globalPos());
+}
+#endif // QT_NO_CONTEXTMENU
 
 stock_manager::~stock_manager() = default;
