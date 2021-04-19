@@ -119,7 +119,6 @@ void dlgAddNew::updateSearch(QString text)
     text.prepend("%");
     text.append("%");
     auto items = storage->get_all_pointer<Item>(where(like(&Item::name, text.toStdString())));
-    // cout << "items = " << items.size() << endl;
     inja::json j;
     j["count"] = items.size();
     if (items.size() >= 1) {

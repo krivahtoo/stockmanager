@@ -61,9 +61,16 @@ stock_manager::stock_manager(QWidget *parent) :
 
     connect(m_ui->btnAdd_Cart, &QPushButton::pressed, this, &stock_manager::show_AddCart);
     connect(m_ui->btnSell_Cart, &QPushButton::pressed, this, &stock_manager::sellItems);
+    connect(m_ui->btnClear_Cart, &QPushButton::pressed, this, &stock_manager::clearCart);
     connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
     connect(m_ui->actQuit, &QAction::triggered, this, &QCoreApplication::quit);
     connect(m_ui->dateSales, &QDateEdit::dateChanged, this, &stock_manager::updateSales);
+    connect(m_ui->btnRefreshSales, &QPushButton::pressed, this, 
+        [&]() {
+            updateSales(
+                m_ui->dateSales->date()
+            );
+        });
     connect(cartShortcut, &QShortcut::activated, this,
         [&]() {
             m_ui->tabMain->setCurrentIndex(0);
@@ -346,6 +353,12 @@ void stock_manager::updateCart()
                 j)));
 }
 
+void stock_manager::clearCart()
+{
+    this->cart.clear();
+    this->updateCart();
+}
+
 void stock_manager::sellItems()
 {
     using namespace sqlite_orm;
@@ -557,14 +570,14 @@ void stock_manager::updateSalesStats()
 <html>
     <head/>
     <body>
-    <p>
-        <span style=" font-weight:600;">Sales this week:</span><br/>
-        {{ w_count }} items for <span style=" font-weight:600;">{{ w_sales }}</span>
-    </p>
-    <p>
-        <span style=" font-weight:600;">Sales this Month:</span><br/>
-        {{ m_count }} items for <span style=" font-weight:600;">{{ m_sales }}</span>
-    </p>
+        <p>
+            <span style=" font-weight:600;">Sales this week:</span><br/>
+            {{ w_count }} items for <span style=" font-weight:600;">{{ w_sales }}</span>
+        </p>
+        <p>
+            <span style=" font-weight:600;">Sales this Month:</span><br/>
+            {{ m_count }} items for <span style=" font-weight:600;">{{ m_sales }}</span>
+        </p>
     </body>
 </html>)", j)));
 }

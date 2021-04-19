@@ -72,6 +72,7 @@ private:
     int stockCount;
     json getStatsData();
     void updateCart();
+    void clearCart();
     void sellItems();
     void updateSales(QDate ch_date = QDate::currentDate());
     void updateSalesStats();
