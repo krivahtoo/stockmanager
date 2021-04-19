@@ -29,6 +29,7 @@
 #include "structs.h"
 #include "utils.h"
 
+#include <inja/inja.hpp>
 #include <sqlcipher/sqlite3.h>
 
 #include <QtCore/QString>
@@ -45,6 +46,7 @@ dlgAddNew::dlgAddNew(QWidget *parent, std::vector<CartItem> &cart_items):
     connect(ui->btnAdd, &QPushButton::pressed, this, &dlgAddNew::addToCart);
     connect(ui->txtId, &QLineEdit::textChanged, this, &dlgAddNew::updateItem);
     connect(ui->txtSearch, &QLineEdit::textChanged, this, &dlgAddNew::updateSearch);
+    connect(ui->lstSearch, &QListWidget::currentItemChanged, this, &dlgAddNew::itemSelected);
 
     ui->btnAdd->setEnabled(false);
     ui->spbQuantity->setEnabled(false);
@@ -77,6 +79,7 @@ void dlgAddNew::updateItem(QString id)
     );
     if (item_count < 1) {
         this->ui->txtName->setText("Item you entered does not exists..");
+        this->unsetCursor();
         return;
     } else {
         auto stock = storage->get_all_pointer<Stock>(
@@ -85,6 +88,7 @@ void dlgAddNew::updateItem(QString id)
 
         if (stock[0]->quantity < 1) {
             this->ui->txtName->setText("Item you entered is out of stock..");
+            this->unsetCursor();
             return;
         }
         this->ui->spbQuantity->setEnabled(true);
@@ -116,19 +120,33 @@ void dlgAddNew::updateSearch(QString text)
     text.append("%");
     auto items = storage->get_all_pointer<Item>(where(like(&Item::name, text.toStdString())));
     // cout << "items = " << items.size() << endl;
+    inja::json j;
+    j["count"] = items.size();
+    if (items.size() >= 1) {
+        this->ui->lblItems->setText(
+            QString::fromStdString(
+                inja::render(
+                    "{{ count }} items found", j)));
+    } else {
+        this->ui->lblItems->setText("No items Found");
+    }
     for(auto &item : items) {
         QString txt = QString::fromStdString(item->itemNo);
         txt.append(" | ");
         txt.append(QString::fromStdString(item->name));
         txt.append(" | ");
-        txt.append(QString::fromStdString(
-            util::formatCurrency(
-                util::formatNumber(item->price)
-            )
-        ));
+        txt.append(
+            QString::fromStdString(
+                util::formatCurrency(
+                    util::formatNumber(item->price))));
         new QListWidgetItem(txt, this->ui->lstSearch);
     }
     this->unsetCursor();
+}
+
+void dlgAddNew::itemSelected(QListWidgetItem *item) {
+    QString itemNo = item->text().split("|").first().trimmed();
+    this->ui->txtId->setText(itemNo);
 }
 
 dlgAddNew::~dlgAddNew() = default;

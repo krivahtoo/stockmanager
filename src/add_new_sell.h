@@ -48,6 +48,7 @@ private:
     void addToCart();
     void updateItem(QString id);
     void updateSearch(QString text);
+    void itemSelected(QListWidgetItem *item);
 };
 
 #endif // ABOUT_ITEMS_H
