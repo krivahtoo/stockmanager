@@ -45,13 +45,14 @@ dlgAddNew::dlgAddNew(QWidget *parent, std::vector<CartItem> &cart_items):
 
     connect(ui->btnAdd, &QPushButton::pressed, this, &dlgAddNew::addToCart);
     connect(ui->txtId, &QLineEdit::textChanged, this, &dlgAddNew::updateItem);
-    connect(ui->txtSearch, &QLineEdit::textChanged, this, &dlgAddNew::updateSearch);
-    connect(ui->lstSearch, &QListWidget::currentItemChanged, this, &dlgAddNew::itemSelected);
+    connect(ui->txtSearch, &QLineEdit::textEdited, this, &dlgAddNew::updateSearch);
+    connect(ui->lstSearch, &QListWidget::itemActivated, this, &dlgAddNew::itemSelected);
 
     ui->btnAdd->setEnabled(false);
     ui->spbQuantity->setEnabled(false);
     ui->spbQuantity->setMinimum(1);
 
+    ui->txtSearch->clear();
     ui->txtSearch->setPlaceholderText("Search...");
     ui->txtId->setPlaceholderText("Enter item id...");
 }
@@ -109,13 +110,14 @@ void dlgAddNew::updateItem(QString id)
 void dlgAddNew::updateSearch(QString text)
 {
     using namespace sqlite_orm;
+    // Don't procced if text is empty
+    if (text.isEmpty()) return;
     this->setCursor(Qt::BusyCursor);
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
     storage->on_open = [&](sqlite3* db){
         sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
     };
     this->ui->lstSearch->clear();
-    if (text.isEmpty()) return;
     text.prepend("%");
     text.append("%");
     auto items = storage->get_all_pointer<Item>(where(like(&Item::name, text.toStdString())));
@@ -132,6 +134,8 @@ void dlgAddNew::updateSearch(QString text)
     for(auto &item : items) {
         QString txt = QString::fromStdString(item->itemNo);
         txt.append(" | ");
+        txt.append(QString::fromStdString(item->capacity));
+        txt.append(" | ");
         txt.append(QString::fromStdString(item->name));
         txt.append(" | ");
         txt.append(
@@ -146,6 +150,10 @@ void dlgAddNew::updateSearch(QString text)
 void dlgAddNew::itemSelected(QListWidgetItem *item) {
     QString itemNo = item->text().split("|").first().trimmed();
     this->ui->txtId->setText(itemNo);
+    item->setSelected(false);
+    this->ui->txtSearch->clear();
+    this->ui->lstSearch->clear();
+    this->ui->spbQuantity->setFocus(Qt::FocusReason::OtherFocusReason);
 }
 
 dlgAddNew::~dlgAddNew() = default;
