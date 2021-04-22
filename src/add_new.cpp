@@ -113,8 +113,6 @@ void dlgAdd::clearData()
     ui->spnQuantity->setValue(1);
 }
 
-// new QListWidgetItem(tr("Oak"), this->m_ui->ls);
-
 void dlgAdd::updateItem(QString id)
 {
     using namespace sqlite_orm;
@@ -127,6 +125,8 @@ void dlgAdd::updateItem(QString id)
     );
     if (item_count < 1) {
         this->newItem = true;
+        this->ui->txtName->setEnabled(true);
+        this->ui->txtCapacity->setEnabled(true);
         return;
     } else {
         this->newItem = false;

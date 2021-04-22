@@ -168,7 +168,7 @@ void stock_manager::refreshDb()
             &Item::id, &Item::itemNo, &Item::name,
             &Item::price, &Item::capacity, &Stock::quantity),
         where(c(&Item::itemNo) == &Stock::itemNo and c(&Stock::quantity) > 0),
-        order_by(&Item::id), limit(20, offset(0)));
+        order_by(&Item::id));
 
     for (auto &itm : allItems) {
         items.push_back(

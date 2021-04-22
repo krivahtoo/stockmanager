@@ -251,6 +251,16 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>txtId</tabstop>
+  <tabstop>txtName</tabstop>
+  <tabstop>spnQuantity</tabstop>
+  <tabstop>txtCapacity</tabstop>
+  <tabstop>spnBuyingPrice</tabstop>
+  <tabstop>spnPrice</tabstop>
+  <tabstop>btnSave</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
  <resources>
   <include location="../stock_manager.qrc"/>
  </resources>

@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_newOxfPBZ.ui'
+** Form generated from reading UI file 'add_newPuvlgm.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEWOXFPBZ_H
-#define ADD_NEWOXFPBZ_H
+#ifndef ADD_NEWPUVLGM_H
+#define ADD_NEWPUVLGM_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -177,6 +177,13 @@ public:
 
         verticalLayout->addLayout(horizontalLayout);
 
+        QWidget::setTabOrder(txtId, txtName);
+        QWidget::setTabOrder(txtName, spnQuantity);
+        QWidget::setTabOrder(spnQuantity, txtCapacity);
+        QWidget::setTabOrder(txtCapacity, spnBuyingPrice);
+        QWidget::setTabOrder(spnBuyingPrice, spnPrice);
+        QWidget::setTabOrder(spnPrice, btnSave);
+        QWidget::setTabOrder(btnSave, btnCancel);
 
         retranslateUi(dlgAdd);
         QObject::connect(btnCancel, SIGNAL(clicked()), dlgAdd, SLOT(reject()));
@@ -217,4 +224,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEWOXFPBZ_H
+#endif // ADD_NEWPUVLGM_H
