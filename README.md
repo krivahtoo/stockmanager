@@ -1,18 +1,18 @@
 # Stock Manager
 ----------------------
 
-A Qt5 and CMake GUI stock manager
+A Qt5 GUI software for managing stocks
 
-You need Qt5 and CMake 2.8.11 or higher
+You need [Conan Package Manager](https://conan.io/) and CMake 2.8.11 or higher
 
 # Build instructions
 
+## Linux
 ```sh
-cd /your/project/build
-cmake ../
-make
+./build.sh
 ```
 
-```sh
-./stock_manager
+## Windows
+```bat
+.\build
 ```
