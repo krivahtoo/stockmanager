@@ -56,6 +56,24 @@ void dlgAdd::add()
     storage->on_open = [&](sqlite3* db){
         sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
     };
+
+    // Empty fields are unacceptable
+    if (
+        ui->txtName->text().isEmpty() ||
+        ui->txtCapacity->text().isEmpty() ||
+        ui->spnBuyingPrice->cleanText().toLong() < 1 ||
+        ui->spnPrice->cleanText().toLong() < 1
+    ) {
+        QMessageBox msgBx;
+        msgBx.setText("All fields are required!");
+        msgBx.setInformativeText("Please enter all fields");
+        msgBx.setIcon(QMessageBox::Warning);
+        msgBx.setStandardButtons(QMessageBox::Ok);
+        msgBx.setDefaultButton(QMessageBox::Ok);
+        msgBx.exec();
+        return;
+    }
+    
     name = ui->txtName->text().toStdString();
     itemNo = ui->txtId->text().toStdString();
     price = ui->spnPrice->cleanText().toLong();

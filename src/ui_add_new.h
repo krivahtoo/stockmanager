@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_newPuvlgm.ui'
+** Form generated from reading UI file 'add_newMzdTNx.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEWPUVLGM_H
-#define ADD_NEWPUVLGM_H
+#ifndef ADD_NEWMZDTNX_H
+#define ADD_NEWMZDTNX_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -38,11 +38,16 @@ public:
     QLabel *lblQuantity;
     QSpinBox *spnQuantity;
     QGroupBox *groupBox;
+    QHBoxLayout *horizontalLayout_2;
     QFormLayout *formLayout_2;
     QLabel *label;
     QSpinBox *spnBuyingPrice;
     QLabel *lblPrice;
     QSpinBox *spnPrice;
+    QFormLayout *formLayout_4;
+    QLabel *label_3;
+    QSpinBox *spnMin;
+    QSpacerItem *verticalSpacer_2;
     QSpacerItem *verticalSpacer;
     QLabel *label_2;
     QLineEdit *txtCapacity;
@@ -56,7 +61,7 @@ public:
         if (dlgAdd->objectName().isEmpty())
             dlgAdd->setObjectName(QString::fromUtf8("dlgAdd"));
         dlgAdd->setWindowModality(Qt::WindowModal);
-        dlgAdd->resize(460, 271);
+        dlgAdd->resize(512, 272);
         dlgAdd->setMinimumSize(QSize(0, 0));
         dlgAdd->setMaximumSize(QSize(41055, 25455));
         dlgAdd->setModal(true);
@@ -74,6 +79,7 @@ public:
         txtId = new QLineEdit(grpItem);
         txtId->setObjectName(QString::fromUtf8("txtId"));
         txtId->setMaximumSize(QSize(181, 16777215));
+        txtId->setInputMethodHints(Qt::ImhNone);
 
         formLayout->setWidget(0, QFormLayout::FieldRole, txtId);
 
@@ -102,7 +108,9 @@ public:
 
         groupBox = new QGroupBox(grpItem);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        formLayout_2 = new QFormLayout(groupBox);
+        horizontalLayout_2 = new QHBoxLayout(groupBox);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        formLayout_2 = new QFormLayout();
         formLayout_2->setObjectName(QString::fromUtf8("formLayout_2"));
         label = new QLabel(groupBox);
         label->setObjectName(QString::fromUtf8("label"));
@@ -128,6 +136,28 @@ public:
         spnPrice->setValue(0);
 
         formLayout_2->setWidget(1, QFormLayout::FieldRole, spnPrice);
+
+
+        horizontalLayout_2->addLayout(formLayout_2);
+
+        formLayout_4 = new QFormLayout();
+        formLayout_4->setObjectName(QString::fromUtf8("formLayout_4"));
+        label_3 = new QLabel(groupBox);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        formLayout_4->setWidget(1, QFormLayout::LabelRole, label_3);
+
+        spnMin = new QSpinBox(groupBox);
+        spnMin->setObjectName(QString::fromUtf8("spnMin"));
+
+        formLayout_4->setWidget(1, QFormLayout::FieldRole, spnMin);
+
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        formLayout_4->setItem(0, QFormLayout::LabelRole, verticalSpacer_2);
+
+
+        horizontalLayout_2->addLayout(formLayout_4);
 
 
         formLayout->setWidget(4, QFormLayout::SpanningRole, groupBox);
@@ -210,6 +240,9 @@ public:
         lblPrice->setText(QCoreApplication::translate("dlgAdd", "Selling Price:", nullptr));
         spnPrice->setSuffix(QCoreApplication::translate("dlgAdd", ".00", nullptr));
         spnPrice->setPrefix(QCoreApplication::translate("dlgAdd", "Ksh. ", nullptr));
+        label_3->setText(QCoreApplication::translate("dlgAdd", "Minimum Price", nullptr));
+        spnMin->setSuffix(QCoreApplication::translate("dlgAdd", ".00", nullptr));
+        spnMin->setPrefix(QCoreApplication::translate("dlgAdd", "Ksh. ", nullptr));
         label_2->setText(QCoreApplication::translate("dlgAdd", "Capacity / Weight:", nullptr));
         txtCapacity->setPlaceholderText(QCoreApplication::translate("dlgAdd", "e.g. 500g, 100ml", nullptr));
         btnCancel->setText(QCoreApplication::translate("dlgAdd", "Cancel", nullptr));
@@ -224,4 +257,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEWPUVLGM_H
+#endif // ADD_NEWMZDTNX_H
