@@ -88,12 +88,6 @@ stock_manager::stock_manager(QWidget *parent) :
         &QPushButton::pressed, this,
         [=]() { dlg_add->show(); });
     connect(
-        m_ui->btnSellItem,
-        &QPushButton::pressed, this,
-        [&]() {
-            m_ui->tabMain->setCurrentIndex(0);
-        });
-    connect(
         m_ui->btnRefresh,
         &QPushButton::pressed, this,
         [&]() {

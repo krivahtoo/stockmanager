@@ -93,12 +93,12 @@
             </column>
             <column>
              <property name="text">
-              <string>Quantity</string>
+              <string>Price</string>
              </property>
             </column>
             <column>
              <property name="text">
-              <string>Price</string>
+              <string>Quantity</string>
              </property>
             </column>
             <column>
@@ -198,6 +198,9 @@
              </item>
              <item>
               <widget class="QPushButton" name="btnSell_Cart">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
@@ -503,29 +506,6 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
-            <widget class="QPushButton" name="btnSellItem">
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="statusTip">
-              <string>Record sold items</string>
-             </property>
-             <property name="text">
-              <string>Sell Items</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../stock_manager.qrc">
-               <normaloff>:/icons/cart.svg</normaloff>:/icons/cart.svg</iconset>
-             </property>
-             <property name="shortcut">
-              <string>Ctrl+S</string>
-             </property>
-            </widget>
-           </item>
-           <item>
             <widget class="QPushButton" name="btnAddItem">
              <property name="maximumSize">
               <size>
@@ -568,6 +548,17 @@
              </property>
              <property name="shortcut">
               <string>Ctrl+R</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnSearch">
+             <property name="text">
+              <string>Search</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../stock_manager.qrc">
+               <normaloff>:/icons/search.svg</normaloff>:/icons/search.svg</iconset>
              </property>
             </widget>
            </item>
@@ -615,6 +606,8 @@
     <addaction name="actHome"/>
     <addaction name="actSales"/>
     <addaction name="actStock"/>
+    <addaction name="separator"/>
+    <addaction name="actionSearch"/>
     <addaction name="separator"/>
     <addaction name="actQuit"/>
    </widget>
@@ -786,6 +779,18 @@
     <string>Settings</string>
    </property>
   </action>
+  <action name="actionSearch">
+   <property name="icon">
+    <iconset resource="../stock_manager.qrc">
+     <normaloff>:/icons/search.svg</normaloff>:/icons/search.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Search</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+S</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>btnAdd_Cart</tabstop>
@@ -795,7 +800,6 @@
   <tabstop>dateSales</tabstop>
   <tabstop>btnRefreshSales</tabstop>
   <tabstop>btnAddItem</tabstop>
-  <tabstop>btnSellItem</tabstop>
   <tabstop>tabMain</tabstop>
   <tabstop>tblStock</tabstop>
   <tabstop>tblCart</tabstop>

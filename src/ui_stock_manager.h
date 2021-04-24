@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'stock_managerkRBGsX.ui'
+** Form generated from reading UI file 'stock_managerZjifgF.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef STOCK_MANAGERKRBGSX_H
-#define STOCK_MANAGERKRBGSX_H
+#ifndef STOCK_MANAGERZJIFGF_H
+#define STOCK_MANAGERZJIFGF_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -51,6 +51,7 @@ public:
     QAction *actStock;
     QAction *actSettings;
     QAction *actSettings_2;
+    QAction *actionSearch;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QTabWidget *tabMain;
@@ -95,9 +96,9 @@ public:
     QTableWidget *tblStock;
     QGroupBox *grpStock;
     QVBoxLayout *verticalLayout;
-    QPushButton *btnSellItem;
     QPushButton *btnAddItem;
     QPushButton *btnRefresh;
+    QPushButton *btnSearch;
     QGroupBox *groupBox_7;
     QVBoxLayout *verticalLayout_5;
     QLabel *lblStats;
@@ -183,6 +184,11 @@ public:
         actSettings_2 = new QAction(stock_manager);
         actSettings_2->setObjectName(QString::fromUtf8("actSettings_2"));
         actSettings_2->setIcon(icon12);
+        actionSearch = new QAction(stock_manager);
+        actionSearch->setObjectName(QString::fromUtf8("actionSearch"));
+        QIcon icon13;
+        icon13.addFile(QString::fromUtf8(":/icons/search.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        actionSearch->setIcon(icon13);
         centralWidget = new QWidget(stock_manager);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -241,17 +247,17 @@ public:
         btnRemove_Cart = new QPushButton(grpCart);
         btnRemove_Cart->setObjectName(QString::fromUtf8("btnRemove_Cart"));
         btnRemove_Cart->setEnabled(false);
-        QIcon icon13;
-        icon13.addFile(QString::fromUtf8(":/icons/cross.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnRemove_Cart->setIcon(icon13);
+        QIcon icon14;
+        icon14.addFile(QString::fromUtf8(":/icons/cross.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnRemove_Cart->setIcon(icon14);
 
         verticalLayout_4->addWidget(btnRemove_Cart);
 
         btnClear_Cart = new QPushButton(grpCart);
         btnClear_Cart->setObjectName(QString::fromUtf8("btnClear_Cart"));
-        QIcon icon14;
-        icon14.addFile(QString::fromUtf8(":/icons/trash.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnClear_Cart->setIcon(icon14);
+        QIcon icon15;
+        icon15.addFile(QString::fromUtf8(":/icons/trash.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnClear_Cart->setIcon(icon15);
 
         verticalLayout_4->addWidget(btnClear_Cart);
 
@@ -282,9 +288,9 @@ public:
         font.setItalic(false);
         font.setWeight(50);
         btnSell_Cart->setFont(font);
-        QIcon icon15;
-        icon15.addFile(QString::fromUtf8(":/icons/basket.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnSell_Cart->setIcon(icon15);
+        QIcon icon16;
+        icon16.addFile(QString::fromUtf8(":/icons/basket.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnSell_Cart->setIcon(icon16);
         btnSell_Cart->setAutoDefault(true);
 
         verticalLayout_4->addWidget(btnSell_Cart);
@@ -367,9 +373,9 @@ public:
         formLayout_6->setObjectName(QString::fromUtf8("formLayout_6"));
         btnRefreshSales = new QPushButton(grpOptions);
         btnRefreshSales->setObjectName(QString::fromUtf8("btnRefreshSales"));
-        QIcon icon16;
-        icon16.addFile(QString::fromUtf8(":/icons/clockwise.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnRefreshSales->setIcon(icon16);
+        QIcon icon17;
+        icon17.addFile(QString::fromUtf8(":/icons/clockwise.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnRefreshSales->setIcon(icon17);
 
         formLayout_6->setWidget(7, QFormLayout::FieldRole, btnRefreshSales);
 
@@ -450,28 +456,27 @@ public:
         grpStock->setMaximumSize(QSize(240, 16777215));
         verticalLayout = new QVBoxLayout(grpStock);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        btnSellItem = new QPushButton(grpStock);
-        btnSellItem->setObjectName(QString::fromUtf8("btnSellItem"));
-        btnSellItem->setMaximumSize(QSize(16777215, 16777215));
-        btnSellItem->setIcon(icon9);
-
-        verticalLayout->addWidget(btnSellItem);
-
         btnAddItem = new QPushButton(grpStock);
         btnAddItem->setObjectName(QString::fromUtf8("btnAddItem"));
         btnAddItem->setMaximumSize(QSize(16777215, 16777215));
-        QIcon icon17;
-        icon17.addFile(QString::fromUtf8(":/icons/plus.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnAddItem->setIcon(icon17);
+        QIcon icon18;
+        icon18.addFile(QString::fromUtf8(":/icons/plus.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnAddItem->setIcon(icon18);
 
         verticalLayout->addWidget(btnAddItem);
 
         btnRefresh = new QPushButton(grpStock);
         btnRefresh->setObjectName(QString::fromUtf8("btnRefresh"));
         btnRefresh->setMaximumSize(QSize(16777215, 16777215));
-        btnRefresh->setIcon(icon16);
+        btnRefresh->setIcon(icon17);
 
         verticalLayout->addWidget(btnRefresh);
+
+        btnSearch = new QPushButton(grpStock);
+        btnSearch->setObjectName(QString::fromUtf8("btnSearch"));
+        btnSearch->setIcon(icon13);
+
+        verticalLayout->addWidget(btnSearch);
 
         groupBox_7 = new QGroupBox(grpStock);
         groupBox_7->setObjectName(QString::fromUtf8("groupBox_7"));
@@ -512,8 +517,7 @@ public:
         QWidget::setTabOrder(btnSell_Cart, dateSales);
         QWidget::setTabOrder(dateSales, btnRefreshSales);
         QWidget::setTabOrder(btnRefreshSales, btnAddItem);
-        QWidget::setTabOrder(btnAddItem, btnSellItem);
-        QWidget::setTabOrder(btnSellItem, tabMain);
+        QWidget::setTabOrder(btnAddItem, tabMain);
         QWidget::setTabOrder(tabMain, tblStock);
         QWidget::setTabOrder(tblStock, tblCart);
         QWidget::setTabOrder(tblCart, tblSales);
@@ -528,6 +532,8 @@ public:
         menuFile->addAction(actHome);
         menuFile->addAction(actSales);
         menuFile->addAction(actStock);
+        menuFile->addSeparator();
+        menuFile->addAction(actionSearch);
         menuFile->addSeparator();
         menuFile->addAction(actQuit);
         menuHelp->addAction(actQt_About);
@@ -581,6 +587,10 @@ public:
         actStock->setText(QCoreApplication::translate("stock_manager", "Stock", nullptr));
         actSettings->setText(QCoreApplication::translate("stock_manager", "Settings", nullptr));
         actSettings_2->setText(QCoreApplication::translate("stock_manager", "Settings", nullptr));
+        actionSearch->setText(QCoreApplication::translate("stock_manager", "Search", nullptr));
+#if QT_CONFIG(shortcut)
+        actionSearch->setShortcut(QCoreApplication::translate("stock_manager", "Alt+S", nullptr));
+#endif // QT_CONFIG(shortcut)
 #if QT_CONFIG(statustip)
         tabMain->setStatusTip(QCoreApplication::translate("stock_manager", "View items on stock", nullptr));
 #endif // QT_CONFIG(statustip)
@@ -589,9 +599,9 @@ public:
         QTableWidgetItem *___qtablewidgetitem1 = tblCart->horizontalHeaderItem(1);
         ___qtablewidgetitem1->setText(QCoreApplication::translate("stock_manager", "Name", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = tblCart->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QCoreApplication::translate("stock_manager", "Quantity", nullptr));
+        ___qtablewidgetitem2->setText(QCoreApplication::translate("stock_manager", "Price", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = tblCart->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QCoreApplication::translate("stock_manager", "Price", nullptr));
+        ___qtablewidgetitem3->setText(QCoreApplication::translate("stock_manager", "Quantity", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = tblCart->horizontalHeaderItem(4);
         ___qtablewidgetitem4->setText(QCoreApplication::translate("stock_manager", "Total Price", nullptr));
         grpCart->setTitle(QString());
@@ -655,13 +665,6 @@ public:
         QTableWidgetItem *___qtablewidgetitem16 = tblStock->horizontalHeaderItem(4);
         ___qtablewidgetitem16->setText(QCoreApplication::translate("stock_manager", "Quantity", nullptr));
 #if QT_CONFIG(statustip)
-        btnSellItem->setStatusTip(QCoreApplication::translate("stock_manager", "Record sold items", nullptr));
-#endif // QT_CONFIG(statustip)
-        btnSellItem->setText(QCoreApplication::translate("stock_manager", "Sell Items", nullptr));
-#if QT_CONFIG(shortcut)
-        btnSellItem->setShortcut(QCoreApplication::translate("stock_manager", "Ctrl+S", nullptr));
-#endif // QT_CONFIG(shortcut)
-#if QT_CONFIG(statustip)
         btnAddItem->setStatusTip(QCoreApplication::translate("stock_manager", "Add new item into stock", nullptr));
 #endif // QT_CONFIG(statustip)
         btnAddItem->setText(QCoreApplication::translate("stock_manager", "Add Item", nullptr));
@@ -675,6 +678,7 @@ public:
 #if QT_CONFIG(shortcut)
         btnRefresh->setShortcut(QCoreApplication::translate("stock_manager", "Ctrl+R", nullptr));
 #endif // QT_CONFIG(shortcut)
+        btnSearch->setText(QCoreApplication::translate("stock_manager", "Search", nullptr));
         groupBox_7->setTitle(QString());
         lblStats->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p>Stock: 244</p><p>Sales Today: 23 for Ksh. 2,244</p><p><span style=\" font-weight:600;\">Items Out of Stock:</span></p><p>1. Milk<br/>2. TipTop<br/>3. Oreo</p></body></html>", nullptr));
         tabMain->setTabText(tabMain->indexOf(tabStock), QCoreApplication::translate("stock_manager", "Stock", nullptr));
@@ -691,4 +695,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // STOCK_MANAGERKRBGSX_H
+#endif // STOCK_MANAGERZJIFGF_H
