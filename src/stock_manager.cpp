@@ -63,7 +63,6 @@ stock_manager::stock_manager(QWidget *parent) :
     QShortcut *salesShortcut = new QShortcut(QKeySequence("Ctrl+2"), this);
     QShortcut *stockShortcut = new QShortcut(QKeySequence("Ctrl+3"), this);
 
-    connect(m_ui->btnAdd_Cart, &QPushButton::pressed, this, &stock_manager::show_AddCart);
     connect(m_ui->btnSell_Cart, &QPushButton::pressed, this, &stock_manager::sellItems);
     connect(m_ui->btnClear_Cart, &QPushButton::pressed, this, &stock_manager::clearCart);
     connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
@@ -87,6 +86,10 @@ stock_manager::stock_manager(QWidget *parent) :
     connect(stockShortcut, &QShortcut::activated, this,
         [&]() {
             m_ui->tabMain->setCurrentIndex(2);
+        });
+    connect(m_ui->btnAdd_Cart, &QPushButton::pressed, this,
+        [&]() {
+            dlg_add_new->show();
         });
     connect(
         m_ui->btnAddItem,
@@ -146,11 +149,6 @@ stock_manager::stock_manager(QWidget *parent) :
     updateStats();
     updateSales();
     updateSalesStats();
-}
-
-void stock_manager::show_AddCart()
-{
-    dlg_add_new->show();
 }
 
 void stock_manager::refreshDb()

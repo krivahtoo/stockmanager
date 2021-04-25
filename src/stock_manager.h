@@ -49,11 +49,6 @@ public:
     explicit stock_manager(QWidget *parent = nullptr);
     ~stock_manager() override;
 
-    void show_AddCart();
-    void refreshDb();
-    void updateTable();
-    void updateStats();
-
 protected:
 #ifndef QT_NO_CONTEXTMENU
     void contextMenuEvent(QContextMenuEvent *event) override;
@@ -70,6 +65,9 @@ private:
     std::vector<CartItem> cart;
     int stockCount;
     json getStatsData();
+    void refreshDb();
+    void updateTable();
+    void updateStats();
     void updateCart();
     void clearCart();
     void sellItems();
