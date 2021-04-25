@@ -28,17 +28,21 @@
 #include "settings.h"
 #include "utils.h"
 
-#include <sqlcipher/sqlite3.h>
 #include <iostream>
 
 #include <inja/inja.hpp>
 #include <nlohmann/json.hpp>
+#include <sqlcipher/sqlite3.h>
 
 #include <QtCore/QDateTime>
 #include <QtGui/QKeySequence>
 #include <QtGui/QContextMenuEvent>
-#include <QtWidgets/QPushButton>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QDialog>
 #include <QtWidgets/QShortcut>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QMessageBox>
+#include <QtWidgets/QMainWindow>
 
 stock_manager::stock_manager(QWidget *parent) :
     QMainWindow(parent),
@@ -70,6 +74,7 @@ stock_manager::stock_manager(QWidget *parent) :
             updateSales(
                 m_ui->dateSales->date()
             );
+            updateSalesStats();
         });
     connect(cartShortcut, &QShortcut::activated, this,
         [&]() {
@@ -356,6 +361,15 @@ void stock_manager::clearCart()
 void stock_manager::sellItems()
 {
     using namespace sqlite_orm;
+    // Don't even try when cart is empty
+    if (this->cart.empty()) {
+        QMessageBox msgBox;
+        msgBox.setText("Cart Empty!");
+        msgBox.setInformativeText("Cannot sell an empty cart");
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        return;
+    }
     this->setCursor(Qt::BusyCursor);
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
     storage->on_open = [&](sqlite3 *db) {
@@ -383,8 +397,7 @@ void stock_manager::sellItems()
         this->m_ui->tblCart->clearContents();
         this->m_ui->tblCart->setRowCount(0);
         this->cart.clear();
-    }
-    catch (std::system_error &e) {
+    } catch (std::system_error &e) {
         std::cout << e.what() << std::endl;
     } catch (...) {
         std::cout << "Unknown Error occurred." << std::endl;

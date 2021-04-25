@@ -37,7 +37,6 @@
 #include <nlohmann/json.hpp>
 
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QDialog>
 
 using json = nlohmann::json;
