@@ -30,6 +30,7 @@
 #include "structs.h"
 #include "add_new.h"
 #include "database.h"
+#include "ui_search.h"
 #include "ui_stock_manager.h"
 #include "ui_settings.h"
 #include "add_new_sell.h"
@@ -60,6 +61,8 @@ private:
     dlgAbout *dlg_about;
     dlgAddNew *dlg_add_new;
     QDialog dlg_settings;
+    QDialog dlg_search;
+    Ui::dlgSearch ui_dlg_search;
     Ui::dlgSettings ui_dlg_settings;
     std::vector<Items> items;
     std::vector<CartItem> cart;

@@ -52,6 +52,7 @@ stock_manager::stock_manager(QWidget *parent) :
     dlg_about = new dlgAbout(this);
     dlg_add_new = new dlgAddNew(this, cart);
 
+    ui_dlg_search.setupUi(&dlg_search);
     ui_dlg_settings.setupUi(&dlg_settings);
     m_ui->setupUi(this);
 
@@ -121,6 +122,10 @@ stock_manager::stock_manager(QWidget *parent) :
         m_ui->actSettings_2,
         &QAction::triggered, this,
         [=]() { dlg_settings.show(); });
+    connect(
+        m_ui->actionSearch,
+        &QAction::triggered, this,
+        [=]() { dlg_search.show(); });
     connect(
         m_ui->actAbout,
         &QAction::triggered, this,
@@ -397,10 +402,17 @@ void stock_manager::sellItems()
         this->cart.clear();
     } catch (std::system_error &e) {
         std::cout << e.what() << std::endl;
+        this->unsetCursor();
+        this->statusBar()->showMessage("Oops, something went wrong", 2000);
+        return;
     } catch (...) {
         std::cout << "Unknown Error occurred." << std::endl;
+        this->unsetCursor();
+        this->statusBar()->showMessage("Oops, something went wrong", 2000);
+        return;
     }
     this->unsetCursor();
+    this->statusBar()->showMessage("Items sold", 2000);
 }
 
 void stock_manager::updateSales(QDate ch_date)
