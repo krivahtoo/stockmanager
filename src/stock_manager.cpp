@@ -397,8 +397,6 @@ void stock_manager::sellItems()
                 where(c(&Stock::itemNo) == itm.itemNo));
         }
         guard.commit();
-        this->m_ui->tblCart->clearContents();
-        this->m_ui->tblCart->setRowCount(0);
         this->cart.clear();
     } catch (std::system_error &e) {
         std::cout << e.what() << std::endl;
@@ -411,6 +409,7 @@ void stock_manager::sellItems()
         this->statusBar()->showMessage("Oops, something went wrong", 2000);
         return;
     }
+    this->updateCart();
     this->unsetCursor();
     this->statusBar()->showMessage("Items sold", 2000);
 }
