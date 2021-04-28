@@ -65,7 +65,6 @@ stock_manager::stock_manager(QWidget *parent) :
     QShortcut *stockShortcut = new QShortcut(QKeySequence("Ctrl+3"), this);
 
     connect(m_ui->btnSell_Cart, &QPushButton::pressed, this, &stock_manager::sellItems);
-    connect(m_ui->btnClear_Cart, &QPushButton::pressed, this, &stock_manager::clearCart);
     connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
     connect(m_ui->actQuit, &QAction::triggered, this, &QCoreApplication::quit);
     connect(m_ui->dateSales, &QDateEdit::dateChanged, this, &stock_manager::updateSales);
@@ -75,6 +74,11 @@ stock_manager::stock_manager(QWidget *parent) :
                 m_ui->dateSales->date()
             );
             updateSalesStats();
+        });
+    connect(m_ui->btnClear_Cart, &QPushButton::pressed, this, 
+        [&]() {
+            cart.clear();
+            updateCart();
         });
     connect(cartShortcut, &QShortcut::activated, this,
         [&]() {
@@ -353,12 +357,6 @@ void stock_manager::updateCart()
     </body>
 </html>)",
                 j)));
-}
-
-void stock_manager::clearCart()
-{
-    this->cart.clear();
-    this->updateCart();
 }
 
 void stock_manager::sellItems()
