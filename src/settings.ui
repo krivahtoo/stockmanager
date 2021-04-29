@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>592</width>
-    <height>361</height>
+    <width>665</width>
+    <height>469</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,6 +46,23 @@
            </property>
           </widget>
          </item>
+         <item row="1" column="1">
+          <widget class="QPushButton" name="btnAdd_Method">
+           <property name="text">
+            <string>Add Payment Method</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>Payment Methods</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="2">
+          <widget class="QListWidget" name="lstPayment_Methods"/>
+         </item>
         </layout>
        </widget>
       </item>
@@ -54,11 +71,111 @@
         <property name="title">
          <string>Advance</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <widget class="QCheckBox" name="chkDev_Mode">
+        <layout class="QFormLayout" name="formLayout_4">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_5">
            <property name="text">
-            <string>Dev Mode</string>
+            <string>Change Theme:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="cmbTheme">
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <property name="placeholderText">
+            <string>Select Theme..</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>Default</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="0" colspan="2">
+          <widget class="QLabel" name="label_7">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="text">
+            <string>Currency</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Prefix:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="txtPrefix">
+           <property name="maximumSize">
+            <size>
+             <width>115</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="placeholderText">
+            <string>e.g. Ksh.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Surfix:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="txtSurfix">
+           <property name="maximumSize">
+            <size>
+             <width>115</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="placeholderText">
+            <string>e.g. .00</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0" colspan="2">
+          <widget class="QLabel" name="label_12">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Telegram Notification Config&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="label_13">
+           <property name="text">
+            <string>Id:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="txtTg_Id">
+           <property name="inputMethodHints">
+            <set>Qt::ImhPreferNumbers</set>
+           </property>
+           <property name="placeholderText">
+            <string>Your Telegram user Id..</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0" colspan="2">
+          <widget class="QCheckBox" name="chkTg_Notification">
+           <property name="text">
+            <string>Enable telegram notification</string>
            </property>
           </widget>
          </item>
@@ -68,7 +185,7 @@
       <item row="1" column="0">
        <widget class="QGroupBox" name="grpPass">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="title">
          <string>Change Password</string>
@@ -92,6 +209,9 @@
            <property name="echoMode">
             <enum>QLineEdit::Password</enum>
            </property>
+           <property name="placeholderText">
+            <string>Current Password...</string>
+           </property>
           </widget>
          </item>
          <item row="1" column="0">
@@ -112,6 +232,9 @@
            <property name="echoMode">
             <enum>QLineEdit::Password</enum>
            </property>
+           <property name="placeholderText">
+            <string>New Password...</string>
+           </property>
           </widget>
          </item>
          <item row="2" column="0">
@@ -131,6 +254,9 @@
            </property>
            <property name="echoMode">
             <enum>QLineEdit::Password</enum>
+           </property>
+           <property name="placeholderText">
+            <string>Confirm New Password..</string>
            </property>
           </widget>
          </item>
@@ -192,80 +318,23 @@
         </property>
         <layout class="QFormLayout" name="formLayout_3">
          <item row="0" column="0">
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>Change Theme:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QComboBox" name="cmbTheme">
-           <property name="currentIndex">
-            <number>0</number>
-           </property>
-           <property name="placeholderText">
-            <string>Select Theme..</string>
-           </property>
-           <item>
-            <property name="text">
-             <string>Default</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="1" column="0">
           <widget class="QLabel" name="label_6">
            <property name="text">
             <string>Date Format:</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
+         <item row="0" column="1">
           <widget class="QLineEdit" name="txtDate_Format">
            <property name="placeholderText">
             <string>e.g. dd/MM/YY</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="label_9">
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="chkDev_Mode">
            <property name="text">
-            <string>Prefix:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="txtPrefix">
-           <property name="placeholderText">
-            <string>e.g. Ksh.</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="label_10">
-           <property name="text">
-            <string>Surfix:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QLineEdit" name="txtSurfix">
-           <property name="placeholderText">
-            <string>e.g. .00</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0" colspan="2">
-          <widget class="QLabel" name="label_7">
-           <property name="font">
-            <font>
-             <weight>75</weight>
-             <bold>true</bold>
-             <underline>false</underline>
-            </font>
-           </property>
-           <property name="text">
-            <string>Currency</string>
+            <string>Dev Mode</string>
            </property>
           </widget>
          </item>
@@ -353,12 +422,12 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>362</x>
-     <y>290</y>
+     <x>452</x>
+     <y>463</y>
     </hint>
     <hint type="destinationlabel">
-     <x>228</x>
-     <y>286</y>
+     <x>202</x>
+     <y>455</y>
     </hint>
    </hints>
   </connection>
