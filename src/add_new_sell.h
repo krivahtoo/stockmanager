@@ -26,7 +26,7 @@
 #ifndef ADD_NEW_SELL_H
 #define ADD_NEW_SELL_H
 
-#include "ui_add_new_sell.h"
+#include "ui/ui_add_new_sell.h"
 #include "database.h"
 
 #include <QtCore/QString>

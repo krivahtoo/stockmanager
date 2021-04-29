@@ -30,9 +30,9 @@
 #include "structs.h"
 #include "add_new.h"
 #include "database.h"
-#include "ui_search.h"
-#include "ui_stock_manager.h"
-#include "ui_settings.h"
+#include "ui/ui_search.h"
+#include "ui/ui_stock_manager.h"
+#include "ui/ui_settings.h"
 #include "add_new_sell.h"
 
 #include <nlohmann/json.hpp>

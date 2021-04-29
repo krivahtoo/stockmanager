@@ -26,7 +26,7 @@
 #ifndef SELL_ITEMS_H
 #define SELL_ITEMS_H
 
-#include "ui_sell_items.h"
+#include "ui/ui_sell_items.h"
 #include "add_new_sell.h"
 
 #include <QtWidgets/QMainWindow>

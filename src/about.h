@@ -26,7 +26,7 @@
 #ifndef ABOUT_H
 #define ABOUT_H
 
-#include "ui_about.h"
+#include "ui/ui_about.h"
 
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QDialog>

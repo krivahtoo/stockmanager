@@ -26,7 +26,7 @@
 #ifndef ADD_NEW_H
 #define ADD_NEW_H
 
-#include "ui_add_new.h"
+#include "ui/ui_add_new.h"
 
 #include <string>
 
