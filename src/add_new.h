@@ -48,6 +48,7 @@ private:
     std::string itemNo;
     long price;
     long buyingPrice;
+    long minimumPrice;
     int quantity;
     std::string capacity;
     void add();

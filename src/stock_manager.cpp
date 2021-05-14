@@ -386,7 +386,7 @@ void stock_manager::sellItems()
                 itm.itemNo,
                 itm.quantity,
                 payment_method,
-                date});
+                date, std::make_unique<long>(itm.price)});
             auto items = storage->get_all_pointer<Stock>(
                 where(c(&Stock::itemNo) == itm.itemNo));
 

@@ -14,7 +14,7 @@
    <string>Dashboard</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../stock_manager.qrc">
+   <iconset resource="../../stock_manager.qrc">
     <normaloff>:/images/logo.svg</normaloff>:/images/logo.svg</iconset>
   </property>
   <property name="styleSheet">
@@ -57,6 +57,9 @@
           </property>
           <item>
            <widget class="QTableWidget" name="tblCart">
+            <property name="contextMenuPolicy">
+             <enum>Qt::CustomContextMenu</enum>
+            </property>
             <property name="styleSheet">
              <string notr="true"/>
             </property>
@@ -132,7 +135,7 @@
                 <string>Add Item to Cart</string>
                </property>
                <property name="icon">
-                <iconset resource="../stock_manager.qrc">
+                <iconset resource="../../stock_manager.qrc">
                  <normaloff>:/icons/cart.svg</normaloff>:/icons/cart.svg</iconset>
                </property>
                <property name="shortcut">
@@ -149,7 +152,7 @@
                 <string>Remove Item</string>
                </property>
                <property name="icon">
-                <iconset resource="../stock_manager.qrc">
+                <iconset resource="../../stock_manager.qrc">
                  <normaloff>:/icons/cross.svg</normaloff>:/icons/cross.svg</iconset>
                </property>
                <property name="shortcut">
@@ -163,7 +166,7 @@
                 <string>Clear Cart</string>
                </property>
                <property name="icon">
-                <iconset resource="../stock_manager.qrc">
+                <iconset resource="../../stock_manager.qrc">
                  <normaloff>:/icons/trash.svg</normaloff>:/icons/trash.svg</iconset>
                </property>
               </widget>
@@ -219,7 +222,7 @@
                 <string>Sell</string>
                </property>
                <property name="icon">
-                <iconset resource="../stock_manager.qrc">
+                <iconset resource="../../stock_manager.qrc">
                  <normaloff>:/icons/basket.svg</normaloff>:/icons/basket.svg</iconset>
                </property>
                <property name="shortcut">
@@ -290,6 +293,9 @@
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QTableWidget" name="tblSales">
+          <property name="contextMenuPolicy">
+           <enum>Qt::CustomContextMenu</enum>
+          </property>
           <property name="sizeAdjustPolicy">
            <enum>QAbstractScrollArea::AdjustToContents</enum>
           </property>
@@ -372,7 +378,7 @@
                  <string>Refresh</string>
                 </property>
                 <property name="icon">
-                 <iconset resource="../stock_manager.qrc">
+                 <iconset resource="../../stock_manager.qrc">
                   <normaloff>:/icons/clockwise.svg</normaloff>:/icons/clockwise.svg</iconset>
                 </property>
                 <property name="shortcut">
@@ -454,6 +460,9 @@
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QTableWidget" name="tblStock">
+          <property name="contextMenuPolicy">
+           <enum>Qt::CustomContextMenu</enum>
+          </property>
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
           </property>
@@ -480,7 +489,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Weight / Capacity</string>
+            <string>Capacity</string>
            </property>
           </column>
           <column>
@@ -520,7 +529,7 @@
               <string>Add Item</string>
              </property>
              <property name="icon">
-              <iconset resource="../stock_manager.qrc">
+              <iconset resource="../../stock_manager.qrc">
                <normaloff>:/icons/plus.svg</normaloff>:/icons/plus.svg</iconset>
              </property>
              <property name="shortcut">
@@ -543,7 +552,7 @@
               <string>Refresh</string>
              </property>
              <property name="icon">
-              <iconset resource="../stock_manager.qrc">
+              <iconset resource="../../stock_manager.qrc">
                <normaloff>:/icons/clockwise.svg</normaloff>:/icons/clockwise.svg</iconset>
              </property>
              <property name="shortcut">
@@ -557,7 +566,7 @@
               <string>Search</string>
              </property>
              <property name="icon">
-              <iconset resource="../stock_manager.qrc">
+              <iconset resource="../../stock_manager.qrc">
                <normaloff>:/icons/search.svg</normaloff>:/icons/search.svg</iconset>
              </property>
             </widget>
@@ -637,7 +646,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actQuit">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/exit.svg</normaloff>:/icons/exit.svg</iconset>
    </property>
    <property name="text">
@@ -649,7 +658,7 @@
   </action>
   <action name="actQt_About">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/information.svg</normaloff>:/icons/information.svg</iconset>
    </property>
    <property name="text">
@@ -658,7 +667,7 @@
   </action>
   <action name="actAbout">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/information.svg</normaloff>:/icons/information.svg</iconset>
    </property>
    <property name="text">
@@ -667,7 +676,7 @@
   </action>
   <action name="actCheck_For_Updates">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/retweet.svg</normaloff>:/icons/retweet.svg</iconset>
    </property>
    <property name="text">
@@ -676,7 +685,7 @@
   </action>
   <action name="actAdd_Item">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/document-new.svg</normaloff>:/icons/document-new.svg</iconset>
    </property>
    <property name="text">
@@ -688,7 +697,7 @@
   </action>
   <action name="actSell_Items">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/shopping-bag.svg</normaloff>:/icons/shopping-bag.svg</iconset>
    </property>
    <property name="text">
@@ -697,7 +706,7 @@
   </action>
   <action name="actionCopy">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/copy.svg</normaloff>:/icons/copy.svg</iconset>
    </property>
    <property name="text">
@@ -712,7 +721,7 @@
   </action>
   <action name="actionPaste">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/blog.svg</normaloff>:/icons/blog.svg</iconset>
    </property>
    <property name="text">
@@ -724,7 +733,7 @@
   </action>
   <action name="actionCut">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/document-delete.svg</normaloff>:/icons/document-delete.svg</iconset>
    </property>
    <property name="text">
@@ -736,7 +745,7 @@
   </action>
   <action name="actHome">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/cart.svg</normaloff>:/icons/cart.svg</iconset>
    </property>
    <property name="text">
@@ -745,7 +754,7 @@
   </action>
   <action name="actSales">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/to-do.svg</normaloff>:/icons/to-do.svg</iconset>
    </property>
    <property name="text">
@@ -754,7 +763,7 @@
   </action>
   <action name="actStock">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/archive.svg</normaloff>:/icons/archive.svg</iconset>
    </property>
    <property name="text">
@@ -763,7 +772,7 @@
   </action>
   <action name="actSettings">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/gear.svg</normaloff>:/icons/gear.svg</iconset>
    </property>
    <property name="text">
@@ -772,7 +781,7 @@
   </action>
   <action name="actSettings_2">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/gear.svg</normaloff>:/icons/gear.svg</iconset>
    </property>
    <property name="text">
@@ -781,7 +790,7 @@
   </action>
   <action name="actionSearch">
    <property name="icon">
-    <iconset resource="../stock_manager.qrc">
+    <iconset resource="../../stock_manager.qrc">
      <normaloff>:/icons/search.svg</normaloff>:/icons/search.svg</iconset>
    </property>
    <property name="text">
@@ -800,14 +809,13 @@
   <tabstop>dateSales</tabstop>
   <tabstop>btnRefreshSales</tabstop>
   <tabstop>btnAddItem</tabstop>
-  <tabstop>tabMain</tabstop>
   <tabstop>tblStock</tabstop>
   <tabstop>tblCart</tabstop>
   <tabstop>tblSales</tabstop>
   <tabstop>btnRefresh</tabstop>
  </tabstops>
  <resources>
-  <include location="../stock_manager.qrc"/>
+  <include location="../../stock_manager.qrc"/>
  </resources>
  <connections/>
 </ui>

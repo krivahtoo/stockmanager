@@ -34,9 +34,12 @@ struct Item
     std::string itemNo; // This can be WR2536 ;-
     std::string name;
     long price;
+    long minimumPrice;
     long buyingPrice;
     std::string capacity;
     long int entryDate;
+    // TODO: implement photo
+    std::unique_ptr<std::string> photo;
 };
 
 struct Stock
@@ -49,8 +52,21 @@ struct SoldItem
 {
     std::string itemNo;
     int quantity;
+    // TODO: use enum
     std::string paymentMethod;
     long int saleDate;
+    std::unique_ptr<long> sellingPrice;
+    std::unique_ptr<int> userId;
+};
+
+// TODO: implement user login
+struct User
+{
+    int id;
+    std::string name;
+    std::string password;
+    std::unique_ptr<std::string> avatar;
+    std::unique_ptr<long int> lastLogin;
 };
 
 struct CartItem

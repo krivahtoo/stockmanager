@@ -46,9 +46,11 @@ inline auto initStorage(const std::string &path) {
             make_column("item_no", &Item::itemNo),
             make_column("name", &Item::name),
             make_column("price", &Item::price),
+            make_column("minimum_price", &Item::minimumPrice, default_value(0)),
             make_column("buying_price", &Item::buyingPrice),
             make_column("capacity", &Item::capacity),
-            make_column("entry_date", &Item::entryDate)
+            make_column("entry_date", &Item::entryDate),
+            make_column("photo", &Item::photo, default_value("null"))
         ),
         make_table("stock",
             make_column("item_no", &Stock::itemNo),
@@ -58,7 +60,9 @@ inline auto initStorage(const std::string &path) {
             make_column("item_no", &SoldItem::itemNo),
             make_column("quantity", &SoldItem::quantity),
             make_column("payment_method", &SoldItem::paymentMethod),
-            make_column("sale_date", &SoldItem::saleDate)
+            make_column("sale_date", &SoldItem::saleDate),
+            make_column("selling_price", &SoldItem::sellingPrice, default_value(0)),
+            make_column("user_id", &SoldItem::userId, default_value(0))
         )
     );
 }

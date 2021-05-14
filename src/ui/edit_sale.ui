@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>335</width>
-    <height>166</height>
+    <height>192</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,7 +28,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit">
+       <widget class="QLineEdit" name="txtId">
         <property name="placeholderText">
          <string>Enter item id...</string>
         </property>
@@ -42,12 +42,18 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QSpinBox" name="spinBox">
+       <widget class="QSpinBox" name="spnQuantity">
         <property name="maximumSize">
          <size>
           <width>84</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>9999</number>
         </property>
        </widget>
       </item>
@@ -59,7 +65,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QComboBox" name="comboBox">
+       <widget class="QComboBox" name="cmbPayment_Method">
         <property name="maximumSize">
          <size>
           <width>100</width>
@@ -84,15 +90,32 @@
         </item>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item row="4" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
          <string>Sale Date:</string>
         </property>
        </widget>
       </item>
+      <item row="4" column="1">
+       <widget class="QDateTimeEdit" name="dateTimeSale"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Sell Price:</string>
+        </property>
+       </widget>
+      </item>
       <item row="3" column="1">
-       <widget class="QDateTimeEdit" name="dateTimeEdit"/>
+       <widget class="QSpinBox" name="spnSale_Price">
+        <property name="suffix">
+         <string>.00</string>
+        </property>
+        <property name="prefix">
+         <string>Ksh. </string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -100,12 +123,12 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="btnCancel">
        <property name="text">
         <string>Cancel</string>
        </property>
        <property name="icon">
-        <iconset resource="../stock_manager.qrc">
+        <iconset resource="../../stock_manager.qrc">
          <normaloff>:/icons/cross.svg</normaloff>:/icons/cross.svg</iconset>
        </property>
       </widget>
@@ -124,12 +147,12 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="btnUpdate">
        <property name="text">
         <string>Update</string>
        </property>
        <property name="icon">
-        <iconset resource="../stock_manager.qrc">
+        <iconset resource="../../stock_manager.qrc">
          <normaloff>:/icons/clockwise.svg</normaloff>:/icons/clockwise.svg</iconset>
        </property>
       </widget>
@@ -139,7 +162,24 @@
   </layout>
  </widget>
  <resources>
-  <include location="../stock_manager.qrc"/>
+  <include location="../../stock_manager.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btnCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>dlgEdit_Sale</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>52</x>
+     <y>183</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>205</x>
+     <y>172</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -81,5 +81,6 @@
         "cfenv": "cpp",
         "qdir": "cpp"
     },
-    "C_Cpp.vcpkg.enabled": false
+    "C_Cpp.vcpkg.enabled": false,
+    "C_Cpp.default.cppStandard": "c++14"
 }

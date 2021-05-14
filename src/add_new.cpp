@@ -78,13 +78,15 @@ void dlgAdd::add()
     itemNo = ui->txtId->text().toStdString();
     price = ui->spnPrice->cleanText().toLong();
     buyingPrice = ui->spnBuyingPrice->cleanText().toLong();
+    minimumPrice = ui->spnMin->cleanText().toLong();
     capacity = ui->txtCapacity->text().toStdString();
     quantity = ui->spnQuantity->cleanText().toInt();
     if (newItem) {
         storage->insert(Item {-1,
             itemNo, name, price,
-            buyingPrice, capacity,
+            minimumPrice, buyingPrice, capacity,
             QDateTime::currentSecsSinceEpoch()
+            // TODO: add default image
         });
         storage->insert(Stock{itemNo, quantity});
     } else {
@@ -128,6 +130,7 @@ void dlgAdd::clearData()
     ui->spnPrice->setValue(0);
     ui->txtCapacity->clear();
     ui->spnBuyingPrice->setValue(0);
+    ui->spnMin->setValue(0);
     ui->spnQuantity->setValue(1);
 }
 
@@ -159,6 +162,7 @@ void dlgAdd::updateItem(QString id)
         this->ui->txtCapacity->setText(QString::fromStdString(itm[0]->capacity));
         this->ui->spnPrice->setValue(itm[0]->price);
         this->ui->spnBuyingPrice->setValue(itm[0]->buyingPrice);
+        this->ui->spnMin->setValue(itm[0]->minimumPrice);
     }
 }
 

@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'edit_itemAxFtJc.ui'
+** Form generated from reading UI file 'edit_itemMyxhFt.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef EDIT_ITEMAXFTJC_H
-#define EDIT_ITEMAXFTJC_H
+#ifndef EDIT_ITEMMYXHFT_H
+#define EDIT_ITEMMYXHFT_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -32,16 +32,20 @@ public:
     QGroupBox *formGroupBox;
     QFormLayout *formLayout;
     QLabel *label;
-    QLineEdit *lineEdit;
+    QLineEdit *txtId;
     QLabel *label_2;
-    QLineEdit *lineEdit_2;
+    QLineEdit *txtName;
     QLabel *label_3;
-    QSpinBox *spinBox;
+    QSpinBox *spnBuyingPrice;
     QLabel *label_4;
-    QSpinBox *spinBox_2;
+    QSpinBox *spnSellingPrice;
+    QLabel *label_5;
+    QSpinBox *spnMinimumSellingPrice;
     QSpacerItem *verticalSpacer;
+    QSpinBox *spnQuantity;
+    QLabel *label_6;
     QHBoxLayout *horizontalLayout;
-    QPushButton *pushButton;
+    QPushButton *btnCancel;
     QSpacerItem *horizontalSpacer;
     QPushButton *btnUpdate;
 
@@ -49,7 +53,7 @@ public:
     {
         if (dlgEdit->objectName().isEmpty())
             dlgEdit->setObjectName(QString::fromUtf8("dlgEdit"));
-        dlgEdit->resize(389, 224);
+        dlgEdit->resize(388, 226);
         verticalLayout = new QVBoxLayout(dlgEdit);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         formGroupBox = new QGroupBox(dlgEdit);
@@ -61,60 +65,86 @@ public:
 
         formLayout->setWidget(0, QFormLayout::LabelRole, label);
 
-        lineEdit = new QLineEdit(formGroupBox);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setMaximumSize(QSize(178, 16777215));
+        txtId = new QLineEdit(formGroupBox);
+        txtId->setObjectName(QString::fromUtf8("txtId"));
+        txtId->setMaximumSize(QSize(178, 16777215));
 
-        formLayout->setWidget(0, QFormLayout::FieldRole, lineEdit);
+        formLayout->setWidget(0, QFormLayout::FieldRole, txtId);
 
         label_2 = new QLabel(formGroupBox);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
         formLayout->setWidget(1, QFormLayout::LabelRole, label_2);
 
-        lineEdit_2 = new QLineEdit(formGroupBox);
-        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
+        txtName = new QLineEdit(formGroupBox);
+        txtName->setObjectName(QString::fromUtf8("txtName"));
 
-        formLayout->setWidget(1, QFormLayout::FieldRole, lineEdit_2);
+        formLayout->setWidget(1, QFormLayout::FieldRole, txtName);
 
         label_3 = new QLabel(formGroupBox);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
-        formLayout->setWidget(2, QFormLayout::LabelRole, label_3);
+        formLayout->setWidget(3, QFormLayout::LabelRole, label_3);
 
-        spinBox = new QSpinBox(formGroupBox);
-        spinBox->setObjectName(QString::fromUtf8("spinBox"));
-        spinBox->setMaximumSize(QSize(136, 16777215));
+        spnBuyingPrice = new QSpinBox(formGroupBox);
+        spnBuyingPrice->setObjectName(QString::fromUtf8("spnBuyingPrice"));
+        spnBuyingPrice->setMaximumSize(QSize(130, 16777215));
+        spnBuyingPrice->setMaximum(9999);
 
-        formLayout->setWidget(2, QFormLayout::FieldRole, spinBox);
+        formLayout->setWidget(3, QFormLayout::FieldRole, spnBuyingPrice);
 
         label_4 = new QLabel(formGroupBox);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
-        formLayout->setWidget(3, QFormLayout::LabelRole, label_4);
+        formLayout->setWidget(4, QFormLayout::LabelRole, label_4);
 
-        spinBox_2 = new QSpinBox(formGroupBox);
-        spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
-        spinBox_2->setMaximumSize(QSize(136, 16777215));
+        spnSellingPrice = new QSpinBox(formGroupBox);
+        spnSellingPrice->setObjectName(QString::fromUtf8("spnSellingPrice"));
+        spnSellingPrice->setMaximumSize(QSize(130, 16777215));
+        spnSellingPrice->setMaximum(9999);
 
-        formLayout->setWidget(3, QFormLayout::FieldRole, spinBox_2);
+        formLayout->setWidget(4, QFormLayout::FieldRole, spnSellingPrice);
+
+        label_5 = new QLabel(formGroupBox);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+
+        formLayout->setWidget(5, QFormLayout::LabelRole, label_5);
+
+        spnMinimumSellingPrice = new QSpinBox(formGroupBox);
+        spnMinimumSellingPrice->setObjectName(QString::fromUtf8("spnMinimumSellingPrice"));
+        spnMinimumSellingPrice->setMaximumSize(QSize(130, 16777215));
+        spnMinimumSellingPrice->setMaximum(9999);
+
+        formLayout->setWidget(5, QFormLayout::FieldRole, spnMinimumSellingPrice);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        formLayout->setItem(4, QFormLayout::SpanningRole, verticalSpacer);
+        formLayout->setItem(8, QFormLayout::SpanningRole, verticalSpacer);
+
+        spnQuantity = new QSpinBox(formGroupBox);
+        spnQuantity->setObjectName(QString::fromUtf8("spnQuantity"));
+        spnQuantity->setMaximumSize(QSize(90, 16777215));
+        spnQuantity->setMaximum(9999);
+
+        formLayout->setWidget(2, QFormLayout::FieldRole, spnQuantity);
+
+        label_6 = new QLabel(formGroupBox);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        formLayout->setWidget(2, QFormLayout::LabelRole, label_6);
 
 
         verticalLayout->addWidget(formGroupBox);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        pushButton = new QPushButton(dlgEdit);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        btnCancel = new QPushButton(dlgEdit);
+        btnCancel->setObjectName(QString::fromUtf8("btnCancel"));
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/cross.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton->setIcon(icon);
+        btnCancel->setIcon(icon);
 
-        horizontalLayout->addWidget(pushButton);
+        horizontalLayout->addWidget(btnCancel);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -133,7 +163,7 @@ public:
 
 
         retranslateUi(dlgEdit);
-        QObject::connect(pushButton, SIGNAL(clicked()), dlgEdit, SLOT(reject()));
+        QObject::connect(btnCancel, SIGNAL(clicked()), dlgEdit, SLOT(reject()));
 
         QMetaObject::connectSlotsByName(dlgEdit);
     } // setupUi
@@ -143,12 +173,20 @@ public:
         dlgEdit->setWindowTitle(QCoreApplication::translate("dlgEdit", "Edit Item", nullptr));
         formGroupBox->setTitle(QString());
         label->setText(QCoreApplication::translate("dlgEdit", "Item Id:", nullptr));
-        lineEdit->setPlaceholderText(QCoreApplication::translate("dlgEdit", "Enter Item's Id...", nullptr));
+        txtId->setPlaceholderText(QCoreApplication::translate("dlgEdit", "Enter Item's Id...", nullptr));
         label_2->setText(QCoreApplication::translate("dlgEdit", "Name:", nullptr));
-        lineEdit_2->setPlaceholderText(QCoreApplication::translate("dlgEdit", "Enter Item's Name", nullptr));
-        label_3->setText(QCoreApplication::translate("dlgEdit", "Buing Price:", nullptr));
+        txtName->setPlaceholderText(QCoreApplication::translate("dlgEdit", "Enter Item's Name", nullptr));
+        label_3->setText(QCoreApplication::translate("dlgEdit", "Buying Price:", nullptr));
+        spnBuyingPrice->setSuffix(QCoreApplication::translate("dlgEdit", ".00", nullptr));
+        spnBuyingPrice->setPrefix(QCoreApplication::translate("dlgEdit", "Ksh ", nullptr));
         label_4->setText(QCoreApplication::translate("dlgEdit", "Selling Price:", nullptr));
-        pushButton->setText(QCoreApplication::translate("dlgEdit", "Cancel", nullptr));
+        spnSellingPrice->setSuffix(QCoreApplication::translate("dlgEdit", ".00", nullptr));
+        spnSellingPrice->setPrefix(QCoreApplication::translate("dlgEdit", "Ksh ", nullptr));
+        label_5->setText(QCoreApplication::translate("dlgEdit", "Minimum Selling Price:", nullptr));
+        spnMinimumSellingPrice->setSuffix(QCoreApplication::translate("dlgEdit", ".00", nullptr));
+        spnMinimumSellingPrice->setPrefix(QCoreApplication::translate("dlgEdit", "Ksh ", nullptr));
+        label_6->setText(QCoreApplication::translate("dlgEdit", "Quantity:", nullptr));
+        btnCancel->setText(QCoreApplication::translate("dlgEdit", "Cancel", nullptr));
         btnUpdate->setText(QCoreApplication::translate("dlgEdit", "Update", nullptr));
     } // retranslateUi
 
@@ -160,4 +198,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // EDIT_ITEMAXFTJC_H
+#endif // EDIT_ITEMMYXHFT_H

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>389</width>
-    <height>224</height>
+    <width>388</width>
+    <height>226</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,7 +28,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit">
+       <widget class="QLineEdit" name="txtId">
         <property name="maximumSize">
          <size>
           <width>178</width>
@@ -48,47 +48,91 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_2">
+       <widget class="QLineEdit" name="txtName">
         <property name="placeholderText">
          <string>Enter Item's Name</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="3" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Buing Price:</string>
+         <string>Buying Price:</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QSpinBox" name="spinBox">
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="spnBuyingPrice">
         <property name="maximumSize">
          <size>
-          <width>136</width>
+          <width>130</width>
           <height>16777215</height>
          </size>
         </property>
+        <property name="suffix">
+         <string>.00</string>
+        </property>
+        <property name="prefix">
+         <string>Ksh </string>
+        </property>
+        <property name="maximum">
+         <number>9999</number>
+        </property>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item row="4" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
          <string>Selling Price:</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
-       <widget class="QSpinBox" name="spinBox_2">
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="spnSellingPrice">
         <property name="maximumSize">
          <size>
-          <width>136</width>
+          <width>130</width>
           <height>16777215</height>
          </size>
         </property>
+        <property name="suffix">
+         <string>.00</string>
+        </property>
+        <property name="prefix">
+         <string>Ksh </string>
+        </property>
+        <property name="maximum">
+         <number>9999</number>
+        </property>
        </widget>
       </item>
-      <item row="4" column="0" colspan="2">
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Minimum Selling Price:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QSpinBox" name="spnMinimumSellingPrice">
+        <property name="maximumSize">
+         <size>
+          <width>130</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="suffix">
+         <string>.00</string>
+        </property>
+        <property name="prefix">
+         <string>Ksh </string>
+        </property>
+        <property name="maximum">
+         <number>9999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0" colspan="2">
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -101,18 +145,38 @@
         </property>
        </spacer>
       </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="spnQuantity">
+        <property name="maximumSize">
+         <size>
+          <width>90</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="maximum">
+         <number>9999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Quantity:</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="btnCancel">
        <property name="text">
         <string>Cancel</string>
        </property>
        <property name="icon">
-        <iconset resource="../stock_manager.qrc">
+        <iconset resource="../../stock_manager.qrc">
          <normaloff>:/icons/cross.svg</normaloff>:/icons/cross.svg</iconset>
        </property>
       </widget>
@@ -136,7 +200,7 @@
         <string>Update</string>
        </property>
        <property name="icon">
-        <iconset resource="../stock_manager.qrc">
+        <iconset resource="../../stock_manager.qrc">
          <normaloff>:/icons/clockwise.svg</normaloff>:/icons/clockwise.svg</iconset>
        </property>
       </widget>
@@ -146,22 +210,22 @@
   </layout>
  </widget>
  <resources>
-  <include location="../stock_manager.qrc"/>
+  <include location="../../stock_manager.qrc"/>
  </resources>
  <connections>
   <connection>
-   <sender>pushButton</sender>
+   <sender>btnCancel</sender>
    <signal>clicked()</signal>
    <receiver>dlgEdit</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>72</x>
-     <y>206</y>
+     <x>77</x>
+     <y>196</y>
     </hint>
     <hint type="destinationlabel">
      <x>146</x>
-     <y>205</y>
+     <y>201</y>
     </hint>
    </hints>
   </connection>

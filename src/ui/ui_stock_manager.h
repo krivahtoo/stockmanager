@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'stock_managerZjifgF.ui'
+** Form generated from reading UI file 'stock_managersspzmo.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef STOCK_MANAGERZJIFGF_H
-#define STOCK_MANAGERZJIFGF_H
+#ifndef STOCK_MANAGERSSPZMO_H
+#define STOCK_MANAGERSSPZMO_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -221,6 +221,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
         tblCart->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         tblCart->setObjectName(QString::fromUtf8("tblCart"));
+        tblCart->setContextMenuPolicy(Qt::CustomContextMenu);
         tblCart->setStyleSheet(QString::fromUtf8(""));
         tblCart->setEditTriggers(QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked);
         tblCart->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -281,6 +282,7 @@ public:
 
         btnSell_Cart = new QPushButton(grpCart);
         btnSell_Cart->setObjectName(QString::fromUtf8("btnSell_Cart"));
+        btnSell_Cart->setEnabled(true);
         btnSell_Cart->setMaximumSize(QSize(16777215, 16777215));
         QFont font;
         font.setPointSize(16);
@@ -351,6 +353,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
         tblSales->setHorizontalHeaderItem(6, __qtablewidgetitem11);
         tblSales->setObjectName(QString::fromUtf8("tblSales"));
+        tblSales->setContextMenuPolicy(Qt::CustomContextMenu);
         tblSales->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
         tblSales->setEditTriggers(QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked);
         tblSales->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -444,6 +447,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
         tblStock->setHorizontalHeaderItem(4, __qtablewidgetitem16);
         tblStock->setObjectName(QString::fromUtf8("tblStock"));
+        tblStock->setContextMenuPolicy(Qt::CustomContextMenu);
         tblStock->setSelectionBehavior(QAbstractItemView::SelectRows);
         tblStock->horizontalHeader()->setCascadingSectionResizes(true);
         tblStock->horizontalHeader()->setStretchLastSection(true);
@@ -517,8 +521,7 @@ public:
         QWidget::setTabOrder(btnSell_Cart, dateSales);
         QWidget::setTabOrder(dateSales, btnRefreshSales);
         QWidget::setTabOrder(btnRefreshSales, btnAddItem);
-        QWidget::setTabOrder(btnAddItem, tabMain);
-        QWidget::setTabOrder(tabMain, tblStock);
+        QWidget::setTabOrder(btnAddItem, tblStock);
         QWidget::setTabOrder(tblStock, tblCart);
         QWidget::setTabOrder(tblCart, tblSales);
         QWidget::setTabOrder(tblSales, btnRefresh);
@@ -661,7 +664,7 @@ public:
         QTableWidgetItem *___qtablewidgetitem14 = tblStock->horizontalHeaderItem(2);
         ___qtablewidgetitem14->setText(QCoreApplication::translate("stock_manager", "Price", nullptr));
         QTableWidgetItem *___qtablewidgetitem15 = tblStock->horizontalHeaderItem(3);
-        ___qtablewidgetitem15->setText(QCoreApplication::translate("stock_manager", "Weight / Capacity", nullptr));
+        ___qtablewidgetitem15->setText(QCoreApplication::translate("stock_manager", "Capacity", nullptr));
         QTableWidgetItem *___qtablewidgetitem16 = tblStock->horizontalHeaderItem(4);
         ___qtablewidgetitem16->setText(QCoreApplication::translate("stock_manager", "Quantity", nullptr));
 #if QT_CONFIG(statustip)
@@ -695,4 +698,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // STOCK_MANAGERZJIFGF_H
+#endif // STOCK_MANAGERSSPZMO_H
