@@ -14,6 +14,11 @@ You need [Conan Package Manager](https://conan.io/) and CMake 2.8.11 or higher
 
 ## Build instructions
 
+Clone this repo
+```sh
+git clone https://github.com/krivahtoo/stockmanager.git
+```
+
 ### Linux
 ```sh
 ./build.sh
