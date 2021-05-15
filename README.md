@@ -19,6 +19,11 @@ Clone this repo
 git clone https://github.com/krivahtoo/stockmanager.git
 ```
 
+### Build Dependencies
+
+- [conan](https://conan.io/)
+- cmake
+
 ### Linux
 ```sh
 ./build.sh
