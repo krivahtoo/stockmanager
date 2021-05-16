@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.ui": "xml",
+        "*.service": "ini",
         "qvariant": "cpp",
         "qapplication": "cpp",
         "string": "cpp",
@@ -79,7 +80,8 @@
         "iomanip": "cpp",
         "shared_mutex": "cpp",
         "cfenv": "cpp",
-        "qdir": "cpp"
+        "qdir": "cpp",
+        "qmessagebox": "cpp"
     },
     "C_Cpp.vcpkg.enabled": false,
     "C_Cpp.default.cppStandard": "c++14"

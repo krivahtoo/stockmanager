@@ -26,6 +26,7 @@
 #include "stock_manager.h"
 #include "database.h"
 #include "settings.h"
+#include "structs.h"
 #include "utils.h"
 
 #include <iostream>
@@ -48,13 +49,20 @@ stock_manager::stock_manager(QWidget *parent) :
     QMainWindow(parent),
     m_ui(new Ui::stock_manager)
 {
+    // Initialize dialogs
     dlg_add = new dlgAdd(this);
     dlg_about = new dlgAbout(this);
     dlg_add_new = new dlgAddNew(this, cart);
 
+    // Setup all dialogs uis
     ui_dlg_search.setupUi(&dlg_search);
     ui_dlg_settings.setupUi(&dlg_settings);
+    ui_dlg_edit.setupUi(&dlg_edit);
+    ui_dlg_edit_sale.setupUi(&dlg_edit_sale);
     m_ui->setupUi(this);
+
+    actEdit = new QAction(this);
+    actEdit_Sale = new QAction(this);
 
     this->stockCount = 0;
     m_ui->dateSales->setDate(QDate::currentDate());
@@ -64,10 +72,17 @@ stock_manager::stock_manager(QWidget *parent) :
     QShortcut *salesShortcut = new QShortcut(QKeySequence("Ctrl+2"), this);
     QShortcut *stockShortcut = new QShortcut(QKeySequence("Ctrl+3"), this);
 
+    // Connect all slots
     connect(m_ui->btnSell_Cart, &QPushButton::pressed, this, &stock_manager::sellItems);
+    connect(ui_dlg_edit.btnUpdate, &QPushButton::pressed, this, &stock_manager::updateItem);
     connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
     connect(m_ui->actQuit, &QAction::triggered, this, &QCoreApplication::quit);
+    connect(actEdit, &QAction::triggered, this, &stock_manager::editSelectedItem);
     connect(m_ui->dateSales, &QDateEdit::dateChanged, this, &stock_manager::updateSales);
+    connect(m_ui->tblStock, &QTableWidget::customContextMenuRequested,
+        this, &stock_manager::editContext);
+    connect(m_ui->tblSales, &QTableWidget::customContextMenuRequested,
+        this, &stock_manager::editSaleContext);
     connect(m_ui->btnRefreshSales, &QPushButton::pressed, this, 
         [&]() {
             updateSales(
@@ -153,6 +168,7 @@ stock_manager::stock_manager(QWidget *parent) :
             m_ui->tabMain->setCurrentIndex(2);
         });
 
+    // Load all initial data
     refreshDb();
     updateTable();
     updateStats();
@@ -594,6 +610,122 @@ void stock_manager::updateSalesStats()
         </p>
     </body>
 </html>)", j)));
+}
+
+void stock_manager::updateItem()
+{
+    using namespace sqlite_orm;
+    storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    storage->on_open = [&](sqlite3* db){
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
+
+    Item item;
+    try {
+        auto item_old = storage->get_all_pointer<Item>(
+                where(c(&Item::itemNo) == this->ui_dlg_edit.txtId->text().toStdString()));
+        item.id = item_old[0]->id;
+        item.itemNo = this->ui_dlg_edit.txtId->text().toStdString();
+        item.name = this->ui_dlg_edit.txtName->text().toStdString();
+        item.capacity = this->ui_dlg_edit.txtCapacity->text().toStdString();
+        item.buyingPrice = this->ui_dlg_edit.spnBuyingPrice->cleanText().toLong();
+        item.price = this->ui_dlg_edit.spnSellingPrice->cleanText().toLong();
+        item.minimumPrice = this->ui_dlg_edit.spnMinimumSellingPrice->cleanText().toLong();
+
+        // Update item
+        storage->update(item);
+
+        // Update stock item
+        storage->update_all(set(
+                    c(&Stock::itemNo) = this->ui_dlg_edit.txtId->text().toStdString(),
+                    c(&Stock::quantity) = this->ui_dlg_edit.spnQuantity->cleanText().toInt()),
+                where(c(&Stock::itemNo) = item.itemNo));
+        this->dlg_edit.accept();
+    } catch (...) {
+        // Error 😜
+    }
+}
+
+void stock_manager::editSelectedItem()
+{
+    using namespace sqlite_orm;
+    storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    storage->on_open = [&](sqlite3* db){
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
+    try {
+        QTableWidgetItem *tblItem = this->m_ui->tblStock->selectedItems().first();
+
+        // get itemNo in the first column
+        QString id = this->m_ui->tblStock->item(tblItem->row(), 0)->text();
+        this->ui_dlg_edit.txtId->setText(id);
+        auto itm = storage->get_all_pointer<Item>(
+            where(c(&Item::itemNo) == id.toStdString())
+        );
+        auto stock_item = storage->get_all_pointer<Stock>(
+            where(c(&Stock::itemNo) == id.toStdString()));
+        this->ui_dlg_edit.txtId->setText(QString::fromStdString(itm[0]->itemNo));
+        this->ui_dlg_edit.txtName->setText(QString::fromStdString(itm[0]->name));
+        this->ui_dlg_edit.txtCapacity->setText(QString::fromStdString(itm[0]->capacity));
+        this->ui_dlg_edit.spnQuantity->setValue(stock_item[0]->quantity);
+        this->ui_dlg_edit.spnSellingPrice->setValue(itm[0]->price);
+        this->ui_dlg_edit.spnBuyingPrice->setValue(itm[0]->buyingPrice);
+        this->ui_dlg_edit.spnMinimumSellingPrice->setValue(itm[0]->minimumPrice);
+        this->dlg_edit.show();
+    } catch(...) {
+        //qError("Error cannot edit item");
+    }
+}
+
+// Context menus
+void stock_manager::editContext(QPoint pos)
+{
+    QMenu menu(this);
+    QList<QTableWidgetItem *> itemList;
+
+    this->stockPoint = pos;
+
+    this->actEdit->setText("Edit Item");
+    itemList = this->m_ui->tblStock->selectedItems();
+
+    // Add 'edit' to context menu only
+    // when there is an item selected
+    if (itemList.count() > 0) {
+        menu.addAction(this->actEdit);
+        menu.addSeparator();
+    }
+    menu.addAction(this->m_ui->actHome);
+    menu.addAction(this->m_ui->actSales);
+    menu.addAction(this->m_ui->actStock);
+    menu.addSeparator();
+    menu.addAction(this->m_ui->actQuit);
+    // Show the context menu
+    menu.exec(this->m_ui->tblStock->mapToGlobal(pos));
+}
+
+void stock_manager::editSaleContext(QPoint pos)
+{
+    QMenu menu(this);
+    QList<QTableWidgetItem *> itemList;
+
+    this->salePoint = pos;
+
+    this->actEdit_Sale->setText("Edit Sale");
+    itemList = this->m_ui->tblSales->selectedItems();
+
+    // Add 'edit sale' to context menu only
+    // when there is an item selected
+    if (itemList.count() > 0) {
+        menu.addAction(this->actEdit_Sale);
+        menu.addSeparator();
+    }
+    menu.addAction(this->m_ui->actHome);
+    menu.addAction(this->m_ui->actSales);
+    menu.addAction(this->m_ui->actStock);
+    menu.addSeparator();
+    menu.addAction(this->m_ui->actQuit);
+    // Show the context menu
+    menu.exec(this->m_ui->tblStock->mapFromGlobal(pos));
 }
 
 #ifndef QT_NO_CONTEXTMENU

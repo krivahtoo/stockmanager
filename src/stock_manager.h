@@ -31,12 +31,15 @@
 #include "add_new.h"
 #include "database.h"
 #include "ui/ui_search.h"
+#include "ui/ui_edit_item.h"
+#include "ui/ui_edit_sale.h"
 #include "ui/ui_stock_manager.h"
 #include "ui/ui_settings.h"
 #include "add_new_sell.h"
 
 #include <nlohmann/json.hpp>
 
+#include <QtCore/QPoint>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QDialog>
 
@@ -57,12 +60,20 @@ protected:
 
 private:
     QScopedPointer<Ui::stock_manager> m_ui;
+    QPoint salePoint;
+    QPoint stockPoint;
+    QAction *actEdit;
+    QAction *actEdit_Sale;
     dlgAdd *dlg_add;
     dlgAbout *dlg_about;
     dlgAddNew *dlg_add_new;
     QDialog dlg_settings;
     QDialog dlg_search;
+    QDialog dlg_edit;
+    QDialog dlg_edit_sale;
     Ui::dlgSearch ui_dlg_search;
+    Ui::dlgEdit ui_dlg_edit;
+    Ui::dlgEdit_Sale ui_dlg_edit_sale;
     Ui::dlgSettings ui_dlg_settings;
     std::vector<Items> items;
     std::vector<CartItem> cart;
@@ -75,6 +86,10 @@ private:
     void sellItems();
     void updateSales(QDate ch_date = QDate::currentDate());
     void updateSalesStats();
+    void updateItem();
+    void editSelectedItem();
+    void editContext(QPoint pos);
+    void editSaleContext(QPoint pos);
 };
 
 #endif // STOCK_MANAGER_H
