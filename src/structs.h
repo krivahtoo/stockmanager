@@ -50,6 +50,7 @@ struct Stock
 
 struct SoldItem
 {
+    int id;
     std::string itemNo;
     int quantity;
     // TODO: use enum
@@ -65,6 +66,7 @@ struct User
     int id;
     std::string name;
     std::string password;
+    std::string role;
     std::unique_ptr<std::string> avatar;
     std::unique_ptr<long int> lastLogin;
 };

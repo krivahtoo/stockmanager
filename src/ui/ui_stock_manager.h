@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'stock_managersspzmo.ui'
+** Form generated from reading UI file 'stock_managerJylFah.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef STOCK_MANAGERSSPZMO_H
-#define STOCK_MANAGERSSPZMO_H
+#ifndef STOCK_MANAGERJYLFAH_H
+#define STOCK_MANAGERJYLFAH_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -112,7 +112,7 @@ public:
     {
         if (stock_manager->objectName().isEmpty())
             stock_manager->setObjectName(QString::fromUtf8("stock_manager"));
-        stock_manager->resize(799, 492);
+        stock_manager->resize(799, 515);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/images/logo.svg"), QSize(), QIcon::Normal, QIcon::Off);
         stock_manager->setWindowIcon(icon);
@@ -504,7 +504,7 @@ public:
         stock_manager->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(stock_manager);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 799, 27));
+        menuBar->setGeometry(QRect(0, 0, 799, 18));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuHelp = new QMenu(menuBar);
@@ -630,7 +630,7 @@ public:
         lblTotal->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p><span style=\" font-size:16pt;\">Total: Kshs. 0.00</span></p></body></html>", nullptr));
         tabMain->setTabText(tabMain->indexOf(tabHome), QCoreApplication::translate("stock_manager", "Cart", nullptr));
         QTableWidgetItem *___qtablewidgetitem5 = tblSales->horizontalHeaderItem(0);
-        ___qtablewidgetitem5->setText(QCoreApplication::translate("stock_manager", "Item Number", nullptr));
+        ___qtablewidgetitem5->setText(QCoreApplication::translate("stock_manager", "Id", nullptr));
         QTableWidgetItem *___qtablewidgetitem6 = tblSales->horizontalHeaderItem(1);
         ___qtablewidgetitem6->setText(QCoreApplication::translate("stock_manager", "Name", nullptr));
         QTableWidgetItem *___qtablewidgetitem7 = tblSales->horizontalHeaderItem(2);
@@ -698,4 +698,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // STOCK_MANAGERSSPZMO_H
+#endif // STOCK_MANAGERJYLFAH_H

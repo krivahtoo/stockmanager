@@ -36,12 +36,12 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     app.setApplicationDisplayName("Shop Manager");
     app.setApplicationName("StockManager");
-    app.setApplicationVersion("0.1.0");
+    app.setApplicationVersion("0.2.0");
     app.setOrganizationName("KrivArt");
     Settings settings;
     QFile config_file;
     config_file.setFileName(QString::fromStdString(Settings::config_path));
-    // TODO: Find a better way
+    // TODO: Find a better way / implement user login
     if (!isDbFileExist() || !config_file.exists()) {
         bool ok = false;
         QString pass = "";

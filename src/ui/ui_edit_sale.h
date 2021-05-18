@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'edit_saleoUFxAb.ui'
+** Form generated from reading UI file 'edit_salekRKniv.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef EDIT_SALEOUFXAB_H
-#define EDIT_SALEOUFXAB_H
+#ifndef EDIT_SALEKRKNIV_H
+#define EDIT_SALEKRKNIV_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -43,6 +43,8 @@ public:
     QDateTimeEdit *dateTimeSale;
     QLabel *label_5;
     QSpinBox *spnSale_Price;
+    QLabel *label_6;
+    QLabel *lblId;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnCancel;
     QSpacerItem *horizontalSpacer;
@@ -52,7 +54,7 @@ public:
     {
         if (dlgEdit_Sale->objectName().isEmpty())
             dlgEdit_Sale->setObjectName(QString::fromUtf8("dlgEdit_Sale"));
-        dlgEdit_Sale->resize(335, 192);
+        dlgEdit_Sale->resize(335, 214);
         verticalLayout = new QVBoxLayout(dlgEdit_Sale);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         groupBox = new QGroupBox(dlgEdit_Sale);
@@ -62,17 +64,17 @@ public:
         label = new QLabel(groupBox);
         label->setObjectName(QString::fromUtf8("label"));
 
-        formLayout->setWidget(0, QFormLayout::LabelRole, label);
+        formLayout->setWidget(1, QFormLayout::LabelRole, label);
 
         txtId = new QLineEdit(groupBox);
         txtId->setObjectName(QString::fromUtf8("txtId"));
 
-        formLayout->setWidget(0, QFormLayout::FieldRole, txtId);
+        formLayout->setWidget(1, QFormLayout::FieldRole, txtId);
 
         label_2 = new QLabel(groupBox);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
-        formLayout->setWidget(1, QFormLayout::LabelRole, label_2);
+        formLayout->setWidget(2, QFormLayout::LabelRole, label_2);
 
         spnQuantity = new QSpinBox(groupBox);
         spnQuantity->setObjectName(QString::fromUtf8("spnQuantity"));
@@ -80,12 +82,12 @@ public:
         spnQuantity->setMinimum(1);
         spnQuantity->setMaximum(9999);
 
-        formLayout->setWidget(1, QFormLayout::FieldRole, spnQuantity);
+        formLayout->setWidget(2, QFormLayout::FieldRole, spnQuantity);
 
         label_3 = new QLabel(groupBox);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
-        formLayout->setWidget(2, QFormLayout::LabelRole, label_3);
+        formLayout->setWidget(3, QFormLayout::LabelRole, label_3);
 
         cmbPayment_Method = new QComboBox(groupBox);
         cmbPayment_Method->addItem(QString());
@@ -93,27 +95,37 @@ public:
         cmbPayment_Method->setObjectName(QString::fromUtf8("cmbPayment_Method"));
         cmbPayment_Method->setMaximumSize(QSize(100, 16777215));
 
-        formLayout->setWidget(2, QFormLayout::FieldRole, cmbPayment_Method);
+        formLayout->setWidget(3, QFormLayout::FieldRole, cmbPayment_Method);
 
         label_4 = new QLabel(groupBox);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
-        formLayout->setWidget(4, QFormLayout::LabelRole, label_4);
+        formLayout->setWidget(5, QFormLayout::LabelRole, label_4);
 
         dateTimeSale = new QDateTimeEdit(groupBox);
         dateTimeSale->setObjectName(QString::fromUtf8("dateTimeSale"));
 
-        formLayout->setWidget(4, QFormLayout::FieldRole, dateTimeSale);
+        formLayout->setWidget(5, QFormLayout::FieldRole, dateTimeSale);
 
         label_5 = new QLabel(groupBox);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
-        formLayout->setWidget(3, QFormLayout::LabelRole, label_5);
+        formLayout->setWidget(4, QFormLayout::LabelRole, label_5);
 
         spnSale_Price = new QSpinBox(groupBox);
         spnSale_Price->setObjectName(QString::fromUtf8("spnSale_Price"));
 
-        formLayout->setWidget(3, QFormLayout::FieldRole, spnSale_Price);
+        formLayout->setWidget(4, QFormLayout::FieldRole, spnSale_Price);
+
+        label_6 = new QLabel(groupBox);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        formLayout->setWidget(0, QFormLayout::LabelRole, label_6);
+
+        lblId = new QLabel(groupBox);
+        lblId->setObjectName(QString::fromUtf8("lblId"));
+
+        formLayout->setWidget(0, QFormLayout::FieldRole, lblId);
 
 
         verticalLayout->addWidget(groupBox);
@@ -167,6 +179,8 @@ public:
         label_5->setText(QCoreApplication::translate("dlgEdit_Sale", "Sell Price:", nullptr));
         spnSale_Price->setSuffix(QCoreApplication::translate("dlgEdit_Sale", ".00", nullptr));
         spnSale_Price->setPrefix(QCoreApplication::translate("dlgEdit_Sale", "Ksh. ", nullptr));
+        label_6->setText(QCoreApplication::translate("dlgEdit_Sale", "Id:", nullptr));
+        lblId->setText(QString());
         btnCancel->setText(QCoreApplication::translate("dlgEdit_Sale", "Cancel", nullptr));
         btnUpdate->setText(QCoreApplication::translate("dlgEdit_Sale", "Update", nullptr));
     } // retranslateUi
@@ -179,4 +193,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // EDIT_SALEOUFXAB_H
+#endif // EDIT_SALEKRKNIV_H

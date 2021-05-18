@@ -87,6 +87,8 @@ private:
     void updateSales(QDate ch_date = QDate::currentDate());
     void updateSalesStats();
     void updateItem();
+    void updateSoldItem();
+    void editSelectedSoldItem();
     void editSelectedItem();
     void editContext(QPoint pos);
     void editSaleContext(QPoint pos);

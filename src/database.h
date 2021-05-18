@@ -57,13 +57,21 @@ inline auto initStorage(const std::string &path) {
             make_column("quantity", &Stock::quantity)
         ),
         make_table("sold_item",
+            make_column("id", &SoldItem::id, autoincrement(), primary_key()),
             make_column("item_no", &SoldItem::itemNo),
             make_column("quantity", &SoldItem::quantity),
             make_column("payment_method", &SoldItem::paymentMethod),
             make_column("sale_date", &SoldItem::saleDate),
             make_column("selling_price", &SoldItem::sellingPrice, default_value(0)),
             make_column("user_id", &SoldItem::userId, default_value(0))
-        )
+        ),
+        make_table("user", 
+            make_column("id", &User::id, autoincrement(), primary_key()),
+            make_column("name", &User::name),
+            make_column("password", &User::password),
+            make_column("role", &User::role),
+            make_column("avatar", &User::avatar),
+            make_column("lastLogin", &User::lastLogin))
     );
 }
 

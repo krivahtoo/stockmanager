@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_new_sellxPJLUU.ui'
+** Form generated from reading UI file 'add_new_sellUmzQhv.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEW_SELLXPJLUU_H
-#define ADD_NEW_SELLXPJLUU_H
+#ifndef ADD_NEW_SELLUMZQHV_H
+#define ADD_NEW_SELLUMZQHV_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -37,13 +37,15 @@ public:
     QLabel *label_2;
     QSpinBox *spbQuantity;
     QLabel *label_3;
-    QLineEdit *txtName;
     QGroupBox *grpSearch;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
     QLineEdit *txtSearch;
     QLabel *lblItems;
     QListWidget *lstSearch;
+    QLabel *txtName;
+    QLabel *label_4;
+    QSpinBox *spnSellingPrice;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnCancel;
     QSpacerItem *horizontalSpacer;
@@ -54,7 +56,7 @@ public:
         if (dlgAddNew->objectName().isEmpty())
             dlgAddNew->setObjectName(QString::fromUtf8("dlgAddNew"));
         dlgAddNew->setWindowModality(Qt::WindowModal);
-        dlgAddNew->resize(485, 322);
+        dlgAddNew->resize(470, 373);
         dlgAddNew->setModal(true);
         verticalLayout_2 = new QVBoxLayout(dlgAddNew);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
@@ -89,13 +91,7 @@ public:
         label_3 = new QLabel(grpItem);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
-        formLayout->setWidget(2, QFormLayout::LabelRole, label_3);
-
-        txtName = new QLineEdit(grpItem);
-        txtName->setObjectName(QString::fromUtf8("txtName"));
-        txtName->setEnabled(false);
-
-        formLayout->setWidget(2, QFormLayout::FieldRole, txtName);
+        formLayout->setWidget(3, QFormLayout::LabelRole, label_3);
 
         grpSearch = new QGroupBox(grpItem);
         grpSearch->setObjectName(QString::fromUtf8("grpSearch"));
@@ -124,7 +120,25 @@ public:
         verticalLayout->addWidget(lstSearch);
 
 
-        formLayout->setWidget(3, QFormLayout::SpanningRole, grpSearch);
+        formLayout->setWidget(4, QFormLayout::SpanningRole, grpSearch);
+
+        txtName = new QLabel(grpItem);
+        txtName->setObjectName(QString::fromUtf8("txtName"));
+
+        formLayout->setWidget(3, QFormLayout::FieldRole, txtName);
+
+        label_4 = new QLabel(grpItem);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        formLayout->setWidget(2, QFormLayout::LabelRole, label_4);
+
+        spnSellingPrice = new QSpinBox(grpItem);
+        spnSellingPrice->setObjectName(QString::fromUtf8("spnSellingPrice"));
+        spnSellingPrice->setMaximumSize(QSize(111, 16777215));
+        spnSellingPrice->setMinimum(1);
+        spnSellingPrice->setMaximum(99999);
+
+        formLayout->setWidget(2, QFormLayout::FieldRole, spnSellingPrice);
 
 
         verticalLayout_2->addWidget(grpItem);
@@ -147,6 +161,7 @@ public:
 
         btnAdd = new QPushButton(dlgAddNew);
         btnAdd->setObjectName(QString::fromUtf8("btnAdd"));
+        btnAdd->setEnabled(false);
         btnAdd->setMinimumSize(QSize(88, 26));
         QIcon icon1;
         icon1.addFile(QString::fromUtf8(":/icons/cart.svg"), QSize(), QIcon::Normal, QIcon::Off);
@@ -172,10 +187,11 @@ public:
         txtId->setPlaceholderText(QCoreApplication::translate("dlgAddNew", "Enter item id..", nullptr));
         label_2->setText(QCoreApplication::translate("dlgAddNew", "Quantity:", nullptr));
         label_3->setText(QCoreApplication::translate("dlgAddNew", "Name:", nullptr));
-        txtName->setText(QCoreApplication::translate("dlgAddNew", "No id entered...", nullptr));
         grpSearch->setTitle(QCoreApplication::translate("dlgAddNew", "Search", nullptr));
         txtSearch->setPlaceholderText(QCoreApplication::translate("dlgAddNew", "Search...", nullptr));
         lblItems->setText(QCoreApplication::translate("dlgAddNew", "Type to search", nullptr));
+        txtName->setText(QCoreApplication::translate("dlgAddNew", "Enter item id..", nullptr));
+        label_4->setText(QCoreApplication::translate("dlgAddNew", "Selling price:", nullptr));
         btnCancel->setText(QCoreApplication::translate("dlgAddNew", "Cancel", nullptr));
         btnAdd->setText(QCoreApplication::translate("dlgAddNew", "Add to Cart", nullptr));
     } // retranslateUi
@@ -188,4 +204,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEW_SELLXPJLUU_H
+#endif // ADD_NEW_SELLUMZQHV_H

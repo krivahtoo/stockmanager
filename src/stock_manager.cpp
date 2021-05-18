@@ -32,6 +32,7 @@
 #include <iostream>
 
 #include <inja/inja.hpp>
+#include <memory>
 #include <nlohmann/json.hpp>
 #include <sqlcipher/sqlite3.h>
 
@@ -75,9 +76,13 @@ stock_manager::stock_manager(QWidget *parent) :
     // Connect all slots
     connect(m_ui->btnSell_Cart, &QPushButton::pressed, this, &stock_manager::sellItems);
     connect(ui_dlg_edit.btnUpdate, &QPushButton::pressed, this, &stock_manager::updateItem);
+    connect(ui_dlg_edit_sale.btnUpdate, &QPushButton::pressed,
+        this, &stock_manager::updateSoldItem);
     connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
     connect(m_ui->actQuit, &QAction::triggered, this, &QCoreApplication::quit);
     connect(actEdit, &QAction::triggered, this, &stock_manager::editSelectedItem);
+    connect(actEdit_Sale, &QAction::triggered,
+        this, &stock_manager::editSelectedSoldItem);
     connect(m_ui->dateSales, &QDateEdit::dateChanged, this, &stock_manager::updateSales);
     connect(m_ui->tblStock, &QTableWidget::customContextMenuRequested,
         this, &stock_manager::editContext);
@@ -399,6 +404,7 @@ void stock_manager::sellItems()
         auto guard = storage->transaction_guard();
         for (auto &itm : this->cart) {
             storage->insert(SoldItem{
+                -1,
                 itm.itemNo,
                 itm.quantity,
                 payment_method,
@@ -446,7 +452,7 @@ void stock_manager::updateSales(QDate ch_date)
     end = date.toSecsSinceEpoch();
 
     auto items = storage->select(
-        columns(&Item::itemNo, &Item::name, &SoldItem::quantity,
+        columns(&SoldItem::id, &Item::name, &SoldItem::quantity,
             &Item::price, &SoldItem::paymentMethod, &SoldItem::saleDate),
         where(c(&Item::itemNo) == &SoldItem::itemNo and
             c(&SoldItem::saleDate) >= start and c(&SoldItem::saleDate) <= end));
@@ -458,9 +464,9 @@ void stock_manager::updateSales(QDate ch_date)
     this->m_ui->tblSales->setRowCount(items.size());
 
     for (auto &itm : items) {
-        // Item::itemNo
+        // SoldItem::id
         QTableWidgetItem *tblItem0 = new QTableWidgetItem();
-        tblItem0->setText(QString::fromStdString(std::get<0>(itm)));
+        tblItem0->setText(QString::number(std::get<0>(itm)));
         m_ui->tblSales->setItem(count, 0, tblItem0);
 
         // Item::name
@@ -643,6 +649,74 @@ void stock_manager::updateItem()
         this->dlg_edit.accept();
     } catch (...) {
         // Error 😜
+        this->statusBar()->showMessage("Oops, something went wrong", 2000);
+    }
+}
+
+void stock_manager::updateSoldItem()
+{
+    using namespace sqlite_orm;
+    storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    storage->on_open = [&](sqlite3* db){
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
+    SoldItem sold_itm;
+    int id = this->ui_dlg_edit_sale.lblId->text().toInt();
+    sold_itm.id = id;
+    sold_itm.itemNo = this->ui_dlg_edit_sale.txtId->text().toStdString();
+    sold_itm.quantity = this->ui_dlg_edit_sale.spnQuantity->cleanText().toInt();
+    sold_itm.paymentMethod = 
+        this->ui_dlg_edit_sale.cmbPayment_Method->currentText().toStdString();
+    sold_itm.sellingPrice =
+        std::make_unique<long>(
+            this->ui_dlg_edit_sale.spnSale_Price->cleanText().toLong());
+    sold_itm.saleDate =
+        this->ui_dlg_edit_sale.dateTimeSale->dateTime().toSecsSinceEpoch();
+
+    storage->update(sold_itm);
+    this->dlg_edit_sale.accept();
+}
+
+void stock_manager::editSelectedSoldItem()
+{
+    using namespace sqlite_orm;
+    storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    storage->on_open = [&](sqlite3* db){
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
+    long price;
+    try {
+        QTableWidgetItem *tblItem = this->m_ui->tblSales->selectedItems().first();
+        
+        // get sold item id
+        QString id = this->m_ui->tblSales->item(tblItem->row(), 0)->text();
+        this->ui_dlg_edit_sale.lblId->setText(id);
+
+        auto sold_itm = storage->get_all_pointer<SoldItem>(
+                where(c(&SoldItem::id) == id.toInt()));
+        auto itm = storage->get_all_pointer<Item>(
+                where(c(&Item::itemNo) == sold_itm[0]->itemNo));
+
+        if (sold_itm[0]->sellingPrice != nullptr) {
+            price = *(sold_itm[0]->sellingPrice);
+        } else {
+            // Use the item price
+            price = itm[0]->price;
+        }
+
+        // this->ui_dlg_edit_sale.txtName->setText(QString::fromStdString(itm[0]->name));
+        this->ui_dlg_edit_sale.lblId->setText(QString::number(sold_itm[0]->id));
+        this->ui_dlg_edit_sale.txtId->setText(QString::fromStdString(sold_itm[0]->itemNo));
+        this->ui_dlg_edit_sale.spnQuantity->setValue(sold_itm[0]->quantity);
+        this->ui_dlg_edit_sale.dateTimeSale->setDateTime(
+                QDateTime::fromSecsSinceEpoch(sold_itm[0]->saleDate));
+        this->ui_dlg_edit_sale.spnSale_Price->setValue(price);
+
+        // Show the dialog
+        this->dlg_edit_sale.show();
+    } catch (...) {
+        // Just in case
+        this->statusBar()->showMessage("Oops, something went wrong", 2000);
     }
 }
 
@@ -674,6 +748,7 @@ void stock_manager::editSelectedItem()
         this->dlg_edit.show();
     } catch(...) {
         //qError("Error cannot edit item");
+        this->statusBar()->showMessage("Oops, something went wrong", 2000);
     }
 }
 
@@ -725,7 +800,7 @@ void stock_manager::editSaleContext(QPoint pos)
     menu.addSeparator();
     menu.addAction(this->m_ui->actQuit);
     // Show the context menu
-    menu.exec(this->m_ui->tblStock->mapFromGlobal(pos));
+    menu.exec(this->m_ui->tblSales->mapFromGlobal(pos));
 }
 
 #ifndef QT_NO_CONTEXTMENU

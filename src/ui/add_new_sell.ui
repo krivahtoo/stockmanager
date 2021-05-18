@@ -69,24 +69,14 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="3" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
          <string>Name:</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="txtName">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>No id entered...</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0" colspan="2">
+      <item row="4" column="0" colspan="2">
        <widget class="QGroupBox" name="grpSearch">
         <property name="title">
          <string>Search</string>
@@ -122,6 +112,36 @@
         </layout>
        </widget>
       </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="txtName">
+        <property name="text">
+         <string>Enter item id..</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Selling price:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="spnSellingPrice">
+        <property name="maximumSize">
+         <size>
+          <width>111</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -142,7 +162,7 @@
         <string>Cancel</string>
        </property>
        <property name="icon">
-        <iconset resource="../stock_manager.qrc">
+        <iconset resource="../../stock_manager.qrc">
          <normaloff>:/icons/cross.svg</normaloff>:/icons/cross.svg</iconset>
        </property>
       </widget>
@@ -175,7 +195,7 @@
         <string>Add to Cart</string>
        </property>
        <property name="icon">
-        <iconset resource="../stock_manager.qrc">
+        <iconset resource="../../stock_manager.qrc">
          <normaloff>:/icons/cart.svg</normaloff>:/icons/cart.svg</iconset>
        </property>
       </widget>
@@ -185,7 +205,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../stock_manager.qrc"/>
+  <include location="../../stock_manager.qrc"/>
  </resources>
  <connections>
   <connection>

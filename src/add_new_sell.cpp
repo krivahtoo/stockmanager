@@ -60,7 +60,8 @@ dlgAddNew::dlgAddNew(QWidget *parent, std::vector<CartItem> &cart_items):
 void dlgAddNew::addToCart()
 {
     this->item.quantity = this->ui->spbQuantity->text().toInt();
-    this->item.totalPrice = item.price * item.quantity;
+    this->item.price = this->ui->spnSellingPrice->cleanText().toLong();
+    this->item.totalPrice = this->item.price * item.quantity;
     this->cart.push_back(item);
     this->ui->txtId->clear();
     this->ui->spbQuantity->setValue(1);
@@ -99,6 +100,11 @@ void dlgAddNew::updateItem(QString id)
         auto itm = storage->get_all_pointer<Item>(
             where(c(&Item::itemNo) == id.toStdString())
         );
+        if (itm[0]->minimumPrice > itm[0]->buyingPrice) {
+            this->ui->spnSellingPrice->setMinimum(itm[0]->minimumPrice);
+        } else {
+            this->ui->spnSellingPrice->setMinimum(itm[0]->price);
+        }
         this->ui->txtName->setText(QString::fromStdString(itm[0]->name));
         this->item.itemNo = itm[0]->itemNo;
         this->item.name = itm[0]->name;
