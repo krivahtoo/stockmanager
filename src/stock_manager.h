@@ -64,6 +64,8 @@ private:
     QPoint stockPoint;
     QAction *actEdit;
     QAction *actEdit_Sale;
+    QAction *actDelete;
+    QAction *actDelete_Sale;
     dlgAdd *dlg_add;
     dlgAbout *dlg_about;
     dlgAddNew *dlg_add_new;
@@ -88,6 +90,8 @@ private:
     void updateSalesStats();
     void updateItem();
     void updateSoldItem();
+    void deleteSoldItem();
+    void deleteItem();
     void editSelectedSoldItem();
     void editSelectedItem();
     void editContext(QPoint pos);

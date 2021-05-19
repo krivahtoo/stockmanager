@@ -64,6 +64,8 @@ stock_manager::stock_manager(QWidget *parent) :
 
     actEdit = new QAction(this);
     actEdit_Sale = new QAction(this);
+    actDelete = new QAction(this);
+    actDelete_Sale = new QAction(this);
 
     this->stockCount = 0;
     m_ui->dateSales->setDate(QDate::currentDate());
@@ -81,8 +83,9 @@ stock_manager::stock_manager(QWidget *parent) :
     connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
     connect(m_ui->actQuit, &QAction::triggered, this, &QCoreApplication::quit);
     connect(actEdit, &QAction::triggered, this, &stock_manager::editSelectedItem);
-    connect(actEdit_Sale, &QAction::triggered,
-        this, &stock_manager::editSelectedSoldItem);
+    connect(actEdit_Sale, &QAction::triggered, this, &stock_manager::editSelectedSoldItem);
+    connect(actDelete, &QAction::triggered, this, &stock_manager::deleteItem);
+    connect(actDelete_Sale, &QAction::triggered, this, &stock_manager::deleteSoldItem);
     connect(m_ui->dateSales, &QDateEdit::dateChanged, this, &stock_manager::updateSales);
     connect(m_ui->tblStock, &QTableWidget::customContextMenuRequested,
         this, &stock_manager::editContext);
@@ -677,6 +680,47 @@ void stock_manager::updateSoldItem()
     this->dlg_edit_sale.accept();
 }
 
+void stock_manager::deleteItem()
+{
+    using namespace sqlite_orm;
+    storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    storage->on_open = [&](sqlite3* db){
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
+    QTableWidgetItem *tblItem = this->m_ui->tblStock->selectedItems().first();
+    std::string itemNo = this->m_ui->tblStock->item(
+                tblItem->row(), 0)->text().toStdString();
+    auto itm = storage->get_all_pointer<Item>(
+                where(c(&Item::itemNo) == itemNo));
+    // Delete from db
+    storage->remove<Item>(itm[0]->id);
+
+    // Refresh the sales table
+    this->refreshDb();
+    this->updateTable();
+    this->updateStats();
+}
+
+void stock_manager::deleteSoldItem()
+{
+    using namespace sqlite_orm;
+    storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
+    storage->on_open = [&](sqlite3* db){
+        sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    };
+    QTableWidgetItem *tblItem = this->m_ui->tblSales->selectedItems().first();
+    int id = this->m_ui->tblSales->item(
+            tblItem->row(), 0)->text().toInt();
+    // Delete from db
+    storage->remove<SoldItem>(id);
+
+    // Update sales table
+    this->updateSales(
+        this->m_ui->dateSales->date()
+    );
+    this->updateSalesStats();
+}
+
 void stock_manager::editSelectedSoldItem()
 {
     using namespace sqlite_orm;
@@ -760,12 +804,14 @@ void stock_manager::editContext(QPoint pos)
 
     this->stockPoint = pos;
 
-    this->actEdit->setText("Edit Item");
+    this->actDelete->setText("Delete");
+    this->actEdit->setText("Edit");
     itemList = this->m_ui->tblStock->selectedItems();
 
     // Add 'edit' to context menu only
     // when there is an item selected
     if (itemList.count() > 0) {
+        menu.addAction(this->actDelete);
         menu.addAction(this->actEdit);
         menu.addSeparator();
     }
@@ -785,12 +831,14 @@ void stock_manager::editSaleContext(QPoint pos)
 
     this->salePoint = pos;
 
-    this->actEdit_Sale->setText("Edit Sale");
+    this->actDelete_Sale->setText("Delete");
+    this->actEdit_Sale->setText("Edit");
     itemList = this->m_ui->tblSales->selectedItems();
 
     // Add 'edit sale' to context menu only
     // when there is an item selected
     if (itemList.count() > 0) {
+        menu.addAction(this->actDelete_Sale);
         menu.addAction(this->actEdit_Sale);
         menu.addSeparator();
     }
@@ -800,7 +848,7 @@ void stock_manager::editSaleContext(QPoint pos)
     menu.addSeparator();
     menu.addAction(this->m_ui->actQuit);
     // Show the context menu
-    menu.exec(this->m_ui->tblSales->mapFromGlobal(pos));
+    menu.exec(this->m_ui->tblSales->mapToGlobal(pos));
 }
 
 #ifndef QT_NO_CONTEXTMENU

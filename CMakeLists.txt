@@ -12,6 +12,8 @@ set(CMAKE_AUTOUIC ON)
 
 set(CMAKE_CXX_FLAGS "-Wall -fPIC -std=c++14")
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
 
 # Find the QtWidgets library
