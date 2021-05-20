@@ -29,6 +29,7 @@
 #include "structs.h"
 #include "utils.h"
 
+#include <array>
 #include <iostream>
 
 #include <inja/inja.hpp>
@@ -45,6 +46,8 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QMainWindow>
+#include <string>
+#include <utility>
 
 stock_manager::stock_manager(QWidget *parent) :
     QMainWindow(parent),
@@ -197,7 +200,7 @@ void stock_manager::refreshDb()
         columns(
             &Item::id, &Item::itemNo, &Item::name,
             &Item::price, &Item::capacity, &Stock::quantity),
-        where(c(&Item::itemNo) == &Stock::itemNo and c(&Stock::quantity) > 0),
+        where(c(&Item::itemNo) == &Stock::itemNo),
         order_by(&Item::id));
 
     for (auto &itm : allItems) {
@@ -279,6 +282,7 @@ void stock_manager::updateStats()
     m_ui->lblStats->setText(stats_template);
 }
 
+// TODO: refactor
 json stock_manager::getStatsData()
 {
     using namespace sqlite_orm;
@@ -456,7 +460,8 @@ void stock_manager::updateSales(QDate ch_date)
 
     auto items = storage->select(
         columns(&SoldItem::id, &Item::name, &SoldItem::quantity,
-            &Item::price, &SoldItem::paymentMethod, &SoldItem::saleDate),
+            &SoldItem::sellingPrice, &SoldItem::paymentMethod,
+            &SoldItem::saleDate, &Item::buyingPrice, &Item::price),
         where(c(&Item::itemNo) == &SoldItem::itemNo and
             c(&SoldItem::saleDate) >= start and c(&SoldItem::saleDate) <= end));
 
@@ -467,6 +472,14 @@ void stock_manager::updateSales(QDate ch_date)
     this->m_ui->tblSales->setRowCount(items.size());
 
     for (auto &itm : items) {
+
+        long price = *(std::get<3>(itm));
+        if (price < std::get<7>(itm)) {
+            if (price <= std::get<6>(itm)) {
+                price = std::get<7>(itm);
+            }
+        }
+
         // SoldItem::id
         QTableWidgetItem *tblItem0 = new QTableWidgetItem();
         tblItem0->setText(QString::number(std::get<0>(itm)));
@@ -486,14 +499,14 @@ void stock_manager::updateSales(QDate ch_date)
         // Item::price
         QTableWidgetItem *tblItem3 = new QTableWidgetItem();
         tblItem3->setText(QString::fromStdString(
-            util::formatCurrency(util::formatNumber(std::get<3>(itm)))));
+            util::formatCurrency(util::formatNumber(price))));
         m_ui->tblSales->setItem(count, 3, tblItem3);
 
         // Total price
         QTableWidgetItem *tblItem4 = new QTableWidgetItem();
         tblItem4->setText(QString::fromStdString(
             util::formatCurrency(
-                util::formatNumber(std::get<3>(itm) * std::get<2>(itm)))));
+                util::formatNumber(price * std::get<2>(itm)))));
         m_ui->tblSales->setItem(count, 4, tblItem4);
 
         // SoldItem::paymentMethod
@@ -507,7 +520,7 @@ void stock_manager::updateSales(QDate ch_date)
         tblItem6->setText(date_time.toString("dd-MM-yyyy"));
         m_ui->tblSales->setItem(count, 6, tblItem6);
 
-        salesMade += std::get<3>(itm) * std::get<2>(itm);
+        salesMade += price * std::get<2>(itm);
         count++;
     }
     j["count"] = quantity;
@@ -692,9 +705,25 @@ void stock_manager::deleteItem()
                 tblItem->row(), 0)->text().toStdString();
     auto itm = storage->get_all_pointer<Item>(
                 where(c(&Item::itemNo) == itemNo));
-    // Delete from db
-    storage->remove<Item>(itm[0]->id);
+    int ret = QMessageBox::warning(this, "Stock Manager",
+            QString("Are you sure you want to delete %1 ?").arg(
+                QString::fromStdString(itm[0]->name)),
+            QMessageBox::Yes | QMessageBox::No,
+            QMessageBox::No);
 
+    switch (ret) {
+        case QMessageBox::Ok:
+            // Delete from db
+            storage->remove<Item>(itm[0]->id);
+            this->statusBar()->showMessage("Item deleted succefully.", 2000);
+            break;
+        case QMessageBox::Cancel:
+            // accept();
+            this->statusBar()->showMessage("Ok, deletion canceled.", 2000);
+            break;
+        default:
+            break;
+    }
     // Refresh the sales table
     this->refreshDb();
     this->updateTable();
@@ -711,8 +740,27 @@ void stock_manager::deleteSoldItem()
     QTableWidgetItem *tblItem = this->m_ui->tblSales->selectedItems().first();
     int id = this->m_ui->tblSales->item(
             tblItem->row(), 0)->text().toInt();
-    // Delete from db
-    storage->remove<SoldItem>(id);
+    std::string name = this->m_ui->tblSales->item(
+            tblItem->row(), 1)->text().toStdString();
+    int ret = QMessageBox::warning(this, "Stock Manager",
+            QString("Are you sure you want to delete %1 ?").arg(
+                QString::fromStdString(name)),
+            QMessageBox::Yes | QMessageBox::No,
+            QMessageBox::No);
+
+    switch (ret) {
+        case QMessageBox::Yes:
+            // Delete from db
+            storage->remove<SoldItem>(id);
+            this->statusBar()->showMessage("Item deleted succefully.", 2000);
+            break;
+        case QMessageBox::No:
+            // accept();
+            this->statusBar()->showMessage("Ok, deletion canceled.", 2000);
+            break;
+        default:
+            break;
+    }
 
     // Update sales table
     this->updateSales(
@@ -746,6 +794,12 @@ void stock_manager::editSelectedSoldItem()
         } else {
             // Use the item price
             price = itm[0]->price;
+        }
+
+        if (sold_itm[0]->paymentMethod == "Cash") {
+            this->ui_dlg_edit_sale.cmbPayment_Method->setCurrentIndex(0);
+        } else {
+            this->ui_dlg_edit_sale.cmbPayment_Method->setCurrentIndex(1);
         }
 
         // this->ui_dlg_edit_sale.txtName->setText(QString::fromStdString(itm[0]->name));

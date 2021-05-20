@@ -50,6 +50,7 @@ dlgAddNew::dlgAddNew(QWidget *parent, std::vector<CartItem> &cart_items):
 
     ui->btnAdd->setEnabled(false);
     ui->spbQuantity->setEnabled(false);
+    ui->spnSellingPrice->setEnabled(false);
     ui->spbQuantity->setMinimum(1);
 
     ui->txtSearch->clear();
@@ -65,6 +66,7 @@ void dlgAddNew::addToCart()
     this->cart.push_back(item);
     this->ui->txtId->clear();
     this->ui->spbQuantity->setValue(1);
+    this->ui->spnSellingPrice->setValue(1);
     accept();
 }
 
@@ -95,6 +97,7 @@ void dlgAddNew::updateItem(QString id)
         }
         this->ui->spbQuantity->setEnabled(true);
         this->ui->btnAdd->setEnabled(true);
+        this->ui->spnSellingPrice->setEnabled(true);
         this->ui->spbQuantity->setMaximum(stock[0]->quantity);
     
         auto itm = storage->get_all_pointer<Item>(
@@ -105,6 +108,7 @@ void dlgAddNew::updateItem(QString id)
         } else {
             this->ui->spnSellingPrice->setMinimum(itm[0]->price);
         }
+        this->ui->spnSellingPrice->setValue(itm[0]->price);
         this->ui->txtName->setText(QString::fromStdString(itm[0]->name));
         this->item.itemNo = itm[0]->itemNo;
         this->item.name = itm[0]->name;

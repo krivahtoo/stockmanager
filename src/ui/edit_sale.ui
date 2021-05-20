@@ -2,12 +2,15 @@
 <ui version="4.0">
  <class>dlgEdit_Sale</class>
  <widget class="QDialog" name="dlgEdit_Sale">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>335</width>
-    <height>214</height>
+    <height>234</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -114,6 +117,9 @@
         </property>
         <property name="prefix">
          <string>Ksh. </string>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
         </property>
        </widget>
       </item>

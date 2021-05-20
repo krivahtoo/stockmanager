@@ -134,6 +134,12 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="suffix">
+         <string>.00</string>
+        </property>
+        <property name="prefix">
+         <string>Ksh </string>
+        </property>
         <property name="minimum">
          <number>1</number>
         </property>

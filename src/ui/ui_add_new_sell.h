@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'add_new_sellUmzQhv.ui'
+** Form generated from reading UI file 'add_new_sellDaxHZw.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef ADD_NEW_SELLUMZQHV_H
-#define ADD_NEW_SELLUMZQHV_H
+#ifndef ADD_NEW_SELLDAXHZW_H
+#define ADD_NEW_SELLDAXHZW_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -192,6 +192,8 @@ public:
         lblItems->setText(QCoreApplication::translate("dlgAddNew", "Type to search", nullptr));
         txtName->setText(QCoreApplication::translate("dlgAddNew", "Enter item id..", nullptr));
         label_4->setText(QCoreApplication::translate("dlgAddNew", "Selling price:", nullptr));
+        spnSellingPrice->setSuffix(QCoreApplication::translate("dlgAddNew", ".00", nullptr));
+        spnSellingPrice->setPrefix(QCoreApplication::translate("dlgAddNew", "Ksh ", nullptr));
         btnCancel->setText(QCoreApplication::translate("dlgAddNew", "Cancel", nullptr));
         btnAdd->setText(QCoreApplication::translate("dlgAddNew", "Add to Cart", nullptr));
     } // retranslateUi
@@ -204,4 +206,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // ADD_NEW_SELLUMZQHV_H
+#endif // ADD_NEW_SELLDAXHZW_H

@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'edit_salekRKniv.ui'
+** Form generated from reading UI file 'edit_saleFfFKQi.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef EDIT_SALEKRKNIV_H
-#define EDIT_SALEKRKNIV_H
+#ifndef EDIT_SALEFFFKQI_H
+#define EDIT_SALEFFFKQI_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -54,7 +54,8 @@ public:
     {
         if (dlgEdit_Sale->objectName().isEmpty())
             dlgEdit_Sale->setObjectName(QString::fromUtf8("dlgEdit_Sale"));
-        dlgEdit_Sale->resize(335, 214);
+        dlgEdit_Sale->setWindowModality(Qt::WindowModal);
+        dlgEdit_Sale->resize(335, 234);
         verticalLayout = new QVBoxLayout(dlgEdit_Sale);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         groupBox = new QGroupBox(dlgEdit_Sale);
@@ -114,6 +115,7 @@ public:
 
         spnSale_Price = new QSpinBox(groupBox);
         spnSale_Price->setObjectName(QString::fromUtf8("spnSale_Price"));
+        spnSale_Price->setMaximum(99999);
 
         formLayout->setWidget(4, QFormLayout::FieldRole, spnSale_Price);
 
@@ -193,4 +195,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // EDIT_SALEKRKNIV_H
+#endif // EDIT_SALEFFFKQI_H

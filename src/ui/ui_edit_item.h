@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'edit_itemsgrAvG.ui'
+** Form generated from reading UI file 'edit_itemCFLJci.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef EDIT_ITEMSGRAVG_H
-#define EDIT_ITEMSGRAVG_H
+#ifndef EDIT_ITEMCFLJCI_H
+#define EDIT_ITEMCFLJCI_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -55,7 +55,8 @@ public:
     {
         if (dlgEdit->objectName().isEmpty())
             dlgEdit->setObjectName(QString::fromUtf8("dlgEdit"));
-        dlgEdit->resize(388, 261);
+        dlgEdit->setWindowModality(Qt::WindowModal);
+        dlgEdit->resize(388, 289);
         verticalLayout = new QVBoxLayout(dlgEdit);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         formGroupBox = new QGroupBox(dlgEdit);
@@ -187,7 +188,7 @@ public:
         label->setText(QCoreApplication::translate("dlgEdit", "Item Id:", nullptr));
         txtId->setPlaceholderText(QCoreApplication::translate("dlgEdit", "Enter Item's Id...", nullptr));
         label_2->setText(QCoreApplication::translate("dlgEdit", "Name:", nullptr));
-        txtName->setPlaceholderText(QCoreApplication::translate("dlgEdit", "Enter Item's Name", nullptr));
+        txtName->setPlaceholderText(QCoreApplication::translate("dlgEdit", "Enter item name...", nullptr));
         label_7->setText(QCoreApplication::translate("dlgEdit", "Capacity:", nullptr));
         label_6->setText(QCoreApplication::translate("dlgEdit", "Quantity:", nullptr));
         label_3->setText(QCoreApplication::translate("dlgEdit", "Buying Price:", nullptr));
@@ -212,4 +213,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // EDIT_ITEMSGRAVG_H
+#endif // EDIT_ITEMCFLJCI_H
