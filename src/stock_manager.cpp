@@ -712,12 +712,12 @@ void stock_manager::deleteItem()
             QMessageBox::No);
 
     switch (ret) {
-        case QMessageBox::Ok:
+        case QMessageBox::Yes:
             // Delete from db
             storage->remove<Item>(itm[0]->id);
             this->statusBar()->showMessage("Item deleted succefully.", 2000);
             break;
-        case QMessageBox::Cancel:
+        case QMessageBox::No:
             // accept();
             this->statusBar()->showMessage("Ok, deletion canceled.", 2000);
             break;
