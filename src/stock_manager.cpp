@@ -99,7 +99,6 @@ stock_manager::stock_manager(QWidget *parent) :
             updateSales(
                 m_ui->dateSales->date()
             );
-            updateSalesStats();
         });
     connect(m_ui->btnClear_Cart, &QPushButton::pressed, this, 
         [&]() {
@@ -547,6 +546,7 @@ void stock_manager::updateSales(QDate ch_date)
     </body>
 </html>)",
                 j)));
+    this->updateSalesStats();
     this->unsetCursor();
 }
 
@@ -561,7 +561,8 @@ void stock_manager::updateSalesStats()
     storage->on_open = [&](sqlite3 *db) {
         sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
     };
-    date = QDateTime::currentDateTime();
+    date.setDate(m_ui->dateSales->date());
+    date.setTime(QTime::fromString("23:59:59", "HH:mm:ss"));
     end = date.toSecsSinceEpoch();
     dt = date.date();
     jDate["month"] = dt.month();
@@ -623,11 +624,11 @@ void stock_manager::updateSalesStats()
     <head/>
     <body>
         <p>
-            <span style=" font-weight:600;">Sales this week:</span><br/>
+            <span style=" font-weight:600;">Week Sales:</span><br/>
             {{ w_count }} items for <span style=" font-weight:600;">{{ w_sales }}</span>
         </p>
         <p>
-            <span style=" font-weight:600;">Sales this Month:</span><br/>
+            <span style=" font-weight:600;">Month Sales:</span><br/>
             {{ m_count }} items for <span style=" font-weight:600;">{{ m_sales }}</span>
         </p>
     </body>

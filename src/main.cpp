@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     app.setApplicationDisplayName("Shop Manager");
     app.setApplicationName("StockManager");
-    app.setApplicationVersion("0.2.1");
+    app.setApplicationVersion("0.2.2");
     app.setOrganizationName("KrivArt");
     Settings settings;
     QFile config_file;
