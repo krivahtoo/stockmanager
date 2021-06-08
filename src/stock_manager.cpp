@@ -31,12 +31,15 @@
 
 #include <array>
 #include <iostream>
+#include <string>
+#include <utility>
+#include <memory>
 
 #include <inja/inja.hpp>
-#include <memory>
 #include <nlohmann/json.hpp>
 #include <sqlcipher/sqlite3.h>
 
+#include <QtCore/QTimer>
 #include <QtCore/QDateTime>
 #include <QtGui/QKeySequence>
 #include <QtGui/QContextMenuEvent>
@@ -46,8 +49,6 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QMainWindow>
-#include <string>
-#include <utility>
 
 stock_manager::stock_manager(QWidget *parent) :
     QMainWindow(parent),
@@ -71,6 +72,8 @@ stock_manager::stock_manager(QWidget *parent) :
     actDelete_Sale = new QAction(this);
 
     this->stockCount = 0;
+    this->lastChange = 0;
+    this->timerActive = false;
     m_ui->dateSales->setDate(QDate::currentDate());
     m_ui->dateSales->setMaximumDate(QDate::currentDate());
 
@@ -446,6 +449,18 @@ void stock_manager::updateSales(QDate ch_date)
     long start, end;
     json j;
     QDateTime date;
+    // Avoid reloading too much
+    if ((QDateTime::currentSecsSinceEpoch() - this->lastChange) <= 5 && this->lastChange > 0) {
+      if (!this->timerActive) {
+        QTimer::singleShot(
+            (QDateTime::currentSecsSinceEpoch() - this->lastChange) * 1000,
+            this, [&]() {
+                updateSales(this->m_ui->dateSales->date());
+            });
+        this->timerActive = true;
+      }
+      return;
+    }
     this->setCursor(Qt::BusyCursor);
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
     storage->on_open = [&](sqlite3 *db) {
@@ -547,6 +562,8 @@ void stock_manager::updateSales(QDate ch_date)
 </html>)",
                 j)));
     this->updateSalesStats();
+    this->lastChange = QDateTime::currentSecsSinceEpoch();
+    this->timerActive = false;
     this->unsetCursor();
 }
 

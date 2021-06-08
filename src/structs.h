@@ -46,6 +46,7 @@ struct Stock
 {
     std::string itemNo;
     int quantity;
+    std::unique_ptr<long int> lastStocked;
 };
 
 struct SoldItem

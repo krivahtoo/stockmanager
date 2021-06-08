@@ -80,6 +80,8 @@ private:
     std::vector<Items> items;
     std::vector<CartItem> cart;
     int stockCount;
+    bool timerActive;
+    long lastChange;
     json getStatsData();
     void refreshDb();
     void updateTable();

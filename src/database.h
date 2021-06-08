@@ -54,7 +54,8 @@ inline auto initStorage(const std::string &path) {
         ),
         make_table("stock",
             make_column("item_no", &Stock::itemNo),
-            make_column("quantity", &Stock::quantity)
+            make_column("quantity", &Stock::quantity),
+            make_column("last_stocked", &Stock::lastStocked, default_value(0))
         ),
         make_table("sold_item",
             make_column("id", &SoldItem::id, autoincrement(), primary_key()),
