@@ -93,6 +93,7 @@ stock_manager::stock_manager(QWidget *parent) :
     connect(actDelete, &QAction::triggered, this, &stock_manager::deleteItem);
     connect(actDelete_Sale, &QAction::triggered, this, &stock_manager::deleteSoldItem);
     connect(m_ui->dateSales, &QDateEdit::dateChanged, this, &stock_manager::updateSales);
+    connect(ui_dlg_settings.btnChangePass, &QPushButton::pressed, this, &stock_manager::changePassword);
     connect(m_ui->tblStock, &QTableWidget::customContextMenuRequested,
         this, &stock_manager::editContext);
     connect(m_ui->tblSales, &QTableWidget::customContextMenuRequested,
@@ -273,7 +274,11 @@ void stock_manager::updateStats()
     if (data.contains("items") || data["items"].size() > 0)
         stats_template.push_back(
             QString::fromStdString(
-                inja::render(R"(<p><span style=" font-weight:600;">Items Out of Stock:</span></p><p>
+                inja::render(R"(
+<p>
+  <span style=" font-weight:600;">Items Out of Stock:</span>
+</p>
+<p>
 ## for item in items
 {{ loop.index1 }}: {{ item }}<br/>
 ## endfor
@@ -609,27 +614,39 @@ void stock_manager::updateSalesStats()
     mStart = date.toSecsSinceEpoch();
 
     auto wItems = storage->select(
-        columns(&SoldItem::quantity, &Item::price),
+        columns(&SoldItem::quantity, &Item::price, &SoldItem::sellingPrice, &Item::buyingPrice),
         where(c(&Item::itemNo) == &SoldItem::itemNo and
             c(&SoldItem::saleDate) >= wStart and c(&SoldItem::saleDate) <= end));
     int w_count = 0;
     int w_sales = 0;
     for (auto &itm: wItems) {
+        long price = *(std::get<2>(itm));
+        if (price < std::get<1>(itm)) {
+            if (price <= std::get<3>(itm)) {
+                price = std::get<1>(itm);
+            }
+        }
         w_count += std::get<0>(itm);
-        w_sales += std::get<1>(itm) * std::get<0>(itm);
+        w_sales += price * std::get<0>(itm);
     }
     j["w_count"] = w_count;
     j["w_sales"] = util::formatCurrency(util::formatNumber(w_sales));
 
     auto mItems = storage->select(
-        columns(&SoldItem::quantity, &Item::price),
+        columns(&SoldItem::quantity, &Item::price, &SoldItem::sellingPrice, &Item::buyingPrice),
         where(c(&Item::itemNo) == &SoldItem::itemNo and
             c(&SoldItem::saleDate) >= mStart and c(&SoldItem::saleDate) <= end));
     int m_count = 0;
     int m_sales = 0;
     for (auto &itm: mItems) {
+        long price = *(std::get<2>(itm));
+        if (price < std::get<1>(itm)) {
+            if (price <= std::get<3>(itm)) {
+                price = std::get<1>(itm);
+            }
+        }
         m_count += std::get<0>(itm);
-        m_sales += std::get<1>(itm) * std::get<0>(itm);
+        m_sales += price * std::get<0>(itm);
     }
     j["m_count"] = m_count;
     j["m_sales"] = util::formatCurrency(util::formatNumber(m_sales));
@@ -921,6 +938,64 @@ void stock_manager::editSaleContext(QPoint pos)
     menu.addAction(this->m_ui->actQuit);
     // Show the context menu
     menu.exec(this->m_ui->tblSales->mapToGlobal(pos));
+}
+
+void stock_manager::changePassword() {
+    sqlite3 *db;
+    Settings settings;
+    std::string db_file = util::getDBPath(DB_FILE);
+    if (this->ui_dlg_settings.txtOld_Pass->text().isEmpty() ||
+        this->ui_dlg_settings.txtConfirm_Pass->text().isEmpty() ||
+        this->ui_dlg_settings.txtNew_Pass->text().isEmpty()
+      ) {
+        QMessageBox::warning(this, "Stock Manager",
+            "All password fields are required\n"
+            "Please enter all the password fields",
+            QMessageBox::Ok);
+        return;
+    }
+    if (this->ui_dlg_settings.txtNew_Pass->text() !=
+        this->ui_dlg_settings.txtConfirm_Pass->text()
+      ) {
+        QMessageBox::warning(this, "Stock Manager",
+            "Password confirmation do not match.\n"
+            "Please enter the correct password",
+            QMessageBox::Ok);
+        this->ui_dlg_settings.txtOld_Pass->setText("");
+        this->ui_dlg_settings.txtNew_Pass->setText("");
+        this->ui_dlg_settings.txtConfirm_Pass->setText("");
+        return;
+    }
+    // This doest seem to work 😑
+    if (Settings::hash(this->ui_dlg_settings.txtOld_Pass->text().toStdString()) !=
+        settings.getKey("db_key").get<std::string>()
+    ) {
+        QMessageBox::warning(this, "Stock Manager",
+            "Password entered is incorrect.\n"
+            "Please enter the correct password and try again",
+            QMessageBox::Ok);
+        /* std::cout << Settings::hash(this->ui_dlg_settings.txtOld_Pass->text().trimmed().toStdString()) << std::endl;
+        std::cout << this->ui_dlg_settings.txtOld_Pass->text().trimmed().toStdString() << std::endl;
+        std::cout << settings.getKey("db_key").get<std::string>() << std::endl;
+        std::cout << Settings::hash("embotich") << std::endl; */
+        this->ui_dlg_settings.txtOld_Pass->setText("");
+        this->ui_dlg_settings.txtNew_Pass->setText("");
+        this->ui_dlg_settings.txtConfirm_Pass->setText("");
+        return;
+    }
+
+    if (sqlite3_open(db_file.c_str(), &db) != SQLITE_OK)
+        return;
+    if (sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size()) != SQLITE_OK)
+        return;
+    if (sqlite3_rekey(db,
+            this->ui_dlg_settings.txtNew_Pass->text().toStdString().c_str(),
+            this->ui_dlg_settings.txtNew_Pass->text().toStdString().size()) != SQLITE_OK)
+        return;
+    settings.setKey("db_key", 
+        Settings::hash(this->ui_dlg_settings.txtNew_Pass->text().toStdString()));
+    settings.saveSettings();
+    sqlite3_close(db);
 }
 
 #ifndef QT_NO_CONTEXTMENU

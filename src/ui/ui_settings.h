@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'settingsZehrSN.ui'
+** Form generated from reading UI file 'settingsbliqJi.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SETTINGSZEHRSN_H
-#define SETTINGSZEHRSN_H
+#ifndef SETTINGSBLIQJI_H
+#define SETTINGSBLIQJI_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -72,6 +72,7 @@ public:
     QLabel *label_6;
     QLineEdit *txtDate_Format;
     QCheckBox *chkDev_Mode;
+    QSpacerItem *verticalSpacer_2;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer_2;
     QPushButton *pushButton_3;
@@ -282,6 +283,10 @@ public:
 
         formLayout_3->setWidget(1, QFormLayout::LabelRole, chkDev_Mode);
 
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        formLayout_3->setItem(2, QFormLayout::SpanningRole, verticalSpacer_2);
+
 
         gridLayout->addWidget(grpOther, 1, 1, 1, 1);
 
@@ -382,4 +387,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SETTINGSZEHRSN_H
+#endif // SETTINGSBLIQJI_H

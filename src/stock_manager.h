@@ -98,6 +98,7 @@ private:
     void editSelectedItem();
     void editContext(QPoint pos);
     void editSaleContext(QPoint pos);
+    void changePassword();
 };
 
 #endif // STOCK_MANAGER_H

@@ -281,7 +281,7 @@
               <string>Change Password</string>
              </property>
              <property name="icon">
-              <iconset resource="../stock_manager.qrc">
+              <iconset resource="../../stock_manager.qrc">
                <normaloff>:/icons/lock.svg</normaloff>:/icons/lock.svg</iconset>
              </property>
             </widget>
@@ -338,6 +338,19 @@
            </property>
           </widget>
          </item>
+         <item row="2" column="0" colspan="2">
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
         </layout>
        </widget>
       </item>
@@ -374,7 +387,7 @@
         <string>Close</string>
        </property>
        <property name="icon">
-        <iconset resource="../stock_manager.qrc">
+        <iconset resource="../../stock_manager.qrc">
          <normaloff>:/icons/cross.svg</normaloff>:/icons/cross.svg</iconset>
        </property>
       </widget>
@@ -385,7 +398,7 @@
         <string>Reset</string>
        </property>
        <property name="icon">
-        <iconset resource="../stock_manager.qrc">
+        <iconset resource="../../stock_manager.qrc">
          <normaloff>:/icons/time-reverse.svg</normaloff>:/icons/time-reverse.svg</iconset>
        </property>
       </widget>
@@ -402,7 +415,7 @@
         <string>Save Settings</string>
        </property>
        <property name="icon">
-        <iconset resource="../stock_manager.qrc">
+        <iconset resource="../../stock_manager.qrc">
          <normaloff>:/icons/gear.svg</normaloff>:/icons/gear.svg</iconset>
        </property>
       </widget>
@@ -412,7 +425,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../stock_manager.qrc"/>
+  <include location="../../stock_manager.qrc"/>
  </resources>
  <connections>
   <connection>
