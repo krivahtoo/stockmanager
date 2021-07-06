@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>665</width>
-    <height>469</height>
+    <height>486</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -185,7 +185,7 @@
       <item row="1" column="0">
        <widget class="QGroupBox" name="grpPass">
         <property name="enabled">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
         <property name="title">
          <string>Change Password</string>
@@ -435,8 +435,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>452</x>
-     <y>463</y>
+     <x>440</x>
+     <y>475</y>
     </hint>
     <hint type="destinationlabel">
      <x>202</x>

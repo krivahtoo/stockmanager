@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'settingsbliqJi.ui'
+** Form generated from reading UI file 'settingsMmjYYL.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SETTINGSBLIQJI_H
-#define SETTINGSBLIQJI_H
+#ifndef SETTINGSMMJYYL_H
+#define SETTINGSMMJYYL_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -83,7 +83,7 @@ public:
     {
         if (dlgSettings->objectName().isEmpty())
             dlgSettings->setObjectName(QString::fromUtf8("dlgSettings"));
-        dlgSettings->resize(665, 469);
+        dlgSettings->resize(665, 486);
         verticalLayout = new QVBoxLayout(dlgSettings);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         groupBox = new QGroupBox(dlgSettings);
@@ -196,7 +196,7 @@ public:
 
         grpPass = new QGroupBox(groupBox);
         grpPass->setObjectName(QString::fromUtf8("grpPass"));
-        grpPass->setEnabled(true);
+        grpPass->setEnabled(false);
         formLayout = new QFormLayout(grpPass);
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
         label = new QLabel(grpPass);
@@ -387,4 +387,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SETTINGSBLIQJI_H
+#endif // SETTINGSMMJYYL_H

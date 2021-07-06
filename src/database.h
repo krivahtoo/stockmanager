@@ -68,6 +68,7 @@ inline auto initStorage(const std::string &path) {
         ),
         make_table("user", 
             make_column("id", &User::id, autoincrement(), primary_key()),
+            make_column("username", &User::username),
             make_column("name", &User::name),
             make_column("password", &User::password),
             make_column("role", &User::role),

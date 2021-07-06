@@ -101,7 +101,9 @@ void Settings::saveSettings()
 
 json Settings::getKey(std::string key)
 {
-    json val = data[key];
+    json val;
+    if (!data.contains(key)) return val;
+    val = data[key];
     return val;
 }
 

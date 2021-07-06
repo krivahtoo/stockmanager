@@ -65,6 +65,7 @@ struct SoldItem
 struct User
 {
     int id;
+    std::string username;
     std::string name;
     std::string password;
     std::string role;

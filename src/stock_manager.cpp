@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Noah Too
+ * Copyright (c) 2021 Noah Too
  * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -940,6 +940,8 @@ void stock_manager::editSaleContext(QPoint pos)
     menu.exec(this->m_ui->tblSales->mapToGlobal(pos));
 }
 
+// TODO: find a better way to implement this
+// or use user based password changing
 void stock_manager::changePassword() {
     sqlite3 *db;
     Settings settings;
@@ -966,18 +968,18 @@ void stock_manager::changePassword() {
         this->ui_dlg_settings.txtConfirm_Pass->setText("");
         return;
     }
-    // This doest seem to work 😑
-    if (Settings::hash(this->ui_dlg_settings.txtOld_Pass->text().toStdString()) !=
-        settings.getKey("db_key").get<std::string>()
+    // FIXME: This doest seem to work 😑
+    if (this->ui_dlg_settings.txtOld_Pass->text().toStdString() !=
+        Settings::db_key 
     ) {
         QMessageBox::warning(this, "Stock Manager",
             "Password entered is incorrect.\n"
             "Please enter the correct password and try again",
             QMessageBox::Ok);
-        /* std::cout << Settings::hash(this->ui_dlg_settings.txtOld_Pass->text().trimmed().toStdString()) << std::endl;
-        std::cout << this->ui_dlg_settings.txtOld_Pass->text().trimmed().toStdString() << std::endl;
-        std::cout << settings.getKey("db_key").get<std::string>() << std::endl;
-        std::cout << Settings::hash("embotich") << std::endl; */
+        // std::cout << Settings::hash(this->ui_dlg_settings.txtOld_Pass->text().trimmed().toStdString()) << std::endl;
+        std::cout << this->ui_dlg_settings.txtOld_Pass->text().toStdString() << std::endl;
+        // std::cout << settings.getKey("db_key").get<std::string>() << std::endl;
+        std::cout << Settings::db_key << std::endl;
         this->ui_dlg_settings.txtOld_Pass->setText("");
         this->ui_dlg_settings.txtNew_Pass->setText("");
         this->ui_dlg_settings.txtConfirm_Pass->setText("");
