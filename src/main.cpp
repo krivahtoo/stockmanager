@@ -26,6 +26,7 @@
 #include "stock_manager.h"
 #include "database.h"
 #include "settings.h"
+#include "version.h"
 
 #include <QtCore/QFile>
 #include <QtWidgets/QApplication>
@@ -36,7 +37,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     app.setApplicationDisplayName("Shop Manager");
     app.setApplicationName("StockManager");
-    app.setApplicationVersion("0.2.2");
+    app.setApplicationVersion(VERSION);
     app.setOrganizationName("KrivArt");
     Settings settings;
     QFile config_file;

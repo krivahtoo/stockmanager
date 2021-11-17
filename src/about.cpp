@@ -25,11 +25,35 @@
 
 #include "about.h"
 
+#include <inja/inja.hpp>
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
+
 dlgAbout::dlgAbout(QMainWindow *parent):
     QDialog(parent),
     ui(new Ui::dlgAbout)
 {
+    json j;
     ui->setupUi(this);
+
+    j["name"] = NAME;
+    j["about"] = ABOUT;
+    j["version"] = VERSION;
+    j["author"] = AUTHOR;
+
+    ui->label->setText(
+        QString::fromStdString(
+          inja::render(R"(
+<html>
+<head/>
+<body>
+  <p><span style=" font-size:14pt; font-weight:600;">{{ name }}</span></p>
+  <p>{{ about }}</p>
+  <p><span style=" font-weight:600;">Version:</span> {{ version }}</p>
+  <p><span style=" font-style:italic;">{{ author }}</span></p>
+</body>
+</html>)", j)));
 }
 
 dlgAbout::~dlgAbout() = default;

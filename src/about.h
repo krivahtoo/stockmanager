@@ -26,10 +26,17 @@
 #ifndef ABOUT_H
 #define ABOUT_H
 
+#include "version.h"
 #include "ui/ui_about.h"
 
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QDialog>
+
+#include <string>
+
+#define NAME "Stock Manager"
+#define ABOUT "Manage your stocks"
+#define AUTHOR "(c) Noah Too"
 
 class dlgAbout: public QDialog
 {
