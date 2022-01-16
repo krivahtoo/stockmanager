@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>799</width>
-    <height>515</height>
+    <height>534</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,9 +24,6 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabMain">
-      <property name="statusTip">
-       <string>View items on stock</string>
-      </property>
       <property name="autoFillBackground">
        <bool>false</bool>
       </property>
@@ -37,7 +34,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideNone</enum>
@@ -602,7 +599,7 @@
      <x>0</x>
      <y>0</y>
      <width>799</width>
-     <height>18</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -636,6 +633,8 @@
     <addaction name="actionCopy"/>
     <addaction name="actionPaste"/>
     <addaction name="actionCut"/>
+    <addaction name="separator"/>
+    <addaction name="actBackup_Database"/>
     <addaction name="separator"/>
     <addaction name="actSettings_2"/>
    </widget>
@@ -798,6 +797,11 @@
    </property>
    <property name="shortcut">
     <string>Alt+S</string>
+   </property>
+  </action>
+  <action name="actBackup_Database">
+   <property name="text">
+    <string>Backup Database</string>
    </property>
   </action>
  </widget>

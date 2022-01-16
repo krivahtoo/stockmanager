@@ -98,4 +98,36 @@ namespace util
         path = dir.filePath(file);
         return path.toStdString();
     }
+
+    QDir getBackupPath()
+    {
+        QDir dir;
+        QString path = QStandardPaths::locate(
+            QStandardPaths::AppDataLocation,
+            QString("backups"), QStandardPaths::LocateDirectory
+        );
+        if (path.isEmpty()) {
+            dir = QDir(
+                QStandardPaths::standardLocations(
+                    QStandardPaths::AppDataLocation
+                ).first()
+            );
+            if (!dir.exists())
+                qWarning("Cannot find the backups directory");
+            QDir hdir = QDir::home();
+            if (
+                !hdir.mkpath(
+                    QStandardPaths::standardLocations(
+                        QStandardPaths::AppDataLocation
+                    ).first()
+                )
+            ) qWarning("Could not create backups directory");
+                
+            dir.mkdir("backups");
+            dir.cd("backups");
+        } else {
+            dir = QDir(path);
+        }
+        return dir;
+    }
 }

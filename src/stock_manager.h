@@ -98,6 +98,7 @@ private:
     void editSelectedItem();
     void editContext(QPoint pos);
     void editSaleContext(QPoint pos);
+    void backupDb();
     void changePassword();
 };
 

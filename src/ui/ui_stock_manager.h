@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'stock_managerJylFah.ui'
+** Form generated from reading UI file 'stock_managerXjmhEr.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef STOCK_MANAGERJYLFAH_H
-#define STOCK_MANAGERJYLFAH_H
+#ifndef STOCK_MANAGERXJMHER_H
+#define STOCK_MANAGERXJMHER_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -52,6 +52,7 @@ public:
     QAction *actSettings;
     QAction *actSettings_2;
     QAction *actionSearch;
+    QAction *actBackup_Database;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QTabWidget *tabMain;
@@ -112,7 +113,7 @@ public:
     {
         if (stock_manager->objectName().isEmpty())
             stock_manager->setObjectName(QString::fromUtf8("stock_manager"));
-        stock_manager->resize(799, 515);
+        stock_manager->resize(799, 534);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/images/logo.svg"), QSize(), QIcon::Normal, QIcon::Off);
         stock_manager->setWindowIcon(icon);
@@ -189,6 +190,8 @@ public:
         QIcon icon13;
         icon13.addFile(QString::fromUtf8(":/icons/search.svg"), QSize(), QIcon::Normal, QIcon::Off);
         actionSearch->setIcon(icon13);
+        actBackup_Database = new QAction(stock_manager);
+        actBackup_Database->setObjectName(QString::fromUtf8("actBackup_Database"));
         centralWidget = new QWidget(stock_manager);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -504,7 +507,7 @@ public:
         stock_manager->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(stock_manager);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 799, 18));
+        menuBar->setGeometry(QRect(0, 0, 799, 20));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuHelp = new QMenu(menuBar);
@@ -547,11 +550,13 @@ public:
         menuEdit->addAction(actionPaste);
         menuEdit->addAction(actionCut);
         menuEdit->addSeparator();
+        menuEdit->addAction(actBackup_Database);
+        menuEdit->addSeparator();
         menuEdit->addAction(actSettings_2);
 
         retranslateUi(stock_manager);
 
-        tabMain->setCurrentIndex(0);
+        tabMain->setCurrentIndex(1);
         btnSell_Cart->setDefault(true);
 
 
@@ -594,9 +599,7 @@ public:
 #if QT_CONFIG(shortcut)
         actionSearch->setShortcut(QCoreApplication::translate("stock_manager", "Alt+S", nullptr));
 #endif // QT_CONFIG(shortcut)
-#if QT_CONFIG(statustip)
-        tabMain->setStatusTip(QCoreApplication::translate("stock_manager", "View items on stock", nullptr));
-#endif // QT_CONFIG(statustip)
+        actBackup_Database->setText(QCoreApplication::translate("stock_manager", "Backup Database", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tblCart->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("stock_manager", "Item Number", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tblCart->horizontalHeaderItem(1);
@@ -698,4 +701,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // STOCK_MANAGERJYLFAH_H
+#endif // STOCK_MANAGERXJMHER_H

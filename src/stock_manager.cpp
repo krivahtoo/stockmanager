@@ -88,6 +88,7 @@ stock_manager::stock_manager(QWidget *parent) :
         this, &stock_manager::updateSoldItem);
     connect(m_ui->actQt_About, &QAction::triggered, this, QApplication::aboutQt);
     connect(m_ui->actQuit, &QAction::triggered, this, &QCoreApplication::quit);
+    connect(m_ui->actBackup_Database, &QAction::triggered, this, &stock_manager::backupDb);
     connect(actEdit, &QAction::triggered, this, &stock_manager::editSelectedItem);
     connect(actEdit_Sale, &QAction::triggered, this, &stock_manager::editSelectedSoldItem);
     connect(actDelete, &QAction::triggered, this, &stock_manager::deleteItem);
@@ -445,7 +446,7 @@ void stock_manager::sellItems()
     }
     this->updateCart();
     this->unsetCursor();
-    this->statusBar()->showMessage("Items sold", 2000);
+    this->statusBar()->showMessage(QString("%1 Items sold").arg(items_count), 2000);
 }
 
 void stock_manager::updateSales(QDate ch_date)
@@ -1000,9 +1001,18 @@ void stock_manager::changePassword() {
     sqlite3_close(db);
 }
 
+void stock_manager::backupDb() {
+    std::string backup_file;
+    QDir backup_dir = util::getBackupPath();
+    std::string db_path = util::getDBPath(DB_FILE);
+    backup_file = backup_dir.filePath(
+        QString("%1.db").arg(QDateTime::currentDateTime().toString("yyyyMMddhhmm"))).toStdString();
+    QFile::copy(db_path.c_str(), backup_file.c_str());
+    this->statusBar()->showMessage("Database backup created", 2000);
+}
+
 #ifndef QT_NO_CONTEXTMENU
-void stock_manager::contextMenuEvent(QContextMenuEvent *event)
-{
+void stock_manager::contextMenuEvent(QContextMenuEvent *event) {
     QMenu menu(this);
     menu.addAction(this->m_ui->actHome);
     menu.addAction(this->m_ui->actSales);
