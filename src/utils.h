@@ -29,12 +29,14 @@
 #include <string>
 
 #include <QtCore/QString>
+#include <QtCore/QDir>
 
 namespace util
 {
     std::string formatCurrency(std::string price);
     std::string formatNumber(int number);
     std::string getDBPath(QString file = "items.db");
+    QDir getBackupPath();
 }
 
 #endif // UTILS_H
