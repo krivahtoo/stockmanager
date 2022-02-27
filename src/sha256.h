@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2021 Noah Too
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,12 +26,12 @@
 #ifndef SHA256_H
 #define SHA256_H
 
+#include <bitset>
+#include <cstring>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
-#include <bitset>
 #include <vector>
-#include <iomanip>
-#include <cstring>
 
 // By: hak8or
 
@@ -41,7 +41,8 @@ std::vector<unsigned long> convert_to_binary(const std::string);
 // Pads the messages to make sure they are a multiple of 512 bits.
 std::vector<unsigned long> pad_to_512bits(const std::vector<unsigned long>);
 
-// Changes the n 8 bit segments representing every ASCII character to 32 bit words.
+// Changes the n 8 bit segments representing every ASCII character to 32 bit
+// words.
 std::vector<unsigned long> resize_block(std::vector<unsigned long>);
 
 // The actual hash computing.

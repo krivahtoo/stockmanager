@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2021 Noah Too
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,43 +38,41 @@
 
 inline auto initStorage(const std::string &path) {
 
-    using namespace sqlite_orm;
+  using namespace sqlite_orm;
 
-    return make_storage(path,
-        make_table("item",
-            make_column("id", &Item::id, autoincrement(), primary_key()),
-            make_column("item_no", &Item::itemNo),
-            make_column("name", &Item::name),
-            make_column("price", &Item::price),
-            make_column("minimum_price", &Item::minimumPrice, default_value(0)),
-            make_column("buying_price", &Item::buyingPrice),
-            make_column("capacity", &Item::capacity),
-            make_column("entry_date", &Item::entryDate),
-            make_column("photo", &Item::photo, default_value("null"))
-        ),
-        make_table("stock",
-            make_column("item_no", &Stock::itemNo),
-            make_column("quantity", &Stock::quantity),
-            make_column("last_stocked", &Stock::lastStocked, default_value(0))
-        ),
-        make_table("sold_item",
-            make_column("id", &SoldItem::id, autoincrement(), primary_key()),
-            make_column("item_no", &SoldItem::itemNo),
-            make_column("quantity", &SoldItem::quantity),
-            make_column("payment_method", &SoldItem::paymentMethod),
-            make_column("sale_date", &SoldItem::saleDate),
-            make_column("selling_price", &SoldItem::sellingPrice, default_value(0)),
-            make_column("user_id", &SoldItem::userId, default_value(0))
-        ),
-        make_table("user", 
-            make_column("id", &User::id, autoincrement(), primary_key()),
-            make_column("username", &User::username),
-            make_column("name", &User::name),
-            make_column("password", &User::password),
-            make_column("role", &User::role),
-            make_column("avatar", &User::avatar),
-            make_column("lastLogin", &User::lastLogin))
-    );
+  return make_storage(
+      path,
+      make_table(
+          "item", make_column("id", &Item::id, autoincrement(), primary_key()),
+          make_column("item_no", &Item::itemNo),
+          make_column("name", &Item::name), make_column("price", &Item::price),
+          make_column("minimum_price", &Item::minimumPrice, default_value(0)),
+          make_column("buying_price", &Item::buyingPrice),
+          make_column("capacity", &Item::capacity),
+          make_column("entry_date", &Item::entryDate),
+          make_column("photo", &Item::photo, default_value("null"))),
+      make_table(
+          "stock", make_column("item_no", &Stock::itemNo),
+          make_column("quantity", &Stock::quantity),
+          make_column("last_stocked", &Stock::lastStocked, default_value(0))),
+      make_table(
+          "sold_item",
+          make_column("id", &SoldItem::id, autoincrement(), primary_key()),
+          make_column("item_no", &SoldItem::itemNo),
+          make_column("quantity", &SoldItem::quantity),
+          make_column("payment_method", &SoldItem::paymentMethod),
+          make_column("sale_date", &SoldItem::saleDate),
+          make_column("selling_price", &SoldItem::sellingPrice,
+                      default_value(0)),
+          make_column("user_id", &SoldItem::userId, default_value(0))),
+      make_table("user",
+                 make_column("id", &User::id, autoincrement(), primary_key()),
+                 make_column("username", &User::username),
+                 make_column("name", &User::name),
+                 make_column("password", &User::password),
+                 make_column("role", &User::role),
+                 make_column("avatar", &User::avatar),
+                 make_column("lastLogin", &User::lastLogin)));
 }
 
 using Storage = decltype(initStorage(""));

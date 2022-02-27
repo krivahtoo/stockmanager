@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2021 Noah Too
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,23 +32,23 @@
 
 using json = nlohmann::json;
 
-class Settings
-{
+class Settings {
 private:
-    json data;
-    std::string file;
-    std::string getConfigPath();
-    void loadSettings();
+  json data;
+  std::string file;
+  std::string getConfigPath();
+  void loadSettings();
+
 public:
-    Settings(std::string configFile = "config.json");
-    ~Settings();
-    static std::string db_key;
-    static std::string config_path;
-    json getKey(std::string key);
-    bool setKey(std::string key, std::string value);
-    static std::string hash(std::string pass);
-    void saveSettings();
-    void setDBKey(std::string dbKey);
+  Settings(std::string configFile = "config.json");
+  ~Settings();
+  static std::string db_key;
+  static std::string config_path;
+  json getKey(std::string key);
+  bool setKey(std::string key, std::string value);
+  static std::string hash(std::string pass);
+  void saveSettings();
+  void setDBKey(std::string dbKey);
 };
 
 #endif // SETTINGS_H

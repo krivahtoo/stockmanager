@@ -49,8 +49,7 @@ dlgAdd::dlgAdd(QMainWindow *parent):
     ui->txtName->setPlaceholderText("Enter the item name...");
 }
 
-void dlgAdd::add()
-{
+void dlgAdd::add() {
     using namespace sqlite_orm;
     storage = std::make_unique<Storage>(initStorage(util::getDBPath()));
     storage->on_open = [&](sqlite3* db){
@@ -123,8 +122,7 @@ void dlgAdd::add()
     }
 }
 
-void dlgAdd::clearData()
-{
+void dlgAdd::clearData() {
     ui->txtId->clear();
     ui->txtName->clear();
     ui->spnPrice->setValue(0);
@@ -134,8 +132,7 @@ void dlgAdd::clearData()
     ui->spnQuantity->setValue(1);
 }
 
-void dlgAdd::updateItem(QString id)
-{
+void dlgAdd::updateItem(QString id) {
     using namespace sqlite_orm;
     storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
     storage->on_open = [&](sqlite3* db){
