@@ -275,7 +275,10 @@ json stock_manager::getStatsData() {
       where(c(&Item::itemNo) == &Stock::itemNo and c(&Stock::quantity) < 1));
 
   for (auto &itm : items) {
-    j["items"].push_back(std::get<0>(itm));
+    // Limit items. Too much items breaks the ui.
+    // TODO: use scroll view to enable showing more items.
+    if (j["items"].size() < 20)
+      j["items"].push_back(std::get<0>(itm));
   }
   return j;
 }

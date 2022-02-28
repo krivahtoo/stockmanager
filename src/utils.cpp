@@ -37,6 +37,7 @@
 #include <QtCore/QStandardPaths>
 
 namespace util {
+
 std::string formatCurrency(std::string price) {
   using json = nlohmann::json;
   Settings settings;
@@ -113,4 +114,5 @@ QDir getBackupPath() {
   }
   return dir;
 }
+
 } // namespace util
