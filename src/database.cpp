@@ -29,9 +29,7 @@
 
 #include <sqlcipher/sqlite3.h>
 
-#include <QtCore/QDir>
 #include <QtCore/QFile>
-#include <QtCore/QStandardPaths>
 
 void updateDb() {
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));

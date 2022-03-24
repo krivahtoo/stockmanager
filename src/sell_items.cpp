@@ -25,6 +25,9 @@
 
 #include "sell_items.h"
 
+#include <QDialog>
+#include <QMainWindow>
+
 dlgSell::dlgSell(QMainWindow *parent) : QDialog(parent), ui(new Ui::dlgSell) {
   // dlg_add_new = new dlgAddNew(this);
 

@@ -40,8 +40,12 @@
 #include <nlohmann/json.hpp>
 
 #include <QtCore/QPoint>
-#include <QtWidgets/QDialog>
-#include <QtWidgets/QMainWindow>
+#include <QtWidgets>
+
+QT_BEGIN_NAMESPACE;
+class QDialog;
+class QMainWindow;
+QT_END_NAMESPACE;
 
 using json = nlohmann::json;
 

@@ -29,9 +29,10 @@
 #include "database.h"
 #include "ui/ui_add_new_sell.h"
 
-#include <QtCore/QString>
-#include <QtWidgets/QDialog>
-#include <QtWidgets/QWidget>
+QT_BEGIN_NAMESPACE;
+class QString;
+class QDialog;
+QT_END_NAMESPACE;
 
 class dlgAddNew : public QDialog {
   Q_OBJECT

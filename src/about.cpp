@@ -28,6 +28,8 @@
 #include <inja/inja.hpp>
 #include <nlohmann/json.hpp>
 
+#include <QMainWindow>
+
 using json = nlohmann::json;
 
 dlgAbout::dlgAbout(QMainWindow *parent)

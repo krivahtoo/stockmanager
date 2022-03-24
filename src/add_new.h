@@ -30,8 +30,12 @@
 
 #include <string>
 
-#include <QtWidgets/QDialog>
-#include <QtWidgets/QMainWindow>
+#include <QtWidgets>
+
+QT_BEGIN_NAMESPACE;
+class QDialog;
+class QMainWindow;
+QT_END_NAMESPACE;
 
 class dlgAdd : public QDialog {
   Q_OBJECT

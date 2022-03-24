@@ -26,11 +26,16 @@
 #ifndef ABOUT_H
 #define ABOUT_H
 
+#include "qglobal.h"
 #include "ui/ui_about.h"
 #include "version.h"
 
-#include <QtWidgets/QDialog>
-#include <QtWidgets/QMainWindow>
+#include <QtWidgets>
+
+QT_BEGIN_NAMESPACE;
+class QDialog;
+class QMainWindow;
+QT_END_NAMESPACE
 
 #include <string>
 

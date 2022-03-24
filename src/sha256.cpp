@@ -28,7 +28,7 @@
 std::vector<unsigned long> convert_to_binary(const std::string input) {
   std::vector<unsigned long> block;
 
-  for (int i = 0; i < input.size(); ++i) {
+  for (int i = 0; i < (int)input.size(); ++i) {
     std::bitset<8> b(input.c_str()[i]);
 
     block.push_back(b.to_ulong());

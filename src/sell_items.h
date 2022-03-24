@@ -29,8 +29,10 @@
 #include "add_new_sell.h"
 #include "ui/ui_sell_items.h"
 
-#include <QtWidgets/QDialog>
-#include <QtWidgets/QMainWindow>
+QT_BEGIN_NAMESPACE;
+class QDialog;
+class QMainWindow;
+QT_END_NAMESPACE;
 
 class dlgSell : public QDialog {
   Q_OBJECT

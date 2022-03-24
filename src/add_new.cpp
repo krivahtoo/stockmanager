@@ -32,7 +32,10 @@
 
 #include <QtCore/QDateTime>
 #include <QtCore/QVariant>
-#include <QtWidgets/QMessageBox>
+
+#include <QDialog>
+#include <QMainWindow>
+#include <QMessageBox>
 
 dlgAdd::dlgAdd(QMainWindow *parent) : QDialog(parent), ui(new Ui::dlgAdd) {
   newItem = true;
