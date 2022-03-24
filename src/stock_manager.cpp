@@ -508,38 +508,43 @@ void stock_manager::updateSales(QDate ch_date) {
 
 void stock_manager::updateSalesStats() {
   using namespace sqlite_orm;
-  json j, jDate;
+  json j;
   QDate dt;
   QDateTime date;
-  long wStart, mStart, end;
+  long wStart, mStart, wEnd, mEnd;
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
     sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
   };
   date.setDate(m_ui->dateSales->date());
   date.setTime(QTime::fromString("23:59:59", "HH:mm:ss"));
-  end = date.toSecsSinceEpoch();
+
+  // get the start of the week
   dt = date.date();
-  jDate["month"] = dt.month();
-  jDate["year"] = dt.year();
-  jDate["date"] = dt.day() - (dt.dayOfWeek() - 1);
-  dt = QDate::fromString(QString::fromStdString(inja::render(
-                             "{{ date }}-{{ month }}-{{ year }}", jDate)),
-                         "d-M-yyyy");
+  dt = dt.addDays(-(dt.dayOfWeek() - 1)); 
   date = dt.startOfDay();
   wStart = date.toSecsSinceEpoch();
-  dt = QDate::fromString(
-      QString::fromStdString(inja::render("1-{{ month }}-{{ year }}", jDate)),
-      "d-M-yyyy");
+  // get the end of the week
+  dt = dt.addDays(6);
+  date = dt.endOfDay();
+  wEnd = date.toSecsSinceEpoch();
+
+  // get the start of the month
+  dt = m_ui->dateSales->date();
+  dt.setDate(dt.year(), dt.month(), 1);
   date = dt.startOfDay();
   mStart = date.toSecsSinceEpoch();
+  // get the end of the month
+  dt = dt.addDays(dt.daysInMonth() - 1);
+  date = dt.endOfDay();
+  mEnd = date.toSecsSinceEpoch();
 
   auto wItems =
       storage->select(columns(&SoldItem::quantity, &Item::price,
                               &SoldItem::sellingPrice, &Item::buyingPrice),
                       where(c(&Item::itemNo) == &SoldItem::itemNo and
                             c(&SoldItem::saleDate) >= wStart and
-                            c(&SoldItem::saleDate) <= end));
+                            c(&SoldItem::saleDate) <= wEnd));
   int w_count = 0;
   int w_sales = 0;
   for (auto &itm : wItems) {
@@ -560,7 +565,7 @@ void stock_manager::updateSalesStats() {
                               &SoldItem::sellingPrice, &Item::buyingPrice),
                       where(c(&Item::itemNo) == &SoldItem::itemNo and
                             c(&SoldItem::saleDate) >= mStart and
-                            c(&SoldItem::saleDate) <= end));
+                            c(&SoldItem::saleDate) <= mEnd));
   int m_count = 0;
   int m_sales = 0;
   for (auto &itm : mItems) {

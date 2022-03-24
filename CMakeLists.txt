@@ -10,7 +10,7 @@ set(CMAKE_AUTOUIC ON)
 
 #set(CMAKE_CXX_COMPILER "clang++")
 
-set(CMAKE_CXX_FLAGS "-Wall -fPIC -std=c++14")
+set(CMAKE_CXX_FLAGS "-Wall -fPIC -std=c++14 -ggdb")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
