@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'loginXGRWaj.ui'
+** Form generated from reading UI file 'loginmqWbzz.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.2
+** Created by: Qt User Interface Compiler version 5.15.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef LOGINXGRWAJ_H
-#define LOGINXGRWAJ_H
+#ifndef LOGINMQWBZZ_H
+#define LOGINMQWBZZ_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -77,6 +77,7 @@ public:
 
         txtUsername = new QLineEdit(groupBox);
         txtUsername->setObjectName(QString::fromUtf8("txtUsername"));
+        txtUsername->setMaximumSize(QSize(180, 16777215));
 
         formLayout->setWidget(0, QFormLayout::FieldRole, txtUsername);
 
@@ -87,6 +88,7 @@ public:
 
         txtPassword = new QLineEdit(groupBox);
         txtPassword->setObjectName(QString::fromUtf8("txtPassword"));
+        txtPassword->setMaximumSize(QSize(200, 16777215));
         txtPassword->setEchoMode(QLineEdit::Password);
 
         formLayout->setWidget(1, QFormLayout::FieldRole, txtPassword);
@@ -148,7 +150,7 @@ public:
         label_3->setText(QCoreApplication::translate("dlgLogin", "Please login to access the system", nullptr));
         label->setText(QCoreApplication::translate("dlgLogin", "Username:", nullptr));
         label_2->setText(QCoreApplication::translate("dlgLogin", "Password:", nullptr));
-        lblInfo->setText(QString());
+        lblInfo->setText(QCoreApplication::translate("dlgLogin", "<html><head/><body><p><span style=\" font-weight:600; color:#ff0000;\">Wrong password or username</span></p></body></html>", nullptr));
         btnCancel->setText(QCoreApplication::translate("dlgLogin", "Cancel", nullptr));
         btnLogin->setText(QCoreApplication::translate("dlgLogin", "Login", nullptr));
     } // retranslateUi
@@ -161,4 +163,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // LOGINXGRWAJ_H
+#endif // LOGINMQWBZZ_H
