@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Noah Too
+ * Copyright (c) 2022 Noah Too
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,35 +23,28 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef SETTINGS_H
-#define SETTINGS_H
+#ifndef REGISTER_H
+#define REGISTER_H
 
-#include <nlohmann/json.hpp>
+#include "ui/ui_register.h"
 
-#include <string>
+QT_BEGIN_NAMESPACE;
+class QDialog;
+class QMainWindow;
+QT_END_NAMESPACE;
 
-using json = nlohmann::json;
-
-// TODO: Consider making this a singleton class.
-class Settings {
-private:
-  json data;
-  std::string file;
-  std::string getConfigPath();
-  void loadSettings();
+class dlgRegister : public QDialog {
+  Q_OBJECT;
 
 public:
-  Settings(std::string configFile = "config.json");
-  ~Settings();
-  static int user_id;
-  static std::string db_key;
-  static std::string config_path;
-  json getKey(std::string key);
-  bool setKey(std::string key, std::string value);
-  static std::string hash(std::string pass);
-  void saveSettings();
-  void setDBKey(std::string dbKey);
-  void setUserId(int id);
+  explicit dlgRegister(QMainWindow *parent, bool isGenesis = false);
+  ~dlgRegister() override;
+
+private:
+  QScopedPointer<Ui::dlgRegister> ui;
+  bool isGenesis;
+  void reg();
 };
 
-#endif // SETTINGS_H
+#endif
+

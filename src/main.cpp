@@ -24,6 +24,7 @@
  */
 
 #include "database.h"
+#include "login.h"
 #include "settings.h"
 #include "stock_manager.h"
 #include "version.h"
@@ -41,40 +42,18 @@ int main(int argc, char *argv[]) {
   Settings settings;
   QFile config_file;
   config_file.setFileName(QString::fromStdString(Settings::config_path));
-  // TODO: Find a better way / implement user login
-  if (!isDbFileExist() || !config_file.exists()) {
-    bool ok = false;
-    QString pass = "";
-    QString confirm = "";
-    while ((!ok && pass.isEmpty()) || pass != confirm) {
-      pass = QInputDialog::getText(nullptr, "Set Master password", "Password",
-                                   QLineEdit::Password, "", &ok);
-      confirm = QInputDialog::getText(nullptr, "Confirm Master password",
-                                      "Confirm Password", QLineEdit::Password);
-    }
-    settings.setDBKey(pass.toStdString());
-    settings.setKey("db_key", Settings::hash(pass.toStdString()));
-  } else {
-    bool ok = false;
-    bool correct = false;
-    QString pass = "";
-    while (pass.isEmpty() || !correct) {
-      pass = QInputDialog::getText(nullptr, "Enter Master Password", "Password",
-                                   QLineEdit::Password, "", &ok);
-      if (Settings::hash(pass.toStdString()) ==
-          settings.getKey("db_key").get<std::string>())
-        correct = true;
-
-      if (!ok)
-        exit(1);
-    }
-    settings.setDBKey(pass.toStdString());
-  }
+  // TODO: Use key from hash
+  settings.setDBKey("embotich");
   settings.saveSettings();
   updateDb();
   stock_manager w;
-  w.setWindowState(Qt::WindowMaximized);
-  w.show();
+  QDialog *dlg_login = new dlgLogin(&w);
+  dlg_login->show();
+  w.connect(dlg_login, &QDialog::rejected, &w, []() { exit(1); });
+  w.connect(dlg_login, &QDialog::accepted, &w, [&]() {
+    w.setWindowState(Qt::WindowMaximized);
+    w.show();
+  });
 
   return app.exec();
 }

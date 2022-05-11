@@ -39,6 +39,7 @@ Settings::Settings(std::string configFile) : file(configFile) {
 
 std::string Settings::config_path = "";
 std::string Settings::db_key = "";
+int Settings::user_id = 0;
 
 std::string Settings::getConfigPath() {
   QString path = QStandardPaths::locate(QStandardPaths::AppConfigLocation,
@@ -96,6 +97,7 @@ bool Settings::setKey(std::string key, std::string value) {
   return 1;
 }
 
+// TODO: Move to utils module
 std::string Settings::hash(std::string pass) {
   std::vector<unsigned long> block;
   block = convert_to_binary(pass);
@@ -106,5 +108,7 @@ std::string Settings::hash(std::string pass) {
 }
 
 void Settings::setDBKey(std::string dbKey) { Settings::db_key = dbKey; }
+
+void Settings::setUserId(int id) { Settings::user_id = id; }
 
 Settings::~Settings() = default;

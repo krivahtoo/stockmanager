@@ -38,6 +38,8 @@ set(stock_manager_SRC
   src/settings.cpp
   src/sha256.cpp
   src/utils.cpp
+  src/login.cpp
+  src/register.cpp
   rc_stock_manager.cpp
 )
 
