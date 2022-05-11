@@ -29,9 +29,7 @@
 #include "stock_manager.h"
 #include "version.h"
 
-#include <QtCore/QFile>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QInputDialog>
 
 int main(int argc, char *argv[]) {
   QApplication app(argc, argv);
@@ -39,12 +37,9 @@ int main(int argc, char *argv[]) {
   app.setApplicationName("StockManager");
   app.setApplicationVersion(VERSION);
   app.setOrganizationName("KrivArt");
-  Settings settings;
-  QFile config_file;
-  config_file.setFileName(QString::fromStdString(Settings::config_path));
   // TODO: Use key from hash
-  settings.setDBKey("embotich");
-  settings.saveSettings();
+  Settings::getInstance().setDBKey("embotich");
+  Settings::getInstance().saveSettings();
   updateDb();
   stock_manager w;
   QDialog *dlg_login = new dlgLogin(&w);

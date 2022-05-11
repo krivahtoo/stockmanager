@@ -31,8 +31,8 @@
 #include <sqlcipher/sqlite3.h>
 
 #include <QDialog>
-#include <QMessageBox>
 #include <QMainWindow>
+#include <QMessageBox>
 
 dlgRegister::dlgRegister(QMainWindow *parent, bool isGenesis)
     : QDialog(parent), ui(new Ui::dlgRegister), isGenesis(isGenesis) {
@@ -51,7 +51,8 @@ void dlgRegister::reg() {
   using namespace sqlite_orm;
   storage = std::make_unique<Storage>(initStorage(util::getDBPath()));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
 
   // Empty fields are unacceptable
@@ -91,7 +92,7 @@ void dlgRegister::reg() {
   user.role = ui->cmbRole->currentText().trimmed().toStdString();
   int id = storage->insert(user);
 
-  Settings::user_id = id;
+  Settings::getInstance().setUserId(id);
 
   // Close dialog
   this->accept();

@@ -53,7 +53,8 @@ void dlgAdd::add() {
   using namespace sqlite_orm;
   storage = std::make_unique<Storage>(initStorage(util::getDBPath()));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
 
   // Empty fields are unacceptable
@@ -129,7 +130,8 @@ void dlgAdd::updateItem(QString id) {
   using namespace sqlite_orm;
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   auto item_count =
       storage->count<Item>(where(c(&Item::itemNo) == id.toStdString()));

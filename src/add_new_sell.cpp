@@ -73,7 +73,8 @@ void dlgAddNew::updateItem(QString id) {
   this->setCursor(Qt::BusyCursor);
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   auto item_count =
       storage->count<Item>(where(c(&Item::itemNo) == id.toStdString()));
@@ -119,7 +120,8 @@ void dlgAddNew::updateSearch(QString text) {
   this->setCursor(Qt::BusyCursor);
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   this->ui->lstSearch->clear();
   text.prepend("%");

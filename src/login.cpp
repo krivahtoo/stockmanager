@@ -23,12 +23,12 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "utils.h"
 #include "login.h"
-#include "structs.h"
 #include "database.h"
 #include "register.h"
 #include "settings.h"
+#include "structs.h"
+#include "utils.h"
 
 #include <QDialog>
 #include <QMainWindow>
@@ -47,20 +47,21 @@ dlgLogin::dlgLogin(QMainWindow *parent)
 
 void dlgLogin::login() {
   if (ui->txtUsername->text().isEmpty() || ui->txtPassword->text().isEmpty()) {
-    QMessageBox::warning(this, "Login", "Please enter a username and password.");
+    QMessageBox::warning(this, "Login",
+                         "Please enter a username and password.");
     return;
   }
   using namespace sqlite_orm;
   storage = std::make_unique<Storage>(initStorage(util::getDBPath()));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
 
   std::string hash = Settings::hash(ui->txtPassword->text().toStdString());
   std::string username = ui->txtUsername->text().trimmed().toStdString();
   auto user = storage->get_all_pointer<User>(
-          where(c(&User::username) == username &&
-                c(&User::password) == hash));
+      where(c(&User::username) == username && c(&User::password) == hash));
 
   if (user.empty()) {
     QMessageBox::warning(this, "Login", "Username or password is incorrect.");
@@ -68,7 +69,8 @@ void dlgLogin::login() {
     return;
   }
 
-  Settings::user_id = user[0]->id;
+  Settings::getInstance().setUserId(user[0]->id);
+  Settings::getInstance().setUser(user[0].get());
 
   accept();
 }
@@ -77,7 +79,8 @@ int dlgLogin::getUserCount() {
   using namespace sqlite_orm;
   storage = std::make_unique<Storage>(initStorage(util::getDBPath()));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   return storage->count<User>();
 }

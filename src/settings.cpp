@@ -34,12 +34,12 @@
 #include <QtCore/QString>
 
 Settings::Settings(std::string configFile) : file(configFile) {
+  config_path = "";
+  db_key = "";
+  user_id = 0;
+
   loadSettings();
 }
-
-std::string Settings::config_path = "";
-std::string Settings::db_key = "";
-int Settings::user_id = 0;
 
 std::string Settings::getConfigPath() {
   QString path = QStandardPaths::locate(QStandardPaths::AppConfigLocation,
@@ -65,7 +65,7 @@ std::string Settings::getConfigPath() {
 void Settings::loadSettings() {
   QFile file;
   file.setFileName(QString::fromStdString(getConfigPath()));
-  Settings::config_path = getConfigPath();
+  config_path = getConfigPath();
   if (!file.exists()) {
     data = {{"name", "Shop Manager"},
             {"theme", "default"},
@@ -107,8 +107,15 @@ std::string Settings::hash(std::string pass) {
   return compute_hash(block);
 }
 
+User *Settings::getUser() { return this->user.get(); }
+
+void Settings::setUser(User *user) { this->user.reset(user); }
+
 void Settings::setDBKey(std::string dbKey) { Settings::db_key = dbKey; }
 
 void Settings::setUserId(int id) { Settings::user_id = id; }
 
-Settings::~Settings() = default;
+Settings &Settings::getInstance() {
+  static Settings instance;
+  return instance;
+}

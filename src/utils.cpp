@@ -41,8 +41,7 @@ namespace util {
 
 std::string formatCurrency(std::string price) {
   using json = nlohmann::json;
-  Settings settings;
-  json data = settings.getKey("currency");
+  json data = Settings::getInstance().getKey("currency");
   data["price"] = price;
   return inja::render("{{ prefix }}{{ price }}{{ suffix }}", data);
 }

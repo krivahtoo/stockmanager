@@ -26,32 +26,38 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#include "structs.h"
+
 #include <nlohmann/json.hpp>
 
 #include <string>
 
 using json = nlohmann::json;
 
-// TODO: Consider making this a singleton class.
 class Settings {
 private:
+  Settings(std::string configFile = "config.json");
   json data;
+  int user_id;
+  std::unique_ptr<User> user;
   std::string file;
   std::string getConfigPath();
   void loadSettings();
 
 public:
-  Settings(std::string configFile = "config.json");
-  ~Settings();
-  static int user_id;
-  static std::string db_key;
-  static std::string config_path;
+  std::string db_key;
+  std::string config_path;
   json getKey(std::string key);
   bool setKey(std::string key, std::string value);
   static std::string hash(std::string pass);
   void saveSettings();
   void setDBKey(std::string dbKey);
   void setUserId(int id);
+  User *getUser();
+  void setUser(User *user);
+  static Settings &getInstance();
+  Settings(Settings const &) = delete;
+  void operator=(Settings const &) = delete;
 };
 
 #endif // SETTINGS_H

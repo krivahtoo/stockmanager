@@ -34,7 +34,8 @@
 void updateDb() {
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   storage->sync_schema();
 }

@@ -158,7 +158,8 @@ void stock_manager::refreshDb() {
   items.clear();
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   auto allItems = storage->select(
       columns(&Item::id, &Item::itemNo, &Item::name, &Item::price,
@@ -245,7 +246,8 @@ json stock_manager::getStatsData() {
   json j;
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   j["stock"]["items"] = storage->count<Stock>();
   j["stock"]["count"] = this->stockCount;
@@ -348,7 +350,8 @@ void stock_manager::sellItems() {
   this->setCursor(Qt::BusyCursor);
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   long int date = QDateTime::currentSecsSinceEpoch();
   std::string payment_method =
@@ -406,7 +409,8 @@ void stock_manager::updateSales(QDate ch_date) {
   this->setCursor(Qt::BusyCursor);
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   date.setDate(ch_date);
   date.setTime(QTime::fromString("00:00:00", "HH:mm:ss"));
@@ -514,7 +518,8 @@ void stock_manager::updateSalesStats() {
   long wStart, mStart, wEnd, mEnd;
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   date.setDate(m_ui->dateSales->date());
   date.setTime(QTime::fromString("23:59:59", "HH:mm:ss"));
@@ -602,7 +607,8 @@ void stock_manager::updateItem() {
   using namespace sqlite_orm;
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
 
   Item item;
@@ -638,7 +644,8 @@ void stock_manager::updateSoldItem() {
   using namespace sqlite_orm;
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   SoldItem sold_itm;
   int id = this->ui_dlg_edit_sale.lblId->text().toInt();
@@ -660,7 +667,8 @@ void stock_manager::deleteItem() {
   using namespace sqlite_orm;
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   QTableWidgetItem *tblItem = this->m_ui->tblStock->selectedItems().first();
   std::string itemNo =
@@ -695,7 +703,8 @@ void stock_manager::deleteSoldItem() {
   using namespace sqlite_orm;
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   QTableWidgetItem *tblItem = this->m_ui->tblSales->selectedItems().first();
   int id = this->m_ui->tblSales->item(tblItem->row(), 0)->text().toInt();
@@ -731,7 +740,8 @@ void stock_manager::editSelectedSoldItem() {
   using namespace sqlite_orm;
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   long price;
   try {
@@ -780,7 +790,8 @@ void stock_manager::editSelectedItem() {
   using namespace sqlite_orm;
   storage = std::make_unique<Storage>(initStorage(util::getDBPath(DB_FILE)));
   storage->on_open = [&](sqlite3 *db) {
-    sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size());
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
   };
   try {
     QTableWidgetItem *tblItem = this->m_ui->tblStock->selectedItems().first();
@@ -864,7 +875,7 @@ void stock_manager::editSaleContext(QPoint pos) {
 // or use user based password changing
 void stock_manager::changePassword() {
   sqlite3 *db;
-  Settings settings;
+  // Settings settings;
   std::string db_file = util::getDBPath(DB_FILE);
   if (this->ui_dlg_settings.txtOld_Pass->text().isEmpty() ||
       this->ui_dlg_settings.txtConfirm_Pass->text().isEmpty() ||
@@ -888,7 +899,7 @@ void stock_manager::changePassword() {
   }
   // FIXME: This doest seem to work 😑
   if (this->ui_dlg_settings.txtOld_Pass->text().toStdString() !=
-      Settings::db_key) {
+      Settings::getInstance().db_key) {
     QMessageBox::warning(this, "Stock Manager",
                          "Password entered is incorrect.\n"
                          "Please enter the correct password and try again",
@@ -899,7 +910,7 @@ void stock_manager::changePassword() {
     std::cout << this->ui_dlg_settings.txtOld_Pass->text().toStdString()
               << std::endl;
     // std::cout << settings.getKey("db_key").get<std::string>() << std::endl;
-    std::cout << Settings::db_key << std::endl;
+    std::cout << Settings::getInstance().db_key << std::endl;
     this->ui_dlg_settings.txtOld_Pass->setText("");
     this->ui_dlg_settings.txtNew_Pass->setText("");
     this->ui_dlg_settings.txtConfirm_Pass->setText("");
@@ -908,18 +919,18 @@ void stock_manager::changePassword() {
 
   if (sqlite3_open(db_file.c_str(), &db) != SQLITE_OK)
     return;
-  if (sqlite3_key(db, Settings::db_key.c_str(), Settings::db_key.size()) !=
-      SQLITE_OK)
+  if (sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                  Settings::getInstance().db_key.size()) != SQLITE_OK)
     return;
   if (sqlite3_rekey(
           db, this->ui_dlg_settings.txtNew_Pass->text().toStdString().c_str(),
           this->ui_dlg_settings.txtNew_Pass->text().toStdString().size()) !=
       SQLITE_OK)
     return;
-  settings.setKey(
+  Settings::getInstance().setKey(
       "db_key",
       Settings::hash(this->ui_dlg_settings.txtNew_Pass->text().toStdString()));
-  settings.saveSettings();
+  Settings::getInstance().saveSettings();
   sqlite3_close(db);
 }
 
