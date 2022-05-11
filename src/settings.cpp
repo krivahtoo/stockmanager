@@ -97,19 +97,9 @@ bool Settings::setKey(std::string key, std::string value) {
   return 1;
 }
 
-// TODO: Move to utils module
-std::string Settings::hash(std::string pass) {
-  std::vector<unsigned long> block;
-  block = convert_to_binary(pass);
-  block = pad_to_512bits(block);
-  block = resize_block(block);
+User *Settings::getUser() { return this->user; }
 
-  return compute_hash(block);
-}
-
-User *Settings::getUser() { return this->user.get(); }
-
-void Settings::setUser(User *user) { this->user.reset(user); }
+void Settings::setUser(User *user) { this->user = user; }
 
 void Settings::setDBKey(std::string dbKey) { Settings::db_key = dbKey; }
 

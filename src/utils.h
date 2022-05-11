@@ -33,6 +33,7 @@
 
 namespace util {
 
+std::string hash(std::string pass);
 std::string formatCurrency(std::string price);
 std::string formatNumber(int number);
 std::string getDBPath(QString file = "items.db");

@@ -929,7 +929,7 @@ void stock_manager::changePassword() {
     return;
   Settings::getInstance().setKey(
       "db_key",
-      Settings::hash(this->ui_dlg_settings.txtNew_Pass->text().toStdString()));
+      util::hash(this->ui_dlg_settings.txtNew_Pass->text().toStdString()));
   Settings::getInstance().saveSettings();
   sqlite3_close(db);
 }

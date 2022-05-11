@@ -88,7 +88,7 @@ void dlgRegister::reg() {
   User user;
   user.name = ui->txtName->text().trimmed().toStdString();
   user.username = ui->txtUsername->text().trimmed().toStdString();
-  user.password = Settings::hash(ui->txtPassword->text().toStdString());
+  user.password = util::hash(ui->txtPassword->text().toStdString());
   user.role = ui->cmbRole->currentText().trimmed().toStdString();
   int id = storage->insert(user);
 

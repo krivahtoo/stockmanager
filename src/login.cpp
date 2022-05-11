@@ -58,7 +58,7 @@ void dlgLogin::login() {
                 Settings::getInstance().db_key.size());
   };
 
-  std::string hash = Settings::hash(ui->txtPassword->text().toStdString());
+  std::string hash = util::hash(ui->txtPassword->text().toStdString());
   std::string username = ui->txtUsername->text().trimmed().toStdString();
   auto user = storage->get_all_pointer<User>(
       where(c(&User::username) == username && c(&User::password) == hash));

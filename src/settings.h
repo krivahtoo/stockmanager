@@ -39,7 +39,7 @@ private:
   Settings(std::string configFile = "config.json");
   json data;
   int user_id;
-  std::unique_ptr<User> user;
+  User *user;
   std::string file;
   std::string getConfigPath();
   void loadSettings();
@@ -49,7 +49,6 @@ public:
   std::string config_path;
   json getKey(std::string key);
   bool setKey(std::string key, std::string value);
-  static std::string hash(std::string pass);
   void saveSettings();
   void setDBKey(std::string dbKey);
   void setUserId(int id);

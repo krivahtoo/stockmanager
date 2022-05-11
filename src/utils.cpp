@@ -24,6 +24,7 @@
  */
 
 #include "utils.h"
+#include "sha256.h"
 #include "settings.h"
 
 #include <inja/inja.hpp>
@@ -38,6 +39,15 @@
 #include <QtCore/QString>
 
 namespace util {
+
+std::string hash(std::string pass) {
+  std::vector<unsigned long> block;
+  block = convert_to_binary(pass);
+  block = pad_to_512bits(block);
+  block = resize_block(block);
+
+  return compute_hash(block);
+}
 
 std::string formatCurrency(std::string price) {
   using json = nlohmann::json;
