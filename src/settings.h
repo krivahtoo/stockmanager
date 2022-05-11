@@ -38,7 +38,6 @@ class Settings {
 private:
   Settings(std::string configFile = "config.json");
   json data;
-  int user_id;
   User *user;
   std::string file;
   std::string getConfigPath();
@@ -51,7 +50,6 @@ public:
   bool setKey(std::string key, std::string value);
   void saveSettings();
   void setDBKey(std::string dbKey);
-  void setUserId(int id);
   User *getUser();
   void setUser(User *user);
   static Settings &getInstance();

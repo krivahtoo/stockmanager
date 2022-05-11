@@ -90,9 +90,7 @@ void dlgRegister::reg() {
   user.username = ui->txtUsername->text().trimmed().toStdString();
   user.password = util::hash(ui->txtPassword->text().toStdString());
   user.role = ui->cmbRole->currentText().trimmed().toStdString();
-  int id = storage->insert(user);
-
-  Settings::getInstance().setUserId(id);
+  storage->insert(user);
 
   // Close dialog
   this->accept();

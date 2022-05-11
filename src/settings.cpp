@@ -36,7 +36,6 @@
 Settings::Settings(std::string configFile) : file(configFile) {
   config_path = "";
   db_key = "";
-  user_id = 0;
 
   loadSettings();
 }
@@ -102,8 +101,6 @@ User *Settings::getUser() { return this->user; }
 void Settings::setUser(User *user) { this->user = user; }
 
 void Settings::setDBKey(std::string dbKey) { Settings::db_key = dbKey; }
-
-void Settings::setUserId(int id) { Settings::user_id = id; }
 
 Settings &Settings::getInstance() {
   static Settings instance;

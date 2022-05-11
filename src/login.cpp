@@ -69,7 +69,6 @@ void dlgLogin::login() {
     return;
   }
 
-  Settings::getInstance().setUserId(user[0]->id);
   Settings::getInstance().setUser(user[0].get());
 
   accept();
