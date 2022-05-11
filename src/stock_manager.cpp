@@ -119,7 +119,7 @@ stock_manager::stock_manager(QWidget *parent)
   connect(m_ui->btnAdd_Cart, &QPushButton::pressed, this,
           [&]() { dlg_add_new->show(); });
   connect(m_ui->btnAddItem, &QPushButton::pressed, this,
-          [=]() { dlg_add->show(); });
+          [&]() { dlg_add->show(); });
   connect(m_ui->btnRefresh, &QPushButton::pressed, this, [&]() {
     refreshDb();
     updateTable();
@@ -132,11 +132,11 @@ stock_manager::stock_manager(QWidget *parent)
   });
   connect(dlg_add_new, &QDialog::accepted, this, [&]() { updateCart(); });
   connect(m_ui->actSettings_2, &QAction::triggered, this,
-          [=]() { dlg_settings.show(); });
+          [&]() { dlg_settings.show(); });
   connect(m_ui->actionSearch, &QAction::triggered, this,
-          [=]() { dlg_search.show(); });
+          [&]() { dlg_search.show(); });
   connect(m_ui->actAbout, &QAction::triggered, this,
-          [=]() { dlg_about->show(); });
+          [&]() { dlg_about->show(); });
   connect(m_ui->actHome, &QAction::triggered, this,
           [&]() { m_ui->tabMain->setCurrentIndex(0); });
   connect(m_ui->actSales, &QAction::triggered, this,
@@ -521,7 +521,7 @@ void stock_manager::updateSalesStats() {
 
   // get the start of the week
   dt = date.date();
-  dt = dt.addDays(-(dt.dayOfWeek() - 1)); 
+  dt = dt.addDays(-(dt.dayOfWeek() - 1));
   date = dt.startOfDay();
   wStart = date.toSecsSinceEpoch();
   // get the end of the week
@@ -932,7 +932,9 @@ void stock_manager::backupDb() {
                         QDateTime::currentDateTime().toString("yyyyMMddhhmm")))
                     .toStdString();
   QFile::copy(db_path.c_str(), backup_file.c_str());
-  this->statusBar()->showMessage("Database backup created", 2000);
+  this->statusBar()->showMessage(QString("Database backup created at %1")
+                                     .arg(QString::fromStdString(backup_file)),
+                                 2000);
 }
 
 #ifndef QT_NO_CONTEXTMENU
