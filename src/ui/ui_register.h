@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'registerqRcRkJ.ui'
+** Form generated from reading UI file 'registerDVCRJZ.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef REGISTERQRCRKJ_H
-#define REGISTERQRCRKJ_H
+#ifndef REGISTERDVCRJZ_H
+#define REGISTERDVCRJZ_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -46,7 +46,7 @@ public:
     QLabel *label_5;
     QLineEdit *txtPassword;
     QLineEdit *txtPasswordConfirm;
-    QLabel *lblError;
+    QLabel *lblInfo;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnCancel;
@@ -113,7 +113,9 @@ public:
         cmbRole->addItem(QString());
         cmbRole->addItem(QString());
         cmbRole->setObjectName(QString::fromUtf8("cmbRole"));
+        cmbRole->setEnabled(true);
         cmbRole->setMaximumSize(QSize(130, 16777215));
+        cmbRole->setEditable(false);
 
         formLayout->setWidget(2, QFormLayout::FieldRole, cmbRole);
 
@@ -150,10 +152,10 @@ public:
 
         formLayout->setWidget(3, QFormLayout::SpanningRole, groupBox_2);
 
-        lblError = new QLabel(groupBox);
-        lblError->setObjectName(QString::fromUtf8("lblError"));
+        lblInfo = new QLabel(groupBox);
+        lblInfo->setObjectName(QString::fromUtf8("lblInfo"));
 
-        formLayout->setWidget(4, QFormLayout::SpanningRole, lblError);
+        formLayout->setWidget(4, QFormLayout::SpanningRole, lblInfo);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -193,6 +195,7 @@ public:
         retranslateUi(dlgRegister);
         QObject::connect(btnCancel, SIGNAL(clicked()), dlgRegister, SLOT(reject()));
 
+        cmbRole->setCurrentIndex(-1);
         btnRegister->setDefault(true);
 
 
@@ -219,11 +222,7 @@ public:
         label_5->setText(QCoreApplication::translate("dlgRegister", "Password", nullptr));
         txtPassword->setPlaceholderText(QCoreApplication::translate("dlgRegister", "Enter password...", nullptr));
         txtPasswordConfirm->setPlaceholderText(QCoreApplication::translate("dlgRegister", "Enter password...", nullptr));
-        lblError->setText(QCoreApplication::translate("dlgRegister", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'JetBrainsMono Nerd Font'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; color:#ff0000;\">Password doesn't match</span></p></body></html>", nullptr));
+        lblInfo->setText(QString());
         btnCancel->setText(QCoreApplication::translate("dlgRegister", "Cancel", nullptr));
         btnReset->setText(QCoreApplication::translate("dlgRegister", "Reset", nullptr));
         btnRegister->setText(QCoreApplication::translate("dlgRegister", "Register", nullptr));
@@ -237,4 +236,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // REGISTERQRCRKJ_H
+#endif // REGISTERDVCRJZ_H

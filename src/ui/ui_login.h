@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'loginmqWbzz.ui'
+** Form generated from reading UI file 'loginGvoHNY.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef LOGINMQWBZZ_H
-#define LOGINMQWBZZ_H
+#ifndef LOGINGVOHNY_H
+#define LOGINGVOHNY_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -37,7 +37,6 @@ public:
     QLineEdit *txtUsername;
     QLabel *label_2;
     QLineEdit *txtPassword;
-    QLabel *lblInfo;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
@@ -96,11 +95,6 @@ public:
 
         verticalLayout->addLayout(formLayout);
 
-        lblInfo = new QLabel(groupBox);
-        lblInfo->setObjectName(QString::fromUtf8("lblInfo"));
-
-        verticalLayout->addWidget(lblInfo);
-
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer);
@@ -150,7 +144,6 @@ public:
         label_3->setText(QCoreApplication::translate("dlgLogin", "Please login to access the system", nullptr));
         label->setText(QCoreApplication::translate("dlgLogin", "Username:", nullptr));
         label_2->setText(QCoreApplication::translate("dlgLogin", "Password:", nullptr));
-        lblInfo->setText(QCoreApplication::translate("dlgLogin", "<html><head/><body><p><span style=\" font-weight:600; color:#ff0000;\">Wrong password or username</span></p></body></html>", nullptr));
         btnCancel->setText(QCoreApplication::translate("dlgLogin", "Cancel", nullptr));
         btnLogin->setText(QCoreApplication::translate("dlgLogin", "Login", nullptr));
     } // retranslateUi
@@ -163,4 +156,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // LOGINMQWBZZ_H
+#endif // LOGINGVOHNY_H
