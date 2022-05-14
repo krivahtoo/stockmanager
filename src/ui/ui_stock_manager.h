@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'stock_managerXjmhEr.ui'
+** Form generated from reading UI file 'stock_managerzsVlNP.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.2
+** Created by: Qt User Interface Compiler version 5.15.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef STOCK_MANAGERXJMHER_H
-#define STOCK_MANAGERXJMHER_H
+#ifndef STOCK_MANAGERZSVLNP_H
+#define STOCK_MANAGERZSVLNP_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -113,7 +113,7 @@ public:
     {
         if (stock_manager->objectName().isEmpty())
             stock_manager->setObjectName(QString::fromUtf8("stock_manager"));
-        stock_manager->resize(799, 534);
+        stock_manager->resize(819, 538);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/images/logo.svg"), QSize(), QIcon::Normal, QIcon::Off);
         stock_manager->setWindowIcon(icon);
@@ -339,8 +339,8 @@ public:
         horizontalLayout_2 = new QHBoxLayout(tabSales);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         tblSales = new QTableWidget(tabSales);
-        if (tblSales->columnCount() < 7)
-            tblSales->setColumnCount(7);
+        if (tblSales->columnCount() < 8)
+            tblSales->setColumnCount(8);
         QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
         tblSales->setHorizontalHeaderItem(0, __qtablewidgetitem5);
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
@@ -355,6 +355,8 @@ public:
         tblSales->setHorizontalHeaderItem(5, __qtablewidgetitem10);
         QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
         tblSales->setHorizontalHeaderItem(6, __qtablewidgetitem11);
+        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
+        tblSales->setHorizontalHeaderItem(7, __qtablewidgetitem12);
         tblSales->setObjectName(QString::fromUtf8("tblSales"));
         tblSales->setContextMenuPolicy(Qt::CustomContextMenu);
         tblSales->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
@@ -439,16 +441,16 @@ public:
         tblStock = new QTableWidget(tabStock);
         if (tblStock->columnCount() < 5)
             tblStock->setColumnCount(5);
-        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
-        tblStock->setHorizontalHeaderItem(0, __qtablewidgetitem12);
         QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
-        tblStock->setHorizontalHeaderItem(1, __qtablewidgetitem13);
+        tblStock->setHorizontalHeaderItem(0, __qtablewidgetitem13);
         QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
-        tblStock->setHorizontalHeaderItem(2, __qtablewidgetitem14);
+        tblStock->setHorizontalHeaderItem(1, __qtablewidgetitem14);
         QTableWidgetItem *__qtablewidgetitem15 = new QTableWidgetItem();
-        tblStock->setHorizontalHeaderItem(3, __qtablewidgetitem15);
+        tblStock->setHorizontalHeaderItem(2, __qtablewidgetitem15);
         QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
-        tblStock->setHorizontalHeaderItem(4, __qtablewidgetitem16);
+        tblStock->setHorizontalHeaderItem(3, __qtablewidgetitem16);
+        QTableWidgetItem *__qtablewidgetitem17 = new QTableWidgetItem();
+        tblStock->setHorizontalHeaderItem(4, __qtablewidgetitem17);
         tblStock->setObjectName(QString::fromUtf8("tblStock"));
         tblStock->setContextMenuPolicy(Qt::CustomContextMenu);
         tblStock->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -507,7 +509,7 @@ public:
         stock_manager->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(stock_manager);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 799, 20));
+        menuBar->setGeometry(QRect(0, 0, 819, 20));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuHelp = new QMenu(menuBar);
@@ -646,6 +648,8 @@ public:
         ___qtablewidgetitem10->setText(QCoreApplication::translate("stock_manager", "Payment Method", nullptr));
         QTableWidgetItem *___qtablewidgetitem11 = tblSales->horizontalHeaderItem(6);
         ___qtablewidgetitem11->setText(QCoreApplication::translate("stock_manager", "Sale Date", nullptr));
+        QTableWidgetItem *___qtablewidgetitem12 = tblSales->horizontalHeaderItem(7);
+        ___qtablewidgetitem12->setText(QCoreApplication::translate("stock_manager", "Sold By", nullptr));
         grpSales->setTitle(QString());
         grpOptions->setTitle(QCoreApplication::translate("stock_manager", "Options", nullptr));
         btnRefreshSales->setText(QCoreApplication::translate("stock_manager", "Refresh", nullptr));
@@ -660,16 +664,16 @@ public:
         grpSalesStats->setTitle(QCoreApplication::translate("stock_manager", "Week and Month", nullptr));
         lblSalesStats_2->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p><span style=\" font-weight:600;\">Sales this week:</span><br/>0 items for <span style=\" font-weight:600;\">Ksh. 0.00</span></p><p><span style=\" font-weight:600;\">Sales this Month:</span><br/>0 items for <span style=\" font-weight:600;\">Ksh. 0.00</span></p></body></html>", nullptr));
         tabMain->setTabText(tabMain->indexOf(tabSales), QCoreApplication::translate("stock_manager", "Sales", nullptr));
-        QTableWidgetItem *___qtablewidgetitem12 = tblStock->horizontalHeaderItem(0);
-        ___qtablewidgetitem12->setText(QCoreApplication::translate("stock_manager", "Id", nullptr));
-        QTableWidgetItem *___qtablewidgetitem13 = tblStock->horizontalHeaderItem(1);
-        ___qtablewidgetitem13->setText(QCoreApplication::translate("stock_manager", "Name", nullptr));
-        QTableWidgetItem *___qtablewidgetitem14 = tblStock->horizontalHeaderItem(2);
-        ___qtablewidgetitem14->setText(QCoreApplication::translate("stock_manager", "Price", nullptr));
-        QTableWidgetItem *___qtablewidgetitem15 = tblStock->horizontalHeaderItem(3);
-        ___qtablewidgetitem15->setText(QCoreApplication::translate("stock_manager", "Capacity", nullptr));
-        QTableWidgetItem *___qtablewidgetitem16 = tblStock->horizontalHeaderItem(4);
-        ___qtablewidgetitem16->setText(QCoreApplication::translate("stock_manager", "Quantity", nullptr));
+        QTableWidgetItem *___qtablewidgetitem13 = tblStock->horizontalHeaderItem(0);
+        ___qtablewidgetitem13->setText(QCoreApplication::translate("stock_manager", "Id", nullptr));
+        QTableWidgetItem *___qtablewidgetitem14 = tblStock->horizontalHeaderItem(1);
+        ___qtablewidgetitem14->setText(QCoreApplication::translate("stock_manager", "Name", nullptr));
+        QTableWidgetItem *___qtablewidgetitem15 = tblStock->horizontalHeaderItem(2);
+        ___qtablewidgetitem15->setText(QCoreApplication::translate("stock_manager", "Price", nullptr));
+        QTableWidgetItem *___qtablewidgetitem16 = tblStock->horizontalHeaderItem(3);
+        ___qtablewidgetitem16->setText(QCoreApplication::translate("stock_manager", "Capacity", nullptr));
+        QTableWidgetItem *___qtablewidgetitem17 = tblStock->horizontalHeaderItem(4);
+        ___qtablewidgetitem17->setText(QCoreApplication::translate("stock_manager", "Quantity", nullptr));
 #if QT_CONFIG(statustip)
         btnAddItem->setStatusTip(QCoreApplication::translate("stock_manager", "Add new item into stock", nullptr));
 #endif // QT_CONFIG(statustip)
@@ -701,4 +705,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // STOCK_MANAGERXJMHER_H
+#endif // STOCK_MANAGERZSVLNP_H

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>799</width>
-    <height>534</height>
+    <width>819</width>
+    <height>538</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -349,6 +349,11 @@
             <string>Sale Date</string>
            </property>
           </column>
+          <column>
+           <property name="text">
+            <string>Sold By</string>
+           </property>
+          </column>
          </widget>
         </item>
         <item>
@@ -598,7 +603,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>799</width>
+     <width>819</width>
      <height>20</height>
     </rect>
    </property>

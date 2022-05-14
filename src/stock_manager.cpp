@@ -361,8 +361,10 @@ void stock_manager::sellItems() {
   try {
     auto guard = storage->transaction_guard();
     for (auto &itm : this->cart) {
-      storage->insert(SoldItem{-1, itm.itemNo, itm.quantity, payment_method,
-                               date, std::make_unique<long>(itm.price)});
+      storage->insert(SoldItem{
+          -1, itm.itemNo, itm.quantity, payment_method, date,
+          std::make_unique<long>(itm.price),
+          std::make_unique<int>(Settings::getInstance().getUser()->id)});
       auto items = storage->get_all_pointer<Stock>(
           where(c(&Stock::itemNo) == itm.itemNo));
 
@@ -421,7 +423,7 @@ void stock_manager::updateSales(QDate ch_date) {
   auto items = storage->select(
       columns(&SoldItem::id, &Item::name, &SoldItem::quantity,
               &SoldItem::sellingPrice, &SoldItem::paymentMethod,
-              &SoldItem::saleDate, &Item::buyingPrice, &Item::price),
+              &SoldItem::saleDate, &Item::buyingPrice, &Item::price, &SoldItem::userId),
       where(c(&Item::itemNo) == &SoldItem::itemNo and
             c(&SoldItem::saleDate) >= start and c(&SoldItem::saleDate) <= end));
 
@@ -478,6 +480,17 @@ void stock_manager::updateSales(QDate ch_date) {
     QTableWidgetItem *tblItem6 = new QTableWidgetItem();
     tblItem6->setText(date_time.toString("dd-MM-yyyy"));
     m_ui->tblSales->setItem(count, 6, tblItem6);
+
+    // SoldItem::userId
+    QTableWidgetItem *tblItem7 = new QTableWidgetItem();
+    int *userId = std::get<8>(itm).get();
+    tblItem7->setText("Unknown");
+    if (userId != nullptr) {
+      if (auto usr = storage->get_pointer<User>(*userId)) {
+        tblItem7->setText(QString::fromStdString(usr->name));
+      }
+    }
+    m_ui->tblSales->setItem(count, 7, tblItem7);
 
     salesMade += price * std::get<2>(itm);
     count++;
