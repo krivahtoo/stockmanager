@@ -423,7 +423,8 @@ void stock_manager::updateSales(QDate ch_date) {
   auto items = storage->select(
       columns(&SoldItem::id, &Item::name, &SoldItem::quantity,
               &SoldItem::sellingPrice, &SoldItem::paymentMethod,
-              &SoldItem::saleDate, &Item::buyingPrice, &Item::price, &SoldItem::userId),
+              &SoldItem::saleDate, &Item::buyingPrice, &Item::price,
+              &SoldItem::userId),
       where(c(&Item::itemNo) == &SoldItem::itemNo and
             c(&SoldItem::saleDate) >= start and c(&SoldItem::saleDate) <= end));
 
