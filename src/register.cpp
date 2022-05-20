@@ -33,6 +33,7 @@
 #include <QDialog>
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QtCore/QCryptographicHash>
 
 dlgRegister::dlgRegister(QMainWindow *parent, bool isGenesis)
     : QDialog(parent), ui(new Ui::dlgRegister), isGenesis(isGenesis) {
@@ -88,7 +89,10 @@ void dlgRegister::reg() {
   User user;
   user.name = ui->txtName->text().trimmed().toStdString();
   user.username = ui->txtUsername->text().trimmed().toStdString();
-  user.password = util::hash(ui->txtPassword->text().toStdString());
+  user.password = QCryptographicHash::hash(ui->txtPassword->text().toUtf8(),
+                                           QCryptographicHash::Sha256)
+                      .toHex()
+                      .toStdString();
   user.role = ui->cmbRole->currentText().trimmed().toStdString();
   storage->insert(user);
 

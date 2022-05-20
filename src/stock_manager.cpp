@@ -39,6 +39,7 @@
 #include <nlohmann/json.hpp>
 #include <sqlcipher/sqlite3.h>
 
+#include <QtCore/QCryptographicHash>
 #include <QtCore/QDateTime>
 #include <QtCore/QTimer>
 #include <QtGui/QContextMenuEvent>
@@ -894,12 +895,14 @@ void stock_manager::editSaleContext(QPoint pos) {
   menu.exec(this->m_ui->tblSales->mapToGlobal(pos));
 }
 
-// TODO: find a better way to implement this
-// or use user based password changing
 void stock_manager::changePassword() {
-  sqlite3 *db;
-  // Settings settings;
-  std::string db_file = util::getDBPath(DB_FILE);
+  using namespace sqlite_orm;
+  storage = std::make_unique<Storage>(initStorage(util::getDBPath()));
+  storage->on_open = [](sqlite3 *db) {
+    sqlite3_key(db, Settings::getInstance().db_key.c_str(),
+                Settings::getInstance().db_key.size());
+  };
+
   if (this->ui_dlg_settings.txtOld_Pass->text().isEmpty() ||
       this->ui_dlg_settings.txtConfirm_Pass->text().isEmpty() ||
       this->ui_dlg_settings.txtNew_Pass->text().isEmpty()) {
@@ -920,41 +923,26 @@ void stock_manager::changePassword() {
     this->ui_dlg_settings.txtConfirm_Pass->setText("");
     return;
   }
-  // FIXME: This doest seem to work 😑
-  if (this->ui_dlg_settings.txtOld_Pass->text().toStdString() !=
-      Settings::getInstance().db_key) {
+
+  if (QCryptographicHash::hash(
+          this->ui_dlg_settings.txtOld_Pass->text().toUtf8(),
+          QCryptographicHash::Sha256)
+          .toHex()
+          .toStdString() != Settings::getInstance().getUser()->password) {
     QMessageBox::warning(this, "Stock Manager",
-                         "Password entered is incorrect.\n"
-                         "Please enter the correct password and try again",
+                         "Incorrect user password.\n"
+                         "Please enter the correct password",
                          QMessageBox::Ok);
-    // std::cout <<
-    // Settings::hash(this->ui_dlg_settings.txtOld_Pass->text().trimmed().toStdString())
-    // << std::endl;
-    std::cout << this->ui_dlg_settings.txtOld_Pass->text().toStdString()
-              << std::endl;
-    // std::cout << settings.getKey("db_key").get<std::string>() << std::endl;
-    std::cout << Settings::getInstance().db_key << std::endl;
-    this->ui_dlg_settings.txtOld_Pass->setText("");
-    this->ui_dlg_settings.txtNew_Pass->setText("");
-    this->ui_dlg_settings.txtConfirm_Pass->setText("");
     return;
   }
 
-  if (sqlite3_open(db_file.c_str(), &db) != SQLITE_OK)
-    return;
-  if (sqlite3_key(db, Settings::getInstance().db_key.c_str(),
-                  Settings::getInstance().db_key.size()) != SQLITE_OK)
-    return;
-  if (sqlite3_rekey(
-          db, this->ui_dlg_settings.txtNew_Pass->text().toStdString().c_str(),
-          this->ui_dlg_settings.txtNew_Pass->text().toStdString().size()) !=
-      SQLITE_OK)
-    return;
-  Settings::getInstance().setKey(
-      "db_key",
-      util::hash(this->ui_dlg_settings.txtNew_Pass->text().toStdString()));
-  Settings::getInstance().saveSettings();
-  sqlite3_close(db);
+  User* user = Settings::getInstance().getUser();
+  user->password = QCryptographicHash::hash(
+                         this->ui_dlg_settings.txtNew_Pass->text().toUtf8(),
+                         QCryptographicHash::Sha256)
+                         .toHex()
+                         .toStdString();
+  storage->update(*user);
 }
 
 void stock_manager::backupDb() {

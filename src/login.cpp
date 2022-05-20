@@ -33,6 +33,7 @@
 #include <QDialog>
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QtCore/QCryptographicHash>
 
 dlgLogin::dlgLogin(QMainWindow *parent)
     : QDialog(parent), ui(new Ui::dlgLogin) {
@@ -58,7 +59,10 @@ void dlgLogin::login() {
                 Settings::getInstance().db_key.size());
   };
 
-  std::string hash = util::hash(ui->txtPassword->text().toStdString());
+  std::string hash = QCryptographicHash::hash(ui->txtPassword->text().toUtf8(),
+                                              QCryptographicHash::Sha256)
+                         .toHex()
+                         .toStdString();
   std::string username = ui->txtUsername->text().trimmed().toStdString();
   auto user = storage->get_all_pointer<User>(
       where(c(&User::username) == username && c(&User::password) == hash));
@@ -69,7 +73,7 @@ void dlgLogin::login() {
     return;
   }
 
-  Settings::getInstance().setUser(user[0].get());
+  Settings::getInstance().setUser(user[0].release());
 
   accept();
 }
