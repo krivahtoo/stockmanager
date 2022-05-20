@@ -72,8 +72,10 @@ stock_manager::stock_manager(QWidget *parent)
   this->stockCount = 0;
   this->lastChange = 0;
   this->timerActive = false;
-  m_ui->dateSales->setDate(QDate::currentDate());
-  m_ui->dateSales->setMaximumDate(QDate::currentDate());
+  m_ui->dateStart->setDate(QDate::currentDate().addDays(-10));
+  m_ui->dateStart->setMaximumDate(QDate::currentDate());
+  m_ui->dateEnd->setDate(QDate::currentDate());
+  m_ui->dateEnd->setMaximumDate(QDate::currentDate());
 
   QShortcut *cartShortcut = new QShortcut(QKeySequence("Ctrl+1"), this);
   QShortcut *salesShortcut = new QShortcut(QKeySequence("Ctrl+2"), this);
@@ -96,8 +98,10 @@ stock_manager::stock_manager(QWidget *parent)
   connect(actDelete, &QAction::triggered, this, &stock_manager::deleteItem);
   connect(actDelete_Sale, &QAction::triggered, this,
           &stock_manager::deleteSoldItem);
-  connect(m_ui->dateSales, &QDateEdit::dateChanged, this,
-          &stock_manager::updateSales);
+  connect(m_ui->dateStart, &QDateEdit::dateChanged, this,
+          [&]() { m_ui->dateEnd->setMinimumDate(m_ui->dateStart->date()); });
+  connect(m_ui->dateEnd, &QDateEdit::dateChanged, this,
+          [&]() { m_ui->dateStart->setMaximumDate(m_ui->dateEnd->date()); });
   connect(ui_dlg_settings.btnChangePass, &QPushButton::pressed, this,
           &stock_manager::changePassword);
   connect(m_ui->tblStock, &QTableWidget::customContextMenuRequested, this,
@@ -105,7 +109,7 @@ stock_manager::stock_manager(QWidget *parent)
   connect(m_ui->tblSales, &QTableWidget::customContextMenuRequested, this,
           &stock_manager::editSaleContext);
   connect(m_ui->btnRefreshSales, &QPushButton::pressed, this,
-          [&]() { updateSales(m_ui->dateSales->date()); });
+          [&]() { updateSales(); });
   connect(m_ui->btnClear_Cart, &QPushButton::pressed, this, [&]() {
     cart.clear();
     updateCart();
@@ -392,18 +396,18 @@ void stock_manager::sellItems() {
                                  2000);
 }
 
-void stock_manager::updateSales(QDate ch_date) {
+void stock_manager::updateSales() {
   using namespace sqlite_orm;
   long start, end;
   json j;
   QDateTime date;
   // Avoid reloading too much
-  if ((QDateTime::currentSecsSinceEpoch() - this->lastChange) <= 5 &&
+  if ((QDateTime::currentSecsSinceEpoch() - this->lastChange) <= 2 &&
       this->lastChange > 0) {
     if (!this->timerActive) {
       QTimer::singleShot(
           (QDateTime::currentSecsSinceEpoch() - this->lastChange) * 1000, this,
-          [&]() { updateSales(this->m_ui->dateSales->date()); });
+          [&]() { updateSales(); });
       this->timerActive = true;
     }
     return;
@@ -414,9 +418,10 @@ void stock_manager::updateSales(QDate ch_date) {
     sqlite3_key(db, Settings::getInstance().db_key.c_str(),
                 Settings::getInstance().db_key.size());
   };
-  date.setDate(ch_date);
+  date.setDate(m_ui->dateStart->date());
   date.setTime(QTime::fromString("00:00:00", "HH:mm:ss"));
   start = date.toSecsSinceEpoch();
+  date.setDate(m_ui->dateEnd->date());
   date.setTime(QTime::fromString("23:59:59", "HH:mm:ss"));
   end = date.toSecsSinceEpoch();
 
@@ -479,7 +484,7 @@ void stock_manager::updateSales(QDate ch_date) {
     // SoldItem::saleDate
     QDateTime date_time = QDateTime::fromSecsSinceEpoch(std::get<5>(itm));
     QTableWidgetItem *tblItem6 = new QTableWidgetItem();
-    tblItem6->setText(date_time.toString("dd-MM-yyyy"));
+    tblItem6->setText(date_time.toString("dd MMM yyyy"));
     m_ui->tblSales->setItem(count, 6, tblItem6);
 
     // SoldItem::userId
@@ -498,14 +503,18 @@ void stock_manager::updateSales(QDate ch_date) {
   }
   j["count"] = quantity;
   j["sales"] = util::formatCurrency(util::formatNumber(salesMade));
-  j["date"] = date.toString("ddd dd MMMM yyyy").toStdString();
+  j["start"] =
+      m_ui->dateStart->date().toString("ddd dd MMMM yyyy").toStdString();
+  j["end"] = m_ui->dateEnd->date().toString("ddd dd MMM yyyy").toStdString();
   this->m_ui->lblSalesStats->setText(QString::fromStdString(inja::render(R"(
 <html>
     <head/>
     <body>
         <p>
-            <span style="font-size:12pt;">Sales Made on </span>
-            <span style="font-size:12pt; font-weight:600;">{{ date }}</span>
+            <span style="font-size:12pt;">Sales Made from </span>
+            <span style="font-size:12pt; font-weight:600;">{{ start }}</span>
+            <span style="font-size:12pt;"> to </span>
+            <span style="font-size:12pt; font-weight:600;">{{ end }}</span>
         </p>
         <p>
             <span style="font-size:12pt;">Items Sold: </span>
@@ -535,7 +544,7 @@ void stock_manager::updateSalesStats() {
     sqlite3_key(db, Settings::getInstance().db_key.c_str(),
                 Settings::getInstance().db_key.size());
   };
-  date.setDate(m_ui->dateSales->date());
+  date.setDate(m_ui->dateStart->date());
   date.setTime(QTime::fromString("23:59:59", "HH:mm:ss"));
 
   // get the start of the week
@@ -549,7 +558,7 @@ void stock_manager::updateSalesStats() {
   wEnd = date.toSecsSinceEpoch();
 
   // get the start of the month
-  dt = m_ui->dateSales->date();
+  dt = m_ui->dateStart->date();
   dt.setDate(dt.year(), dt.month(), 1);
   date = dt.startOfDay();
   mStart = date.toSecsSinceEpoch();
@@ -746,7 +755,7 @@ void stock_manager::deleteSoldItem() {
   }
 
   // Update sales table
-  this->updateSales(this->m_ui->dateSales->date());
+  this->updateSales();
   this->updateSalesStats();
 }
 

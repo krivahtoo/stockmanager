@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'stock_managerzsVlNP.ui'
+** Form generated from reading UI file 'stock_managerryxxMS.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.3
+** Created by: Qt User Interface Compiler version 5.15.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef STOCK_MANAGERZSVLNP_H
-#define STOCK_MANAGERZSVLNP_H
+#ifndef STOCK_MANAGERRYXXMS_H
+#define STOCK_MANAGERRYXXMS_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -82,9 +82,11 @@ public:
     QVBoxLayout *verticalLayout_7;
     QGroupBox *grpOptions;
     QFormLayout *formLayout_6;
-    QPushButton *btnRefreshSales;
     QLabel *label_2;
-    QDateEdit *dateSales;
+    QDateEdit *dateStart;
+    QLabel *label;
+    QDateEdit *dateEnd;
+    QPushButton *btnRefreshSales;
     QLabel *label_3;
     QGroupBox *grpStats;
     QVBoxLayout *verticalLayout_6;
@@ -113,7 +115,7 @@ public:
     {
         if (stock_manager->objectName().isEmpty())
             stock_manager->setObjectName(QString::fromUtf8("stock_manager"));
-        stock_manager->resize(819, 538);
+        stock_manager->resize(788, 567);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/images/logo.svg"), QSize(), QIcon::Normal, QIcon::Off);
         stock_manager->setWindowIcon(icon);
@@ -379,6 +381,28 @@ public:
         grpOptions->setObjectName(QString::fromUtf8("grpOptions"));
         formLayout_6 = new QFormLayout(grpOptions);
         formLayout_6->setObjectName(QString::fromUtf8("formLayout_6"));
+        label_2 = new QLabel(grpOptions);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        formLayout_6->setWidget(2, QFormLayout::LabelRole, label_2);
+
+        dateStart = new QDateEdit(grpOptions);
+        dateStart->setObjectName(QString::fromUtf8("dateStart"));
+        dateStart->setCalendarPopup(true);
+
+        formLayout_6->setWidget(2, QFormLayout::FieldRole, dateStart);
+
+        label = new QLabel(grpOptions);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        formLayout_6->setWidget(3, QFormLayout::LabelRole, label);
+
+        dateEnd = new QDateEdit(grpOptions);
+        dateEnd->setObjectName(QString::fromUtf8("dateEnd"));
+        dateEnd->setCalendarPopup(true);
+
+        formLayout_6->setWidget(3, QFormLayout::FieldRole, dateEnd);
+
         btnRefreshSales = new QPushButton(grpOptions);
         btnRefreshSales->setObjectName(QString::fromUtf8("btnRefreshSales"));
         QIcon icon17;
@@ -387,19 +411,10 @@ public:
 
         formLayout_6->setWidget(7, QFormLayout::FieldRole, btnRefreshSales);
 
-        label_2 = new QLabel(grpOptions);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        formLayout_6->setWidget(2, QFormLayout::LabelRole, label_2);
-
-        dateSales = new QDateEdit(grpOptions);
-        dateSales->setObjectName(QString::fromUtf8("dateSales"));
-
-        formLayout_6->setWidget(2, QFormLayout::FieldRole, dateSales);
-
         label_3 = new QLabel(grpOptions);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setMaximumSize(QSize(16777215, 27));
+        label_3->setWordWrap(true);
 
         formLayout_6->setWidget(0, QFormLayout::SpanningRole, label_3);
 
@@ -412,6 +427,7 @@ public:
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         lblSalesStats = new QLabel(grpStats);
         lblSalesStats->setObjectName(QString::fromUtf8("lblSalesStats"));
+        lblSalesStats->setWordWrap(true);
 
         verticalLayout_6->addWidget(lblSalesStats);
 
@@ -509,7 +525,7 @@ public:
         stock_manager->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(stock_manager);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 819, 20));
+        menuBar->setGeometry(QRect(0, 0, 788, 20));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuHelp = new QMenu(menuBar);
@@ -523,8 +539,8 @@ public:
         QWidget::setTabOrder(btnAdd_Cart, btnRemove_Cart);
         QWidget::setTabOrder(btnRemove_Cart, cmbPayment_Method);
         QWidget::setTabOrder(cmbPayment_Method, btnSell_Cart);
-        QWidget::setTabOrder(btnSell_Cart, dateSales);
-        QWidget::setTabOrder(dateSales, btnRefreshSales);
+        QWidget::setTabOrder(btnSell_Cart, dateStart);
+        QWidget::setTabOrder(dateStart, btnRefreshSales);
         QWidget::setTabOrder(btnRefreshSales, btnAddItem);
         QWidget::setTabOrder(btnAddItem, tblStock);
         QWidget::setTabOrder(tblStock, tblCart);
@@ -652,13 +668,14 @@ public:
         ___qtablewidgetitem12->setText(QCoreApplication::translate("stock_manager", "Sold By", nullptr));
         grpSales->setTitle(QString());
         grpOptions->setTitle(QCoreApplication::translate("stock_manager", "Options", nullptr));
+        label_2->setText(QCoreApplication::translate("stock_manager", "Start Date:", nullptr));
+        dateStart->setDisplayFormat(QCoreApplication::translate("stock_manager", "dd/MM/yyyy", nullptr));
+        label->setText(QCoreApplication::translate("stock_manager", "End Date:", nullptr));
         btnRefreshSales->setText(QCoreApplication::translate("stock_manager", "Refresh", nullptr));
 #if QT_CONFIG(shortcut)
         btnRefreshSales->setShortcut(QCoreApplication::translate("stock_manager", "Ctrl+R", nullptr));
 #endif // QT_CONFIG(shortcut)
-        label_2->setText(QCoreApplication::translate("stock_manager", "Enter Date:", nullptr));
-        dateSales->setDisplayFormat(QCoreApplication::translate("stock_manager", "dd-MM-yyyy", nullptr));
-        label_3->setText(QCoreApplication::translate("stock_manager", "Select the date you want to view sales", nullptr));
+        label_3->setText(QCoreApplication::translate("stock_manager", "Select the date range you want to view sales for:", nullptr));
         grpStats->setTitle(QCoreApplication::translate("stock_manager", "Stats", nullptr));
         lblSalesStats->setText(QCoreApplication::translate("stock_manager", "<html><head/><body><p><span style=\" font-size:12pt;\">Sales Made on </span><span style=\" font-size:12pt; font-weight:600;\">Wed 15 July 2021</span></p><p><span style=\" font-size:12pt;\">Items Sold: </span><span style=\" font-size:12pt; font-weight:600;\">244</span></p><p><span style=\" font-size:12pt;\">Sales Made: </span><span style=\" font-size:12pt; font-weight:600;\">Ksh. 3,245</span></p></body></html>", nullptr));
         grpSalesStats->setTitle(QCoreApplication::translate("stock_manager", "Week and Month", nullptr));
@@ -705,4 +722,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // STOCK_MANAGERZSVLNP_H
+#endif // STOCK_MANAGERRYXXMS_H

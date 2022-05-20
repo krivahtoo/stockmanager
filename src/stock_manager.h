@@ -91,7 +91,7 @@ private:
   void updateStats();
   void updateCart();
   void sellItems();
-  void updateSales(QDate ch_date = QDate::currentDate());
+  void updateSales();
   void updateSalesStats();
   void updateItem();
   void updateSoldItem();

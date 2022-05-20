@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'settingsMmjYYL.ui'
+** Form generated from reading UI file 'settingssLKyPc.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.2
+** Created by: Qt User Interface Compiler version 5.15.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SETTINGSMMJYYL_H
-#define SETTINGSMMJYYL_H
+#ifndef SETTINGSSLKYPC_H
+#define SETTINGSSLKYPC_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -62,11 +62,11 @@ public:
     QLineEdit *txtNew_Pass;
     QLabel *label_3;
     QLineEdit *txtConfirm_Pass;
+    QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QPushButton *btnChangePass;
     QLabel *label_8;
-    QSpacerItem *verticalSpacer;
     QGroupBox *grpOther;
     QFormLayout *formLayout_3;
     QLabel *label_6;
@@ -196,7 +196,7 @@ public:
 
         grpPass = new QGroupBox(groupBox);
         grpPass->setObjectName(QString::fromUtf8("grpPass"));
-        grpPass->setEnabled(false);
+        grpPass->setEnabled(true);
         formLayout = new QFormLayout(grpPass);
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
         label = new QLabel(grpPass);
@@ -235,6 +235,10 @@ public:
 
         formLayout->setWidget(2, QFormLayout::FieldRole, txtConfirm_Pass);
 
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        formLayout->setItem(4, QFormLayout::LabelRole, verticalSpacer);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -256,10 +260,6 @@ public:
         label_8->setObjectName(QString::fromUtf8("label_8"));
 
         formLayout->setWidget(3, QFormLayout::SpanningRole, label_8);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        formLayout->setItem(4, QFormLayout::LabelRole, verticalSpacer);
 
 
         gridLayout->addWidget(grpPass, 1, 0, 1, 1);
@@ -369,7 +369,7 @@ public:
         label_3->setText(QCoreApplication::translate("dlgSettings", "Confirm Password:", nullptr));
         txtConfirm_Pass->setPlaceholderText(QCoreApplication::translate("dlgSettings", "Confirm New Password..", nullptr));
         btnChangePass->setText(QCoreApplication::translate("dlgSettings", "Change Password", nullptr));
-        label_8->setText(QCoreApplication::translate("dlgSettings", "Password used to encrypt the database", nullptr));
+        label_8->setText(QCoreApplication::translate("dlgSettings", "Your user password", nullptr));
         grpOther->setTitle(QCoreApplication::translate("dlgSettings", "Other", nullptr));
         label_6->setText(QCoreApplication::translate("dlgSettings", "Date Format:", nullptr));
         txtDate_Format->setPlaceholderText(QCoreApplication::translate("dlgSettings", "e.g. dd/MM/YY", nullptr));
@@ -387,4 +387,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SETTINGSMMJYYL_H
+#endif // SETTINGSSLKYPC_H
