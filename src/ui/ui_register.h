@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'registerDVCRJZ.ui'
+** Form generated from reading UI file 'registerySEzgY.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.3
+** Created by: Qt User Interface Compiler version 5.15.5
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef REGISTERDVCRJZ_H
-#define REGISTERDVCRJZ_H
+#ifndef REGISTERYSEZGY_H
+#define REGISTERYSEZGY_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -236,4 +236,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // REGISTERDVCRJZ_H
+#endif // REGISTERYSEZGY_H

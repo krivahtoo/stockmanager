@@ -33,7 +33,9 @@
 #include <QDialog>
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QDateTime>
 #include <QtCore/QCryptographicHash>
+#include <memory>
 
 dlgLogin::dlgLogin(QMainWindow *parent)
     : QDialog(parent), ui(new Ui::dlgLogin) {
@@ -64,16 +66,20 @@ void dlgLogin::login() {
                          .toHex()
                          .toStdString();
   std::string username = ui->txtUsername->text().trimmed().toStdString();
-  auto user = storage->get_all_pointer<User>(
+  auto res = storage->get_all_pointer<User>(
       where(c(&User::username) == username && c(&User::password) == hash));
 
-  if (user.empty()) {
+  if (res.empty()) {
     QMessageBox::warning(this, "Login", "Username or password is incorrect.");
     ui->txtPassword->clear();
     return;
   }
 
-  Settings::getInstance().setUser(user[0].release());
+  User *user = res[0].release(); 
+  user->lastLogin = std::make_unique<long>(QDateTime::currentSecsSinceEpoch());
+  storage->update(*user);
+
+  Settings::getInstance().setUser(user);
 
   accept();
 }

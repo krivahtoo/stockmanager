@@ -40,6 +40,7 @@ set(stock_manager_SRC
   src/utils.cpp
   src/login.cpp
   src/register.cpp
+  src/account.cpp
   rc_stock_manager.cpp
 )
 

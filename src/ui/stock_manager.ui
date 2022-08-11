@@ -34,7 +34,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideNone</enum>
@@ -43,6 +43,10 @@
        <bool>false</bool>
       </property>
       <widget class="QWidget" name="tabHome">
+       <attribute name="icon">
+        <iconset resource="../../stock_manager.qrc">
+         <normaloff>:/icons/cart.svg</normaloff>:/icons/cart.svg</iconset>
+       </attribute>
        <attribute name="title">
         <string>Cart</string>
        </attribute>
@@ -284,6 +288,10 @@
        </layout>
       </widget>
       <widget class="QWidget" name="tabSales">
+       <attribute name="icon">
+        <iconset resource="../../stock_manager.qrc">
+         <normaloff>:/icons/archive.svg</normaloff>:/icons/archive.svg</iconset>
+       </attribute>
        <attribute name="title">
         <string>Sales</string>
        </attribute>
@@ -297,7 +305,7 @@
            <enum>QAbstractScrollArea::AdjustToContents</enum>
           </property>
           <property name="editTriggers">
-           <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
+           <set>QAbstractItemView::NoEditTriggers</set>
           </property>
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
@@ -479,6 +487,10 @@
        </layout>
       </widget>
       <widget class="QWidget" name="tabStock">
+       <attribute name="icon">
+        <iconset resource="../../stock_manager.qrc">
+         <normaloff>:/icons/view-list.svg</normaloff>:/icons/view-list.svg</iconset>
+       </attribute>
        <attribute name="title">
         <string>Stock</string>
        </attribute>
@@ -487,6 +499,12 @@
          <widget class="QTableWidget" name="tblStock">
           <property name="contextMenuPolicy">
            <enum>Qt::CustomContextMenu</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
           </property>
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
@@ -617,6 +635,15 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="tabUsers">
+       <attribute name="icon">
+        <iconset resource="../../stock_manager.qrc">
+         <normaloff>:/icons/user-group.svg</normaloff>:/icons/user-group.svg</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Users</string>
+       </attribute>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -642,6 +669,8 @@
     <addaction name="actStock"/>
     <addaction name="separator"/>
     <addaction name="actionSearch"/>
+    <addaction name="separator"/>
+    <addaction name="actAccount"/>
     <addaction name="separator"/>
     <addaction name="actQuit"/>
    </widget>
@@ -830,6 +859,15 @@
   <action name="actBackup_Database">
    <property name="text">
     <string>Backup Database</string>
+   </property>
+  </action>
+  <action name="actAccount">
+   <property name="icon">
+    <iconset resource="../../stock_manager.qrc">
+     <normaloff>:/icons/user.svg</normaloff>:/icons/user.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Account</string>
    </property>
   </action>
  </widget>

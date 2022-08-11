@@ -29,6 +29,7 @@
 #include "about.h"
 #include "add_new.h"
 #include "add_new_sell.h"
+#include "account.h"
 #include "database.h"
 #include "structs.h"
 #include "ui/ui_edit_item.h"
@@ -69,9 +70,6 @@ private:
   QAction *actEdit_Sale;
   QAction *actDelete;
   QAction *actDelete_Sale;
-  dlgAdd *dlg_add;
-  dlgAbout *dlg_about;
-  dlgAddNew *dlg_add_new;
   QDialog dlg_settings;
   QDialog dlg_search;
   QDialog dlg_edit;

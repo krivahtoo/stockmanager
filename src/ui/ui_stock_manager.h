@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'stock_managerryxxMS.ui'
+** Form generated from reading UI file 'stock_manageryNWiTO.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.4
+** Created by: Qt User Interface Compiler version 5.15.5
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef STOCK_MANAGERRYXXMS_H
-#define STOCK_MANAGERRYXXMS_H
+#ifndef STOCK_MANAGERYNWITO_H
+#define STOCK_MANAGERYNWITO_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -53,6 +53,7 @@ public:
     QAction *actSettings_2;
     QAction *actionSearch;
     QAction *actBackup_Database;
+    QAction *actAccount;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QTabWidget *tabMain;
@@ -194,6 +195,11 @@ public:
         actionSearch->setIcon(icon13);
         actBackup_Database = new QAction(stock_manager);
         actBackup_Database->setObjectName(QString::fromUtf8("actBackup_Database"));
+        actAccount = new QAction(stock_manager);
+        actAccount->setObjectName(QString::fromUtf8("actAccount"));
+        QIcon icon14;
+        icon14.addFile(QString::fromUtf8(":/icons/user.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        actAccount->setIcon(icon14);
         centralWidget = new QWidget(stock_manager);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -253,17 +259,17 @@ public:
         btnRemove_Cart = new QPushButton(grpCart);
         btnRemove_Cart->setObjectName(QString::fromUtf8("btnRemove_Cart"));
         btnRemove_Cart->setEnabled(false);
-        QIcon icon14;
-        icon14.addFile(QString::fromUtf8(":/icons/cross.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnRemove_Cart->setIcon(icon14);
+        QIcon icon15;
+        icon15.addFile(QString::fromUtf8(":/icons/cross.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnRemove_Cart->setIcon(icon15);
 
         verticalLayout_4->addWidget(btnRemove_Cart);
 
         btnClear_Cart = new QPushButton(grpCart);
         btnClear_Cart->setObjectName(QString::fromUtf8("btnClear_Cart"));
-        QIcon icon15;
-        icon15.addFile(QString::fromUtf8(":/icons/trash.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnClear_Cart->setIcon(icon15);
+        QIcon icon16;
+        icon16.addFile(QString::fromUtf8(":/icons/trash.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnClear_Cart->setIcon(icon16);
 
         verticalLayout_4->addWidget(btnClear_Cart);
 
@@ -295,9 +301,9 @@ public:
         font.setItalic(false);
         font.setWeight(50);
         btnSell_Cart->setFont(font);
-        QIcon icon16;
-        icon16.addFile(QString::fromUtf8(":/icons/basket.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnSell_Cart->setIcon(icon16);
+        QIcon icon17;
+        icon17.addFile(QString::fromUtf8(":/icons/basket.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnSell_Cart->setIcon(icon17);
         btnSell_Cart->setAutoDefault(true);
 
         verticalLayout_4->addWidget(btnSell_Cart);
@@ -362,7 +368,7 @@ public:
         tblSales->setObjectName(QString::fromUtf8("tblSales"));
         tblSales->setContextMenuPolicy(Qt::CustomContextMenu);
         tblSales->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-        tblSales->setEditTriggers(QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked);
+        tblSales->setEditTriggers(QAbstractItemView::NoEditTriggers);
         tblSales->setSelectionBehavior(QAbstractItemView::SelectRows);
         tblSales->setRowCount(0);
         tblSales->horizontalHeader()->setCascadingSectionResizes(true);
@@ -405,9 +411,9 @@ public:
 
         btnRefreshSales = new QPushButton(grpOptions);
         btnRefreshSales->setObjectName(QString::fromUtf8("btnRefreshSales"));
-        QIcon icon17;
-        icon17.addFile(QString::fromUtf8(":/icons/clockwise.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnRefreshSales->setIcon(icon17);
+        QIcon icon18;
+        icon18.addFile(QString::fromUtf8(":/icons/clockwise.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnRefreshSales->setIcon(icon18);
 
         formLayout_6->setWidget(7, QFormLayout::FieldRole, btnRefreshSales);
 
@@ -469,6 +475,8 @@ public:
         tblStock->setHorizontalHeaderItem(4, __qtablewidgetitem17);
         tblStock->setObjectName(QString::fromUtf8("tblStock"));
         tblStock->setContextMenuPolicy(Qt::CustomContextMenu);
+        tblStock->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContentsOnFirstShow);
+        tblStock->setEditTriggers(QAbstractItemView::NoEditTriggers);
         tblStock->setSelectionBehavior(QAbstractItemView::SelectRows);
         tblStock->horizontalHeader()->setCascadingSectionResizes(true);
         tblStock->horizontalHeader()->setStretchLastSection(true);
@@ -484,16 +492,16 @@ public:
         btnAddItem = new QPushButton(grpStock);
         btnAddItem->setObjectName(QString::fromUtf8("btnAddItem"));
         btnAddItem->setMaximumSize(QSize(16777215, 16777215));
-        QIcon icon18;
-        icon18.addFile(QString::fromUtf8(":/icons/plus.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        btnAddItem->setIcon(icon18);
+        QIcon icon19;
+        icon19.addFile(QString::fromUtf8(":/icons/plus.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        btnAddItem->setIcon(icon19);
 
         verticalLayout->addWidget(btnAddItem);
 
         btnRefresh = new QPushButton(grpStock);
         btnRefresh->setObjectName(QString::fromUtf8("btnRefresh"));
         btnRefresh->setMaximumSize(QSize(16777215, 16777215));
-        btnRefresh->setIcon(icon17);
+        btnRefresh->setIcon(icon18);
 
         verticalLayout->addWidget(btnRefresh);
 
@@ -559,6 +567,8 @@ public:
         menuFile->addSeparator();
         menuFile->addAction(actionSearch);
         menuFile->addSeparator();
+        menuFile->addAction(actAccount);
+        menuFile->addSeparator();
         menuFile->addAction(actQuit);
         menuHelp->addAction(actQt_About);
         menuHelp->addAction(actAbout);
@@ -574,7 +584,7 @@ public:
 
         retranslateUi(stock_manager);
 
-        tabMain->setCurrentIndex(1);
+        tabMain->setCurrentIndex(2);
         btnSell_Cart->setDefault(true);
 
 
@@ -618,6 +628,7 @@ public:
         actionSearch->setShortcut(QCoreApplication::translate("stock_manager", "Alt+S", nullptr));
 #endif // QT_CONFIG(shortcut)
         actBackup_Database->setText(QCoreApplication::translate("stock_manager", "Backup Database", nullptr));
+        actAccount->setText(QCoreApplication::translate("stock_manager", "Account", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tblCart->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("stock_manager", "Item Number", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tblCart->horizontalHeaderItem(1);
@@ -722,4 +733,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // STOCK_MANAGERRYXXMS_H
+#endif // STOCK_MANAGERYNWITO_H

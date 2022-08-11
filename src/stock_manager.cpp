@@ -53,11 +53,6 @@
 
 stock_manager::stock_manager(QWidget *parent)
     : QMainWindow(parent), m_ui(new Ui::stock_manager) {
-  // Initialize dialogs
-  dlg_add = new dlgAdd(this);
-  dlg_about = new dlgAbout(this);
-  dlg_add_new = new dlgAddNew(this, cart);
-
   // Setup all dialogs uis
   ui_dlg_search.setupUi(&dlg_search);
   ui_dlg_settings.setupUi(&dlg_settings);
@@ -94,8 +89,11 @@ stock_manager::stock_manager(QWidget *parent)
   connect(m_ui->actBackup_Database, &QAction::triggered, this,
           &stock_manager::backupDb);
   connect(actEdit, &QAction::triggered, this, &stock_manager::editSelectedItem);
-  connect(actEdit_Sale, &QAction::triggered, this,
-          &stock_manager::editSelectedSoldItem);
+  connect(actEdit_Sale, &QAction::triggered, this, [&]() {
+    ui_dlg_edit_sale.dateTimeSale->setMaximumDateTime(
+        QDateTime::currentDateTime());
+    editSelectedSoldItem();
+  });
   connect(actDelete, &QAction::triggered, this, &stock_manager::deleteItem);
   connect(actDelete_Sale, &QAction::triggered, this,
           &stock_manager::deleteSoldItem);
@@ -121,27 +119,37 @@ stock_manager::stock_manager(QWidget *parent)
           [&]() { m_ui->tabMain->setCurrentIndex(1); });
   connect(stockShortcut, &QShortcut::activated, this,
           [&]() { m_ui->tabMain->setCurrentIndex(2); });
-  connect(m_ui->btnAdd_Cart, &QPushButton::pressed, this,
-          [&]() { dlg_add_new->show(); });
-  connect(m_ui->btnAddItem, &QPushButton::pressed, this,
-          [&]() { dlg_add->show(); });
+  connect(m_ui->btnAdd_Cart, &QPushButton::pressed, this, [&]() {
+    dlgAddNew *dlg_add_new = new dlgAddNew(this, cart);
+    connect(dlg_add_new, &QDialog::accepted, this, [&]() { updateCart(); });
+    dlg_add_new->show();
+  });
+  connect(m_ui->btnAddItem, &QPushButton::pressed, this, [&]() {
+    dlgAdd *dlg_add = new dlgAdd(this);
+    connect(dlg_add, &QDialog::accepted, this, [&]() {
+      refreshDb();
+      updateTable();
+      updateStats();
+    });
+    dlg_add->show();
+  });
   connect(m_ui->btnRefresh, &QPushButton::pressed, this, [&]() {
     refreshDb();
     updateTable();
     updateStats();
   });
-  connect(dlg_add, &QDialog::accepted, this, [&]() {
-    refreshDb();
-    updateTable();
-    updateStats();
-  });
-  connect(dlg_add_new, &QDialog::accepted, this, [&]() { updateCart(); });
   connect(m_ui->actSettings_2, &QAction::triggered, this,
           [&]() { dlg_settings.show(); });
   connect(m_ui->actionSearch, &QAction::triggered, this,
           [&]() { dlg_search.show(); });
-  connect(m_ui->actAbout, &QAction::triggered, this,
-          [&]() { dlg_about->show(); });
+  connect(m_ui->actAbout, &QAction::triggered, this, [&]() {
+    dlgAbout *dlg_about = new dlgAbout(this);
+    dlg_about->show();
+  });
+  connect(m_ui->actAccount, &QAction::triggered, this, [&]() {
+    dlgAccount *dl_account = new dlgAccount(this);
+    dl_account->show();
+  });
   connect(m_ui->actHome, &QAction::triggered, this,
           [&]() { m_ui->tabMain->setCurrentIndex(0); });
   connect(m_ui->actSales, &QAction::triggered, this,
@@ -823,10 +831,13 @@ void stock_manager::editSelectedItem() {
     // get itemNo in the first column
     QString id = this->m_ui->tblStock->item(tblItem->row(), 0)->text();
     this->ui_dlg_edit.txtId->setText(id);
+
     auto itm = storage->get_all_pointer<Item>(
         where(c(&Item::itemNo) == id.toStdString()));
+
     auto stock_item = storage->get_all_pointer<Stock>(
         where(c(&Stock::itemNo) == id.toStdString()));
+
     this->ui_dlg_edit.txtId->setText(QString::fromStdString(itm[0]->itemNo));
     this->ui_dlg_edit.txtName->setText(QString::fromStdString(itm[0]->name));
     this->ui_dlg_edit.txtCapacity->setText(
@@ -936,12 +947,12 @@ void stock_manager::changePassword() {
     return;
   }
 
-  User* user = Settings::getInstance().getUser();
+  User *user = Settings::getInstance().getUser();
   user->password = QCryptographicHash::hash(
-                         this->ui_dlg_settings.txtNew_Pass->text().toUtf8(),
-                         QCryptographicHash::Sha256)
-                         .toHex()
-                         .toStdString();
+                       this->ui_dlg_settings.txtNew_Pass->text().toUtf8(),
+                       QCryptographicHash::Sha256)
+                       .toHex()
+                       .toStdString();
   storage->update(*user);
 }
 
