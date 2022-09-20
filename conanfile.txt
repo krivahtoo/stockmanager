@@ -14,4 +14,3 @@ cmake_find_package
 cmake_paths
 
 [options]
-*:shared=False
