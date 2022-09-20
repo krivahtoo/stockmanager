@@ -31,6 +31,10 @@
 
 #include <QtWidgets/QApplication>
 
+#ifndef DB_KEY
+#define DB_KEY "0b09389dad0aad0216dc94ff2881f8098dce2f67ad531b0dd0f2071cc2e2fcdb"
+#endif
+
 int main(int argc, char *argv[]) {
   QApplication app(argc, argv);
   app.setApplicationDisplayName("Shop Manager");
@@ -38,7 +42,7 @@ int main(int argc, char *argv[]) {
   app.setApplicationVersion(VERSION);
   app.setOrganizationName("KrivArt");
   // TODO: Use key from hash
-  Settings::getInstance().setDBKey("embotich");
+  Settings::getInstance().setDBKey(DB_KEY);
   Settings::getInstance().saveSettings();
   updateDb();
   stock_manager w;
