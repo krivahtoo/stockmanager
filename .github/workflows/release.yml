@@ -28,7 +28,7 @@ jobs:
         run: pip install conan
 
       - name: Run conan
-        run: build.sh
+        run: ./build.sh
 
       - name: Copy file
         run: cp ${{ github.workspace }}/build/stock_manager ${{ github.workspace }}/stock_manager-linux
@@ -60,7 +60,7 @@ jobs:
         run: pip install conan
 
       - name: Run conan
-        run: build.sh
+        run: ./build.sh
 
       - name: Copy file
         run: cp ${{ github.workspace }}/build/stock_manager.exe ${{ github.workspace }}/stock_manager-win.exe
