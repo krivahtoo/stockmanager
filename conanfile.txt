@@ -7,6 +7,7 @@ inja/3.1.0
 libharu/2.3.0
 podofo/0.9.6
 tgbot/1.2.1
+odbc/2.3.7
 
 [generators]
 cmake_find_package
